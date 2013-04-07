@@ -147,8 +147,22 @@ lines causing the errors. No one else seems to have noticed the
 problem in years. It just seemed like a shame to leave things
 published in a broken state.
 
+Installation Notes
+------------------
+
+These are pieces that tripped me up while I was trying to get
+this working. They may be blindingly obvious to anyone who isn't
+a complete newb. Still. They were part of the learning curve I
+experienced, and you can't ever have too much documentation,
+especially the "Getting Started" sort...right?
+
+1. Install glfw.
+2. Install sbcl. This part may not matter unless you're regenerating
+the libraries, the way I just did. Or it may be vital. I haven't
+had enough time to play with it to be sure.
+3. Make sure ruby's installed. Pretty much definitely only
+needed for regenerating the OpenGL bindings.
+
 Enjoy,
 James
 jamesgatannah@gmail.com
-
-
