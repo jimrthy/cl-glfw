@@ -1,10 +1,12 @@
-Top-level ASDF packages:
+Top-level ASDF packages
+=======================
 
  * cl-glfw - GLFW bindings for Common Lisp.
  * cl-glfw-opengl-version_* - OpenGL bindings for Common Lisp.
  * cl-glfw-glu (requires cl-glfw-opengl) - OpenGL Utilities bindings for Common Lisp.
 
 ABOUT
+=====
 
 A public domain set of CFFI bindings and convenience macros for the GLFW, GLU
 and OpenGL libraries.
@@ -26,6 +28,7 @@ Check out the examples/ directory for more of a guide through.
 
 
 WINDOWS NOTES
+=============
 
 For SBCL on Windows, you will need to download the GLFW DLLs pack
 (glfw-2.6.bin.WIN32.zip), which you can find on http://glfw.sf.net/
@@ -36,6 +39,7 @@ binaries.
 
 
 MAC OS X NOTES
+==============
 
 For SBCL on Mac OS X, you will want to have the libglfw.dylib somewhere where
 cl-glfw can find it. It's probably easiest to just include it in the current
@@ -43,6 +47,7 @@ directory of your application.
 
 
 THREADING
+=========
 
 GLFW threading WILL PROBABLY BREAK YOUR LISP IMAGE. I would advise seeking
 other avenues if you require threading in your applications. The bindings
@@ -52,6 +57,7 @@ some things to do with stacks and allocations aswell.
 
 
 NAME MANGLING STYLE
+===================
 
 All function/constant names are 'lispified', that is dash-separated, instead of
 camel-case.  Suffixes and acronyms are kept together as one word. Library
@@ -66,6 +72,7 @@ GL_LIGHT0 -> gl:+light-0+
 
 
 TYPE CONVERSION IN CL-GLFW-OPENGL
+=================================
 
 Functions that take a predictable c-array input or return an output have
 automatic-translators for lisp-sequences (array and vectors). However, this
@@ -81,6 +88,7 @@ cl-glfw-glu does not do automatic float translations.
 
 
 PLATFORMS
+---------
     SBCL Linux x86
     SBCL Linux amd64/x86_64
     SBCL Windows 32-bit
@@ -89,6 +97,7 @@ PLATFORMS
 
 
 LINKS
+-----
 
     http://repo.or.cz/w/cl-glfw.git - The working online git repository
     http://glfw.sf.net/ - The homepage for GLFW
@@ -98,6 +107,7 @@ LINKS
 
 
 ALTERNATIVES
+------------
 
     http://common-lisp.net/project/cl-opengl/ - Alternative set of OpenGL (with GLUT) bindings
     http://cl-sdl.sf.net/ - Seemingly abandoned SDL and OpenGL bindings
