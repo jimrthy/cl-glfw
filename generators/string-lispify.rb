@@ -43,6 +43,7 @@ class Array
       #pp [orig,stem,arg_suffix||'',vendor_suffix]
       [orig,stem,arg_suffix||'',vendor_suffix]
     end
+
     # re-join endings that do not share a stem with another function name
     split.collect do |orig,e,arg_suffix,vendor_suffix|
       # also keep those ending in 'v', as these are never (probably) going to be at the end of words

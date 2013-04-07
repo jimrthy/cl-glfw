@@ -33,8 +33,10 @@ fetch_specs unless File::exists?("#{BASE}/src/gl.tm") and
     File::exists?("#{BASE}/src/enum.spec") and
     File::exists?("#{BASE}/src/enumext.spec")
 
+puts "Generating:"
 puts `ruby #{BASE}/generators/sexpize-gl-spec.rb`
 check_ok
+puts "Generated. Checking:"
 puts `sbcl --load #{BASE}/generators/make-bindings-from-spec.lisp --eval "(progn (main) (sb-ext:quit))"`
 check_ok
 

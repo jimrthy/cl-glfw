@@ -22,6 +22,8 @@ function_name_map=function_names.lispify.inject(Hash.new) do |h,cl|
   h
 end
 
+puts "Names mapped"
+
 open("#{BASE}/src/gl.spec.lisp","w") do |o|
   o.puts "("
   open("#{BASE}/src/gl.spec","r") do |i|
@@ -60,6 +62,9 @@ open("#{BASE}/src/gl.spec.lisp","w") do |o|
     end
     o.puts "))"
   end
+
+  puts "Function names mapped. Mapping type names"
+
   open(BASE+"/src/gl.tm","r") do |i|
     o.puts(";;;; File: gl.tm")
     o.puts ":type-map ("
@@ -75,6 +80,9 @@ open("#{BASE}/src/gl.spec.lisp","w") do |o|
     end
     o.puts ")"
   end
+
+  puts "Types mapped. Mapping enums"
+
   o.puts ":enum-spec ("
   for spec in ["enum.spec","enumext.spec"]
     open(BASE+'/src/'+spec) do |i|
@@ -104,6 +112,10 @@ open("#{BASE}/src/gl.spec.lisp","w") do |o|
       end
     end
   end
+
+  puts "enums mapped. Wrapping up"
   o.puts "))"
   o.puts ")"
 end
+
+puts "Done"

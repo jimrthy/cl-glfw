@@ -434,10 +434,12 @@ suitable for cl-glfw-types or CFFI."
   (let ((*print-case* :downcase)
         (*print-radix* t)
         (*print-base* 16))
-    
+
+    (format t "Generating core")
     (output-core)
 
     ;;Write the bindings for the core versions
+    (format t "Binding categories to core versions")
     (let (current-categories)
       (loop for extension-name in *opengl-versions* do 
 	   (let ((deprecated-extension-name (intern (concatenate 'string (string extension-name) "_DEPRECATED")))
@@ -449,6 +451,7 @@ suitable for cl-glfw-types or CFFI."
 	       (push deprecated-extension-name current-categories)
 	       (setf output t))
 	     (when output
+	       (format t "Outputting extension category ~A" extension-name)
 	       (output-category extension-name (reverse current-categories)))))
       ;;Remove them from the lists to be processed
       (loop for name in current-categories do
@@ -456,15 +459,18 @@ suitable for cl-glfw-types or CFFI."
 	   (loop while (getf *enum-specs* name) do (remf *enum-specs* name))))
 
     ;;Process all the extension categories
+    (format t "Processing remaining extensions")
     (dolist (category-name *extension-names*)
       (output-category category-name (list category-name))
       (loop while (getf *function-categories* category-name) do (remf *function-categories* category-name))
       (loop while (getf *enum-specs* category-name) do (remf *enum-specs* category-name)))
 
+    (format t "Outputting type maps")
     (with-output-file (out #P"lib/opengl-type-map.lisp")
       (print `(in-package #:cl-glfw-opengl) out)
       (print `(setf *type-map* ',*type-map*) out))
 
+    (format t "Outputting Opengl packages")
     (with-output-file (out #P"lib/opengl-package.lisp") 
       (print (make-opengl-defpackage (remove-duplicates (nreverse *exports*))) out)))
 
@@ -481,4 +487,5 @@ suitable for cl-glfw-types or CFFI."
 (defun main ()
   (load-spec)
   (output-everything)
+  (format t "Done")
   (fresh-line))
