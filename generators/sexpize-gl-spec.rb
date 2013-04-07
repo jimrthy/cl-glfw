@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'generators/string-lispify'
+#puts "Include path:"
+#puts $:
+
+#require 'generators/string-lispify'
+require './generators/string-lispify'
+#require 'string-lispify'
 require 'pp'
 
 BASE=File::dirname($0)+'/..'
