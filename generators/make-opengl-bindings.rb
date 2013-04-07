@@ -37,6 +37,6 @@ puts "Generating:"
 puts `ruby #{BASE}/generators/sexpize-gl-spec.rb`
 check_ok
 puts "Generated. Checking:"
-puts `sbcl --load #{BASE}/generators/make-bindings-from-spec.lisp --eval "(progn (main) (sb-ext:quit))"`
+puts `sbcl --end-runtime-options --load #{BASE}/generators/make-bindings-from-spec.lisp --eval "(progn (main) (sb-ext:quit))" --end-toplevel-options`
 check_ok
 
