@@ -117,3 +117,38 @@ Enjoy.
 Bill
 airbaggins@users.sourceforge.net
 
+* * *
+
+airbaggins hasn't updated cl-glfw in years. lholden forked his repository onto
+github with a minor change (dealing with dynamic library loading)
+about a year ago.
+
+Both of their latest checkins have some issues with the OpenGL wrappers
+trying to redefine constants.
+
+airbaggins had this advice for me:
+
+> Hm. I didn't realise there were any OpenGL ES extensions compiled in.
+> Unfortunately, I don't have much time these days to go and re-visit it.
+> Just having a quick look, maybe that there was a duplicate enum in the
+> spec when I generated it. Perhaps just re-running the generator will
+> help... ? Just running the generators/make-opengl-bindings.rb should 
+> do it.
+>
+> If it's still outputting duplicate enums, maybe in this file 
+> [spec generator](http://repo.or.cz/w/cl-glfw.git/blob/master:/generators/make-bindings-from-spec.lisp)
+> in the set-enum-specs in resolve-enum label.... there could be
+> something done to prevent it from happening.
+
+So that's what this fork is about: to try to fix these errors.
+
+It obviously isn't that big a deal. You can safely comment out the
+lines causing the errors. No one else seems to have noticed the
+problem in years. It just seemed like a shame to leave things
+published in a broken state.
+
+Enjoy,
+James
+jamesgatannah@gmail.com
+
+
