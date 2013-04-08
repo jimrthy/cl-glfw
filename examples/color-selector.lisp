@@ -44,7 +44,13 @@
 	     t1 (glfw:get-time)))    
 
     (when (eql (glfw:get-key glfw:+key-esc+) glfw:+press+)
-      (return-from glfw:do-window))
+      ;;; This next bit is ugly and really should be fixed.
+      #+sbcl(return-from glfw:do-window)
+      #+ccl(return-from color-selector)
+      ;; Next line is the name of the loop we're inside. But it
+      ;; errors out under CCL, at least.
+      ;(return-from glfw:do-open-window)
+      )
 
     (setf t1 (glfw:get-time))
 

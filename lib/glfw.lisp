@@ -424,8 +424,9 @@ setting the title given,
 running setup-forms and then running forms in a loop, with calls to swap-buffers after each loop iteration.
 The loop is in a block named do-window [so can be exited by a call to (return-from glfw:do-window)].
 If the window is closed, the loop is also exited."
-  `(with-init 
-     (do-open-window (,@open-window-keys) (,@setup-forms) ,@forms)))
+  `(block do-window 
+     (with-init 
+       (do-open-window (,@open-window-keys) (,@setup-forms) ,@forms))))
 
 (defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))

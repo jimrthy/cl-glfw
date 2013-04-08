@@ -270,7 +270,7 @@ fills (0 to rows, 0 to cols, 0)"
                t1 (glfw:get-time)))    
 
       (when (eql (glfw:get-key glfw:+key-esc+) glfw:+press+)
-        (return-from glfw:do-window))
+        (return-from view-gl-object))
 
       (setf t1 (glfw:get-time))
 

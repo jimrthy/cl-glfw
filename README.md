@@ -178,6 +178,34 @@ where it calls make-bindings-from-spec.lisp, hangs, and does
 crazy things where my shell keeps dumping me back into the
 sbcl debugger.
 
+NOTE: This version was generated using CCL on Linux.
+
+The sample programs in the examples directory run under
+CCL 64 on Linux from a REPL in the project root directory.
+
+i.e. (load "examples/mipmaps") works fine on my machine.
+
+Exceptions:
+1. mtbench -- hard-coded for SBCL. Multi-threading with this
+library is generally a bad idea anyway. Arguably, should
+be re-written using something like bordeaux-threads.
+2. shader-arb -- this seems bad. +vertex-shader-arb+ and
++fragment-shader-arb+ are undeclared globals. Then
+cl-glfw-opengl-extensions:load-extension is an undefined
+function called with "ARB_shader_objects" arg. Seems
+totally unacceptable.
+3. synchronized-shader-arb -- same issues as shader-arb.
+Again: unacceptably broken.
+4. test-cl-opengl -- doesn't play nicely with the others.
+Sets up incompatible package nicknames. This seems like a
+bigger-picture issue that's currently out of scope.
+5. vbo -- lots of undeclared ARB errors. Culminating
+in that missing LOAD-EXTENSION function. Another show-
+stopper.
+
+I'm not sure how well these examples work under SBCL on
+my system: I don't have CFFI installed with it.
+
 Enjoy,
 James
 jamesgatannah@gmail.com
