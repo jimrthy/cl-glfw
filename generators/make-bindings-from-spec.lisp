@@ -2,6 +2,11 @@
 ;; as that performs the necessary setup.
 
 (declaim (optimize (speed 0) (space 0) (debug 3)))
+
+;;; Deal with Unicode issues
+#+sbcl (unless (eq sb-impl::*default-external-format* :UTF-8)
+	 (setf sb-impl::*default-external-format* :UTF-8))
+
 ;;; {{{ PARAMETERS
 
 (defparameter *reports* '(:type-map nil
@@ -72,9 +77,11 @@ Must be in the correct order.")
   "Converts a symbol into a nice constant-style symbol,
 changing non-alphanumeric characters to - and surrounding it
 with +s."
-  (intern (format nil "+~a+"
-                  (map 'string #'(lambda (c) (if (alphanumericp c) c #\-))
-                       (string-upcase (string symbol))))))
+  (let ((name (format nil "+~A+"
+		       (map 'string #'(lambda (c) (if (alphanumericp c) c #\-))
+			    (string-upcase (string symbol))))))
+    (format t "Constantizing ~A to ~A" (string symbol) name)
+    (intern name)))
 
 (defun deconstant (symbol)
   "Sometimes argument names of OpenGL™ functions have silly names like
@@ -333,8 +340,10 @@ suitable for cl-glfw-types or CFFI."
 			  nil))))))
 	  ;; when this group is not empty and there is a name that isn't already defined
 	  (when enums-to-define
+	    (format t "Defining Enums")
 	    (format out "~&~%;;;; {{{ ~A~%" (string enum-group-name))
 	    (loop for (enum-name . enum-value) in enums-to-define do 
+		 (format t "~A : ~A~%" enum-name enum-value)
 		 (let ((constant-name (constantize enum-name)))
 		   (push constant-name *exports*)
 		   (print `(defconstant ,constant-name ,enum-value) out)))
@@ -343,6 +352,7 @@ suitable for cl-glfw-types or CFFI."
 
 (defun output-category (name category-names)
   "write out the extension named by category name" 
+  (format t "Output extension category named ~A~%" name)
 
   (let ((enum-specs (copy-tree *enum-specs*))
 	(function-categories (copy-tree *function-categories*)))
