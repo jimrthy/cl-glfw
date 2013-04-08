@@ -16,7 +16,63 @@
 (defconstant +vertex-program-parameter-buffer-nv+ #x8DA2) 
 (defconstant +geometry-program-parameter-buffer-nv+ #x8DA3) 
 (defconstant +fragment-program-parameter-buffer-nv+ #x8DA4) 
-(defglextfun "ProgramBufferParametersIuivNV" program-buffer-parameters-i-uiv-nv :return "void" :args ((:name |target| :type |ProgramTarget| :direction :in) (:name |bindingIndex| :type |UInt32| :direction :in) (:name |wordIndex| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |params| :type |UInt32| :direction :in :array t :size count)) :category "NV_parameter_buffer_object" :deprecated nil :version "1.2") 
-(defglextfun "ProgramBufferParametersIivNV" program-buffer-parameters-i-iv-nv :return "void" :args ((:name |target| :type |ProgramTarget| :direction :in) (:name |bindingIndex| :type |UInt32| :direction :in) (:name |wordIndex| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size count)) :category "NV_parameter_buffer_object" :deprecated nil :version "1.2") 
-(defglextfun "ProgramBufferParametersfvNV" program-buffer-parameters-fv-nv :return "void" :args ((:name |target| :type |ProgramTarget| :direction :in) (:name |bindingIndex| :type |UInt32| :direction :in) (:name |wordIndex| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |params| :type |Float32| :direction :in :array t :size count)) :category "NV_parameter_buffer_object" :deprecated nil :version "1.2") 
-(make-extension-loader |NV_parameter_buffer_object| (("ProgramBufferParametersIuivNV" program-buffer-parameters-i-uiv-nv :return "void" :args ((:name |target| :type |ProgramTarget| :direction :in) (:name |bindingIndex| :type |UInt32| :direction :in) (:name |wordIndex| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |params| :type |UInt32| :direction :in :array t :size count)) :category "NV_parameter_buffer_object" :deprecated nil :version "1.2") ("ProgramBufferParametersIivNV" program-buffer-parameters-i-iv-nv :return "void" :args ((:name |target| :type |ProgramTarget| :direction :in) (:name |bindingIndex| :type |UInt32| :direction :in) (:name |wordIndex| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size count)) :category "NV_parameter_buffer_object" :deprecated nil :version "1.2") ("ProgramBufferParametersfvNV" program-buffer-parameters-fv-nv :return "void" :args ((:name |target| :type |ProgramTarget| :direction :in) (:name |bindingIndex| :type |UInt32| :direction :in) (:name |wordIndex| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |params| :type |Float32| :direction :in :array t :size count)) :category "NV_parameter_buffer_object" :deprecated nil :version "1.2"))) 
+(defglextfun "ProgramBufferParametersIuivNV"
+ program-buffer-parameters-i-uiv-nv :return "void" :args
+ ((:name |target| :type |ProgramTarget| :direction :in)
+  (:name |bindingIndex| :type |UInt32| :direction :in)
+  (:name |wordIndex| :type |UInt32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |params| :type |UInt32| :direction :in :array t :size
+   count))
+ :category "NV_parameter_buffer_object" :deprecated nil :version
+ "1.2") 
+(defglextfun "ProgramBufferParametersIivNV"
+ program-buffer-parameters-i-iv-nv :return "void" :args
+ ((:name |target| :type |ProgramTarget| :direction :in)
+  (:name |bindingIndex| :type |UInt32| :direction :in)
+  (:name |wordIndex| :type |UInt32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |params| :type |Int32| :direction :in :array t :size count))
+ :category "NV_parameter_buffer_object" :deprecated nil :version
+ "1.2") 
+(defglextfun "ProgramBufferParametersfvNV"
+ program-buffer-parameters-fv-nv :return "void" :args
+ ((:name |target| :type |ProgramTarget| :direction :in)
+  (:name |bindingIndex| :type |UInt32| :direction :in)
+  (:name |wordIndex| :type |UInt32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |params| :type |Float32| :direction :in :array t :size
+   count))
+ :category "NV_parameter_buffer_object" :deprecated nil :version
+ "1.2") 
+(make-extension-loader |NV_parameter_buffer_object|
+ (("ProgramBufferParametersIuivNV" program-buffer-parameters-i-uiv-nv
+   :return "void" :args
+   ((:name |target| :type |ProgramTarget| :direction :in)
+    (:name |bindingIndex| :type |UInt32| :direction :in)
+    (:name |wordIndex| :type |UInt32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |params| :type |UInt32| :direction :in :array t :size
+     count))
+   :category "NV_parameter_buffer_object" :deprecated nil :version
+   "1.2")
+  ("ProgramBufferParametersIivNV" program-buffer-parameters-i-iv-nv
+   :return "void" :args
+   ((:name |target| :type |ProgramTarget| :direction :in)
+    (:name |bindingIndex| :type |UInt32| :direction :in)
+    (:name |wordIndex| :type |UInt32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |params| :type |Int32| :direction :in :array t :size
+     count))
+   :category "NV_parameter_buffer_object" :deprecated nil :version
+   "1.2")
+  ("ProgramBufferParametersfvNV" program-buffer-parameters-fv-nv
+   :return "void" :args
+   ((:name |target| :type |ProgramTarget| :direction :in)
+    (:name |bindingIndex| :type |UInt32| :direction :in)
+    (:name |wordIndex| :type |UInt32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |params| :type |Float32| :direction :in :array t :size
+     count))
+   :category "NV_parameter_buffer_object" :deprecated nil :version
+   "1.2"))) 

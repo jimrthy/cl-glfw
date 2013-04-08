@@ -4,6 +4,25 @@
 
 ;;;; sgis_point_parameters
 
-(defglextfun "PointParameterfvSGIS" point-parameter-fv-sgis :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "SGIS_point_parameters" :deprecated nil :version "1.0") 
-(defglextfun "PointParameterfSGIS" point-parameter-f-sgis :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |CheckedFloat32| :direction :in)) :category "SGIS_point_parameters" :deprecated nil :version "1.0") 
-(make-extension-loader |SGIS_point_parameters| (("PointParameterfvSGIS" point-parameter-fv-sgis :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "SGIS_point_parameters" :deprecated nil :version "1.0") ("PointParameterfSGIS" point-parameter-f-sgis :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |CheckedFloat32| :direction :in)) :category "SGIS_point_parameters" :deprecated nil :version "1.0"))) 
+(defglextfun "PointParameterfvSGIS" point-parameter-fv-sgis :return
+ "void" :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |params| :type |CheckedFloat32| :direction :in :array t
+   :size (|pname|)))
+ :category "SGIS_point_parameters" :deprecated nil :version "1.0") 
+(defglextfun "PointParameterfSGIS" point-parameter-f-sgis :return
+ "void" :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |param| :type |CheckedFloat32| :direction :in))
+ :category "SGIS_point_parameters" :deprecated nil :version "1.0") 
+(make-extension-loader |SGIS_point_parameters|
+ (("PointParameterfvSGIS" point-parameter-fv-sgis :return "void"
+   :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |params| :type |CheckedFloat32| :direction :in :array t
+     :size (|pname|)))
+   :category "SGIS_point_parameters" :deprecated nil :version "1.0")
+  ("PointParameterfSGIS" point-parameter-f-sgis :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |param| :type |CheckedFloat32| :direction :in))
+   :category "SGIS_point_parameters" :deprecated nil :version "1.0"))) 

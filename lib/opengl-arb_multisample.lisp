@@ -22,5 +22,13 @@
 (defconstant +sample-coverage-value-arb+ #x80AA) 
 (defconstant +sample-coverage-invert-arb+ #x80AB) 
 (defconstant +multisample-bit-arb+ #x20000000) 
-(defglextfun "SampleCoverageARB" sample-coverage-arb :return "void" :args ((:name |value| :type |Float32| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "ARB_multisample" :deprecated nil :version "1.2") 
-(make-extension-loader |ARB_multisample| (("SampleCoverageARB" sample-coverage-arb :return "void" :args ((:name |value| :type |Float32| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "ARB_multisample" :deprecated nil :version "1.2"))) 
+(defglextfun "SampleCoverageARB" sample-coverage-arb :return "void"
+ :args
+ ((:name |value| :type |Float32| :direction :in)
+  (:name |invert| :type |Boolean| :direction :in))
+ :category "ARB_multisample" :deprecated nil :version "1.2") 
+(make-extension-loader |ARB_multisample|
+ (("SampleCoverageARB" sample-coverage-arb :return "void" :args
+   ((:name |value| :type |Float32| :direction :in)
+    (:name |invert| :type |Boolean| :direction :in))
+   :category "ARB_multisample" :deprecated nil :version "1.2"))) 

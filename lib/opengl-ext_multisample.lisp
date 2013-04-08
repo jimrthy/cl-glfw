@@ -40,6 +40,18 @@
 (defconstant +sample-mask-invert-ext+ #x80AB) 
 (defconstant +sample-pattern-ext+ #x80AC) 
 (defconstant +multisample-bit-ext+ #x20000000) 
-(defglextfun "SamplePatternEXT" sample-pattern-ext :return "void" :args ((:name |pattern| :type |SamplePatternEXT| :direction :in)) :category "EXT_multisample" :deprecated nil :version "1.0") 
-(defglextfun "SampleMaskEXT" sample-mask-ext :return "void" :args ((:name |value| :type |ClampedFloat32| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "EXT_multisample" :deprecated nil :version "1.0") 
-(make-extension-loader |EXT_multisample| (("SamplePatternEXT" sample-pattern-ext :return "void" :args ((:name |pattern| :type |SamplePatternEXT| :direction :in)) :category "EXT_multisample" :deprecated nil :version "1.0") ("SampleMaskEXT" sample-mask-ext :return "void" :args ((:name |value| :type |ClampedFloat32| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "EXT_multisample" :deprecated nil :version "1.0"))) 
+(defglextfun "SamplePatternEXT" sample-pattern-ext :return "void"
+ :args ((:name |pattern| :type |SamplePatternEXT| :direction :in))
+ :category "EXT_multisample" :deprecated nil :version "1.0") 
+(defglextfun "SampleMaskEXT" sample-mask-ext :return "void" :args
+ ((:name |value| :type |ClampedFloat32| :direction :in)
+  (:name |invert| :type |Boolean| :direction :in))
+ :category "EXT_multisample" :deprecated nil :version "1.0") 
+(make-extension-loader |EXT_multisample|
+ (("SamplePatternEXT" sample-pattern-ext :return "void" :args
+   ((:name |pattern| :type |SamplePatternEXT| :direction :in))
+   :category "EXT_multisample" :deprecated nil :version "1.0")
+  ("SampleMaskEXT" sample-mask-ext :return "void" :args
+   ((:name |value| :type |ClampedFloat32| :direction :in)
+    (:name |invert| :type |Boolean| :direction :in))
+   :category "EXT_multisample" :deprecated nil :version "1.0"))) 

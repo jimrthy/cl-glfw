@@ -4,5 +4,10 @@
 
 ;;;; sgix_framezoom
 
-(defglextfun "FrameZoomSGIX" frame-zoom-sgix :return "void" :args ((:name |factor| :type |CheckedInt32| :direction :in)) :category "SGIX_framezoom" :deprecated nil :version "1.0") 
-(make-extension-loader |SGIX_framezoom| (("FrameZoomSGIX" frame-zoom-sgix :return "void" :args ((:name |factor| :type |CheckedInt32| :direction :in)) :category "SGIX_framezoom" :deprecated nil :version "1.0"))) 
+(defglextfun "FrameZoomSGIX" frame-zoom-sgix :return "void" :args
+ ((:name |factor| :type |CheckedInt32| :direction :in)) :category
+ "SGIX_framezoom" :deprecated nil :version "1.0") 
+(make-extension-loader |SGIX_framezoom|
+ (("FrameZoomSGIX" frame-zoom-sgix :return "void" :args
+   ((:name |factor| :type |CheckedInt32| :direction :in)) :category
+   "SGIX_framezoom" :deprecated nil :version "1.0"))) 

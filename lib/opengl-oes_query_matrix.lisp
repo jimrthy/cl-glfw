@@ -4,5 +4,17 @@
 
 ;;;; oes_query_matrix
 
-(defglextfun "QueryMatrixxOES" query-matrixx-oes :return "GLbitfield" :args ((:name |mantissa| :type |ConstFixed| :direction :in :array t :size #x10) (:name |exponent| :type |ConstInt32| :direction :in :array t :size #x10)) :category "OES_query_matrix" :deprecated nil :version "4.3") 
-(make-extension-loader |OES_query_matrix| (("QueryMatrixxOES" query-matrixx-oes :return "GLbitfield" :args ((:name |mantissa| :type |ConstFixed| :direction :in :array t :size #x10) (:name |exponent| :type |ConstInt32| :direction :in :array t :size #x10)) :category "OES_query_matrix" :deprecated nil :version "4.3"))) 
+(defglextfun "QueryMatrixxOES" query-matrixx-oes :return "GLbitfield"
+ :args
+ ((:name |mantissa| :type |ConstFixed| :direction :in :array t :size
+   #x10)
+  (:name |exponent| :type |ConstInt32| :direction :in :array t :size
+   #x10))
+ :category "OES_query_matrix" :deprecated nil :version "4.3") 
+(make-extension-loader |OES_query_matrix|
+ (("QueryMatrixxOES" query-matrixx-oes :return "GLbitfield" :args
+   ((:name |mantissa| :type |ConstFixed| :direction :in :array t
+     :size #x10)
+    (:name |exponent| :type |ConstInt32| :direction :in :array t
+     :size #x10))
+   :category "OES_query_matrix" :deprecated nil :version "4.3"))) 

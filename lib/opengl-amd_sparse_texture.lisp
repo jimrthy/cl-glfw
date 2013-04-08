@@ -22,6 +22,45 @@
 (defconstant +min-sparse-level-amd+ #x919B) 
 (defconstant +min-lod-warning-amd+ #x919C) 
 (defconstant +texture-storage-sparse-bit-amd+ #x1) 
-(defglextfun "TextureStorageSparseAMD" texture-storage-sparse-amd :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |internalFormat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |layers| :type |SizeI| :direction :in) (:name |flags| :type |GLbitfield| :direction :in)) :category "AMD_sparse_texture" :deprecated nil :version "4.3") 
-(defglextfun "TexStorageSparseAMD" tex-storage-sparse-amd :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalFormat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |layers| :type |SizeI| :direction :in) (:name |flags| :type |GLbitfield| :direction :in)) :category "AMD_sparse_texture" :deprecated nil :version "4.3") 
-(make-extension-loader |AMD_sparse_texture| (("TextureStorageSparseAMD" texture-storage-sparse-amd :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |internalFormat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |layers| :type |SizeI| :direction :in) (:name |flags| :type |GLbitfield| :direction :in)) :category "AMD_sparse_texture" :deprecated nil :version "4.3") ("TexStorageSparseAMD" tex-storage-sparse-amd :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalFormat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |layers| :type |SizeI| :direction :in) (:name |flags| :type |GLbitfield| :direction :in)) :category "AMD_sparse_texture" :deprecated nil :version "4.3"))) 
+(defglextfun "TextureStorageSparseAMD" texture-storage-sparse-amd
+ :return "void" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |target| :type |GLenum| :direction :in)
+  (:name |internalFormat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |layers| :type |SizeI| :direction :in)
+  (:name |flags| :type |GLbitfield| :direction :in))
+ :category "AMD_sparse_texture" :deprecated nil :version "4.3") 
+(defglextfun "TexStorageSparseAMD" tex-storage-sparse-amd :return
+ "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |internalFormat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |layers| :type |SizeI| :direction :in)
+  (:name |flags| :type |GLbitfield| :direction :in))
+ :category "AMD_sparse_texture" :deprecated nil :version "4.3") 
+(make-extension-loader |AMD_sparse_texture|
+ (("TextureStorageSparseAMD" texture-storage-sparse-amd :return
+   "void" :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |target| :type |GLenum| :direction :in)
+    (:name |internalFormat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |layers| :type |SizeI| :direction :in)
+    (:name |flags| :type |GLbitfield| :direction :in))
+   :category "AMD_sparse_texture" :deprecated nil :version "4.3")
+  ("TexStorageSparseAMD" tex-storage-sparse-amd :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |internalFormat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |layers| :type |SizeI| :direction :in)
+    (:name |flags| :type |GLbitfield| :direction :in))
+   :category "AMD_sparse_texture" :deprecated nil :version "4.3"))) 

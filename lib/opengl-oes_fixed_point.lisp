@@ -5,108 +5,1071 @@
 ;;;; oes_fixed_point
 
 (defconstant +fixed-oes+ #x140C) 
-(defglextfun "Vertex4xvOES" vertex-4xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Vertex3xvOES" vertex-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Vertex2xvOES" vertex-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Vertex4xOES" vertex-4x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Vertex3xOES" vertex-3x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Vertex2xOES" vertex-2x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TranslatexOES" translatex-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexParameterxvOES" tex-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexParameterxOES" tex-parameterx-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexGenxvOES" tex-genxv-oes :return "void" :args ((:name |coord| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexGenxOES" tex-genx-oes :return "void" :args ((:name |coord| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexEnvxvOES" tex-envxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexEnvxOES" tex-envx-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord4xvOES" tex-coord-4xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord3xvOES" tex-coord-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord2xvOES" tex-coord-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord1xvOES" tex-coord-1xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord4xOES" tex-coord-4x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name \q :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord3xOES" tex-coord-3x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord2xOES" tex-coord-2x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord1xOES" tex-coord-1x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ScalexOES" scalex-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "SampleCoverageOES" sample-coverage-oes :return "void" :args ((:name |value| :type |ClampedFixed| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RotatexOES" rotatex-oes :return "void" :args ((:name |angle| :type |Fixed| :direction :in) (:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RectxvOES" rectxv-oes :return "void" :args ((:name \v1 :type |ConstFixed| :direction :in :array t :size #x2) (:name \v2 :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RectxOES" rectx-oes :return "void" :args ((:name \x1 :type |Fixed| :direction :in) (:name \y1 :type |Fixed| :direction :in) (:name \x2 :type |Fixed| :direction :in) (:name \y2 :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RasterPos4xvOES" raster-pos-4xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RasterPos3xvOES" raster-pos-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RasterPos2xvOES" raster-pos-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RasterPos4xOES" raster-pos-4x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in) (:name \w :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RasterPos3xOES" raster-pos-3x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "RasterPos2xOES" raster-pos-2x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PrioritizeTexturesxOES" prioritize-texturesx-oes :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |textures| :type |UInt32| :direction :in :array t :size n) (:name |priorities| :type |ClampedFixed| :direction :in :array t :size n)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PolygonOffsetxOES" polygon-offsetx-oes :return "void" :args ((:name |factor| :type |Fixed| :direction :in) (:name |units| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PointSizexOES" point-sizex-oes :return "void" :args ((:name |size| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PointParameterxvOES" point-parameterxv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PixelZoomxOES" pixel-zoomx-oes :return "void" :args ((:name |xfactor| :type |Fixed| :direction :in) (:name |yfactor| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PixelTransferxOES" pixel-transferx-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PixelStorex" pixel-storex :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PixelMapx" pixel-mapx :return "void" :args ((:name |map| :type |GLenum| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |values| :type |ConstFixed| :direction :in :array t :size size)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "PassThroughxOES" pass-throughx-oes :return "void" :args ((:name |token| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "OrthoxOES" orthox-oes :return "void" :args ((:name \l :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name |b| :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \n :type |Fixed| :direction :in) (:name |f| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Normal3xvOES" normal-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Normal3xOES" normal-3x-oes :return "void" :args ((:name |nx| :type |Fixed| :direction :in) (:name |ny| :type |Fixed| :direction :in) (:name |nz| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord4xvOES" multi-tex-coord-4xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord3xvOES" multi-tex-coord-3xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord2xvOES" multi-tex-coord-2xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord1xvOES" multi-tex-coord-1xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord4xOES" multi-tex-coord-4x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name \q :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord3xOES" multi-tex-coord-3x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord2xOES" multi-tex-coord-2x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord1xOES" multi-tex-coord-1x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultTransposeMatrixxOES" mult-transpose-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MultMatrixxOES" mult-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MaterialxvOES" materialxv-oes :return "void" :args ((:name |face| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MaterialxOES" materialx-oes :return "void" :args ((:name |face| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MapGrid2xOES" map-grid-2x-oes :return "void" :args ((:name \n :type |Int32| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in) (:name \v1 :type |Fixed| :direction :in) (:name \v2 :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "MapGrid1xOES" map-grid-1x-oes :return "void" :args ((:name \n :type |Int32| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Map2xOES" map-2x-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in) (:name |ustride| :type |Int32| :direction :in) (:name |uorder| :type |Int32| :direction :in) (:name \v1 :type |Fixed| :direction :in) (:name \v2 :type |Fixed| :direction :in) (:name |vstride| :type |Int32| :direction :in) (:name |vorder| :type |Int32| :direction :in) (:name |points| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Map1xOES" map-1x-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in) (:name |stride| :type |Int32| :direction :in) (:name |order| :type |Int32| :direction :in) (:name |points| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LoadTransposeMatrixxOES" load-transpose-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LoadMatrixxOES" load-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LineWidthxOES" line-widthx-oes :return "void" :args ((:name |width| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LightxvOES" lightxv-oes :return "void" :args ((:name |light| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LightxOES" lightx-oes :return "void" :args ((:name |light| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LightModelxvOES" light-modelxv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "LightModelxOES" light-modelx-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "IndexxvOES" indexxv-oes :return "void" :args ((:name |component| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "IndexxOES" indexx-oes :return "void" :args ((:name |component| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetTexParameterxvOES" get-tex-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetTexLevelParameterxvOES" get-tex-level-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetTexGenxvOES" get-tex-genxv-oes :return "void" :args ((:name |coord| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetTexEnvxvOES" get-tex-envxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetPixelMapxv" get-pixel-mapxv :return "void" :args ((:name |map| :type |GLenum| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |values| :type |Fixed| :direction :out :array t :size size)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetMaterialxOES" get-materialx-oes :return "void" :args ((:name |face| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetMapxvOES" get-mapxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |query| :type |GLenum| :direction :in) (:name \v :type |Fixed| :direction :out :array t :size (|query|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetLightxOES" get-lightx-oes :return "void" :args ((:name |light| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetHistogramParameterxvOES" get-histogram-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetFixedvOES" get-fixedv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetConvolutionParameterxvOES" get-convolution-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "GetClipPlanexOES" get-clip-planex-oes :return "void" :args ((:name |plane| :type |GLenum| :direction :in) (:name |equation| :type |Fixed| :direction :out :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "FrustumxOES" frustumx-oes :return "void" :args ((:name \l :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name |b| :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \n :type |Fixed| :direction :in) (:name |f| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "FogxvOES" fogxv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "FogxOES" fogx-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "FeedbackBufferxOES" feedback-bufferx-oes :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |buffer| :type |Fixed| :direction :in :array t :size n)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "EvalCoord2xvOES" eval-coord-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "EvalCoord1xvOES" eval-coord-1xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "EvalCoord2xOES" eval-coord-2x-oes :return "void" :args ((:name \u :type |Fixed| :direction :in) (:name \v :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "EvalCoord1xOES" eval-coord-1x-oes :return "void" :args ((:name \u :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "DepthRangexOES" depth-rangex-oes :return "void" :args ((:name \n :type |ClampedFixed| :direction :in) (:name |f| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ConvolutionParameterxvOES" convolution-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ConvolutionParameterxOES" convolution-parameterx-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Color4xvOES" color-4xv-oes :return "void" :args ((:name |components| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Color3xvOES" color-3xv-oes :return "void" :args ((:name |components| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Color4xOES" color-4x-oes :return "void" :args ((:name |red| :type |Fixed| :direction :in) (:name |green| :type |Fixed| :direction :in) (:name |blue| :type |Fixed| :direction :in) (:name |alpha| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "Color3xOES" color-3x-oes :return "void" :args ((:name |red| :type |Fixed| :direction :in) (:name |green| :type |Fixed| :direction :in) (:name |blue| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ClipPlanexOES" clip-planex-oes :return "void" :args ((:name |plane| :type |GLenum| :direction :in) (:name |equation| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ClearDepthxOES" clear-depthx-oes :return "void" :args ((:name |depth| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ClearColorxOES" clear-colorx-oes :return "void" :args ((:name |red| :type |ClampedFixed| :direction :in) (:name |green| :type |ClampedFixed| :direction :in) (:name |blue| :type |ClampedFixed| :direction :in) (:name |alpha| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "ClearAccumxOES" clear-accumx-oes :return "void" :args ((:name |red| :type |ClampedFixed| :direction :in) (:name |green| :type |ClampedFixed| :direction :in) (:name |blue| :type |ClampedFixed| :direction :in) (:name |alpha| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "BlendColorxOES" blend-colorx-oes :return "void" :args ((:name |red| :type |ClampedFixed| :direction :in) (:name |green| :type |ClampedFixed| :direction :in) (:name |blue| :type |ClampedFixed| :direction :in) (:name |alpha| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "BitmapxOES" bitmapx-oes :return "void" :args ((:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |xorig| :type |Fixed| :direction :in) (:name |yorig| :type |Fixed| :direction :in) (:name |xmove| :type |Fixed| :direction :in) (:name |ymove| :type |Fixed| :direction :in) (:name |bitmap| :type |ConstUByte| :direction :in :array t)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "AlphaFuncxOES" alpha-funcx-oes :return "void" :args ((:name |func| :type |GLenum| :direction :in) (:name |ref| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(defglextfun "AccumxOES" accumx-oes :return "void" :args ((:name |op| :type |GLenum| :direction :in) (:name |value| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") 
-(make-extension-loader |OES_fixed_point| (("Vertex4xvOES" vertex-4xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Vertex3xvOES" vertex-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Vertex2xvOES" vertex-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Vertex4xOES" vertex-4x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Vertex3xOES" vertex-3x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Vertex2xOES" vertex-2x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TranslatexOES" translatex-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexParameterxvOES" tex-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexParameterxOES" tex-parameterx-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexGenxvOES" tex-genxv-oes :return "void" :args ((:name |coord| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexGenxOES" tex-genx-oes :return "void" :args ((:name |coord| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexEnvxvOES" tex-envxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexEnvxOES" tex-envx-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord4xvOES" tex-coord-4xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord3xvOES" tex-coord-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord2xvOES" tex-coord-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord1xvOES" tex-coord-1xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord4xOES" tex-coord-4x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name \q :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord3xOES" tex-coord-3x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord2xOES" tex-coord-2x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("TexCoord1xOES" tex-coord-1x-oes :return "void" :args ((:name \s :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ScalexOES" scalex-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("SampleCoverageOES" sample-coverage-oes :return "void" :args ((:name |value| :type |ClampedFixed| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RotatexOES" rotatex-oes :return "void" :args ((:name |angle| :type |Fixed| :direction :in) (:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RectxvOES" rectxv-oes :return "void" :args ((:name \v1 :type |ConstFixed| :direction :in :array t :size #x2) (:name \v2 :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RectxOES" rectx-oes :return "void" :args ((:name \x1 :type |Fixed| :direction :in) (:name \y1 :type |Fixed| :direction :in) (:name \x2 :type |Fixed| :direction :in) (:name \y2 :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RasterPos4xvOES" raster-pos-4xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RasterPos3xvOES" raster-pos-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RasterPos2xvOES" raster-pos-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RasterPos4xOES" raster-pos-4x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in) (:name \w :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RasterPos3xOES" raster-pos-3x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in) (:name \z :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("RasterPos2xOES" raster-pos-2x-oes :return "void" :args ((:name \x :type |Fixed| :direction :in) (:name \y :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PrioritizeTexturesxOES" prioritize-texturesx-oes :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |textures| :type |UInt32| :direction :in :array t :size n) (:name |priorities| :type |ClampedFixed| :direction :in :array t :size n)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PolygonOffsetxOES" polygon-offsetx-oes :return "void" :args ((:name |factor| :type |Fixed| :direction :in) (:name |units| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PointSizexOES" point-sizex-oes :return "void" :args ((:name |size| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PointParameterxvOES" point-parameterxv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PixelZoomxOES" pixel-zoomx-oes :return "void" :args ((:name |xfactor| :type |Fixed| :direction :in) (:name |yfactor| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PixelTransferxOES" pixel-transferx-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PixelStorex" pixel-storex :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PixelMapx" pixel-mapx :return "void" :args ((:name |map| :type |GLenum| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |values| :type |ConstFixed| :direction :in :array t :size size)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("PassThroughxOES" pass-throughx-oes :return "void" :args ((:name |token| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("OrthoxOES" orthox-oes :return "void" :args ((:name \l :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name |b| :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \n :type |Fixed| :direction :in) (:name |f| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Normal3xvOES" normal-3xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Normal3xOES" normal-3x-oes :return "void" :args ((:name |nx| :type |Fixed| :direction :in) (:name |ny| :type |Fixed| :direction :in) (:name |nz| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord4xvOES" multi-tex-coord-4xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord3xvOES" multi-tex-coord-3xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord2xvOES" multi-tex-coord-2xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord1xvOES" multi-tex-coord-1xv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord4xOES" multi-tex-coord-4x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name \q :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord3xOES" multi-tex-coord-3x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord2xOES" multi-tex-coord-2x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultiTexCoord1xOES" multi-tex-coord-1x-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultTransposeMatrixxOES" mult-transpose-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MultMatrixxOES" mult-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MaterialxvOES" materialxv-oes :return "void" :args ((:name |face| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MaterialxOES" materialx-oes :return "void" :args ((:name |face| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MapGrid2xOES" map-grid-2x-oes :return "void" :args ((:name \n :type |Int32| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in) (:name \v1 :type |Fixed| :direction :in) (:name \v2 :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("MapGrid1xOES" map-grid-1x-oes :return "void" :args ((:name \n :type |Int32| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Map2xOES" map-2x-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in) (:name |ustride| :type |Int32| :direction :in) (:name |uorder| :type |Int32| :direction :in) (:name \v1 :type |Fixed| :direction :in) (:name \v2 :type |Fixed| :direction :in) (:name |vstride| :type |Int32| :direction :in) (:name |vorder| :type |Int32| :direction :in) (:name |points| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Map1xOES" map-1x-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name \u1 :type |Fixed| :direction :in) (:name \u2 :type |Fixed| :direction :in) (:name |stride| :type |Int32| :direction :in) (:name |order| :type |Int32| :direction :in) (:name |points| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LoadTransposeMatrixxOES" load-transpose-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LoadMatrixxOES" load-matrixx-oes :return "void" :args ((:name \m :type |ConstFixed| :direction :in :array t :size #x10)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LineWidthxOES" line-widthx-oes :return "void" :args ((:name |width| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LightxvOES" lightxv-oes :return "void" :args ((:name |light| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LightxOES" lightx-oes :return "void" :args ((:name |light| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LightModelxvOES" light-modelxv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("LightModelxOES" light-modelx-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("IndexxvOES" indexxv-oes :return "void" :args ((:name |component| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("IndexxOES" indexx-oes :return "void" :args ((:name |component| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetTexParameterxvOES" get-tex-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetTexLevelParameterxvOES" get-tex-level-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetTexGenxvOES" get-tex-genxv-oes :return "void" :args ((:name |coord| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetTexEnvxvOES" get-tex-envxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetPixelMapxv" get-pixel-mapxv :return "void" :args ((:name |map| :type |GLenum| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |values| :type |Fixed| :direction :out :array t :size size)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetMaterialxOES" get-materialx-oes :return "void" :args ((:name |face| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetMapxvOES" get-mapxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |query| :type |GLenum| :direction :in) (:name \v :type |Fixed| :direction :out :array t :size (|query|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetLightxOES" get-lightx-oes :return "void" :args ((:name |light| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetHistogramParameterxvOES" get-histogram-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetFixedvOES" get-fixedv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetConvolutionParameterxvOES" get-convolution-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Fixed| :direction :out :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("GetClipPlanexOES" get-clip-planex-oes :return "void" :args ((:name |plane| :type |GLenum| :direction :in) (:name |equation| :type |Fixed| :direction :out :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("FrustumxOES" frustumx-oes :return "void" :args ((:name \l :type |Fixed| :direction :in) (:name \r :type |Fixed| :direction :in) (:name |b| :type |Fixed| :direction :in) (:name \t :type |Fixed| :direction :in) (:name \n :type |Fixed| :direction :in) (:name |f| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("FogxvOES" fogxv-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("FogxOES" fogx-oes :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("FeedbackBufferxOES" feedback-bufferx-oes :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |buffer| :type |Fixed| :direction :in :array t :size n)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("EvalCoord2xvOES" eval-coord-2xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x2)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("EvalCoord1xvOES" eval-coord-1xv-oes :return "void" :args ((:name |coords| :type |ConstFixed| :direction :in :array t :size #x1)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("EvalCoord2xOES" eval-coord-2x-oes :return "void" :args ((:name \u :type |Fixed| :direction :in) (:name \v :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("EvalCoord1xOES" eval-coord-1x-oes :return "void" :args ((:name \u :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("DepthRangexOES" depth-rangex-oes :return "void" :args ((:name \n :type |ClampedFixed| :direction :in) (:name |f| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ConvolutionParameterxvOES" convolution-parameterxv-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |ConstFixed| :direction :in :array t :size (|pname|))) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ConvolutionParameterxOES" convolution-parameterx-oes :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Color4xvOES" color-4xv-oes :return "void" :args ((:name |components| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Color3xvOES" color-3xv-oes :return "void" :args ((:name |components| :type |ConstFixed| :direction :in :array t :size #x3)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Color4xOES" color-4x-oes :return "void" :args ((:name |red| :type |Fixed| :direction :in) (:name |green| :type |Fixed| :direction :in) (:name |blue| :type |Fixed| :direction :in) (:name |alpha| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("Color3xOES" color-3x-oes :return "void" :args ((:name |red| :type |Fixed| :direction :in) (:name |green| :type |Fixed| :direction :in) (:name |blue| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ClipPlanexOES" clip-planex-oes :return "void" :args ((:name |plane| :type |GLenum| :direction :in) (:name |equation| :type |ConstFixed| :direction :in :array t :size #x4)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ClearDepthxOES" clear-depthx-oes :return "void" :args ((:name |depth| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ClearColorxOES" clear-colorx-oes :return "void" :args ((:name |red| :type |ClampedFixed| :direction :in) (:name |green| :type |ClampedFixed| :direction :in) (:name |blue| :type |ClampedFixed| :direction :in) (:name |alpha| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("ClearAccumxOES" clear-accumx-oes :return "void" :args ((:name |red| :type |ClampedFixed| :direction :in) (:name |green| :type |ClampedFixed| :direction :in) (:name |blue| :type |ClampedFixed| :direction :in) (:name |alpha| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("BlendColorxOES" blend-colorx-oes :return "void" :args ((:name |red| :type |ClampedFixed| :direction :in) (:name |green| :type |ClampedFixed| :direction :in) (:name |blue| :type |ClampedFixed| :direction :in) (:name |alpha| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("BitmapxOES" bitmapx-oes :return "void" :args ((:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |xorig| :type |Fixed| :direction :in) (:name |yorig| :type |Fixed| :direction :in) (:name |xmove| :type |Fixed| :direction :in) (:name |ymove| :type |Fixed| :direction :in) (:name |bitmap| :type |ConstUByte| :direction :in :array t)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("AlphaFuncxOES" alpha-funcx-oes :return "void" :args ((:name |func| :type |GLenum| :direction :in) (:name |ref| :type |ClampedFixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3") ("AccumxOES" accumx-oes :return "void" :args ((:name |op| :type |GLenum| :direction :in) (:name |value| :type |Fixed| :direction :in)) :category "OES_fixed_point" :deprecated nil :version "4.3"))) 
+(defglextfun "Vertex4xvOES" vertex-4xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Vertex3xvOES" vertex-3xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x3))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Vertex2xvOES" vertex-2xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x2))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Vertex4xOES" vertex-4x-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in)
+  (:name \z :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Vertex3xOES" vertex-3x-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Vertex2xOES" vertex-2x-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TranslatexOES" translatex-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in)
+  (:name \z :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexParameterxvOES" tex-parameterxv-oes :return "void"
+ :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexParameterxOES" tex-parameterx-oes :return "void"
+ :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexGenxvOES" tex-genxv-oes :return "void" :args
+ ((:name |coord| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexGenxOES" tex-genx-oes :return "void" :args
+ ((:name |coord| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexEnvxvOES" tex-envxv-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexEnvxOES" tex-envx-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord4xvOES" tex-coord-4xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord3xvOES" tex-coord-3xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x3))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord2xvOES" tex-coord-2xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x2))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord1xvOES" tex-coord-1xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x1))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord4xOES" tex-coord-4x-oes :return "void" :args
+ ((:name \s :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in)
+  (:name \r :type |Fixed| :direction :in)
+  (:name \q :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord3xOES" tex-coord-3x-oes :return "void" :args
+ ((:name \s :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in)
+  (:name \r :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord2xOES" tex-coord-2x-oes :return "void" :args
+ ((:name \s :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord1xOES" tex-coord-1x-oes :return "void" :args
+ ((:name \s :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ScalexOES" scalex-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in)
+  (:name \z :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "SampleCoverageOES" sample-coverage-oes :return "void"
+ :args
+ ((:name |value| :type |ClampedFixed| :direction :in)
+  (:name |invert| :type |Boolean| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RotatexOES" rotatex-oes :return "void" :args
+ ((:name |angle| :type |Fixed| :direction :in)
+  (:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in)
+  (:name \z :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RectxvOES" rectxv-oes :return "void" :args
+ ((:name \v1 :type |ConstFixed| :direction :in :array t :size #x2)
+  (:name \v2 :type |ConstFixed| :direction :in :array t :size #x2))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RectxOES" rectx-oes :return "void" :args
+ ((:name \x1 :type |Fixed| :direction :in)
+  (:name \y1 :type |Fixed| :direction :in)
+  (:name \x2 :type |Fixed| :direction :in)
+  (:name \y2 :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RasterPos4xvOES" raster-pos-4xv-oes :return "void"
+ :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RasterPos3xvOES" raster-pos-3xv-oes :return "void"
+ :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x3))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RasterPos2xvOES" raster-pos-2xv-oes :return "void"
+ :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x2))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RasterPos4xOES" raster-pos-4x-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in)
+  (:name \z :type |Fixed| :direction :in)
+  (:name \w :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RasterPos3xOES" raster-pos-3x-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in)
+  (:name \z :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "RasterPos2xOES" raster-pos-2x-oes :return "void" :args
+ ((:name \x :type |Fixed| :direction :in)
+  (:name \y :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PrioritizeTexturesxOES" prioritize-texturesx-oes
+ :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |textures| :type |UInt32| :direction :in :array t :size n)
+  (:name |priorities| :type |ClampedFixed| :direction :in :array t
+   :size n))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PolygonOffsetxOES" polygon-offsetx-oes :return "void"
+ :args
+ ((:name |factor| :type |Fixed| :direction :in)
+  (:name |units| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PointSizexOES" point-sizex-oes :return "void" :args
+ ((:name |size| :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PointParameterxvOES" point-parameterxv-oes :return
+ "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PixelZoomxOES" pixel-zoomx-oes :return "void" :args
+ ((:name |xfactor| :type |Fixed| :direction :in)
+  (:name |yfactor| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PixelTransferxOES" pixel-transferx-oes :return "void"
+ :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PixelStorex" pixel-storex :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PixelMapx" pixel-mapx :return "void" :args
+ ((:name |map| :type |GLenum| :direction :in)
+  (:name |size| :type |Int32| :direction :in)
+  (:name |values| :type |ConstFixed| :direction :in :array t :size
+   size))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "PassThroughxOES" pass-throughx-oes :return "void" :args
+ ((:name |token| :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "OrthoxOES" orthox-oes :return "void" :args
+ ((:name \l :type |Fixed| :direction :in)
+  (:name \r :type |Fixed| :direction :in)
+  (:name |b| :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in)
+  (:name \n :type |Fixed| :direction :in)
+  (:name |f| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Normal3xvOES" normal-3xv-oes :return "void" :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x3))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Normal3xOES" normal-3x-oes :return "void" :args
+ ((:name |nx| :type |Fixed| :direction :in)
+  (:name |ny| :type |Fixed| :direction :in)
+  (:name |nz| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord4xvOES" multi-tex-coord-4xv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord3xvOES" multi-tex-coord-3xv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x3))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord2xvOES" multi-tex-coord-2xv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x2))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord1xvOES" multi-tex-coord-1xv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x1))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord4xOES" multi-tex-coord-4x-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in)
+  (:name \r :type |Fixed| :direction :in)
+  (:name \q :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord3xOES" multi-tex-coord-3x-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in)
+  (:name \r :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord2xOES" multi-tex-coord-2x-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord1xOES" multi-tex-coord-1x-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultTransposeMatrixxOES" mult-transpose-matrixx-oes
+ :return "void" :args
+ ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MultMatrixxOES" mult-matrixx-oes :return "void" :args
+ ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MaterialxvOES" materialxv-oes :return "void" :args
+ ((:name |face| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MaterialxOES" materialx-oes :return "void" :args
+ ((:name |face| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MapGrid2xOES" map-grid-2x-oes :return "void" :args
+ ((:name \n :type |Int32| :direction :in)
+  (:name \u1 :type |Fixed| :direction :in)
+  (:name \u2 :type |Fixed| :direction :in)
+  (:name \v1 :type |Fixed| :direction :in)
+  (:name \v2 :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "MapGrid1xOES" map-grid-1x-oes :return "void" :args
+ ((:name \n :type |Int32| :direction :in)
+  (:name \u1 :type |Fixed| :direction :in)
+  (:name \u2 :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Map2xOES" map-2x-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name \u1 :type |Fixed| :direction :in)
+  (:name \u2 :type |Fixed| :direction :in)
+  (:name |ustride| :type |Int32| :direction :in)
+  (:name |uorder| :type |Int32| :direction :in)
+  (:name \v1 :type |Fixed| :direction :in)
+  (:name \v2 :type |Fixed| :direction :in)
+  (:name |vstride| :type |Int32| :direction :in)
+  (:name |vorder| :type |Int32| :direction :in)
+  (:name |points| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Map1xOES" map-1x-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name \u1 :type |Fixed| :direction :in)
+  (:name \u2 :type |Fixed| :direction :in)
+  (:name |stride| :type |Int32| :direction :in)
+  (:name |order| :type |Int32| :direction :in)
+  (:name |points| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LoadTransposeMatrixxOES" load-transpose-matrixx-oes
+ :return "void" :args
+ ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LoadMatrixxOES" load-matrixx-oes :return "void" :args
+ ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LineWidthxOES" line-widthx-oes :return "void" :args
+ ((:name |width| :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LightxvOES" lightxv-oes :return "void" :args
+ ((:name |light| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LightxOES" lightx-oes :return "void" :args
+ ((:name |light| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LightModelxvOES" light-modelxv-oes :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "LightModelxOES" light-modelx-oes :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "IndexxvOES" indexxv-oes :return "void" :args
+ ((:name |component| :type |ConstFixed| :direction :in :array t :size
+   #x1))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "IndexxOES" indexx-oes :return "void" :args
+ ((:name |component| :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetTexParameterxvOES" get-tex-parameterxv-oes :return
+ "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetTexLevelParameterxvOES"
+ get-tex-level-parameterxv-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |level| :type |Int32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetTexGenxvOES" get-tex-genxv-oes :return "void" :args
+ ((:name |coord| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetTexEnvxvOES" get-tex-envxv-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetPixelMapxv" get-pixel-mapxv :return "void" :args
+ ((:name |map| :type |GLenum| :direction :in)
+  (:name |size| :type |Int32| :direction :in)
+  (:name |values| :type |Fixed| :direction :out :array t :size size))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetMaterialxOES" get-materialx-oes :return "void" :args
+ ((:name |face| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetMapxvOES" get-mapxv-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |query| :type |GLenum| :direction :in)
+  (:name \v :type |Fixed| :direction :out :array t :size (|query|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetLightxOES" get-lightx-oes :return "void" :args
+ ((:name |light| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetHistogramParameterxvOES"
+ get-histogram-parameterxv-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetFixedvOES" get-fixedv-oes :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetConvolutionParameterxvOES"
+ get-convolution-parameterxv-oes :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Fixed| :direction :out :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "GetClipPlanexOES" get-clip-planex-oes :return "void"
+ :args
+ ((:name |plane| :type |GLenum| :direction :in)
+  (:name |equation| :type |Fixed| :direction :out :array t :size
+   #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "FrustumxOES" frustumx-oes :return "void" :args
+ ((:name \l :type |Fixed| :direction :in)
+  (:name \r :type |Fixed| :direction :in)
+  (:name |b| :type |Fixed| :direction :in)
+  (:name \t :type |Fixed| :direction :in)
+  (:name \n :type |Fixed| :direction :in)
+  (:name |f| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "FogxvOES" fogxv-oes :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "FogxOES" fogx-oes :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "FeedbackBufferxOES" feedback-bufferx-oes :return "void"
+ :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |type| :type |GLenum| :direction :in)
+  (:name |buffer| :type |Fixed| :direction :in :array t :size n))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "EvalCoord2xvOES" eval-coord-2xv-oes :return "void"
+ :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x2))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "EvalCoord1xvOES" eval-coord-1xv-oes :return "void"
+ :args
+ ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+   #x1))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "EvalCoord2xOES" eval-coord-2x-oes :return "void" :args
+ ((:name \u :type |Fixed| :direction :in)
+  (:name \v :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "EvalCoord1xOES" eval-coord-1x-oes :return "void" :args
+ ((:name \u :type |Fixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "DepthRangexOES" depth-rangex-oes :return "void" :args
+ ((:name \n :type |ClampedFixed| :direction :in)
+  (:name |f| :type |ClampedFixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ConvolutionParameterxvOES" convolution-parameterxv-oes
+ :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |ConstFixed| :direction :in :array t :size
+   (|pname|)))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ConvolutionParameterxOES" convolution-parameterx-oes
+ :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Color4xvOES" color-4xv-oes :return "void" :args
+ ((:name |components| :type |ConstFixed| :direction :in :array t
+   :size #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Color3xvOES" color-3xv-oes :return "void" :args
+ ((:name |components| :type |ConstFixed| :direction :in :array t
+   :size #x3))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Color4xOES" color-4x-oes :return "void" :args
+ ((:name |red| :type |Fixed| :direction :in)
+  (:name |green| :type |Fixed| :direction :in)
+  (:name |blue| :type |Fixed| :direction :in)
+  (:name |alpha| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "Color3xOES" color-3x-oes :return "void" :args
+ ((:name |red| :type |Fixed| :direction :in)
+  (:name |green| :type |Fixed| :direction :in)
+  (:name |blue| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ClipPlanexOES" clip-planex-oes :return "void" :args
+ ((:name |plane| :type |GLenum| :direction :in)
+  (:name |equation| :type |ConstFixed| :direction :in :array t :size
+   #x4))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ClearDepthxOES" clear-depthx-oes :return "void" :args
+ ((:name |depth| :type |ClampedFixed| :direction :in)) :category
+ "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ClearColorxOES" clear-colorx-oes :return "void" :args
+ ((:name |red| :type |ClampedFixed| :direction :in)
+  (:name |green| :type |ClampedFixed| :direction :in)
+  (:name |blue| :type |ClampedFixed| :direction :in)
+  (:name |alpha| :type |ClampedFixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "ClearAccumxOES" clear-accumx-oes :return "void" :args
+ ((:name |red| :type |ClampedFixed| :direction :in)
+  (:name |green| :type |ClampedFixed| :direction :in)
+  (:name |blue| :type |ClampedFixed| :direction :in)
+  (:name |alpha| :type |ClampedFixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "BlendColorxOES" blend-colorx-oes :return "void" :args
+ ((:name |red| :type |ClampedFixed| :direction :in)
+  (:name |green| :type |ClampedFixed| :direction :in)
+  (:name |blue| :type |ClampedFixed| :direction :in)
+  (:name |alpha| :type |ClampedFixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "BitmapxOES" bitmapx-oes :return "void" :args
+ ((:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |xorig| :type |Fixed| :direction :in)
+  (:name |yorig| :type |Fixed| :direction :in)
+  (:name |xmove| :type |Fixed| :direction :in)
+  (:name |ymove| :type |Fixed| :direction :in)
+  (:name |bitmap| :type |ConstUByte| :direction :in :array t))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "AlphaFuncxOES" alpha-funcx-oes :return "void" :args
+ ((:name |func| :type |GLenum| :direction :in)
+  (:name |ref| :type |ClampedFixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(defglextfun "AccumxOES" accumx-oes :return "void" :args
+ ((:name |op| :type |GLenum| :direction :in)
+  (:name |value| :type |Fixed| :direction :in))
+ :category "OES_fixed_point" :deprecated nil :version "4.3") 
+(make-extension-loader |OES_fixed_point|
+ (("Vertex4xvOES" vertex-4xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Vertex3xvOES" vertex-3xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x3))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Vertex2xvOES" vertex-2xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x2))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Vertex4xOES" vertex-4x-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in)
+    (:name \z :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Vertex3xOES" vertex-3x-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Vertex2xOES" vertex-2x-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TranslatexOES" translatex-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in)
+    (:name \z :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexParameterxvOES" tex-parameterxv-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexParameterxOES" tex-parameterx-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexGenxvOES" tex-genxv-oes :return "void" :args
+   ((:name |coord| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexGenxOES" tex-genx-oes :return "void" :args
+   ((:name |coord| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexEnvxvOES" tex-envxv-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexEnvxOES" tex-envx-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord4xvOES" tex-coord-4xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord3xvOES" tex-coord-3xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x3))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord2xvOES" tex-coord-2xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x2))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord1xvOES" tex-coord-1xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x1))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord4xOES" tex-coord-4x-oes :return "void" :args
+   ((:name \s :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in)
+    (:name \r :type |Fixed| :direction :in)
+    (:name \q :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord3xOES" tex-coord-3x-oes :return "void" :args
+   ((:name \s :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in)
+    (:name \r :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord2xOES" tex-coord-2x-oes :return "void" :args
+   ((:name \s :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("TexCoord1xOES" tex-coord-1x-oes :return "void" :args
+   ((:name \s :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ScalexOES" scalex-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in)
+    (:name \z :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("SampleCoverageOES" sample-coverage-oes :return "void" :args
+   ((:name |value| :type |ClampedFixed| :direction :in)
+    (:name |invert| :type |Boolean| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RotatexOES" rotatex-oes :return "void" :args
+   ((:name |angle| :type |Fixed| :direction :in)
+    (:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in)
+    (:name \z :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RectxvOES" rectxv-oes :return "void" :args
+   ((:name \v1 :type |ConstFixed| :direction :in :array t :size #x2)
+    (:name \v2 :type |ConstFixed| :direction :in :array t :size #x2))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RectxOES" rectx-oes :return "void" :args
+   ((:name \x1 :type |Fixed| :direction :in)
+    (:name \y1 :type |Fixed| :direction :in)
+    (:name \x2 :type |Fixed| :direction :in)
+    (:name \y2 :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RasterPos4xvOES" raster-pos-4xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RasterPos3xvOES" raster-pos-3xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x3))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RasterPos2xvOES" raster-pos-2xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x2))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RasterPos4xOES" raster-pos-4x-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in)
+    (:name \z :type |Fixed| :direction :in)
+    (:name \w :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RasterPos3xOES" raster-pos-3x-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in)
+    (:name \z :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("RasterPos2xOES" raster-pos-2x-oes :return "void" :args
+   ((:name \x :type |Fixed| :direction :in)
+    (:name \y :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PrioritizeTexturesxOES" prioritize-texturesx-oes :return "void"
+   :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |textures| :type |UInt32| :direction :in :array t :size n)
+    (:name |priorities| :type |ClampedFixed| :direction :in :array t
+     :size n))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PolygonOffsetxOES" polygon-offsetx-oes :return "void" :args
+   ((:name |factor| :type |Fixed| :direction :in)
+    (:name |units| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PointSizexOES" point-sizex-oes :return "void" :args
+   ((:name |size| :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PointParameterxvOES" point-parameterxv-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PixelZoomxOES" pixel-zoomx-oes :return "void" :args
+   ((:name |xfactor| :type |Fixed| :direction :in)
+    (:name |yfactor| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PixelTransferxOES" pixel-transferx-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PixelStorex" pixel-storex :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PixelMapx" pixel-mapx :return "void" :args
+   ((:name |map| :type |GLenum| :direction :in)
+    (:name |size| :type |Int32| :direction :in)
+    (:name |values| :type |ConstFixed| :direction :in :array t :size
+     size))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("PassThroughxOES" pass-throughx-oes :return "void" :args
+   ((:name |token| :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("OrthoxOES" orthox-oes :return "void" :args
+   ((:name \l :type |Fixed| :direction :in)
+    (:name \r :type |Fixed| :direction :in)
+    (:name |b| :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in)
+    (:name \n :type |Fixed| :direction :in)
+    (:name |f| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Normal3xvOES" normal-3xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x3))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Normal3xOES" normal-3x-oes :return "void" :args
+   ((:name |nx| :type |Fixed| :direction :in)
+    (:name |ny| :type |Fixed| :direction :in)
+    (:name |nz| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord4xvOES" multi-tex-coord-4xv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord3xvOES" multi-tex-coord-3xv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x3))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord2xvOES" multi-tex-coord-2xv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x2))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord1xvOES" multi-tex-coord-1xv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x1))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord4xOES" multi-tex-coord-4x-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in)
+    (:name \r :type |Fixed| :direction :in)
+    (:name \q :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord3xOES" multi-tex-coord-3x-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in)
+    (:name \r :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord2xOES" multi-tex-coord-2x-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultiTexCoord1xOES" multi-tex-coord-1x-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultTransposeMatrixxOES" mult-transpose-matrixx-oes :return
+   "void" :args
+   ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MultMatrixxOES" mult-matrixx-oes :return "void" :args
+   ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MaterialxvOES" materialxv-oes :return "void" :args
+   ((:name |face| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MaterialxOES" materialx-oes :return "void" :args
+   ((:name |face| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MapGrid2xOES" map-grid-2x-oes :return "void" :args
+   ((:name \n :type |Int32| :direction :in)
+    (:name \u1 :type |Fixed| :direction :in)
+    (:name \u2 :type |Fixed| :direction :in)
+    (:name \v1 :type |Fixed| :direction :in)
+    (:name \v2 :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("MapGrid1xOES" map-grid-1x-oes :return "void" :args
+   ((:name \n :type |Int32| :direction :in)
+    (:name \u1 :type |Fixed| :direction :in)
+    (:name \u2 :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Map2xOES" map-2x-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name \u1 :type |Fixed| :direction :in)
+    (:name \u2 :type |Fixed| :direction :in)
+    (:name |ustride| :type |Int32| :direction :in)
+    (:name |uorder| :type |Int32| :direction :in)
+    (:name \v1 :type |Fixed| :direction :in)
+    (:name \v2 :type |Fixed| :direction :in)
+    (:name |vstride| :type |Int32| :direction :in)
+    (:name |vorder| :type |Int32| :direction :in)
+    (:name |points| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Map1xOES" map-1x-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name \u1 :type |Fixed| :direction :in)
+    (:name \u2 :type |Fixed| :direction :in)
+    (:name |stride| :type |Int32| :direction :in)
+    (:name |order| :type |Int32| :direction :in)
+    (:name |points| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LoadTransposeMatrixxOES" load-transpose-matrixx-oes :return
+   "void" :args
+   ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LoadMatrixxOES" load-matrixx-oes :return "void" :args
+   ((:name \m :type |ConstFixed| :direction :in :array t :size #x10))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LineWidthxOES" line-widthx-oes :return "void" :args
+   ((:name |width| :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LightxvOES" lightxv-oes :return "void" :args
+   ((:name |light| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LightxOES" lightx-oes :return "void" :args
+   ((:name |light| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LightModelxvOES" light-modelxv-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("LightModelxOES" light-modelx-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("IndexxvOES" indexxv-oes :return "void" :args
+   ((:name |component| :type |ConstFixed| :direction :in :array t
+     :size #x1))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("IndexxOES" indexx-oes :return "void" :args
+   ((:name |component| :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetTexParameterxvOES" get-tex-parameterxv-oes :return "void"
+   :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetTexLevelParameterxvOES" get-tex-level-parameterxv-oes :return
+   "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |level| :type |Int32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetTexGenxvOES" get-tex-genxv-oes :return "void" :args
+   ((:name |coord| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetTexEnvxvOES" get-tex-envxv-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetPixelMapxv" get-pixel-mapxv :return "void" :args
+   ((:name |map| :type |GLenum| :direction :in)
+    (:name |size| :type |Int32| :direction :in)
+    (:name |values| :type |Fixed| :direction :out :array t :size
+     size))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetMaterialxOES" get-materialx-oes :return "void" :args
+   ((:name |face| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetMapxvOES" get-mapxv-oes :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |query| :type |GLenum| :direction :in)
+    (:name \v :type |Fixed| :direction :out :array t :size
+     (|query|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetLightxOES" get-lightx-oes :return "void" :args
+   ((:name |light| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetHistogramParameterxvOES" get-histogram-parameterxv-oes :return
+   "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetFixedvOES" get-fixedv-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetConvolutionParameterxvOES" get-convolution-parameterxv-oes
+   :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Fixed| :direction :out :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("GetClipPlanexOES" get-clip-planex-oes :return "void" :args
+   ((:name |plane| :type |GLenum| :direction :in)
+    (:name |equation| :type |Fixed| :direction :out :array t :size
+     #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("FrustumxOES" frustumx-oes :return "void" :args
+   ((:name \l :type |Fixed| :direction :in)
+    (:name \r :type |Fixed| :direction :in)
+    (:name |b| :type |Fixed| :direction :in)
+    (:name \t :type |Fixed| :direction :in)
+    (:name \n :type |Fixed| :direction :in)
+    (:name |f| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("FogxvOES" fogxv-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("FogxOES" fogx-oes :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("FeedbackBufferxOES" feedback-bufferx-oes :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |type| :type |GLenum| :direction :in)
+    (:name |buffer| :type |Fixed| :direction :in :array t :size n))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("EvalCoord2xvOES" eval-coord-2xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x2))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("EvalCoord1xvOES" eval-coord-1xv-oes :return "void" :args
+   ((:name |coords| :type |ConstFixed| :direction :in :array t :size
+     #x1))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("EvalCoord2xOES" eval-coord-2x-oes :return "void" :args
+   ((:name \u :type |Fixed| :direction :in)
+    (:name \v :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("EvalCoord1xOES" eval-coord-1x-oes :return "void" :args
+   ((:name \u :type |Fixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("DepthRangexOES" depth-rangex-oes :return "void" :args
+   ((:name \n :type |ClampedFixed| :direction :in)
+    (:name |f| :type |ClampedFixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ConvolutionParameterxvOES" convolution-parameterxv-oes :return
+   "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |ConstFixed| :direction :in :array t :size
+     (|pname|)))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ConvolutionParameterxOES" convolution-parameterx-oes :return
+   "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Color4xvOES" color-4xv-oes :return "void" :args
+   ((:name |components| :type |ConstFixed| :direction :in :array t
+     :size #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Color3xvOES" color-3xv-oes :return "void" :args
+   ((:name |components| :type |ConstFixed| :direction :in :array t
+     :size #x3))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Color4xOES" color-4x-oes :return "void" :args
+   ((:name |red| :type |Fixed| :direction :in)
+    (:name |green| :type |Fixed| :direction :in)
+    (:name |blue| :type |Fixed| :direction :in)
+    (:name |alpha| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("Color3xOES" color-3x-oes :return "void" :args
+   ((:name |red| :type |Fixed| :direction :in)
+    (:name |green| :type |Fixed| :direction :in)
+    (:name |blue| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ClipPlanexOES" clip-planex-oes :return "void" :args
+   ((:name |plane| :type |GLenum| :direction :in)
+    (:name |equation| :type |ConstFixed| :direction :in :array t
+     :size #x4))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ClearDepthxOES" clear-depthx-oes :return "void" :args
+   ((:name |depth| :type |ClampedFixed| :direction :in)) :category
+   "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ClearColorxOES" clear-colorx-oes :return "void" :args
+   ((:name |red| :type |ClampedFixed| :direction :in)
+    (:name |green| :type |ClampedFixed| :direction :in)
+    (:name |blue| :type |ClampedFixed| :direction :in)
+    (:name |alpha| :type |ClampedFixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("ClearAccumxOES" clear-accumx-oes :return "void" :args
+   ((:name |red| :type |ClampedFixed| :direction :in)
+    (:name |green| :type |ClampedFixed| :direction :in)
+    (:name |blue| :type |ClampedFixed| :direction :in)
+    (:name |alpha| :type |ClampedFixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("BlendColorxOES" blend-colorx-oes :return "void" :args
+   ((:name |red| :type |ClampedFixed| :direction :in)
+    (:name |green| :type |ClampedFixed| :direction :in)
+    (:name |blue| :type |ClampedFixed| :direction :in)
+    (:name |alpha| :type |ClampedFixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("BitmapxOES" bitmapx-oes :return "void" :args
+   ((:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |xorig| :type |Fixed| :direction :in)
+    (:name |yorig| :type |Fixed| :direction :in)
+    (:name |xmove| :type |Fixed| :direction :in)
+    (:name |ymove| :type |Fixed| :direction :in)
+    (:name |bitmap| :type |ConstUByte| :direction :in :array t))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("AlphaFuncxOES" alpha-funcx-oes :return "void" :args
+   ((:name |func| :type |GLenum| :direction :in)
+    (:name |ref| :type |ClampedFixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3")
+  ("AccumxOES" accumx-oes :return "void" :args
+   ((:name |op| :type |GLenum| :direction :in)
+    (:name |value| :type |Fixed| :direction :in))
+   :category "OES_fixed_point" :deprecated nil :version "4.3"))) 

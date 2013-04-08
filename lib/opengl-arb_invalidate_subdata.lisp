@@ -4,10 +4,90 @@
 
 ;;;; arb_invalidate_subdata
 
-(defglextfun "InvalidateSubFramebuffer" invalidate-sub-framebuffer :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |numAttachments| :type |SizeI| :direction :in) (:name |attachments| :type |GLenum| :direction :in :array t :size numattachments) (:name \x :type |Int32| :direction :in) (:name \y :type |Int32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
-(defglextfun "InvalidateFramebuffer" invalidate-framebuffer :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |numAttachments| :type |SizeI| :direction :in) (:name |attachments| :type |GLenum| :direction :in :array t :size numattachments)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
-(defglextfun "InvalidateBufferData" invalidate-buffer-data :return "void" :args ((:name |buffer| :type |UInt32| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
-(defglextfun "InvalidateBufferSubData" invalidate-buffer-sub-data :return "void" :args ((:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |length| :type |BufferSize| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
-(defglextfun "InvalidateTexImage" invalidate-tex-image :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
-(defglextfun "InvalidateTexSubImage" invalidate-tex-sub-image :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |xoffset| :type |Int32| :direction :in) (:name |yoffset| :type |Int32| :direction :in) (:name |zoffset| :type |Int32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_invalidate_subdata| (("InvalidateSubFramebuffer" invalidate-sub-framebuffer :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |numAttachments| :type |SizeI| :direction :in) (:name |attachments| :type |GLenum| :direction :in :array t :size numattachments) (:name \x :type |Int32| :direction :in) (:name \y :type |Int32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") ("InvalidateFramebuffer" invalidate-framebuffer :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |numAttachments| :type |SizeI| :direction :in) (:name |attachments| :type |GLenum| :direction :in :array t :size numattachments)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") ("InvalidateBufferData" invalidate-buffer-data :return "void" :args ((:name |buffer| :type |UInt32| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") ("InvalidateBufferSubData" invalidate-buffer-sub-data :return "void" :args ((:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |length| :type |BufferSize| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") ("InvalidateTexImage" invalidate-tex-image :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") ("InvalidateTexSubImage" invalidate-tex-sub-image :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |xoffset| :type |Int32| :direction :in) (:name |yoffset| :type |Int32| :direction :in) (:name |zoffset| :type |Int32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in)) :category "ARB_invalidate_subdata" :deprecated nil :version "4.3"))) 
+(defglextfun "InvalidateSubFramebuffer" invalidate-sub-framebuffer
+ :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |numAttachments| :type |SizeI| :direction :in)
+  (:name |attachments| :type |GLenum| :direction :in :array t :size
+   numattachments)
+  (:name \x :type |Int32| :direction :in)
+  (:name \y :type |Int32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in))
+ :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
+(defglextfun "InvalidateFramebuffer" invalidate-framebuffer :return
+ "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |numAttachments| :type |SizeI| :direction :in)
+  (:name |attachments| :type |GLenum| :direction :in :array t :size
+   numattachments))
+ :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
+(defglextfun "InvalidateBufferData" invalidate-buffer-data :return
+ "void" :args ((:name |buffer| :type |UInt32| :direction :in))
+ :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
+(defglextfun "InvalidateBufferSubData" invalidate-buffer-sub-data
+ :return "void" :args
+ ((:name |buffer| :type |UInt32| :direction :in)
+  (:name |offset| :type |BufferOffset| :direction :in)
+  (:name |length| :type |BufferSize| :direction :in))
+ :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
+(defglextfun "InvalidateTexImage" invalidate-tex-image :return "void"
+ :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |level| :type |Int32| :direction :in))
+ :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
+(defglextfun "InvalidateTexSubImage" invalidate-tex-sub-image :return
+ "void" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |level| :type |Int32| :direction :in)
+  (:name |xoffset| :type |Int32| :direction :in)
+  (:name |yoffset| :type |Int32| :direction :in)
+  (:name |zoffset| :type |Int32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in))
+ :category "ARB_invalidate_subdata" :deprecated nil :version "4.3") 
+(make-extension-loader |ARB_invalidate_subdata|
+ (("InvalidateSubFramebuffer" invalidate-sub-framebuffer :return
+   "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |numAttachments| :type |SizeI| :direction :in)
+    (:name |attachments| :type |GLenum| :direction :in :array t :size
+     numattachments)
+    (:name \x :type |Int32| :direction :in)
+    (:name \y :type |Int32| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in))
+   :category "ARB_invalidate_subdata" :deprecated nil :version "4.3")
+  ("InvalidateFramebuffer" invalidate-framebuffer :return "void"
+   :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |numAttachments| :type |SizeI| :direction :in)
+    (:name |attachments| :type |GLenum| :direction :in :array t :size
+     numattachments))
+   :category "ARB_invalidate_subdata" :deprecated nil :version "4.3")
+  ("InvalidateBufferData" invalidate-buffer-data :return "void" :args
+   ((:name |buffer| :type |UInt32| :direction :in)) :category
+   "ARB_invalidate_subdata" :deprecated nil :version "4.3")
+  ("InvalidateBufferSubData" invalidate-buffer-sub-data :return
+   "void" :args
+   ((:name |buffer| :type |UInt32| :direction :in)
+    (:name |offset| :type |BufferOffset| :direction :in)
+    (:name |length| :type |BufferSize| :direction :in))
+   :category "ARB_invalidate_subdata" :deprecated nil :version "4.3")
+  ("InvalidateTexImage" invalidate-tex-image :return "void" :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |level| :type |Int32| :direction :in))
+   :category "ARB_invalidate_subdata" :deprecated nil :version "4.3")
+  ("InvalidateTexSubImage" invalidate-tex-sub-image :return "void"
+   :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |level| :type |Int32| :direction :in)
+    (:name |xoffset| :type |Int32| :direction :in)
+    (:name |yoffset| :type |Int32| :direction :in)
+    (:name |zoffset| :type |Int32| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in))
+   :category "ARB_invalidate_subdata" :deprecated nil :version
+   "4.3"))) 

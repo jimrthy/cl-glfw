@@ -4,5 +4,39 @@
 
 ;;;; arb_copy_image
 
-(defglextfun "CopyImageSubData" copy-image-sub-data :return "void" :args ((:name |srcName| :type |UInt32| :direction :in) (:name |srcTarget| :type |GLenum| :direction :in) (:name |srcLevel| :type |Int32| :direction :in) (:name |srcX| :type |Int32| :direction :in) (:name |srcY| :type |Int32| :direction :in) (:name |srcZ| :type |Int32| :direction :in) (:name |dstName| :type |UInt32| :direction :in) (:name |dstTarget| :type |GLenum| :direction :in) (:name |dstLevel| :type |Int32| :direction :in) (:name |dstX| :type |Int32| :direction :in) (:name |dstY| :type |Int32| :direction :in) (:name |dstZ| :type |Int32| :direction :in) (:name |srcWidth| :type |SizeI| :direction :in) (:name |srcHeight| :type |SizeI| :direction :in) (:name |srcDepth| :type |SizeI| :direction :in)) :category "ARB_copy_image" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_copy_image| (("CopyImageSubData" copy-image-sub-data :return "void" :args ((:name |srcName| :type |UInt32| :direction :in) (:name |srcTarget| :type |GLenum| :direction :in) (:name |srcLevel| :type |Int32| :direction :in) (:name |srcX| :type |Int32| :direction :in) (:name |srcY| :type |Int32| :direction :in) (:name |srcZ| :type |Int32| :direction :in) (:name |dstName| :type |UInt32| :direction :in) (:name |dstTarget| :type |GLenum| :direction :in) (:name |dstLevel| :type |Int32| :direction :in) (:name |dstX| :type |Int32| :direction :in) (:name |dstY| :type |Int32| :direction :in) (:name |dstZ| :type |Int32| :direction :in) (:name |srcWidth| :type |SizeI| :direction :in) (:name |srcHeight| :type |SizeI| :direction :in) (:name |srcDepth| :type |SizeI| :direction :in)) :category "ARB_copy_image" :deprecated nil :version "4.3"))) 
+(defglextfun "CopyImageSubData" copy-image-sub-data :return "void"
+ :args
+ ((:name |srcName| :type |UInt32| :direction :in)
+  (:name |srcTarget| :type |GLenum| :direction :in)
+  (:name |srcLevel| :type |Int32| :direction :in)
+  (:name |srcX| :type |Int32| :direction :in)
+  (:name |srcY| :type |Int32| :direction :in)
+  (:name |srcZ| :type |Int32| :direction :in)
+  (:name |dstName| :type |UInt32| :direction :in)
+  (:name |dstTarget| :type |GLenum| :direction :in)
+  (:name |dstLevel| :type |Int32| :direction :in)
+  (:name |dstX| :type |Int32| :direction :in)
+  (:name |dstY| :type |Int32| :direction :in)
+  (:name |dstZ| :type |Int32| :direction :in)
+  (:name |srcWidth| :type |SizeI| :direction :in)
+  (:name |srcHeight| :type |SizeI| :direction :in)
+  (:name |srcDepth| :type |SizeI| :direction :in))
+ :category "ARB_copy_image" :deprecated nil :version "4.3") 
+(make-extension-loader |ARB_copy_image|
+ (("CopyImageSubData" copy-image-sub-data :return "void" :args
+   ((:name |srcName| :type |UInt32| :direction :in)
+    (:name |srcTarget| :type |GLenum| :direction :in)
+    (:name |srcLevel| :type |Int32| :direction :in)
+    (:name |srcX| :type |Int32| :direction :in)
+    (:name |srcY| :type |Int32| :direction :in)
+    (:name |srcZ| :type |Int32| :direction :in)
+    (:name |dstName| :type |UInt32| :direction :in)
+    (:name |dstTarget| :type |GLenum| :direction :in)
+    (:name |dstLevel| :type |Int32| :direction :in)
+    (:name |dstX| :type |Int32| :direction :in)
+    (:name |dstY| :type |Int32| :direction :in)
+    (:name |dstZ| :type |Int32| :direction :in)
+    (:name |srcWidth| :type |SizeI| :direction :in)
+    (:name |srcHeight| :type |SizeI| :direction :in)
+    (:name |srcDepth| :type |SizeI| :direction :in))
+   :category "ARB_copy_image" :deprecated nil :version "4.3"))) 

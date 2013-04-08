@@ -11,5 +11,11 @@
 (defconstant +samples-passed-arb+ #x8914) 
 (defconstant +stencil-test-two-side-ext+ #x8910) 
 (defconstant +active-stencil-face-ext+ #x8911) 
-(defglextfun "ActiveStencilFaceEXT" active-stencil-face-ext :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in)) :category "EXT_stencil_two_side" :deprecated nil :version "1.3") 
-(make-extension-loader |EXT_stencil_two_side| (("ActiveStencilFaceEXT" active-stencil-face-ext :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in)) :category "EXT_stencil_two_side" :deprecated nil :version "1.3"))) 
+(defglextfun "ActiveStencilFaceEXT" active-stencil-face-ext :return
+ "void" :args
+ ((:name |face| :type |StencilFaceDirection| :direction :in))
+ :category "EXT_stencil_two_side" :deprecated nil :version "1.3") 
+(make-extension-loader |EXT_stencil_two_side|
+ (("ActiveStencilFaceEXT" active-stencil-face-ext :return "void"
+   :args ((:name |face| :type |StencilFaceDirection| :direction :in))
+   :category "EXT_stencil_two_side" :deprecated nil :version "1.3"))) 

@@ -36,5 +36,16 @@
 (defconstant +framebuffer-attachment-layered-ext+ #x8DA7) 
 (defconstant +framebuffer-attachment-texture-layer-ext+ #x8CD4) 
 (defconstant +program-point-size-ext+ #x8642) 
-(defglextfun "ProgramParameteriEXT" program-parameter-i-ext :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |pname| :type |ProgramParameterPName| :direction :in) (:name |value| :type |Int32| :direction :in)) :category "EXT_geometry_shader4" :deprecated nil :version "2.0") 
-(make-extension-loader |EXT_geometry_shader4| (("ProgramParameteriEXT" program-parameter-i-ext :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |pname| :type |ProgramParameterPName| :direction :in) (:name |value| :type |Int32| :direction :in)) :category "EXT_geometry_shader4" :deprecated nil :version "2.0"))) 
+(defglextfun "ProgramParameteriEXT" program-parameter-i-ext :return
+ "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |pname| :type |ProgramParameterPName| :direction :in)
+  (:name |value| :type |Int32| :direction :in))
+ :category "EXT_geometry_shader4" :deprecated nil :version "2.0") 
+(make-extension-loader |EXT_geometry_shader4|
+ (("ProgramParameteriEXT" program-parameter-i-ext :return "void"
+   :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |pname| :type |ProgramParameterPName| :direction :in)
+    (:name |value| :type |Int32| :direction :in))
+   :category "EXT_geometry_shader4" :deprecated nil :version "2.0"))) 

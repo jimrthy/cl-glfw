@@ -101,10 +101,116 @@
 (defconstant +is-per-patch+ #x92E7) 
 (defconstant +num-compatible-subroutines+ #x8E4A) 
 (defconstant +compatible-subroutines+ #x8E4B) 
-(defglextfun "GetProgramResourceLocationIndex" get-program-resource-location-index :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") 
-(defglextfun "GetProgramResourceLocation" get-program-resource-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") 
-(defglextfun "GetProgramResourceiv" get-program-resource-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |propCount| :type |SizeI| :direction :in) (:name |props| :type |GLenum| :direction :in :array t :size propcount) (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |params| :type |Int32| :direction :out :array t :size bufsize)) :category "ARB_program_interface_query" :deprecated nil :version "4.3") 
-(defglextfun "GetProgramResourceName" get-program-resource-name :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |name| :type |Char| :direction :out :array t :size bufsize)) :category "ARB_program_interface_query" :deprecated nil :version "4.3") 
-(defglextfun "GetProgramResourceIndex" get-program-resource-index :return "UInt32" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") 
-(defglextfun "GetProgramInterfaceiv" get-program-interface-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_program_interface_query| (("GetProgramResourceLocationIndex" get-program-resource-location-index :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") ("GetProgramResourceLocation" get-program-resource-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") ("GetProgramResourceiv" get-program-resource-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |propCount| :type |SizeI| :direction :in) (:name |props| :type |GLenum| :direction :in :array t :size propcount) (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |params| :type |Int32| :direction :out :array t :size bufsize)) :category "ARB_program_interface_query" :deprecated nil :version "4.3") ("GetProgramResourceName" get-program-resource-name :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |name| :type |Char| :direction :out :array t :size bufsize)) :category "ARB_program_interface_query" :deprecated nil :version "4.3") ("GetProgramResourceIndex" get-program-resource-index :return "UInt32" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3") ("GetProgramInterfaceiv" get-program-interface-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |programInterface| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_program_interface_query" :deprecated nil :version "4.3"))) 
+(defglextfun "GetProgramResourceLocationIndex"
+ get-program-resource-location-index :return "Int32" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |programInterface| :type |GLenum| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t :size (|name|)))
+ :category "ARB_program_interface_query" :deprecated nil :version
+ "4.3") 
+(defglextfun "GetProgramResourceLocation"
+ get-program-resource-location :return "Int32" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |programInterface| :type |GLenum| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t :size (|name|)))
+ :category "ARB_program_interface_query" :deprecated nil :version
+ "4.3") 
+(defglextfun "GetProgramResourceiv" get-program-resource-iv :return
+ "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |programInterface| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |propCount| :type |SizeI| :direction :in)
+  (:name |props| :type |GLenum| :direction :in :array t :size
+   propcount)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  ("length" "SizeI" "out" "reference")
+  (:name |params| :type |Int32| :direction :out :array t :size
+   bufsize))
+ :category "ARB_program_interface_query" :deprecated nil :version
+ "4.3") 
+(defglextfun "GetProgramResourceName" get-program-resource-name
+ :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |programInterface| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  ("length" "SizeI" "out" "reference")
+  (:name |name| :type |Char| :direction :out :array t :size bufsize))
+ :category "ARB_program_interface_query" :deprecated nil :version
+ "4.3") 
+(defglextfun "GetProgramResourceIndex" get-program-resource-index
+ :return "UInt32" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |programInterface| :type |GLenum| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t :size (|name|)))
+ :category "ARB_program_interface_query" :deprecated nil :version
+ "4.3") 
+(defglextfun "GetProgramInterfaceiv" get-program-interface-iv :return
+ "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |programInterface| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "ARB_program_interface_query" :deprecated nil :version
+ "4.3") 
+(make-extension-loader |ARB_program_interface_query|
+ (("GetProgramResourceLocationIndex"
+   get-program-resource-location-index :return "Int32" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |programInterface| :type |GLenum| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t :size
+     (|name|)))
+   :category "ARB_program_interface_query" :deprecated nil :version
+   "4.3")
+  ("GetProgramResourceLocation" get-program-resource-location :return
+   "Int32" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |programInterface| :type |GLenum| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t :size
+     (|name|)))
+   :category "ARB_program_interface_query" :deprecated nil :version
+   "4.3")
+  ("GetProgramResourceiv" get-program-resource-iv :return "void"
+   :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |programInterface| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |propCount| :type |SizeI| :direction :in)
+    (:name |props| :type |GLenum| :direction :in :array t :size
+     propcount)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    ("length" "SizeI" "out" "reference")
+    (:name |params| :type |Int32| :direction :out :array t :size
+     bufsize))
+   :category "ARB_program_interface_query" :deprecated nil :version
+   "4.3")
+  ("GetProgramResourceName" get-program-resource-name :return "void"
+   :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |programInterface| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    ("length" "SizeI" "out" "reference")
+    (:name |name| :type |Char| :direction :out :array t :size
+     bufsize))
+   :category "ARB_program_interface_query" :deprecated nil :version
+   "4.3")
+  ("GetProgramResourceIndex" get-program-resource-index :return
+   "UInt32" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |programInterface| :type |GLenum| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t :size
+     (|name|)))
+   :category "ARB_program_interface_query" :deprecated nil :version
+   "4.3")
+  ("GetProgramInterfaceiv" get-program-interface-iv :return "void"
+   :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |programInterface| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "ARB_program_interface_query" :deprecated nil :version
+   "4.3"))) 

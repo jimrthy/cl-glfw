@@ -163,6 +163,21 @@ had enough time to play with it to be sure.
 3. Make sure ruby's installed. Pretty much definitely only
 needed for regenerating the OpenGL bindings.
 
+This version is failing messily under both CCL and SBCL.
+
+Well, it's ugly under CCL, because the generated code does not
+pretty-print. It actually fails when I try to use SBCL for the
+code generation, because the constantize function in
+make-bindings-from-spec can't read character #(226) the first
+time around. The second time through, it creates the duplicated
+:unable-to-resolve constants that triggered this project in
+the first place.
+
+Trying to run make-opengl-bindings.rb gets to the very bottom,
+where it calls make-bindings-from-spec.lisp, hangs, and does
+crazy things where my shell keeps dumping me back into the
+sbcl debugger.
+
 Enjoy,
 James
 jamesgatannah@gmail.com

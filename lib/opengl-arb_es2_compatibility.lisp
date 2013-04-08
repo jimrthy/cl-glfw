@@ -26,9 +26,57 @@
 (defconstant +max-varying-vectors+ #x8DFC) 
 (defconstant +max-fragment-uniform-vectors+ #x8DFD) 
 (defconstant +rgb565+ #x8D62) 
-(defglextfun "ClearDepthf" clear-depth-f :return "void" :args ((:name |d| :type |Float32| :direction :in)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
-(defglextfun "DepthRangef" depth-range-f :return "void" :args ((:name \n :type |Float32| :direction :in) (:name |f| :type |Float32| :direction :in)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
-(defglextfun "GetShaderPrecisionFormat" get-shader-precision-format :return "void" :args ((:name |shadertype| :type |GLenum| :direction :in) (:name |precisiontype| :type |GLenum| :direction :in) (:name |range| :type |Int32| :direction :out :array t :size #x2) (:name |precision| :type |Int32| :direction :out :array t :size #x2)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
-(defglextfun "ShaderBinary" shader-binary :return "void" :args ((:name |count| :type |SizeI| :direction :in) (:name |shaders| :type |UInt32| :direction :in :array t :size count) (:name |binaryformat| :type |GLenum| :direction :in) (:name |binary| :type |Void| :direction :in :array t :size length) (:name |length| :type |SizeI| :direction :in)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
-(defglextfun "ReleaseShaderCompiler" release-shader-compiler :return "void" :args nil :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
-(make-extension-loader |ARB_ES2_compatibility| (("ClearDepthf" clear-depth-f :return "void" :args ((:name |d| :type |Float32| :direction :in)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") ("DepthRangef" depth-range-f :return "void" :args ((:name \n :type |Float32| :direction :in) (:name |f| :type |Float32| :direction :in)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") ("GetShaderPrecisionFormat" get-shader-precision-format :return "void" :args ((:name |shadertype| :type |GLenum| :direction :in) (:name |precisiontype| :type |GLenum| :direction :in) (:name |range| :type |Int32| :direction :out :array t :size #x2) (:name |precision| :type |Int32| :direction :out :array t :size #x2)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") ("ShaderBinary" shader-binary :return "void" :args ((:name |count| :type |SizeI| :direction :in) (:name |shaders| :type |UInt32| :direction :in :array t :size count) (:name |binaryformat| :type |GLenum| :direction :in) (:name |binary| :type |Void| :direction :in :array t :size length) (:name |length| :type |SizeI| :direction :in)) :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") ("ReleaseShaderCompiler" release-shader-compiler :return "void" :args nil :category "ARB_ES2_compatibility" :deprecated nil :version "4.1"))) 
+(defglextfun "ClearDepthf" clear-depth-f :return "void" :args
+ ((:name |d| :type |Float32| :direction :in)) :category
+ "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
+(defglextfun "DepthRangef" depth-range-f :return "void" :args
+ ((:name \n :type |Float32| :direction :in)
+  (:name |f| :type |Float32| :direction :in))
+ :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
+(defglextfun "GetShaderPrecisionFormat" get-shader-precision-format
+ :return "void" :args
+ ((:name |shadertype| :type |GLenum| :direction :in)
+  (:name |precisiontype| :type |GLenum| :direction :in)
+  (:name |range| :type |Int32| :direction :out :array t :size #x2)
+  (:name |precision| :type |Int32| :direction :out :array t :size
+   #x2))
+ :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
+(defglextfun "ShaderBinary" shader-binary :return "void" :args
+ ((:name |count| :type |SizeI| :direction :in)
+  (:name |shaders| :type |UInt32| :direction :in :array t :size
+   count)
+  (:name |binaryformat| :type |GLenum| :direction :in)
+  (:name |binary| :type |Void| :direction :in :array t :size length)
+  (:name |length| :type |SizeI| :direction :in))
+ :category "ARB_ES2_compatibility" :deprecated nil :version "4.1") 
+(defglextfun "ReleaseShaderCompiler" release-shader-compiler :return
+ "void" :args nil :category "ARB_ES2_compatibility" :deprecated nil
+ :version "4.1") 
+(make-extension-loader |ARB_ES2_compatibility|
+ (("ClearDepthf" clear-depth-f :return "void" :args
+   ((:name |d| :type |Float32| :direction :in)) :category
+   "ARB_ES2_compatibility" :deprecated nil :version "4.1")
+  ("DepthRangef" depth-range-f :return "void" :args
+   ((:name \n :type |Float32| :direction :in)
+    (:name |f| :type |Float32| :direction :in))
+   :category "ARB_ES2_compatibility" :deprecated nil :version "4.1")
+  ("GetShaderPrecisionFormat" get-shader-precision-format :return
+   "void" :args
+   ((:name |shadertype| :type |GLenum| :direction :in)
+    (:name |precisiontype| :type |GLenum| :direction :in)
+    (:name |range| :type |Int32| :direction :out :array t :size #x2)
+    (:name |precision| :type |Int32| :direction :out :array t :size
+     #x2))
+   :category "ARB_ES2_compatibility" :deprecated nil :version "4.1")
+  ("ShaderBinary" shader-binary :return "void" :args
+   ((:name |count| :type |SizeI| :direction :in)
+    (:name |shaders| :type |UInt32| :direction :in :array t :size
+     count)
+    (:name |binaryformat| :type |GLenum| :direction :in)
+    (:name |binary| :type |Void| :direction :in :array t :size
+     length)
+    (:name |length| :type |SizeI| :direction :in))
+   :category "ARB_ES2_compatibility" :deprecated nil :version "4.1")
+  ("ReleaseShaderCompiler" release-shader-compiler :return "void"
+   :args nil :category "ARB_ES2_compatibility" :deprecated nil
+   :version "4.1"))) 

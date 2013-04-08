@@ -8,5 +8,10 @@
 (defconstant +texture-max-lod+ #x813B) 
 (defconstant +texture-base-level+ #x813C) 
 (defconstant +texture-max-level+ #x813D) 
-(defglextfun "PixelTexGenSGIX" pixel-tex-gen-sgix :return "void" :args ((:name |mode| :type |PixelTexGenModeSGIX| :direction :in)) :category "SGIX_pixel_texture" :deprecated nil :version "1.0") 
-(make-extension-loader |SGIX_pixel_texture| (("PixelTexGenSGIX" pixel-tex-gen-sgix :return "void" :args ((:name |mode| :type |PixelTexGenModeSGIX| :direction :in)) :category "SGIX_pixel_texture" :deprecated nil :version "1.0"))) 
+(defglextfun "PixelTexGenSGIX" pixel-tex-gen-sgix :return "void"
+ :args ((:name |mode| :type |PixelTexGenModeSGIX| :direction :in))
+ :category "SGIX_pixel_texture" :deprecated nil :version "1.0") 
+(make-extension-loader |SGIX_pixel_texture|
+ (("PixelTexGenSGIX" pixel-tex-gen-sgix :return "void" :args
+   ((:name |mode| :type |PixelTexGenModeSGIX| :direction :in))
+   :category "SGIX_pixel_texture" :deprecated nil :version "1.0"))) 

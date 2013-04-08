@@ -41,7 +41,34 @@
 (defconstant +vertex-weight-array-type-ext+ #x850E) 
 (defconstant +vertex-weight-array-stride-ext+ #x850F) 
 (defconstant +vertex-weight-array-pointer-ext+ #x8510) 
-(defglextfun "VertexWeightPointerEXT" vertex-weight-pointer-ext :return "void" :args ((:name |size| :type |Int32| :direction :in) (:name |type| :type |VertexWeightPointerTypeEXT| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size (|type| |stride|) :retained t)) :category "EXT_vertex_weighting" :deprecated nil :version "1.1") 
-(defglextfun "VertexWeightfvEXT" vertex-weight-fv-ext :return "void" :args ((:name |weight| :type |Float32| :direction :in :array t :size #x1)) :category "EXT_vertex_weighting" :deprecated nil :version "1.1") 
-(defglextfun "VertexWeightfEXT" vertex-weight-f-ext :return "void" :args ((:name |weight| :type |Float32| :direction :in)) :category "EXT_vertex_weighting" :deprecated nil :version "1.1") 
-(make-extension-loader |EXT_vertex_weighting| (("VertexWeightPointerEXT" vertex-weight-pointer-ext :return "void" :args ((:name |size| :type |Int32| :direction :in) (:name |type| :type |VertexWeightPointerTypeEXT| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size (|type| |stride|) :retained t)) :category "EXT_vertex_weighting" :deprecated nil :version "1.1") ("VertexWeightfvEXT" vertex-weight-fv-ext :return "void" :args ((:name |weight| :type |Float32| :direction :in :array t :size #x1)) :category "EXT_vertex_weighting" :deprecated nil :version "1.1") ("VertexWeightfEXT" vertex-weight-f-ext :return "void" :args ((:name |weight| :type |Float32| :direction :in)) :category "EXT_vertex_weighting" :deprecated nil :version "1.1"))) 
+(defglextfun "VertexWeightPointerEXT" vertex-weight-pointer-ext
+ :return "void" :args
+ ((:name |size| :type |Int32| :direction :in)
+  (:name |type| :type |VertexWeightPointerTypeEXT| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in)
+  (:name |pointer| :type |Void| :direction :in :array t :size
+   (|type| |stride|) :retained t))
+ :category "EXT_vertex_weighting" :deprecated nil :version "1.1") 
+(defglextfun "VertexWeightfvEXT" vertex-weight-fv-ext :return "void"
+ :args
+ ((:name |weight| :type |Float32| :direction :in :array t :size #x1))
+ :category "EXT_vertex_weighting" :deprecated nil :version "1.1") 
+(defglextfun "VertexWeightfEXT" vertex-weight-f-ext :return "void"
+ :args ((:name |weight| :type |Float32| :direction :in)) :category
+ "EXT_vertex_weighting" :deprecated nil :version "1.1") 
+(make-extension-loader |EXT_vertex_weighting|
+ (("VertexWeightPointerEXT" vertex-weight-pointer-ext :return "void"
+   :args
+   ((:name |size| :type |Int32| :direction :in)
+    (:name |type| :type |VertexWeightPointerTypeEXT| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in)
+    (:name |pointer| :type |Void| :direction :in :array t :size
+     (|type| |stride|) :retained t))
+   :category "EXT_vertex_weighting" :deprecated nil :version "1.1")
+  ("VertexWeightfvEXT" vertex-weight-fv-ext :return "void" :args
+   ((:name |weight| :type |Float32| :direction :in :array t :size
+     #x1))
+   :category "EXT_vertex_weighting" :deprecated nil :version "1.1")
+  ("VertexWeightfEXT" vertex-weight-f-ext :return "void" :args
+   ((:name |weight| :type |Float32| :direction :in)) :category
+   "EXT_vertex_weighting" :deprecated nil :version "1.1"))) 

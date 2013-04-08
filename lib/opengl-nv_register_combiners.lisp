@@ -76,17 +76,203 @@
 (defconstant +combiner7-nv+ #x8557) 
 (defconstant +texture0-arb+ #x84C0) 
 (defconstant +texture1-arb+ #x84C1) 
-(defglextfun "GetFinalCombinerInputParameterivNV" get-final-combiner-input-parameter-iv-nv :return "void" :args ((:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "GetFinalCombinerInputParameterfvNV" get-final-combiner-input-parameter-fv-nv :return "void" :args ((:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "GetCombinerOutputParameterivNV" get-combiner-output-parameter-iv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "GetCombinerOutputParameterfvNV" get-combiner-output-parameter-fv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "GetCombinerInputParameterivNV" get-combiner-input-parameter-iv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "GetCombinerInputParameterfvNV" get-combiner-input-parameter-fv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "FinalCombinerInputNV" final-combiner-input-nv :return "void" :args ((:name |variable| :type |CombinerVariableNV| :direction :in) (:name |input| :type |CombinerRegisterNV| :direction :in) (:name |mapping| :type |CombinerMappingNV| :direction :in) (:name |componentUsage| :type |CombinerComponentUsageNV| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "CombinerOutputNV" combiner-output-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |abOutput| :type |CombinerRegisterNV| :direction :in) (:name |cdOutput| :type |CombinerRegisterNV| :direction :in) (:name |sumOutput| :type |CombinerRegisterNV| :direction :in) (:name |scale| :type |CombinerScaleNV| :direction :in) (:name |bias| :type |CombinerBiasNV| :direction :in) (:name |abDotProduct| :type |Boolean| :direction :in) (:name |cdDotProduct| :type |Boolean| :direction :in) (:name |muxSum| :type |Boolean| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "CombinerInputNV" combiner-input-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |variable| :type |CombinerVariableNV| :direction :in) (:name |input| :type |CombinerRegisterNV| :direction :in) (:name |mapping| :type |CombinerMappingNV| :direction :in) (:name |componentUsage| :type |CombinerComponentUsageNV| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "CombinerParameteriNV" combiner-parameter-i-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "CombinerParameterivNV" combiner-parameter-iv-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |CheckedInt32| :direction :in :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "CombinerParameterfNV" combiner-parameter-f-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |param| :type |Float32| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(defglextfun "CombinerParameterfvNV" combiner-parameter-fv-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") 
-(make-extension-loader |NV_register_combiners| (("GetFinalCombinerInputParameterivNV" get-final-combiner-input-parameter-iv-nv :return "void" :args ((:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("GetFinalCombinerInputParameterfvNV" get-final-combiner-input-parameter-fv-nv :return "void" :args ((:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("GetCombinerOutputParameterivNV" get-combiner-output-parameter-iv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("GetCombinerOutputParameterfvNV" get-combiner-output-parameter-fv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("GetCombinerInputParameterivNV" get-combiner-input-parameter-iv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("GetCombinerInputParameterfvNV" get-combiner-input-parameter-fv-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |variable| :type |CombinerVariableNV| :direction :in) (:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("FinalCombinerInputNV" final-combiner-input-nv :return "void" :args ((:name |variable| :type |CombinerVariableNV| :direction :in) (:name |input| :type |CombinerRegisterNV| :direction :in) (:name |mapping| :type |CombinerMappingNV| :direction :in) (:name |componentUsage| :type |CombinerComponentUsageNV| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") ("CombinerOutputNV" combiner-output-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |abOutput| :type |CombinerRegisterNV| :direction :in) (:name |cdOutput| :type |CombinerRegisterNV| :direction :in) (:name |sumOutput| :type |CombinerRegisterNV| :direction :in) (:name |scale| :type |CombinerScaleNV| :direction :in) (:name |bias| :type |CombinerBiasNV| :direction :in) (:name |abDotProduct| :type |Boolean| :direction :in) (:name |cdDotProduct| :type |Boolean| :direction :in) (:name |muxSum| :type |Boolean| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") ("CombinerInputNV" combiner-input-nv :return "void" :args ((:name |stage| :type |CombinerStageNV| :direction :in) (:name |portion| :type |CombinerPortionNV| :direction :in) (:name |variable| :type |CombinerVariableNV| :direction :in) (:name |input| :type |CombinerRegisterNV| :direction :in) (:name |mapping| :type |CombinerMappingNV| :direction :in) (:name |componentUsage| :type |CombinerComponentUsageNV| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") ("CombinerParameteriNV" combiner-parameter-i-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") ("CombinerParameterivNV" combiner-parameter-iv-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |CheckedInt32| :direction :in :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1") ("CombinerParameterfNV" combiner-parameter-f-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |param| :type |Float32| :direction :in)) :category "NV_register_combiners" :deprecated nil :version "1.1") ("CombinerParameterfvNV" combiner-parameter-fv-nv :return "void" :args ((:name |pname| :type |CombinerParameterNV| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "NV_register_combiners" :deprecated nil :version "1.1"))) 
+(defglextfun "GetFinalCombinerInputParameterivNV"
+ get-final-combiner-input-parameter-iv-nv :return "void" :args
+ ((:name |variable| :type |CombinerVariableNV| :direction :in)
+  (:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "GetFinalCombinerInputParameterfvNV"
+ get-final-combiner-input-parameter-fv-nv :return "void" :args
+ ((:name |variable| :type |CombinerVariableNV| :direction :in)
+  (:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "GetCombinerOutputParameterivNV"
+ get-combiner-output-parameter-iv-nv :return "void" :args
+ ((:name |stage| :type |CombinerStageNV| :direction :in)
+  (:name |portion| :type |CombinerPortionNV| :direction :in)
+  (:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "GetCombinerOutputParameterfvNV"
+ get-combiner-output-parameter-fv-nv :return "void" :args
+ ((:name |stage| :type |CombinerStageNV| :direction :in)
+  (:name |portion| :type |CombinerPortionNV| :direction :in)
+  (:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "GetCombinerInputParameterivNV"
+ get-combiner-input-parameter-iv-nv :return "void" :args
+ ((:name |stage| :type |CombinerStageNV| :direction :in)
+  (:name |portion| :type |CombinerPortionNV| :direction :in)
+  (:name |variable| :type |CombinerVariableNV| :direction :in)
+  (:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "GetCombinerInputParameterfvNV"
+ get-combiner-input-parameter-fv-nv :return "void" :args
+ ((:name |stage| :type |CombinerStageNV| :direction :in)
+  (:name |portion| :type |CombinerPortionNV| :direction :in)
+  (:name |variable| :type |CombinerVariableNV| :direction :in)
+  (:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "FinalCombinerInputNV" final-combiner-input-nv :return
+ "void" :args
+ ((:name |variable| :type |CombinerVariableNV| :direction :in)
+  (:name |input| :type |CombinerRegisterNV| :direction :in)
+  (:name |mapping| :type |CombinerMappingNV| :direction :in)
+  (:name |componentUsage| :type |CombinerComponentUsageNV| :direction
+   :in))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "CombinerOutputNV" combiner-output-nv :return "void"
+ :args
+ ((:name |stage| :type |CombinerStageNV| :direction :in)
+  (:name |portion| :type |CombinerPortionNV| :direction :in)
+  (:name |abOutput| :type |CombinerRegisterNV| :direction :in)
+  (:name |cdOutput| :type |CombinerRegisterNV| :direction :in)
+  (:name |sumOutput| :type |CombinerRegisterNV| :direction :in)
+  (:name |scale| :type |CombinerScaleNV| :direction :in)
+  (:name |bias| :type |CombinerBiasNV| :direction :in)
+  (:name |abDotProduct| :type |Boolean| :direction :in)
+  (:name |cdDotProduct| :type |Boolean| :direction :in)
+  (:name |muxSum| :type |Boolean| :direction :in))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "CombinerInputNV" combiner-input-nv :return "void" :args
+ ((:name |stage| :type |CombinerStageNV| :direction :in)
+  (:name |portion| :type |CombinerPortionNV| :direction :in)
+  (:name |variable| :type |CombinerVariableNV| :direction :in)
+  (:name |input| :type |CombinerRegisterNV| :direction :in)
+  (:name |mapping| :type |CombinerMappingNV| :direction :in)
+  (:name |componentUsage| :type |CombinerComponentUsageNV| :direction
+   :in))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "CombinerParameteriNV" combiner-parameter-i-nv :return
+ "void" :args
+ ((:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |param| :type |Int32| :direction :in))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "CombinerParameterivNV" combiner-parameter-iv-nv :return
+ "void" :args
+ ((:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |CheckedInt32| :direction :in :array t :size
+   (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "CombinerParameterfNV" combiner-parameter-f-nv :return
+ "void" :args
+ ((:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |param| :type |Float32| :direction :in))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(defglextfun "CombinerParameterfvNV" combiner-parameter-fv-nv :return
+ "void" :args
+ ((:name |pname| :type |CombinerParameterNV| :direction :in)
+  (:name |params| :type |CheckedFloat32| :direction :in :array t
+   :size (|pname|)))
+ :category "NV_register_combiners" :deprecated nil :version "1.1") 
+(make-extension-loader |NV_register_combiners|
+ (("GetFinalCombinerInputParameterivNV"
+   get-final-combiner-input-parameter-iv-nv :return "void" :args
+   ((:name |variable| :type |CombinerVariableNV| :direction :in)
+    (:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("GetFinalCombinerInputParameterfvNV"
+   get-final-combiner-input-parameter-fv-nv :return "void" :args
+   ((:name |variable| :type |CombinerVariableNV| :direction :in)
+    (:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |Float32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("GetCombinerOutputParameterivNV"
+   get-combiner-output-parameter-iv-nv :return "void" :args
+   ((:name |stage| :type |CombinerStageNV| :direction :in)
+    (:name |portion| :type |CombinerPortionNV| :direction :in)
+    (:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("GetCombinerOutputParameterfvNV"
+   get-combiner-output-parameter-fv-nv :return "void" :args
+   ((:name |stage| :type |CombinerStageNV| :direction :in)
+    (:name |portion| :type |CombinerPortionNV| :direction :in)
+    (:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |Float32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("GetCombinerInputParameterivNV" get-combiner-input-parameter-iv-nv
+   :return "void" :args
+   ((:name |stage| :type |CombinerStageNV| :direction :in)
+    (:name |portion| :type |CombinerPortionNV| :direction :in)
+    (:name |variable| :type |CombinerVariableNV| :direction :in)
+    (:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("GetCombinerInputParameterfvNV" get-combiner-input-parameter-fv-nv
+   :return "void" :args
+   ((:name |stage| :type |CombinerStageNV| :direction :in)
+    (:name |portion| :type |CombinerPortionNV| :direction :in)
+    (:name |variable| :type |CombinerVariableNV| :direction :in)
+    (:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |Float32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("FinalCombinerInputNV" final-combiner-input-nv :return "void"
+   :args
+   ((:name |variable| :type |CombinerVariableNV| :direction :in)
+    (:name |input| :type |CombinerRegisterNV| :direction :in)
+    (:name |mapping| :type |CombinerMappingNV| :direction :in)
+    (:name |componentUsage| :type |CombinerComponentUsageNV|
+     :direction :in))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("CombinerOutputNV" combiner-output-nv :return "void" :args
+   ((:name |stage| :type |CombinerStageNV| :direction :in)
+    (:name |portion| :type |CombinerPortionNV| :direction :in)
+    (:name |abOutput| :type |CombinerRegisterNV| :direction :in)
+    (:name |cdOutput| :type |CombinerRegisterNV| :direction :in)
+    (:name |sumOutput| :type |CombinerRegisterNV| :direction :in)
+    (:name |scale| :type |CombinerScaleNV| :direction :in)
+    (:name |bias| :type |CombinerBiasNV| :direction :in)
+    (:name |abDotProduct| :type |Boolean| :direction :in)
+    (:name |cdDotProduct| :type |Boolean| :direction :in)
+    (:name |muxSum| :type |Boolean| :direction :in))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("CombinerInputNV" combiner-input-nv :return "void" :args
+   ((:name |stage| :type |CombinerStageNV| :direction :in)
+    (:name |portion| :type |CombinerPortionNV| :direction :in)
+    (:name |variable| :type |CombinerVariableNV| :direction :in)
+    (:name |input| :type |CombinerRegisterNV| :direction :in)
+    (:name |mapping| :type |CombinerMappingNV| :direction :in)
+    (:name |componentUsage| :type |CombinerComponentUsageNV|
+     :direction :in))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("CombinerParameteriNV" combiner-parameter-i-nv :return "void"
+   :args
+   ((:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |param| :type |Int32| :direction :in))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("CombinerParameterivNV" combiner-parameter-iv-nv :return "void"
+   :args
+   ((:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |CheckedInt32| :direction :in :array t
+     :size (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("CombinerParameterfNV" combiner-parameter-f-nv :return "void"
+   :args
+   ((:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |param| :type |Float32| :direction :in))
+   :category "NV_register_combiners" :deprecated nil :version "1.1")
+  ("CombinerParameterfvNV" combiner-parameter-fv-nv :return "void"
+   :args
+   ((:name |pname| :type |CombinerParameterNV| :direction :in)
+    (:name |params| :type |CheckedFloat32| :direction :in :array t
+     :size (|pname|)))
+   :category "NV_register_combiners" :deprecated nil :version "1.1"))) 

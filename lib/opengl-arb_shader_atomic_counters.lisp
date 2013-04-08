@@ -63,5 +63,22 @@
 (defconstant +active-atomic-counter-buffers+ #x92D9) 
 (defconstant +uniform-atomic-counter-buffer-index+ #x92DA) 
 (defconstant +unsigned-int-atomic-counter+ #x92DB) 
-(defglextfun "GetActiveAtomicCounterBufferiv" get-active-atomic-counter-buffer-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |bufferIndex| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_shader_atomic_counters" :deprecated nil :version "4.2") 
-(make-extension-loader |ARB_shader_atomic_counters| (("GetActiveAtomicCounterBufferiv" get-active-atomic-counter-buffer-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |bufferIndex| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_shader_atomic_counters" :deprecated nil :version "4.2"))) 
+(defglextfun "GetActiveAtomicCounterBufferiv"
+ get-active-atomic-counter-buffer-iv :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |bufferIndex| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "ARB_shader_atomic_counters" :deprecated nil :version
+ "4.2") 
+(make-extension-loader |ARB_shader_atomic_counters|
+ (("GetActiveAtomicCounterBufferiv"
+   get-active-atomic-counter-buffer-iv :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |bufferIndex| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "ARB_shader_atomic_counters" :deprecated nil :version
+   "4.2"))) 

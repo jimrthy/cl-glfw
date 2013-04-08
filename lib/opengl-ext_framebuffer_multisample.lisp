@@ -10,5 +10,22 @@
 (defconstant +renderbuffer-samples-ext+ #x8CAB) 
 (defconstant +framebuffer-incomplete-multisample-ext+ #x8D56) 
 (defconstant +max-samples-ext+ #x8D57) 
-(defglextfun "RenderbufferStorageMultisampleEXT" renderbuffer-storage-multisample-ext :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "EXT_framebuffer_multisample" :deprecated nil :version "1.5") 
-(make-extension-loader |EXT_framebuffer_multisample| (("RenderbufferStorageMultisampleEXT" renderbuffer-storage-multisample-ext :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "EXT_framebuffer_multisample" :deprecated nil :version "1.5"))) 
+(defglextfun "RenderbufferStorageMultisampleEXT"
+ renderbuffer-storage-multisample-ext :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |samples| :type |SizeI| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in))
+ :category "EXT_framebuffer_multisample" :deprecated nil :version
+ "1.5") 
+(make-extension-loader |EXT_framebuffer_multisample|
+ (("RenderbufferStorageMultisampleEXT"
+   renderbuffer-storage-multisample-ext :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |samples| :type |SizeI| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in))
+   :category "EXT_framebuffer_multisample" :deprecated nil :version
+   "1.5"))) 

@@ -4,5 +4,13 @@
 
 ;;;; gremedy_string_marker
 
-(defglextfun "StringMarkerGREMEDY" string-marker-gremedy :return "void" :args ((:name |len| :type |SizeI| :direction :in) (:name |string| :type |Void| :direction :in :array t :size len)) :category "GREMEDY_string_marker" :deprecated nil :version "1.0") 
-(make-extension-loader |GREMEDY_string_marker| (("StringMarkerGREMEDY" string-marker-gremedy :return "void" :args ((:name |len| :type |SizeI| :direction :in) (:name |string| :type |Void| :direction :in :array t :size len)) :category "GREMEDY_string_marker" :deprecated nil :version "1.0"))) 
+(defglextfun "StringMarkerGREMEDY" string-marker-gremedy :return
+ "void" :args
+ ((:name |len| :type |SizeI| :direction :in)
+  (:name |string| :type |Void| :direction :in :array t :size len))
+ :category "GREMEDY_string_marker" :deprecated nil :version "1.0") 
+(make-extension-loader |GREMEDY_string_marker|
+ (("StringMarkerGREMEDY" string-marker-gremedy :return "void" :args
+   ((:name |len| :type |SizeI| :direction :in)
+    (:name |string| :type |Void| :direction :in :array t :size len))
+   :category "GREMEDY_string_marker" :deprecated nil :version "1.0"))) 

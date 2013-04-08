@@ -4,6 +4,17 @@
 
 ;;;; nvx_conditional_render
 
-(defglextfun "EndConditionalRenderNVX" end-conditional-render-nvx :return "void" :args nil :category "NVX_conditional_render" :deprecated nil :version "4.3") 
-(defglextfun "BeginConditionalRenderNVX" begin-conditional-render-nvx :return "void" :args ((:name |id| :type |UInt32| :direction :in)) :category "NVX_conditional_render" :deprecated nil :version "4.3") 
-(make-extension-loader |NVX_conditional_render| (("EndConditionalRenderNVX" end-conditional-render-nvx :return "void" :args nil :category "NVX_conditional_render" :deprecated nil :version "4.3") ("BeginConditionalRenderNVX" begin-conditional-render-nvx :return "void" :args ((:name |id| :type |UInt32| :direction :in)) :category "NVX_conditional_render" :deprecated nil :version "4.3"))) 
+(defglextfun "EndConditionalRenderNVX" end-conditional-render-nvx
+ :return "void" :args nil :category "NVX_conditional_render"
+ :deprecated nil :version "4.3") 
+(defglextfun "BeginConditionalRenderNVX" begin-conditional-render-nvx
+ :return "void" :args ((:name |id| :type |UInt32| :direction :in))
+ :category "NVX_conditional_render" :deprecated nil :version "4.3") 
+(make-extension-loader |NVX_conditional_render|
+ (("EndConditionalRenderNVX" end-conditional-render-nvx :return
+   "void" :args nil :category "NVX_conditional_render" :deprecated
+   nil :version "4.3")
+  ("BeginConditionalRenderNVX" begin-conditional-render-nvx :return
+   "void" :args ((:name |id| :type |UInt32| :direction :in))
+   :category "NVX_conditional_render" :deprecated nil :version
+   "4.3"))) 

@@ -16,5 +16,27 @@
 (defconstant +blend-src-rgb-ext+ #x80C9) 
 (defconstant +blend-dst-alpha-ext+ #x80CA) 
 (defconstant +blend-src-alpha-ext+ #x80CB) 
-(defglextfun "BlendFuncSeparateEXT" blend-func-separate-ext :return "void" :args ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in)) :category "EXT_blend_func_separate" :deprecated nil :version "1.0") 
-(make-extension-loader |EXT_blend_func_separate| (("BlendFuncSeparateEXT" blend-func-separate-ext :return "void" :args ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in)) :category "EXT_blend_func_separate" :deprecated nil :version "1.0"))) 
+(defglextfun "BlendFuncSeparateEXT" blend-func-separate-ext :return
+ "void" :args
+ ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT|
+   :direction :in)
+  (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT|
+   :direction :in)
+  (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+   :direction :in)
+  (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+   :direction :in))
+ :category "EXT_blend_func_separate" :deprecated nil :version "1.0") 
+(make-extension-loader |EXT_blend_func_separate|
+ (("BlendFuncSeparateEXT" blend-func-separate-ext :return "void"
+   :args
+   ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT|
+     :direction :in)
+    (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT|
+     :direction :in)
+    (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+     :direction :in)
+    (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+     :direction :in))
+   :category "EXT_blend_func_separate" :deprecated nil :version
+   "1.0"))) 

@@ -10,6 +10,38 @@
 (defconstant +texture-buffer-offset+ #x919D) 
 (defconstant +texture-buffer-size+ #x919E) 
 (defconstant +texture-buffer-offset-alignment+ #x919F) 
-(defglextfun "TextureBufferRangeEXT" texture-buffer-range-ext :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in)) :category "ARB_texture_buffer_range" :deprecated nil :version "4.3") 
-(defglextfun "TexBufferRange" tex-buffer-range :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in)) :category "ARB_texture_buffer_range" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_texture_buffer_range| (("TextureBufferRangeEXT" texture-buffer-range-ext :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in)) :category "ARB_texture_buffer_range" :deprecated nil :version "4.3") ("TexBufferRange" tex-buffer-range :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in)) :category "ARB_texture_buffer_range" :deprecated nil :version "4.3"))) 
+(defglextfun "TextureBufferRangeEXT" texture-buffer-range-ext :return
+ "void" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |target| :type |GLenum| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |buffer| :type |UInt32| :direction :in)
+  (:name |offset| :type |BufferOffset| :direction :in)
+  (:name |size| :type |BufferSize| :direction :in))
+ :category "ARB_texture_buffer_range" :deprecated nil :version "4.3") 
+(defglextfun "TexBufferRange" tex-buffer-range :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |buffer| :type |UInt32| :direction :in)
+  (:name |offset| :type |BufferOffset| :direction :in)
+  (:name |size| :type |BufferSize| :direction :in))
+ :category "ARB_texture_buffer_range" :deprecated nil :version "4.3") 
+(make-extension-loader |ARB_texture_buffer_range|
+ (("TextureBufferRangeEXT" texture-buffer-range-ext :return "void"
+   :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |target| :type |GLenum| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |buffer| :type |UInt32| :direction :in)
+    (:name |offset| :type |BufferOffset| :direction :in)
+    (:name |size| :type |BufferSize| :direction :in))
+   :category "ARB_texture_buffer_range" :deprecated nil :version
+   "4.3")
+  ("TexBufferRange" tex-buffer-range :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |buffer| :type |UInt32| :direction :in)
+    (:name |offset| :type |BufferOffset| :direction :in)
+    (:name |size| :type |BufferSize| :direction :in))
+   :category "ARB_texture_buffer_range" :deprecated nil :version
+   "4.3"))) 

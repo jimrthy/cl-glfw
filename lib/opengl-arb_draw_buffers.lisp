@@ -38,5 +38,14 @@
 (defconstant +draw-buffer13-arb+ #x8832) 
 (defconstant +draw-buffer14-arb+ #x8833) 
 (defconstant +draw-buffer15-arb+ #x8834) 
-(defglextfun "DrawBuffersARB" draw-buffers-arb :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t :size n)) :category "ARB_draw_buffers" :deprecated nil :version "1.5") 
-(make-extension-loader |ARB_draw_buffers| (("DrawBuffersARB" draw-buffers-arb :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t :size n)) :category "ARB_draw_buffers" :deprecated nil :version "1.5"))) 
+(defglextfun "DrawBuffersARB" draw-buffers-arb :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t
+   :size n))
+ :category "ARB_draw_buffers" :deprecated nil :version "1.5") 
+(make-extension-loader |ARB_draw_buffers|
+ (("DrawBuffersARB" draw-buffers-arb :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t
+     :size n))
+   :category "ARB_draw_buffers" :deprecated nil :version "1.5"))) 

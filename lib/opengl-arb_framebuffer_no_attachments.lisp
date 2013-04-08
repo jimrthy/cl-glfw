@@ -22,8 +22,64 @@
 (defconstant +max-framebuffer-height+ #x9316) 
 (defconstant +max-framebuffer-layers+ #x9317) 
 (defconstant +max-framebuffer-samples+ #x9318) 
-(defglextfun "GetNamedFramebufferParameterivEXT" get-named-framebuffer-parameter-iv-ext :return "void" :args ((:name |framebuffer| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") 
-(defglextfun "NamedFramebufferParameteriEXT" named-framebuffer-parameter-i-ext :return "void" :args ((:name |framebuffer| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") 
-(defglextfun "GetFramebufferParameteriv" get-framebuffer-parameter-iv :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") 
-(defglextfun "FramebufferParameteri" framebuffer-parameter-i :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_framebuffer_no_attachments| (("GetNamedFramebufferParameterivEXT" get-named-framebuffer-parameter-iv-ext :return "void" :args ((:name |framebuffer| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") ("NamedFramebufferParameteriEXT" named-framebuffer-parameter-i-ext :return "void" :args ((:name |framebuffer| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") ("GetFramebufferParameteriv" get-framebuffer-parameter-iv :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3") ("FramebufferParameteri" framebuffer-parameter-i :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "ARB_framebuffer_no_attachments" :deprecated nil :version "4.3"))) 
+(defglextfun "GetNamedFramebufferParameterivEXT"
+ get-named-framebuffer-parameter-iv-ext :return "void" :args
+ ((:name |framebuffer| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "ARB_framebuffer_no_attachments" :deprecated nil :version
+ "4.3") 
+(defglextfun "NamedFramebufferParameteriEXT"
+ named-framebuffer-parameter-i-ext :return "void" :args
+ ((:name |framebuffer| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Int32| :direction :in))
+ :category "ARB_framebuffer_no_attachments" :deprecated nil :version
+ "4.3") 
+(defglextfun "GetFramebufferParameteriv" get-framebuffer-parameter-iv
+ :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "ARB_framebuffer_no_attachments" :deprecated nil :version
+ "4.3") 
+(defglextfun "FramebufferParameteri" framebuffer-parameter-i :return
+ "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |param| :type |Int32| :direction :in))
+ :category "ARB_framebuffer_no_attachments" :deprecated nil :version
+ "4.3") 
+(make-extension-loader |ARB_framebuffer_no_attachments|
+ (("GetNamedFramebufferParameterivEXT"
+   get-named-framebuffer-parameter-iv-ext :return "void" :args
+   ((:name |framebuffer| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "ARB_framebuffer_no_attachments" :deprecated nil
+   :version "4.3")
+  ("NamedFramebufferParameteriEXT" named-framebuffer-parameter-i-ext
+   :return "void" :args
+   ((:name |framebuffer| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Int32| :direction :in))
+   :category "ARB_framebuffer_no_attachments" :deprecated nil
+   :version "4.3")
+  ("GetFramebufferParameteriv" get-framebuffer-parameter-iv :return
+   "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "ARB_framebuffer_no_attachments" :deprecated nil
+   :version "4.3")
+  ("FramebufferParameteri" framebuffer-parameter-i :return "void"
+   :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |param| :type |Int32| :direction :in))
+   :category "ARB_framebuffer_no_attachments" :deprecated nil
+   :version "4.3"))) 

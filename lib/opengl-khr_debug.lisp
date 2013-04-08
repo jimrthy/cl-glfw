@@ -59,14 +59,157 @@
 (defconstant +debug-severity-low+ #x9148) 
 (defconstant +debug-output+ #x92E0) 
 (defconstant +context-flag-debug-bit+ #x2) 
-(defglextfun "GetObjectPtrLabel" get-object-ptr-label :return "void" :args (("ptr" "void" "in" "reference") (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |label| :type |Char| :direction :out :array t :size bufsize)) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "ObjectPtrLabel" object-ptr-label :return "void" :args (("ptr" "void" "in" "reference") (:name |length| :type |SizeI| :direction :in) (:name |label| :type |Char| :direction :in :array t :size (|label| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "GetObjectLabel" get-object-label :return "void" :args ((:name |identifier| :type |GLenum| :direction :in) (:name |name| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |label| :type |Char| :direction :out :array t :size bufsize)) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "ObjectLabel" object-label :return "void" :args ((:name |identifier| :type |GLenum| :direction :in) (:name |name| :type |UInt32| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |label| :type |Char| :direction :in :array t :size (|label| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "PopDebugGroup" pop-debug-group :return "void" :args nil :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "PushDebugGroup" push-debug-group :return "void" :args ((:name |source| :type |GLenum| :direction :in) (:name |id| :type |UInt32| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |message| :type |Char| :direction :in :array t :size (|message| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "GetDebugMessageLog" get-debug-message-log :return "UInt32" :args ((:name |count| :type |UInt32| :direction :in) (:name |bufsize| :type |SizeI| :direction :in) (:name |sources| :type |GLenum| :direction :out :array t :size (|count|)) (:name |types| :type |GLenum| :direction :out :array t :size (|count|)) (:name |ids| :type |UInt32| :direction :out :array t :size (|count|)) (:name |severities| :type |GLenum| :direction :out :array t :size (|count|)) (:name |lengths| :type |SizeI| :direction :out :array t :size (|count|)) (:name |messageLog| :type |Char| :direction :out :array t :size (|bufsize|))) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "DebugMessageCallback" debug-message-callback :return "void" :args ((:name |callback| :type gldebugproc :direction :in) ("userParam" "void" "in" "reference")) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "DebugMessageInsert" debug-message-insert :return "void" :args ((:name |source| :type |GLenum| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |id| :type |UInt32| :direction :in) (:name |severity| :type |GLenum| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |buf| :type |Char| :direction :in :array t :size (|buf| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") 
-(defglextfun "DebugMessageControl" debug-message-control :return "void" :args ((:name |source| :type |GLenum| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |severity| :type |GLenum| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |ids| :type |UInt32| :direction :in :array t :size count) (:name |enabled| :type |Boolean| :direction :in)) :category "KHR_debug" :deprecated nil :version "4.3") 
-(make-extension-loader |KHR_debug| (("GetObjectPtrLabel" get-object-ptr-label :return "void" :args (("ptr" "void" "in" "reference") (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |label| :type |Char| :direction :out :array t :size bufsize)) :category "KHR_debug" :deprecated nil :version "4.3") ("ObjectPtrLabel" object-ptr-label :return "void" :args (("ptr" "void" "in" "reference") (:name |length| :type |SizeI| :direction :in) (:name |label| :type |Char| :direction :in :array t :size (|label| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") ("GetObjectLabel" get-object-label :return "void" :args ((:name |identifier| :type |GLenum| :direction :in) (:name |name| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) ("length" "SizeI" "out" "reference") (:name |label| :type |Char| :direction :out :array t :size bufsize)) :category "KHR_debug" :deprecated nil :version "4.3") ("ObjectLabel" object-label :return "void" :args ((:name |identifier| :type |GLenum| :direction :in) (:name |name| :type |UInt32| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |label| :type |Char| :direction :in :array t :size (|label| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") ("PopDebugGroup" pop-debug-group :return "void" :args nil :category "KHR_debug" :deprecated nil :version "4.3") ("PushDebugGroup" push-debug-group :return "void" :args ((:name |source| :type |GLenum| :direction :in) (:name |id| :type |UInt32| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |message| :type |Char| :direction :in :array t :size (|message| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") ("GetDebugMessageLog" get-debug-message-log :return "UInt32" :args ((:name |count| :type |UInt32| :direction :in) (:name |bufsize| :type |SizeI| :direction :in) (:name |sources| :type |GLenum| :direction :out :array t :size (|count|)) (:name |types| :type |GLenum| :direction :out :array t :size (|count|)) (:name |ids| :type |UInt32| :direction :out :array t :size (|count|)) (:name |severities| :type |GLenum| :direction :out :array t :size (|count|)) (:name |lengths| :type |SizeI| :direction :out :array t :size (|count|)) (:name |messageLog| :type |Char| :direction :out :array t :size (|bufsize|))) :category "KHR_debug" :deprecated nil :version "4.3") ("DebugMessageCallback" debug-message-callback :return "void" :args ((:name |callback| :type gldebugproc :direction :in) ("userParam" "void" "in" "reference")) :category "KHR_debug" :deprecated nil :version "4.3") ("DebugMessageInsert" debug-message-insert :return "void" :args ((:name |source| :type |GLenum| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |id| :type |UInt32| :direction :in) (:name |severity| :type |GLenum| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |buf| :type |Char| :direction :in :array t :size (|buf| |length|))) :category "KHR_debug" :deprecated nil :version "4.3") ("DebugMessageControl" debug-message-control :return "void" :args ((:name |source| :type |GLenum| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |severity| :type |GLenum| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |ids| :type |UInt32| :direction :in :array t :size count) (:name |enabled| :type |Boolean| :direction :in)) :category "KHR_debug" :deprecated nil :version "4.3"))) 
+(defglextfun "GetObjectPtrLabel" get-object-ptr-label :return "void"
+ :args
+ (("ptr" "void" "in" "reference")
+  (:name |bufSize| :type |SizeI| :direction :in)
+  ("length" "SizeI" "out" "reference")
+  (:name |label| :type |Char| :direction :out :array t :size
+   bufsize))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "ObjectPtrLabel" object-ptr-label :return "void" :args
+ (("ptr" "void" "in" "reference")
+  (:name |length| :type |SizeI| :direction :in)
+  (:name |label| :type |Char| :direction :in :array t :size
+   (|label| |length|)))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "GetObjectLabel" get-object-label :return "void" :args
+ ((:name |identifier| :type |GLenum| :direction :in)
+  (:name |name| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  ("length" "SizeI" "out" "reference")
+  (:name |label| :type |Char| :direction :out :array t :size
+   bufsize))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "ObjectLabel" object-label :return "void" :args
+ ((:name |identifier| :type |GLenum| :direction :in)
+  (:name |name| :type |UInt32| :direction :in)
+  (:name |length| :type |SizeI| :direction :in)
+  (:name |label| :type |Char| :direction :in :array t :size
+   (|label| |length|)))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "PopDebugGroup" pop-debug-group :return "void" :args nil
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "PushDebugGroup" push-debug-group :return "void" :args
+ ((:name |source| :type |GLenum| :direction :in)
+  (:name |id| :type |UInt32| :direction :in)
+  (:name |length| :type |SizeI| :direction :in)
+  (:name |message| :type |Char| :direction :in :array t :size
+   (|message| |length|)))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "GetDebugMessageLog" get-debug-message-log :return
+ "UInt32" :args
+ ((:name |count| :type |UInt32| :direction :in)
+  (:name |bufsize| :type |SizeI| :direction :in)
+  (:name |sources| :type |GLenum| :direction :out :array t :size
+   (|count|))
+  (:name |types| :type |GLenum| :direction :out :array t :size
+   (|count|))
+  (:name |ids| :type |UInt32| :direction :out :array t :size
+   (|count|))
+  (:name |severities| :type |GLenum| :direction :out :array t :size
+   (|count|))
+  (:name |lengths| :type |SizeI| :direction :out :array t :size
+   (|count|))
+  (:name |messageLog| :type |Char| :direction :out :array t :size
+   (|bufsize|)))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "DebugMessageCallback" debug-message-callback :return
+ "void" :args
+ ((:name |callback| :type gldebugproc :direction :in)
+  ("userParam" "void" "in" "reference"))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "DebugMessageInsert" debug-message-insert :return "void"
+ :args
+ ((:name |source| :type |GLenum| :direction :in)
+  (:name |type| :type |GLenum| :direction :in)
+  (:name |id| :type |UInt32| :direction :in)
+  (:name |severity| :type |GLenum| :direction :in)
+  (:name |length| :type |SizeI| :direction :in)
+  (:name |buf| :type |Char| :direction :in :array t :size
+   (|buf| |length|)))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(defglextfun "DebugMessageControl" debug-message-control :return
+ "void" :args
+ ((:name |source| :type |GLenum| :direction :in)
+  (:name |type| :type |GLenum| :direction :in)
+  (:name |severity| :type |GLenum| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |ids| :type |UInt32| :direction :in :array t :size count)
+  (:name |enabled| :type |Boolean| :direction :in))
+ :category "KHR_debug" :deprecated nil :version "4.3") 
+(make-extension-loader |KHR_debug|
+ (("GetObjectPtrLabel" get-object-ptr-label :return "void" :args
+   (("ptr" "void" "in" "reference")
+    (:name |bufSize| :type |SizeI| :direction :in)
+    ("length" "SizeI" "out" "reference")
+    (:name |label| :type |Char| :direction :out :array t :size
+     bufsize))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("ObjectPtrLabel" object-ptr-label :return "void" :args
+   (("ptr" "void" "in" "reference")
+    (:name |length| :type |SizeI| :direction :in)
+    (:name |label| :type |Char| :direction :in :array t :size
+     (|label| |length|)))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("GetObjectLabel" get-object-label :return "void" :args
+   ((:name |identifier| :type |GLenum| :direction :in)
+    (:name |name| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    ("length" "SizeI" "out" "reference")
+    (:name |label| :type |Char| :direction :out :array t :size
+     bufsize))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("ObjectLabel" object-label :return "void" :args
+   ((:name |identifier| :type |GLenum| :direction :in)
+    (:name |name| :type |UInt32| :direction :in)
+    (:name |length| :type |SizeI| :direction :in)
+    (:name |label| :type |Char| :direction :in :array t :size
+     (|label| |length|)))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("PopDebugGroup" pop-debug-group :return "void" :args nil :category
+   "KHR_debug" :deprecated nil :version "4.3")
+  ("PushDebugGroup" push-debug-group :return "void" :args
+   ((:name |source| :type |GLenum| :direction :in)
+    (:name |id| :type |UInt32| :direction :in)
+    (:name |length| :type |SizeI| :direction :in)
+    (:name |message| :type |Char| :direction :in :array t :size
+     (|message| |length|)))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("GetDebugMessageLog" get-debug-message-log :return "UInt32" :args
+   ((:name |count| :type |UInt32| :direction :in)
+    (:name |bufsize| :type |SizeI| :direction :in)
+    (:name |sources| :type |GLenum| :direction :out :array t :size
+     (|count|))
+    (:name |types| :type |GLenum| :direction :out :array t :size
+     (|count|))
+    (:name |ids| :type |UInt32| :direction :out :array t :size
+     (|count|))
+    (:name |severities| :type |GLenum| :direction :out :array t :size
+     (|count|))
+    (:name |lengths| :type |SizeI| :direction :out :array t :size
+     (|count|))
+    (:name |messageLog| :type |Char| :direction :out :array t :size
+     (|bufsize|)))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("DebugMessageCallback" debug-message-callback :return "void" :args
+   ((:name |callback| :type gldebugproc :direction :in)
+    ("userParam" "void" "in" "reference"))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("DebugMessageInsert" debug-message-insert :return "void" :args
+   ((:name |source| :type |GLenum| :direction :in)
+    (:name |type| :type |GLenum| :direction :in)
+    (:name |id| :type |UInt32| :direction :in)
+    (:name |severity| :type |GLenum| :direction :in)
+    (:name |length| :type |SizeI| :direction :in)
+    (:name |buf| :type |Char| :direction :in :array t :size
+     (|buf| |length|)))
+   :category "KHR_debug" :deprecated nil :version "4.3")
+  ("DebugMessageControl" debug-message-control :return "void" :args
+   ((:name |source| :type |GLenum| :direction :in)
+    (:name |type| :type |GLenum| :direction :in)
+    (:name |severity| :type |GLenum| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |ids| :type |UInt32| :direction :in :array t :size count)
+    (:name |enabled| :type |Boolean| :direction :in))
+   :category "KHR_debug" :deprecated nil :version "4.3"))) 

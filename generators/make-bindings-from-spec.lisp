@@ -4,8 +4,14 @@
 (declaim (optimize (speed 0) (space 0) (debug 3)))
 
 ;;; Deal with Unicode issues
+;;; Annoyingly enough, this doesn't quite work.
+;;; If I try to load this once from the REPL, it errors
+;;; out. If I try to load it a second time, it loads fine.
+;;; Then (main) restores the "unable-to-resolve" duplicated
+;;; constants.
 #+sbcl (unless (eq sb-impl::*default-external-format* :UTF-8)
 	 (setf sb-impl::*default-external-format* :UTF-8))
+#+ccl (setf *print-pretty* t)
 
 ;;; {{{ PARAMETERS
 

@@ -8,5 +8,16 @@
 (defconstant +sync-cl-event-complete-arb+ #x8241) 
 (defconstant +sync-cl-event-arb+ #x8240) 
 (defconstant +sync-cl-event-complete-arb+ #x8241) 
-(defglextfun "CreateSyncFromCLeventARB" create-sync-from-clevent-arb :return "sync" :args ((:name |context| :type |cl_context| :direction :in) (:name |event| :type |cl_event| :direction :in) (:name |flags| :type |GLbitfield| :direction :in)) :category "ARB_cl_event" :deprecated nil :version "4.1") 
-(make-extension-loader |ARB_cl_event| (("CreateSyncFromCLeventARB" create-sync-from-clevent-arb :return "sync" :args ((:name |context| :type |cl_context| :direction :in) (:name |event| :type |cl_event| :direction :in) (:name |flags| :type |GLbitfield| :direction :in)) :category "ARB_cl_event" :deprecated nil :version "4.1"))) 
+(defglextfun "CreateSyncFromCLeventARB" create-sync-from-clevent-arb
+ :return "sync" :args
+ ((:name |context| :type |cl_context| :direction :in)
+  (:name |event| :type |cl_event| :direction :in)
+  (:name |flags| :type |GLbitfield| :direction :in))
+ :category "ARB_cl_event" :deprecated nil :version "4.1") 
+(make-extension-loader |ARB_cl_event|
+ (("CreateSyncFromCLeventARB" create-sync-from-clevent-arb :return
+   "sync" :args
+   ((:name |context| :type |cl_context| :direction :in)
+    (:name |event| :type |cl_event| :direction :in)
+    (:name |flags| :type |GLbitfield| :direction :in))
+   :category "ARB_cl_event" :deprecated nil :version "4.1"))) 

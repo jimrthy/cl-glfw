@@ -258,53 +258,725 @@
 (defconstant +primary-color+ #x8577) 
 (defconstant +primary-color-nv+ #x852C) 
 (defconstant +secondary-color-nv+ #x852D) 
-(defglextfun "PointAlongPathNV" point-along-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in) (:name |startSegment| :type |SizeI| :direction :in) (:name |numSegments| :type |SizeI| :direction :in) (:name |distance| :type |Float32| :direction :in) (:name \x :type |Float32| :direction :out :array t :size #x1) (:name \y :type |Float32| :direction :out :array t :size #x1) (:name |tangentX| :type |Float32| :direction :out :array t :size #x1) (:name |tangentY| :type |Float32| :direction :out :array t :size #x1)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathLengthNV" get-path-length-nv :return "Float32" :args ((:name |path| :type |Path| :direction :in) (:name |startSegment| :type |SizeI| :direction :in) (:name |numSegments| :type |SizeI| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "IsPointInStrokePathNV" is-point-in-stroke-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in) (:name \x :type |Float32| :direction :in) (:name \y :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "IsPointInFillPathNV" is-point-in-fill-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in) (:name \x :type |Float32| :direction :in) (:name \y :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathTexGenfvNV" get-path-tex-gen-fv-nv :return "void" :args ((:name |texCoordSet| :type |TextureUnit| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathTexGenivNV" get-path-tex-gen-iv-nv :return "void" :args ((:name |texCoordSet| :type |TextureUnit| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathColorGenfvNV" get-path-color-gen-fv-nv :return "void" :args ((:name |color| :type |PathColor| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathColorGenivNV" get-path-color-gen-iv-nv :return "void" :args ((:name |color| :type |PathColor| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathSpacingNV" get-path-spacing-nv :return "void" :args ((:name |pathListMode| :type |PathListMode| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |advanceScale| :type |Float32| :direction :in) (:name |kerningScale| :type |Float32| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |returnedSpacing| :type |Float32| :direction :out :array t :size (|pathListMode| |numPaths|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathMetricRangeNV" get-path-metric-range-nv :return "void" :args ((:name |metricQueryMask| :type |PathMetricMask| :direction :in) (:name |firstPathName| :type |Path| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |metrics| :type |Float32| :direction :out :array t :size (|metricQueryMask| |numPaths| |stride|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathMetricsNV" get-path-metrics-nv :return "void" :args ((:name |metricQueryMask| :type |PathMetricMask| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |metrics| :type |Float32| :direction :out :array t :size (|metricQueryMask| |numPaths| |stride|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathDashArrayNV" get-path-dash-array-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |dashArray| :type |Float32| :direction :out :array t :size (|path|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathCoordsNV" get-path-coords-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coords| :type |Float32| :direction :out :array t :size (|path|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathCommandsNV" get-path-commands-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |commands| :type |PathCommand| :direction :out :array t :size (|path|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathParameterfvNV" get-path-parameter-fv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Float32| :direction :out :array t :size #x4)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GetPathParameterivNV" get-path-parameter-iv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Int32| :direction :out :array t :size #x4)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "CoverStrokePathInstancedNV" cover-stroke-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "CoverFillPathInstancedNV" cover-fill-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "CoverStrokePathNV" cover-stroke-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "CoverFillPathNV" cover-fill-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathFogGenNV" path-fog-gen-nv :return "void" :args ((:name |genMode| :type |PathGenMode| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathTexGenNV" path-tex-gen-nv :return "void" :args ((:name |texCoordSet| :type |PathColor| :direction :in) (:name |genMode| :type |PathGenMode| :direction :in) (:name |components| :type |Int32| :direction :in) (:name |coeffs| :type |Float32| :direction :in :array t :size (|genMode| |components|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathColorGenNV" path-color-gen-nv :return "void" :args ((:name |color| :type |PathColor| :direction :in) (:name |genMode| :type |PathGenMode| :direction :in) (:name |colorFormat| :type |PathColorFormat| :direction :in) (:name |coeffs| :type |Float32| :direction :in :array t :size (|genMode| |colorFormat|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathCoverDepthFuncNV" path-cover-depth-func-nv :return "void" :args ((:name |func| :type |DepthFunction| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "StencilStrokePathInstancedNV" stencil-stroke-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |reference| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "StencilFillPathInstancedNV" stencil-fill-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |fillMode| :type |PathFillMode| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "StencilStrokePathNV" stencil-stroke-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |reference| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "StencilFillPathNV" stencil-fill-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |fillMode| :type |PathFillMode| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathStencilDepthOffsetNV" path-stencil-depth-offset-nv :return "void" :args ((:name |factor| :type |Float32| :direction :in) (:name |units| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathStencilFuncNV" path-stencil-func-nv :return "void" :args ((:name |func| :type |StencilFunction| :direction :in) (:name |ref| :type |ClampedStencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathDashArrayNV" path-dash-array-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |dashCount| :type |SizeI| :direction :in) (:name |dashArray| :type |Float32| :direction :in :array t :size dashcount)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathParameterfNV" path-parameter-f-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathParameterfvNV" path-parameter-fv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathParameteriNV" path-parameter-i-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Int32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathParameterivNV" path-parameter-iv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "TransformPathNV" transform-path-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |srcPath| :type |Path| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "InterpolatePathsNV" interpolate-paths-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |pathA| :type |Path| :direction :in) (:name |pathB| :type |Path| :direction :in) (:name |weight| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "CopyPathNV" copy-path-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |srcPath| :type |Path| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "WeightPathsNV" weight-paths-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |paths| :type |Path| :direction :in :array t :size numpaths) (:name |weights| :type |Float32| :direction :in :array t :size numpaths)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathGlyphRangeNV" path-glyph-range-nv :return "void" :args ((:name |firstPathName| :type |Path| :direction :in) (:name |fontTarget| :type |PathFontTarget| :direction :in) (:name |fontName| :type |Void| :direction :in :array t :size (|fontTarget| |fontName|)) (:name |fontStyle| :type |PathFontStyle| :direction :in) (:name |firstGlyph| :type |UInt32| :direction :in) (:name |numGlyphs| :type |SizeI| :direction :in) (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs| :direction :in) (:name |pathParameterTemplate| :type |Path| :direction :in) (:name |emScale| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathGlyphsNV" path-glyphs-nv :return "void" :args ((:name |firstPathName| :type |Path| :direction :in) (:name |fontTarget| :type |PathFontTarget| :direction :in) (:name |fontName| :type |Void| :direction :in :array t :size (|fontTarget| |fontName|)) (:name |fontStyle| :type |PathFontStyle| :direction :in) (:name |numGlyphs| :type |SizeI| :direction :in) (:name |type| :type |PathElementType| :direction :in) (:name |charcodes| :type |Void| :direction :in :array t :size (|numGlyphs| |type| |charcodes|)) (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs| :direction :in) (:name |pathParameterTemplate| :type |Path| :direction :in) (:name |emScale| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathStringNV" path-string-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |format| :type |PathStringFormat| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |pathString| :type |Void| :direction :in :array t :size length)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathSubCoordsNV" path-sub-coords-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coordStart| :type |SizeI| :direction :in) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathSubCommandsNV" path-sub-commands-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |commandStart| :type |SizeI| :direction :in) (:name |commandsToDelete| :type |SizeI| :direction :in) (:name |numCommands| :type |SizeI| :direction :in) (:name |commands| :type |PathCommand| :direction :in :array t :size numcommands) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathCoordsNV" path-coords-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "PathCommandsNV" path-commands-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |numCommands| :type |SizeI| :direction :in) (:name |commands| :type |PathCommand| :direction :in :array t :size numcommands) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "IsPathNV" is-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "DeletePathsNV" delete-paths-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |range| :type |SizeI| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(defglextfun "GenPathsNV" gen-paths-nv :return "Path" :args ((:name |range| :type |SizeI| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") 
-(make-extension-loader |NV_path_rendering| (("PointAlongPathNV" point-along-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in) (:name |startSegment| :type |SizeI| :direction :in) (:name |numSegments| :type |SizeI| :direction :in) (:name |distance| :type |Float32| :direction :in) (:name \x :type |Float32| :direction :out :array t :size #x1) (:name \y :type |Float32| :direction :out :array t :size #x1) (:name |tangentX| :type |Float32| :direction :out :array t :size #x1) (:name |tangentY| :type |Float32| :direction :out :array t :size #x1)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathLengthNV" get-path-length-nv :return "Float32" :args ((:name |path| :type |Path| :direction :in) (:name |startSegment| :type |SizeI| :direction :in) (:name |numSegments| :type |SizeI| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("IsPointInStrokePathNV" is-point-in-stroke-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in) (:name \x :type |Float32| :direction :in) (:name \y :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("IsPointInFillPathNV" is-point-in-fill-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in) (:name \x :type |Float32| :direction :in) (:name \y :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathTexGenfvNV" get-path-tex-gen-fv-nv :return "void" :args ((:name |texCoordSet| :type |TextureUnit| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathTexGenivNV" get-path-tex-gen-iv-nv :return "void" :args ((:name |texCoordSet| :type |TextureUnit| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathColorGenfvNV" get-path-color-gen-fv-nv :return "void" :args ((:name |color| :type |PathColor| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Float32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathColorGenivNV" get-path-color-gen-iv-nv :return "void" :args ((:name |color| :type |PathColor| :direction :in) (:name |pname| :type |PathGenMode| :direction :in) (:name |value| :type |Int32| :direction :out :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathSpacingNV" get-path-spacing-nv :return "void" :args ((:name |pathListMode| :type |PathListMode| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |advanceScale| :type |Float32| :direction :in) (:name |kerningScale| :type |Float32| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |returnedSpacing| :type |Float32| :direction :out :array t :size (|pathListMode| |numPaths|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathMetricRangeNV" get-path-metric-range-nv :return "void" :args ((:name |metricQueryMask| :type |PathMetricMask| :direction :in) (:name |firstPathName| :type |Path| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |metrics| :type |Float32| :direction :out :array t :size (|metricQueryMask| |numPaths| |stride|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathMetricsNV" get-path-metrics-nv :return "void" :args ((:name |metricQueryMask| :type |PathMetricMask| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |metrics| :type |Float32| :direction :out :array t :size (|metricQueryMask| |numPaths| |stride|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathDashArrayNV" get-path-dash-array-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |dashArray| :type |Float32| :direction :out :array t :size (|path|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathCoordsNV" get-path-coords-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coords| :type |Float32| :direction :out :array t :size (|path|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathCommandsNV" get-path-commands-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |commands| :type |PathCommand| :direction :out :array t :size (|path|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathParameterfvNV" get-path-parameter-fv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Float32| :direction :out :array t :size #x4)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GetPathParameterivNV" get-path-parameter-iv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Int32| :direction :out :array t :size #x4)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("CoverStrokePathInstancedNV" cover-stroke-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("CoverFillPathInstancedNV" cover-fill-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("CoverStrokePathNV" cover-stroke-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("CoverFillPathNV" cover-fill-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coverMode| :type |PathCoverMode| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathFogGenNV" path-fog-gen-nv :return "void" :args ((:name |genMode| :type |PathGenMode| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathTexGenNV" path-tex-gen-nv :return "void" :args ((:name |texCoordSet| :type |PathColor| :direction :in) (:name |genMode| :type |PathGenMode| :direction :in) (:name |components| :type |Int32| :direction :in) (:name |coeffs| :type |Float32| :direction :in :array t :size (|genMode| |components|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathColorGenNV" path-color-gen-nv :return "void" :args ((:name |color| :type |PathColor| :direction :in) (:name |genMode| :type |PathGenMode| :direction :in) (:name |colorFormat| :type |PathColorFormat| :direction :in) (:name |coeffs| :type |Float32| :direction :in :array t :size (|genMode| |colorFormat|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathCoverDepthFuncNV" path-cover-depth-func-nv :return "void" :args ((:name |func| :type |DepthFunction| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("StencilStrokePathInstancedNV" stencil-stroke-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |reference| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("StencilFillPathInstancedNV" stencil-fill-path-instanced-nv :return "void" :args ((:name |numPaths| :type |SizeI| :direction :in) (:name |pathNameType| :type |PathElementType| :direction :in) (:name |paths| :type |PathElement| :direction :in :array t :size (|numPaths| |pathNameType| |paths|)) (:name |pathBase| :type |Path| :direction :in) (:name |fillMode| :type |PathFillMode| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|numPaths| |transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("StencilStrokePathNV" stencil-stroke-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |reference| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("StencilFillPathNV" stencil-fill-path-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |fillMode| :type |PathFillMode| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathStencilDepthOffsetNV" path-stencil-depth-offset-nv :return "void" :args ((:name |factor| :type |Float32| :direction :in) (:name |units| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathStencilFuncNV" path-stencil-func-nv :return "void" :args ((:name |func| :type |StencilFunction| :direction :in) (:name |ref| :type |ClampedStencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathDashArrayNV" path-dash-array-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |dashCount| :type |SizeI| :direction :in) (:name |dashArray| :type |Float32| :direction :in :array t :size dashcount)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathParameterfNV" path-parameter-f-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathParameterfvNV" path-parameter-fv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathParameteriNV" path-parameter-i-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Int32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathParameterivNV" path-parameter-iv-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |pname| :type |PathParameter| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size (|pname|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("TransformPathNV" transform-path-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |srcPath| :type |Path| :direction :in) (:name |transformType| :type |PathTransformType| :direction :in) (:name |transformValues| :type |Float32| :direction :in :array t :size (|transformType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("InterpolatePathsNV" interpolate-paths-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |pathA| :type |Path| :direction :in) (:name |pathB| :type |Path| :direction :in) (:name |weight| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("CopyPathNV" copy-path-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |srcPath| :type |Path| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("WeightPathsNV" weight-paths-nv :return "void" :args ((:name |resultPath| :type |Path| :direction :in) (:name |numPaths| :type |SizeI| :direction :in) (:name |paths| :type |Path| :direction :in :array t :size numpaths) (:name |weights| :type |Float32| :direction :in :array t :size numpaths)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathGlyphRangeNV" path-glyph-range-nv :return "void" :args ((:name |firstPathName| :type |Path| :direction :in) (:name |fontTarget| :type |PathFontTarget| :direction :in) (:name |fontName| :type |Void| :direction :in :array t :size (|fontTarget| |fontName|)) (:name |fontStyle| :type |PathFontStyle| :direction :in) (:name |firstGlyph| :type |UInt32| :direction :in) (:name |numGlyphs| :type |SizeI| :direction :in) (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs| :direction :in) (:name |pathParameterTemplate| :type |Path| :direction :in) (:name |emScale| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathGlyphsNV" path-glyphs-nv :return "void" :args ((:name |firstPathName| :type |Path| :direction :in) (:name |fontTarget| :type |PathFontTarget| :direction :in) (:name |fontName| :type |Void| :direction :in :array t :size (|fontTarget| |fontName|)) (:name |fontStyle| :type |PathFontStyle| :direction :in) (:name |numGlyphs| :type |SizeI| :direction :in) (:name |type| :type |PathElementType| :direction :in) (:name |charcodes| :type |Void| :direction :in :array t :size (|numGlyphs| |type| |charcodes|)) (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs| :direction :in) (:name |pathParameterTemplate| :type |Path| :direction :in) (:name |emScale| :type |Float32| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathStringNV" path-string-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |format| :type |PathStringFormat| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |pathString| :type |Void| :direction :in :array t :size length)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathSubCoordsNV" path-sub-coords-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |coordStart| :type |SizeI| :direction :in) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathSubCommandsNV" path-sub-commands-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |commandStart| :type |SizeI| :direction :in) (:name |commandsToDelete| :type |SizeI| :direction :in) (:name |numCommands| :type |SizeI| :direction :in) (:name |commands| :type |PathCommand| :direction :in :array t :size numcommands) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathCoordsNV" path-coords-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("PathCommandsNV" path-commands-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |numCommands| :type |SizeI| :direction :in) (:name |commands| :type |PathCommand| :direction :in :array t :size numcommands) (:name |numCoords| :type |SizeI| :direction :in) (:name |coordType| :type |PathCoordType| :direction :in) (:name |coords| :type |Void| :direction :in :array t :size (|numCoords| |coordType|))) :category "NV_path_rendering" :deprecated nil :version "1.1") ("IsPathNV" is-path-nv :return "Boolean" :args ((:name |path| :type |Path| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("DeletePathsNV" delete-paths-nv :return "void" :args ((:name |path| :type |Path| :direction :in) (:name |range| :type |SizeI| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1") ("GenPathsNV" gen-paths-nv :return "Path" :args ((:name |range| :type |SizeI| :direction :in)) :category "NV_path_rendering" :deprecated nil :version "1.1"))) 
+(defglextfun "PointAlongPathNV" point-along-path-nv :return "Boolean"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |startSegment| :type |SizeI| :direction :in)
+  (:name |numSegments| :type |SizeI| :direction :in)
+  (:name |distance| :type |Float32| :direction :in)
+  (:name \x :type |Float32| :direction :out :array t :size #x1)
+  (:name \y :type |Float32| :direction :out :array t :size #x1)
+  (:name |tangentX| :type |Float32| :direction :out :array t :size
+   #x1)
+  (:name |tangentY| :type |Float32| :direction :out :array t :size
+   #x1))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathLengthNV" get-path-length-nv :return "Float32"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |startSegment| :type |SizeI| :direction :in)
+  (:name |numSegments| :type |SizeI| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "IsPointInStrokePathNV" is-point-in-stroke-path-nv
+ :return "Boolean" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name \x :type |Float32| :direction :in)
+  (:name \y :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "IsPointInFillPathNV" is-point-in-fill-path-nv :return
+ "Boolean" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in)
+  (:name \x :type |Float32| :direction :in)
+  (:name \y :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathTexGenfvNV" get-path-tex-gen-fv-nv :return
+ "void" :args
+ ((:name |texCoordSet| :type |TextureUnit| :direction :in)
+  (:name |pname| :type |PathGenMode| :direction :in)
+  (:name |value| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathTexGenivNV" get-path-tex-gen-iv-nv :return
+ "void" :args
+ ((:name |texCoordSet| :type |TextureUnit| :direction :in)
+  (:name |pname| :type |PathGenMode| :direction :in)
+  (:name |value| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathColorGenfvNV" get-path-color-gen-fv-nv :return
+ "void" :args
+ ((:name |color| :type |PathColor| :direction :in)
+  (:name |pname| :type |PathGenMode| :direction :in)
+  (:name |value| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathColorGenivNV" get-path-color-gen-iv-nv :return
+ "void" :args
+ ((:name |color| :type |PathColor| :direction :in)
+  (:name |pname| :type |PathGenMode| :direction :in)
+  (:name |value| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathSpacingNV" get-path-spacing-nv :return "void"
+ :args
+ ((:name |pathListMode| :type |PathListMode| :direction :in)
+  (:name |numPaths| :type |SizeI| :direction :in)
+  (:name |pathNameType| :type |PathElementType| :direction :in)
+  (:name |paths| :type |PathElement| :direction :in :array t :size
+   (|numPaths| |pathNameType| |paths|))
+  (:name |pathBase| :type |Path| :direction :in)
+  (:name |advanceScale| :type |Float32| :direction :in)
+  (:name |kerningScale| :type |Float32| :direction :in)
+  (:name |transformType| :type |PathTransformType| :direction :in)
+  (:name |returnedSpacing| :type |Float32| :direction :out :array t
+   :size (|pathListMode| |numPaths|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathMetricRangeNV" get-path-metric-range-nv :return
+ "void" :args
+ ((:name |metricQueryMask| :type |PathMetricMask| :direction :in)
+  (:name |firstPathName| :type |Path| :direction :in)
+  (:name |numPaths| :type |SizeI| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in)
+  (:name |metrics| :type |Float32| :direction :out :array t :size
+   (|metricQueryMask| |numPaths| |stride|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathMetricsNV" get-path-metrics-nv :return "void"
+ :args
+ ((:name |metricQueryMask| :type |PathMetricMask| :direction :in)
+  (:name |numPaths| :type |SizeI| :direction :in)
+  (:name |pathNameType| :type |PathElementType| :direction :in)
+  (:name |paths| :type |PathElement| :direction :in :array t :size
+   (|numPaths| |pathNameType| |paths|))
+  (:name |pathBase| :type |Path| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in)
+  (:name |metrics| :type |Float32| :direction :out :array t :size
+   (|metricQueryMask| |numPaths| |stride|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathDashArrayNV" get-path-dash-array-nv :return
+ "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |dashArray| :type |Float32| :direction :out :array t :size
+   (|path|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathCoordsNV" get-path-coords-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |coords| :type |Float32| :direction :out :array t :size
+   (|path|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathCommandsNV" get-path-commands-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |commands| :type |PathCommand| :direction :out :array t
+   :size (|path|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathParameterfvNV" get-path-parameter-fv-nv :return
+ "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |pname| :type |PathParameter| :direction :in)
+  (:name |value| :type |Float32| :direction :out :array t :size #x4))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GetPathParameterivNV" get-path-parameter-iv-nv :return
+ "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |pname| :type |PathParameter| :direction :in)
+  (:name |value| :type |Int32| :direction :out :array t :size #x4))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "CoverStrokePathInstancedNV"
+ cover-stroke-path-instanced-nv :return "void" :args
+ ((:name |numPaths| :type |SizeI| :direction :in)
+  (:name |pathNameType| :type |PathElementType| :direction :in)
+  (:name |paths| :type |PathElement| :direction :in :array t :size
+   (|numPaths| |pathNameType| |paths|))
+  (:name |pathBase| :type |Path| :direction :in)
+  (:name |coverMode| :type |PathCoverMode| :direction :in)
+  (:name |transformType| :type |PathTransformType| :direction :in)
+  (:name |transformValues| :type |Float32| :direction :in :array t
+   :size (|numPaths| |transformType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "CoverFillPathInstancedNV" cover-fill-path-instanced-nv
+ :return "void" :args
+ ((:name |numPaths| :type |SizeI| :direction :in)
+  (:name |pathNameType| :type |PathElementType| :direction :in)
+  (:name |paths| :type |PathElement| :direction :in :array t :size
+   (|numPaths| |pathNameType| |paths|))
+  (:name |pathBase| :type |Path| :direction :in)
+  (:name |coverMode| :type |PathCoverMode| :direction :in)
+  (:name |transformType| :type |PathTransformType| :direction :in)
+  (:name |transformValues| :type |Float32| :direction :in :array t
+   :size (|numPaths| |transformType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "CoverStrokePathNV" cover-stroke-path-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |coverMode| :type |PathCoverMode| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "CoverFillPathNV" cover-fill-path-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |coverMode| :type |PathCoverMode| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathFogGenNV" path-fog-gen-nv :return "void" :args
+ ((:name |genMode| :type |PathGenMode| :direction :in)) :category
+ "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathTexGenNV" path-tex-gen-nv :return "void" :args
+ ((:name |texCoordSet| :type |PathColor| :direction :in)
+  (:name |genMode| :type |PathGenMode| :direction :in)
+  (:name |components| :type |Int32| :direction :in)
+  (:name |coeffs| :type |Float32| :direction :in :array t :size
+   (|genMode| |components|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathColorGenNV" path-color-gen-nv :return "void" :args
+ ((:name |color| :type |PathColor| :direction :in)
+  (:name |genMode| :type |PathGenMode| :direction :in)
+  (:name |colorFormat| :type |PathColorFormat| :direction :in)
+  (:name |coeffs| :type |Float32| :direction :in :array t :size
+   (|genMode| |colorFormat|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathCoverDepthFuncNV" path-cover-depth-func-nv :return
+ "void" :args ((:name |func| :type |DepthFunction| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "StencilStrokePathInstancedNV"
+ stencil-stroke-path-instanced-nv :return "void" :args
+ ((:name |numPaths| :type |SizeI| :direction :in)
+  (:name |pathNameType| :type |PathElementType| :direction :in)
+  (:name |paths| :type |PathElement| :direction :in :array t :size
+   (|numPaths| |pathNameType| |paths|))
+  (:name |pathBase| :type |Path| :direction :in)
+  (:name |reference| :type |StencilValue| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in)
+  (:name |transformType| :type |PathTransformType| :direction :in)
+  (:name |transformValues| :type |Float32| :direction :in :array t
+   :size (|numPaths| |transformType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "StencilFillPathInstancedNV"
+ stencil-fill-path-instanced-nv :return "void" :args
+ ((:name |numPaths| :type |SizeI| :direction :in)
+  (:name |pathNameType| :type |PathElementType| :direction :in)
+  (:name |paths| :type |PathElement| :direction :in :array t :size
+   (|numPaths| |pathNameType| |paths|))
+  (:name |pathBase| :type |Path| :direction :in)
+  (:name |fillMode| :type |PathFillMode| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in)
+  (:name |transformType| :type |PathTransformType| :direction :in)
+  (:name |transformValues| :type |Float32| :direction :in :array t
+   :size (|numPaths| |transformType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "StencilStrokePathNV" stencil-stroke-path-nv :return
+ "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |reference| :type |StencilValue| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "StencilFillPathNV" stencil-fill-path-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |fillMode| :type |PathFillMode| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathStencilDepthOffsetNV" path-stencil-depth-offset-nv
+ :return "void" :args
+ ((:name |factor| :type |Float32| :direction :in)
+  (:name |units| :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathStencilFuncNV" path-stencil-func-nv :return "void"
+ :args
+ ((:name |func| :type |StencilFunction| :direction :in)
+  (:name |ref| :type |ClampedStencilValue| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathDashArrayNV" path-dash-array-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |dashCount| :type |SizeI| :direction :in)
+  (:name |dashArray| :type |Float32| :direction :in :array t :size
+   dashcount))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathParameterfNV" path-parameter-f-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |pname| :type |PathParameter| :direction :in)
+  (:name |value| :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathParameterfvNV" path-parameter-fv-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |pname| :type |PathParameter| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   (|pname|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathParameteriNV" path-parameter-i-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |pname| :type |PathParameter| :direction :in)
+  (:name |value| :type |Int32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathParameterivNV" path-parameter-iv-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |pname| :type |PathParameter| :direction :in)
+  (:name |value| :type |Int32| :direction :in :array t :size
+   (|pname|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "TransformPathNV" transform-path-nv :return "void" :args
+ ((:name |resultPath| :type |Path| :direction :in)
+  (:name |srcPath| :type |Path| :direction :in)
+  (:name |transformType| :type |PathTransformType| :direction :in)
+  (:name |transformValues| :type |Float32| :direction :in :array t
+   :size (|transformType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "InterpolatePathsNV" interpolate-paths-nv :return "void"
+ :args
+ ((:name |resultPath| :type |Path| :direction :in)
+  (:name |pathA| :type |Path| :direction :in)
+  (:name |pathB| :type |Path| :direction :in)
+  (:name |weight| :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "CopyPathNV" copy-path-nv :return "void" :args
+ ((:name |resultPath| :type |Path| :direction :in)
+  (:name |srcPath| :type |Path| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "WeightPathsNV" weight-paths-nv :return "void" :args
+ ((:name |resultPath| :type |Path| :direction :in)
+  (:name |numPaths| :type |SizeI| :direction :in)
+  (:name |paths| :type |Path| :direction :in :array t :size numpaths)
+  (:name |weights| :type |Float32| :direction :in :array t :size
+   numpaths))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathGlyphRangeNV" path-glyph-range-nv :return "void"
+ :args
+ ((:name |firstPathName| :type |Path| :direction :in)
+  (:name |fontTarget| :type |PathFontTarget| :direction :in)
+  (:name |fontName| :type |Void| :direction :in :array t :size
+   (|fontTarget| |fontName|))
+  (:name |fontStyle| :type |PathFontStyle| :direction :in)
+  (:name |firstGlyph| :type |UInt32| :direction :in)
+  (:name |numGlyphs| :type |SizeI| :direction :in)
+  (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs|
+   :direction :in)
+  (:name |pathParameterTemplate| :type |Path| :direction :in)
+  (:name |emScale| :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathGlyphsNV" path-glyphs-nv :return "void" :args
+ ((:name |firstPathName| :type |Path| :direction :in)
+  (:name |fontTarget| :type |PathFontTarget| :direction :in)
+  (:name |fontName| :type |Void| :direction :in :array t :size
+   (|fontTarget| |fontName|))
+  (:name |fontStyle| :type |PathFontStyle| :direction :in)
+  (:name |numGlyphs| :type |SizeI| :direction :in)
+  (:name |type| :type |PathElementType| :direction :in)
+  (:name |charcodes| :type |Void| :direction :in :array t :size
+   (|numGlyphs| |type| |charcodes|))
+  (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs|
+   :direction :in)
+  (:name |pathParameterTemplate| :type |Path| :direction :in)
+  (:name |emScale| :type |Float32| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathStringNV" path-string-nv :return "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |format| :type |PathStringFormat| :direction :in)
+  (:name |length| :type |SizeI| :direction :in)
+  (:name |pathString| :type |Void| :direction :in :array t :size
+   length))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathSubCoordsNV" path-sub-coords-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |coordStart| :type |SizeI| :direction :in)
+  (:name |numCoords| :type |SizeI| :direction :in)
+  (:name |coordType| :type |PathCoordType| :direction :in)
+  (:name |coords| :type |Void| :direction :in :array t :size
+   (|numCoords| |coordType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathSubCommandsNV" path-sub-commands-nv :return "void"
+ :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |commandStart| :type |SizeI| :direction :in)
+  (:name |commandsToDelete| :type |SizeI| :direction :in)
+  (:name |numCommands| :type |SizeI| :direction :in)
+  (:name |commands| :type |PathCommand| :direction :in :array t :size
+   numcommands)
+  (:name |numCoords| :type |SizeI| :direction :in)
+  (:name |coordType| :type |PathCoordType| :direction :in)
+  (:name |coords| :type |Void| :direction :in :array t :size
+   (|numCoords| |coordType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathCoordsNV" path-coords-nv :return "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |numCoords| :type |SizeI| :direction :in)
+  (:name |coordType| :type |PathCoordType| :direction :in)
+  (:name |coords| :type |Void| :direction :in :array t :size
+   (|numCoords| |coordType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "PathCommandsNV" path-commands-nv :return "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |numCommands| :type |SizeI| :direction :in)
+  (:name |commands| :type |PathCommand| :direction :in :array t :size
+   numcommands)
+  (:name |numCoords| :type |SizeI| :direction :in)
+  (:name |coordType| :type |PathCoordType| :direction :in)
+  (:name |coords| :type |Void| :direction :in :array t :size
+   (|numCoords| |coordType|)))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "IsPathNV" is-path-nv :return "Boolean" :args
+ ((:name |path| :type |Path| :direction :in)) :category
+ "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "DeletePathsNV" delete-paths-nv :return "void" :args
+ ((:name |path| :type |Path| :direction :in)
+  (:name |range| :type |SizeI| :direction :in))
+ :category "NV_path_rendering" :deprecated nil :version "1.1") 
+(defglextfun "GenPathsNV" gen-paths-nv :return "Path" :args
+ ((:name |range| :type |SizeI| :direction :in)) :category
+ "NV_path_rendering" :deprecated nil :version "1.1") 
+(make-extension-loader |NV_path_rendering|
+ (("PointAlongPathNV" point-along-path-nv :return "Boolean" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |startSegment| :type |SizeI| :direction :in)
+    (:name |numSegments| :type |SizeI| :direction :in)
+    (:name |distance| :type |Float32| :direction :in)
+    (:name \x :type |Float32| :direction :out :array t :size #x1)
+    (:name \y :type |Float32| :direction :out :array t :size #x1)
+    (:name |tangentX| :type |Float32| :direction :out :array t :size
+     #x1)
+    (:name |tangentY| :type |Float32| :direction :out :array t :size
+     #x1))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathLengthNV" get-path-length-nv :return "Float32" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |startSegment| :type |SizeI| :direction :in)
+    (:name |numSegments| :type |SizeI| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("IsPointInStrokePathNV" is-point-in-stroke-path-nv :return
+   "Boolean" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name \x :type |Float32| :direction :in)
+    (:name \y :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("IsPointInFillPathNV" is-point-in-fill-path-nv :return "Boolean"
+   :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in)
+    (:name \x :type |Float32| :direction :in)
+    (:name \y :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathTexGenfvNV" get-path-tex-gen-fv-nv :return "void" :args
+   ((:name |texCoordSet| :type |TextureUnit| :direction :in)
+    (:name |pname| :type |PathGenMode| :direction :in)
+    (:name |value| :type |Float32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathTexGenivNV" get-path-tex-gen-iv-nv :return "void" :args
+   ((:name |texCoordSet| :type |TextureUnit| :direction :in)
+    (:name |pname| :type |PathGenMode| :direction :in)
+    (:name |value| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathColorGenfvNV" get-path-color-gen-fv-nv :return "void"
+   :args
+   ((:name |color| :type |PathColor| :direction :in)
+    (:name |pname| :type |PathGenMode| :direction :in)
+    (:name |value| :type |Float32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathColorGenivNV" get-path-color-gen-iv-nv :return "void"
+   :args
+   ((:name |color| :type |PathColor| :direction :in)
+    (:name |pname| :type |PathGenMode| :direction :in)
+    (:name |value| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathSpacingNV" get-path-spacing-nv :return "void" :args
+   ((:name |pathListMode| :type |PathListMode| :direction :in)
+    (:name |numPaths| :type |SizeI| :direction :in)
+    (:name |pathNameType| :type |PathElementType| :direction :in)
+    (:name |paths| :type |PathElement| :direction :in :array t :size
+     (|numPaths| |pathNameType| |paths|))
+    (:name |pathBase| :type |Path| :direction :in)
+    (:name |advanceScale| :type |Float32| :direction :in)
+    (:name |kerningScale| :type |Float32| :direction :in)
+    (:name |transformType| :type |PathTransformType| :direction :in)
+    (:name |returnedSpacing| :type |Float32| :direction :out :array t
+     :size (|pathListMode| |numPaths|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathMetricRangeNV" get-path-metric-range-nv :return "void"
+   :args
+   ((:name |metricQueryMask| :type |PathMetricMask| :direction :in)
+    (:name |firstPathName| :type |Path| :direction :in)
+    (:name |numPaths| :type |SizeI| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in)
+    (:name |metrics| :type |Float32| :direction :out :array t :size
+     (|metricQueryMask| |numPaths| |stride|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathMetricsNV" get-path-metrics-nv :return "void" :args
+   ((:name |metricQueryMask| :type |PathMetricMask| :direction :in)
+    (:name |numPaths| :type |SizeI| :direction :in)
+    (:name |pathNameType| :type |PathElementType| :direction :in)
+    (:name |paths| :type |PathElement| :direction :in :array t :size
+     (|numPaths| |pathNameType| |paths|))
+    (:name |pathBase| :type |Path| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in)
+    (:name |metrics| :type |Float32| :direction :out :array t :size
+     (|metricQueryMask| |numPaths| |stride|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathDashArrayNV" get-path-dash-array-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |dashArray| :type |Float32| :direction :out :array t :size
+     (|path|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathCoordsNV" get-path-coords-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |coords| :type |Float32| :direction :out :array t :size
+     (|path|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathCommandsNV" get-path-commands-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |commands| :type |PathCommand| :direction :out :array t
+     :size (|path|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathParameterfvNV" get-path-parameter-fv-nv :return "void"
+   :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |pname| :type |PathParameter| :direction :in)
+    (:name |value| :type |Float32| :direction :out :array t :size
+     #x4))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GetPathParameterivNV" get-path-parameter-iv-nv :return "void"
+   :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |pname| :type |PathParameter| :direction :in)
+    (:name |value| :type |Int32| :direction :out :array t :size #x4))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("CoverStrokePathInstancedNV" cover-stroke-path-instanced-nv
+   :return "void" :args
+   ((:name |numPaths| :type |SizeI| :direction :in)
+    (:name |pathNameType| :type |PathElementType| :direction :in)
+    (:name |paths| :type |PathElement| :direction :in :array t :size
+     (|numPaths| |pathNameType| |paths|))
+    (:name |pathBase| :type |Path| :direction :in)
+    (:name |coverMode| :type |PathCoverMode| :direction :in)
+    (:name |transformType| :type |PathTransformType| :direction :in)
+    (:name |transformValues| :type |Float32| :direction :in :array t
+     :size (|numPaths| |transformType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("CoverFillPathInstancedNV" cover-fill-path-instanced-nv :return
+   "void" :args
+   ((:name |numPaths| :type |SizeI| :direction :in)
+    (:name |pathNameType| :type |PathElementType| :direction :in)
+    (:name |paths| :type |PathElement| :direction :in :array t :size
+     (|numPaths| |pathNameType| |paths|))
+    (:name |pathBase| :type |Path| :direction :in)
+    (:name |coverMode| :type |PathCoverMode| :direction :in)
+    (:name |transformType| :type |PathTransformType| :direction :in)
+    (:name |transformValues| :type |Float32| :direction :in :array t
+     :size (|numPaths| |transformType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("CoverStrokePathNV" cover-stroke-path-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |coverMode| :type |PathCoverMode| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("CoverFillPathNV" cover-fill-path-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |coverMode| :type |PathCoverMode| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathFogGenNV" path-fog-gen-nv :return "void" :args
+   ((:name |genMode| :type |PathGenMode| :direction :in)) :category
+   "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathTexGenNV" path-tex-gen-nv :return "void" :args
+   ((:name |texCoordSet| :type |PathColor| :direction :in)
+    (:name |genMode| :type |PathGenMode| :direction :in)
+    (:name |components| :type |Int32| :direction :in)
+    (:name |coeffs| :type |Float32| :direction :in :array t :size
+     (|genMode| |components|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathColorGenNV" path-color-gen-nv :return "void" :args
+   ((:name |color| :type |PathColor| :direction :in)
+    (:name |genMode| :type |PathGenMode| :direction :in)
+    (:name |colorFormat| :type |PathColorFormat| :direction :in)
+    (:name |coeffs| :type |Float32| :direction :in :array t :size
+     (|genMode| |colorFormat|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathCoverDepthFuncNV" path-cover-depth-func-nv :return "void"
+   :args ((:name |func| :type |DepthFunction| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("StencilStrokePathInstancedNV" stencil-stroke-path-instanced-nv
+   :return "void" :args
+   ((:name |numPaths| :type |SizeI| :direction :in)
+    (:name |pathNameType| :type |PathElementType| :direction :in)
+    (:name |paths| :type |PathElement| :direction :in :array t :size
+     (|numPaths| |pathNameType| |paths|))
+    (:name |pathBase| :type |Path| :direction :in)
+    (:name |reference| :type |StencilValue| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in)
+    (:name |transformType| :type |PathTransformType| :direction :in)
+    (:name |transformValues| :type |Float32| :direction :in :array t
+     :size (|numPaths| |transformType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("StencilFillPathInstancedNV" stencil-fill-path-instanced-nv
+   :return "void" :args
+   ((:name |numPaths| :type |SizeI| :direction :in)
+    (:name |pathNameType| :type |PathElementType| :direction :in)
+    (:name |paths| :type |PathElement| :direction :in :array t :size
+     (|numPaths| |pathNameType| |paths|))
+    (:name |pathBase| :type |Path| :direction :in)
+    (:name |fillMode| :type |PathFillMode| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in)
+    (:name |transformType| :type |PathTransformType| :direction :in)
+    (:name |transformValues| :type |Float32| :direction :in :array t
+     :size (|numPaths| |transformType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("StencilStrokePathNV" stencil-stroke-path-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |reference| :type |StencilValue| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("StencilFillPathNV" stencil-fill-path-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |fillMode| :type |PathFillMode| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathStencilDepthOffsetNV" path-stencil-depth-offset-nv :return
+   "void" :args
+   ((:name |factor| :type |Float32| :direction :in)
+    (:name |units| :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathStencilFuncNV" path-stencil-func-nv :return "void" :args
+   ((:name |func| :type |StencilFunction| :direction :in)
+    (:name |ref| :type |ClampedStencilValue| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathDashArrayNV" path-dash-array-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |dashCount| :type |SizeI| :direction :in)
+    (:name |dashArray| :type |Float32| :direction :in :array t :size
+     dashcount))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathParameterfNV" path-parameter-f-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |pname| :type |PathParameter| :direction :in)
+    (:name |value| :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathParameterfvNV" path-parameter-fv-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |pname| :type |PathParameter| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     (|pname|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathParameteriNV" path-parameter-i-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |pname| :type |PathParameter| :direction :in)
+    (:name |value| :type |Int32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathParameterivNV" path-parameter-iv-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |pname| :type |PathParameter| :direction :in)
+    (:name |value| :type |Int32| :direction :in :array t :size
+     (|pname|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("TransformPathNV" transform-path-nv :return "void" :args
+   ((:name |resultPath| :type |Path| :direction :in)
+    (:name |srcPath| :type |Path| :direction :in)
+    (:name |transformType| :type |PathTransformType| :direction :in)
+    (:name |transformValues| :type |Float32| :direction :in :array t
+     :size (|transformType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("InterpolatePathsNV" interpolate-paths-nv :return "void" :args
+   ((:name |resultPath| :type |Path| :direction :in)
+    (:name |pathA| :type |Path| :direction :in)
+    (:name |pathB| :type |Path| :direction :in)
+    (:name |weight| :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("CopyPathNV" copy-path-nv :return "void" :args
+   ((:name |resultPath| :type |Path| :direction :in)
+    (:name |srcPath| :type |Path| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("WeightPathsNV" weight-paths-nv :return "void" :args
+   ((:name |resultPath| :type |Path| :direction :in)
+    (:name |numPaths| :type |SizeI| :direction :in)
+    (:name |paths| :type |Path| :direction :in :array t :size
+     numpaths)
+    (:name |weights| :type |Float32| :direction :in :array t :size
+     numpaths))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathGlyphRangeNV" path-glyph-range-nv :return "void" :args
+   ((:name |firstPathName| :type |Path| :direction :in)
+    (:name |fontTarget| :type |PathFontTarget| :direction :in)
+    (:name |fontName| :type |Void| :direction :in :array t :size
+     (|fontTarget| |fontName|))
+    (:name |fontStyle| :type |PathFontStyle| :direction :in)
+    (:name |firstGlyph| :type |UInt32| :direction :in)
+    (:name |numGlyphs| :type |SizeI| :direction :in)
+    (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs|
+     :direction :in)
+    (:name |pathParameterTemplate| :type |Path| :direction :in)
+    (:name |emScale| :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathGlyphsNV" path-glyphs-nv :return "void" :args
+   ((:name |firstPathName| :type |Path| :direction :in)
+    (:name |fontTarget| :type |PathFontTarget| :direction :in)
+    (:name |fontName| :type |Void| :direction :in :array t :size
+     (|fontTarget| |fontName|))
+    (:name |fontStyle| :type |PathFontStyle| :direction :in)
+    (:name |numGlyphs| :type |SizeI| :direction :in)
+    (:name |type| :type |PathElementType| :direction :in)
+    (:name |charcodes| :type |Void| :direction :in :array t :size
+     (|numGlyphs| |type| |charcodes|))
+    (:name |handleMissingGlyphs| :type |PathHandleMissingGlyphs|
+     :direction :in)
+    (:name |pathParameterTemplate| :type |Path| :direction :in)
+    (:name |emScale| :type |Float32| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathStringNV" path-string-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |format| :type |PathStringFormat| :direction :in)
+    (:name |length| :type |SizeI| :direction :in)
+    (:name |pathString| :type |Void| :direction :in :array t :size
+     length))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathSubCoordsNV" path-sub-coords-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |coordStart| :type |SizeI| :direction :in)
+    (:name |numCoords| :type |SizeI| :direction :in)
+    (:name |coordType| :type |PathCoordType| :direction :in)
+    (:name |coords| :type |Void| :direction :in :array t :size
+     (|numCoords| |coordType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathSubCommandsNV" path-sub-commands-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |commandStart| :type |SizeI| :direction :in)
+    (:name |commandsToDelete| :type |SizeI| :direction :in)
+    (:name |numCommands| :type |SizeI| :direction :in)
+    (:name |commands| :type |PathCommand| :direction :in :array t
+     :size numcommands)
+    (:name |numCoords| :type |SizeI| :direction :in)
+    (:name |coordType| :type |PathCoordType| :direction :in)
+    (:name |coords| :type |Void| :direction :in :array t :size
+     (|numCoords| |coordType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathCoordsNV" path-coords-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |numCoords| :type |SizeI| :direction :in)
+    (:name |coordType| :type |PathCoordType| :direction :in)
+    (:name |coords| :type |Void| :direction :in :array t :size
+     (|numCoords| |coordType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("PathCommandsNV" path-commands-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |numCommands| :type |SizeI| :direction :in)
+    (:name |commands| :type |PathCommand| :direction :in :array t
+     :size numcommands)
+    (:name |numCoords| :type |SizeI| :direction :in)
+    (:name |coordType| :type |PathCoordType| :direction :in)
+    (:name |coords| :type |Void| :direction :in :array t :size
+     (|numCoords| |coordType|)))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("IsPathNV" is-path-nv :return "Boolean" :args
+   ((:name |path| :type |Path| :direction :in)) :category
+   "NV_path_rendering" :deprecated nil :version "1.1")
+  ("DeletePathsNV" delete-paths-nv :return "void" :args
+   ((:name |path| :type |Path| :direction :in)
+    (:name |range| :type |SizeI| :direction :in))
+   :category "NV_path_rendering" :deprecated nil :version "1.1")
+  ("GenPathsNV" gen-paths-nv :return "Path" :args
+   ((:name |range| :type |SizeI| :direction :in)) :category
+   "NV_path_rendering" :deprecated nil :version "1.1"))) 

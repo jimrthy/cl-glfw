@@ -9,7 +9,36 @@
 (defconstant +layout-default-intel+ #x0) 
 (defconstant +layout-linear-intel+ #x1) 
 (defconstant +layout-linear-cpu-cached-intel+ #x2) 
-(defglextfun "MapTexture2DINTEL" map-texture-2d-intel :return "VoidPointer" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |access| :type |GLbitfield| :direction :in) (:name |stride| :type |Int32| :direction :in :array t :size #x1) (:name |layout| :type |GLenum| :direction :in :array t :size #x1)) :category "INTEL_map_texture" :deprecated nil :version "4.3") 
-(defglextfun "UnmapTexture2DINTEL" unmap-texture-2d-intel :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in)) :category "INTEL_map_texture" :deprecated nil :version "4.3") 
-(defglextfun "SyncTextureINTEL" sync-texture-intel :return "void" :args ((:name |texture| :type |UInt32| :direction :in)) :category "INTEL_map_texture" :deprecated nil :version "4.3") 
-(make-extension-loader |INTEL_map_texture| (("MapTexture2DINTEL" map-texture-2d-intel :return "VoidPointer" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |access| :type |GLbitfield| :direction :in) (:name |stride| :type |Int32| :direction :in :array t :size #x1) (:name |layout| :type |GLenum| :direction :in :array t :size #x1)) :category "INTEL_map_texture" :deprecated nil :version "4.3") ("UnmapTexture2DINTEL" unmap-texture-2d-intel :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in)) :category "INTEL_map_texture" :deprecated nil :version "4.3") ("SyncTextureINTEL" sync-texture-intel :return "void" :args ((:name |texture| :type |UInt32| :direction :in)) :category "INTEL_map_texture" :deprecated nil :version "4.3"))) 
+(defglextfun "MapTexture2DINTEL" map-texture-2d-intel :return
+ "VoidPointer" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |level| :type |Int32| :direction :in)
+  (:name |access| :type |GLbitfield| :direction :in)
+  (:name |stride| :type |Int32| :direction :in :array t :size #x1)
+  (:name |layout| :type |GLenum| :direction :in :array t :size #x1))
+ :category "INTEL_map_texture" :deprecated nil :version "4.3") 
+(defglextfun "UnmapTexture2DINTEL" unmap-texture-2d-intel :return
+ "void" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |level| :type |Int32| :direction :in))
+ :category "INTEL_map_texture" :deprecated nil :version "4.3") 
+(defglextfun "SyncTextureINTEL" sync-texture-intel :return "void"
+ :args ((:name |texture| :type |UInt32| :direction :in)) :category
+ "INTEL_map_texture" :deprecated nil :version "4.3") 
+(make-extension-loader |INTEL_map_texture|
+ (("MapTexture2DINTEL" map-texture-2d-intel :return "VoidPointer"
+   :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |level| :type |Int32| :direction :in)
+    (:name |access| :type |GLbitfield| :direction :in)
+    (:name |stride| :type |Int32| :direction :in :array t :size #x1)
+    (:name |layout| :type |GLenum| :direction :in :array t :size
+     #x1))
+   :category "INTEL_map_texture" :deprecated nil :version "4.3")
+  ("UnmapTexture2DINTEL" unmap-texture-2d-intel :return "void" :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |level| :type |Int32| :direction :in))
+   :category "INTEL_map_texture" :deprecated nil :version "4.3")
+  ("SyncTextureINTEL" sync-texture-intel :return "void" :args
+   ((:name |texture| :type |UInt32| :direction :in)) :category
+   "INTEL_map_texture" :deprecated nil :version "4.3"))) 

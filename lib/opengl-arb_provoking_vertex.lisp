@@ -12,5 +12,10 @@
 (defconstant +first-vertex-convention+ #x8E4D) 
 (defconstant +last-vertex-convention+ #x8E4E) 
 (defconstant +provoking-vertex+ #x8E4F) 
-(defglextfun "ProvokingVertex" provoking-vertex :return "void" :args ((:name |mode| :type |GLenum| :direction :in)) :category "ARB_provoking_vertex" :deprecated nil :version "1.2") 
-(make-extension-loader |ARB_provoking_vertex| (("ProvokingVertex" provoking-vertex :return "void" :args ((:name |mode| :type |GLenum| :direction :in)) :category "ARB_provoking_vertex" :deprecated nil :version "1.2"))) 
+(defglextfun "ProvokingVertex" provoking-vertex :return "void" :args
+ ((:name |mode| :type |GLenum| :direction :in)) :category
+ "ARB_provoking_vertex" :deprecated nil :version "1.2") 
+(make-extension-loader |ARB_provoking_vertex|
+ (("ProvokingVertex" provoking-vertex :return "void" :args
+   ((:name |mode| :type |GLenum| :direction :in)) :category
+   "ARB_provoking_vertex" :deprecated nil :version "1.2"))) 

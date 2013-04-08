@@ -112,6 +112,31 @@
 (defconstant +max-geometry-image-uniforms+ #x90CD) 
 (defconstant +max-fragment-image-uniforms+ #x90CE) 
 (defconstant +max-combined-image-uniforms+ #x90CF) 
-(defglextfun "MemoryBarrier" memory-barrier :return "void" :args ((:name |barriers| :type |GLbitfield| :direction :in)) :category "ARB_shader_image_load_store" :deprecated nil :version "4.2") 
-(defglextfun "BindImageTexture" bind-image-texture :return "void" :args ((:name |unit| :type |UInt32| :direction :in) (:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |layered| :type |Boolean| :direction :in) (:name |layer| :type |Int32| :direction :in) (:name |access| :type |GLenum| :direction :in) (:name |format| :type |GLenum| :direction :in)) :category "ARB_shader_image_load_store" :deprecated nil :version "4.2") 
-(make-extension-loader |ARB_shader_image_load_store| (("MemoryBarrier" memory-barrier :return "void" :args ((:name |barriers| :type |GLbitfield| :direction :in)) :category "ARB_shader_image_load_store" :deprecated nil :version "4.2") ("BindImageTexture" bind-image-texture :return "void" :args ((:name |unit| :type |UInt32| :direction :in) (:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |layered| :type |Boolean| :direction :in) (:name |layer| :type |Int32| :direction :in) (:name |access| :type |GLenum| :direction :in) (:name |format| :type |GLenum| :direction :in)) :category "ARB_shader_image_load_store" :deprecated nil :version "4.2"))) 
+(defglextfun "MemoryBarrier" memory-barrier :return "void" :args
+ ((:name |barriers| :type |GLbitfield| :direction :in)) :category
+ "ARB_shader_image_load_store" :deprecated nil :version "4.2") 
+(defglextfun "BindImageTexture" bind-image-texture :return "void"
+ :args
+ ((:name |unit| :type |UInt32| :direction :in)
+  (:name |texture| :type |UInt32| :direction :in)
+  (:name |level| :type |Int32| :direction :in)
+  (:name |layered| :type |Boolean| :direction :in)
+  (:name |layer| :type |Int32| :direction :in)
+  (:name |access| :type |GLenum| :direction :in)
+  (:name |format| :type |GLenum| :direction :in))
+ :category "ARB_shader_image_load_store" :deprecated nil :version
+ "4.2") 
+(make-extension-loader |ARB_shader_image_load_store|
+ (("MemoryBarrier" memory-barrier :return "void" :args
+   ((:name |barriers| :type |GLbitfield| :direction :in)) :category
+   "ARB_shader_image_load_store" :deprecated nil :version "4.2")
+  ("BindImageTexture" bind-image-texture :return "void" :args
+   ((:name |unit| :type |UInt32| :direction :in)
+    (:name |texture| :type |UInt32| :direction :in)
+    (:name |level| :type |Int32| :direction :in)
+    (:name |layered| :type |Boolean| :direction :in)
+    (:name |layer| :type |Int32| :direction :in)
+    (:name |access| :type |GLenum| :direction :in)
+    (:name |format| :type |GLenum| :direction :in))
+   :category "ARB_shader_image_load_store" :deprecated nil :version
+   "4.2"))) 

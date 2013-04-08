@@ -11,5 +11,22 @@
 (defconstant +pack-reverse-row-order-angle+ #x93A4) 
 (defconstant +program-binary-angle+ #x93A6) 
 (defconstant +num-sample-counts+ #x9380) 
-(defglextfun "GetInternalformativ" get-internalformat-iv :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size bufsize)) :category "ARB_internalformat_query" :deprecated nil :version "4.2") 
-(make-extension-loader |ARB_internalformat_query| (("GetInternalformativ" get-internalformat-iv :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size bufsize)) :category "ARB_internalformat_query" :deprecated nil :version "4.2"))) 
+(defglextfun "GetInternalformativ" get-internalformat-iv :return
+ "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   bufsize))
+ :category "ARB_internalformat_query" :deprecated nil :version "4.2") 
+(make-extension-loader |ARB_internalformat_query|
+ (("GetInternalformativ" get-internalformat-iv :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     bufsize))
+   :category "ARB_internalformat_query" :deprecated nil :version
+   "4.2"))) 

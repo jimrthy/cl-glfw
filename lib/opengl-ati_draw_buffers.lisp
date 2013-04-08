@@ -57,5 +57,14 @@
 (defconstant +draw-buffer13-ati+ #x8832) 
 (defconstant +draw-buffer14-ati+ #x8833) 
 (defconstant +draw-buffer15-ati+ #x8834) 
-(defglextfun "DrawBuffersATI" draw-buffers-ati :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t :size n)) :category "ATI_draw_buffers" :deprecated nil :version "1.2") 
-(make-extension-loader |ATI_draw_buffers| (("DrawBuffersATI" draw-buffers-ati :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t :size n)) :category "ATI_draw_buffers" :deprecated nil :version "1.2"))) 
+(defglextfun "DrawBuffersATI" draw-buffers-ati :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t
+   :size n))
+ :category "ATI_draw_buffers" :deprecated nil :version "1.2") 
+(make-extension-loader |ATI_draw_buffers|
+ (("DrawBuffersATI" draw-buffers-ati :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t
+     :size n))
+   :category "ATI_draw_buffers" :deprecated nil :version "1.2"))) 

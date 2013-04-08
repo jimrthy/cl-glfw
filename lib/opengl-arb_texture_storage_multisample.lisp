@@ -4,8 +4,92 @@
 
 ;;;; arb_texture_storage_multisample
 
-(defglextfun "TextureStorage3DMultisampleEXT" texture-storage-3dmultisample-ext :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") 
-(defglextfun "TextureStorage2DMultisampleEXT" texture-storage-2dmultisample-ext :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") 
-(defglextfun "TexStorage3DMultisample" tex-storage-3dmultisample :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") 
-(defglextfun "TexStorage2DMultisample" tex-storage-2dmultisample :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_texture_storage_multisample| (("TextureStorage3DMultisampleEXT" texture-storage-3dmultisample-ext :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") ("TextureStorage2DMultisampleEXT" texture-storage-2dmultisample-ext :return "void" :args ((:name |texture| :type |UInt32| :direction :in) (:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") ("TexStorage3DMultisample" tex-storage-3dmultisample :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3") ("TexStorage2DMultisample" tex-storage-2dmultisample :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |samples| :type |SizeI| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |fixedsamplelocations| :type |Boolean| :direction :in)) :category "ARB_texture_storage_multisample" :deprecated nil :version "4.3"))) 
+(defglextfun "TextureStorage3DMultisampleEXT"
+ texture-storage-3dmultisample-ext :return "void" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |target| :type |GLenum| :direction :in)
+  (:name |samples| :type |SizeI| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+ :category "ARB_texture_storage_multisample" :deprecated nil :version
+ "4.3") 
+(defglextfun "TextureStorage2DMultisampleEXT"
+ texture-storage-2dmultisample-ext :return "void" :args
+ ((:name |texture| :type |UInt32| :direction :in)
+  (:name |target| :type |GLenum| :direction :in)
+  (:name |samples| :type |SizeI| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+ :category "ARB_texture_storage_multisample" :deprecated nil :version
+ "4.3") 
+(defglextfun "TexStorage3DMultisample" tex-storage-3dmultisample
+ :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |samples| :type |SizeI| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+ :category "ARB_texture_storage_multisample" :deprecated nil :version
+ "4.3") 
+(defglextfun "TexStorage2DMultisample" tex-storage-2dmultisample
+ :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |samples| :type |SizeI| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+ :category "ARB_texture_storage_multisample" :deprecated nil :version
+ "4.3") 
+(make-extension-loader |ARB_texture_storage_multisample|
+ (("TextureStorage3DMultisampleEXT" texture-storage-3dmultisample-ext
+   :return "void" :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |target| :type |GLenum| :direction :in)
+    (:name |samples| :type |SizeI| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+   :category "ARB_texture_storage_multisample" :deprecated nil
+   :version "4.3")
+  ("TextureStorage2DMultisampleEXT" texture-storage-2dmultisample-ext
+   :return "void" :args
+   ((:name |texture| :type |UInt32| :direction :in)
+    (:name |target| :type |GLenum| :direction :in)
+    (:name |samples| :type |SizeI| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+   :category "ARB_texture_storage_multisample" :deprecated nil
+   :version "4.3")
+  ("TexStorage3DMultisample" tex-storage-3dmultisample :return "void"
+   :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |samples| :type |SizeI| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+   :category "ARB_texture_storage_multisample" :deprecated nil
+   :version "4.3")
+  ("TexStorage2DMultisample" tex-storage-2dmultisample :return "void"
+   :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |samples| :type |SizeI| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |fixedsamplelocations| :type |Boolean| :direction :in))
+   :category "ARB_texture_storage_multisample" :deprecated nil
+   :version "4.3"))) 

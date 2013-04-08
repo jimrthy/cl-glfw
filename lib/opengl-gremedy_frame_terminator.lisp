@@ -4,5 +4,10 @@
 
 ;;;; gremedy_frame_terminator
 
-(defglextfun "FrameTerminatorGREMEDY" frame-terminator-gremedy :return "void" :args nil :category "GREMEDY_frame_terminator" :deprecated nil :version "1.0") 
-(make-extension-loader |GREMEDY_frame_terminator| (("FrameTerminatorGREMEDY" frame-terminator-gremedy :return "void" :args nil :category "GREMEDY_frame_terminator" :deprecated nil :version "1.0"))) 
+(defglextfun "FrameTerminatorGREMEDY" frame-terminator-gremedy
+ :return "void" :args nil :category "GREMEDY_frame_terminator"
+ :deprecated nil :version "1.0") 
+(make-extension-loader |GREMEDY_frame_terminator|
+ (("FrameTerminatorGREMEDY" frame-terminator-gremedy :return "void"
+   :args nil :category "GREMEDY_frame_terminator" :deprecated nil
+   :version "1.0"))) 

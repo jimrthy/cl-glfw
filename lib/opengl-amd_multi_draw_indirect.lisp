@@ -4,6 +4,36 @@
 
 ;;;; amd_multi_draw_indirect
 
-(defglextfun "MultiDrawElementsIndirectAMD" multi-draw-elements-indirect-amd :return "void" :args ((:name |mode| :type |GLenum| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |indirect| :type |Void| :direction :in :array t) (:name |primcount| :type |SizeI| :direction :in) (:name |stride| :type |SizeI| :direction :in)) :category "AMD_multi_draw_indirect" :deprecated nil :version "4.0") 
-(defglextfun "MultiDrawArraysIndirectAMD" multi-draw-arrays-indirect-amd :return "void" :args ((:name |mode| :type |GLenum| :direction :in) (:name |indirect| :type |Void| :direction :in :array t) (:name |primcount| :type |SizeI| :direction :in) (:name |stride| :type |SizeI| :direction :in)) :category "AMD_multi_draw_indirect" :deprecated nil :version "4.0") 
-(make-extension-loader |AMD_multi_draw_indirect| (("MultiDrawElementsIndirectAMD" multi-draw-elements-indirect-amd :return "void" :args ((:name |mode| :type |GLenum| :direction :in) (:name |type| :type |GLenum| :direction :in) (:name |indirect| :type |Void| :direction :in :array t) (:name |primcount| :type |SizeI| :direction :in) (:name |stride| :type |SizeI| :direction :in)) :category "AMD_multi_draw_indirect" :deprecated nil :version "4.0") ("MultiDrawArraysIndirectAMD" multi-draw-arrays-indirect-amd :return "void" :args ((:name |mode| :type |GLenum| :direction :in) (:name |indirect| :type |Void| :direction :in :array t) (:name |primcount| :type |SizeI| :direction :in) (:name |stride| :type |SizeI| :direction :in)) :category "AMD_multi_draw_indirect" :deprecated nil :version "4.0"))) 
+(defglextfun "MultiDrawElementsIndirectAMD"
+ multi-draw-elements-indirect-amd :return "void" :args
+ ((:name |mode| :type |GLenum| :direction :in)
+  (:name |type| :type |GLenum| :direction :in)
+  (:name |indirect| :type |Void| :direction :in :array t)
+  (:name |primcount| :type |SizeI| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in))
+ :category "AMD_multi_draw_indirect" :deprecated nil :version "4.0") 
+(defglextfun "MultiDrawArraysIndirectAMD"
+ multi-draw-arrays-indirect-amd :return "void" :args
+ ((:name |mode| :type |GLenum| :direction :in)
+  (:name |indirect| :type |Void| :direction :in :array t)
+  (:name |primcount| :type |SizeI| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in))
+ :category "AMD_multi_draw_indirect" :deprecated nil :version "4.0") 
+(make-extension-loader |AMD_multi_draw_indirect|
+ (("MultiDrawElementsIndirectAMD" multi-draw-elements-indirect-amd
+   :return "void" :args
+   ((:name |mode| :type |GLenum| :direction :in)
+    (:name |type| :type |GLenum| :direction :in)
+    (:name |indirect| :type |Void| :direction :in :array t)
+    (:name |primcount| :type |SizeI| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in))
+   :category "AMD_multi_draw_indirect" :deprecated nil :version
+   "4.0")
+  ("MultiDrawArraysIndirectAMD" multi-draw-arrays-indirect-amd
+   :return "void" :args
+   ((:name |mode| :type |GLenum| :direction :in)
+    (:name |indirect| :type |Void| :direction :in :array t)
+    (:name |primcount| :type |SizeI| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in))
+   :category "AMD_multi_draw_indirect" :deprecated nil :version
+   "4.0"))) 

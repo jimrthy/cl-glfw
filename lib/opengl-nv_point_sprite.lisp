@@ -16,6 +16,24 @@
 (defconstant +point-sprite-nv+ #x8861) 
 (defconstant +coord-replace-nv+ #x8862) 
 (defconstant +point-sprite-r-mode-nv+ #x8863) 
-(defglextfun "PointParameterivNV" point-parameter-iv-nv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size (|pname|))) :category "NV_point_sprite" :deprecated nil :version "1.2") 
-(defglextfun "PointParameteriNV" point-parameter-i-nv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "NV_point_sprite" :deprecated nil :version "1.2") 
-(make-extension-loader |NV_point_sprite| (("PointParameterivNV" point-parameter-iv-nv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size (|pname|))) :category "NV_point_sprite" :deprecated nil :version "1.2") ("PointParameteriNV" point-parameter-i-nv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "NV_point_sprite" :deprecated nil :version "1.2"))) 
+(defglextfun "PointParameterivNV" point-parameter-iv-nv :return
+ "void" :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |params| :type |Int32| :direction :in :array t :size
+   (|pname|)))
+ :category "NV_point_sprite" :deprecated nil :version "1.2") 
+(defglextfun "PointParameteriNV" point-parameter-i-nv :return "void"
+ :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |param| :type |Int32| :direction :in))
+ :category "NV_point_sprite" :deprecated nil :version "1.2") 
+(make-extension-loader |NV_point_sprite|
+ (("PointParameterivNV" point-parameter-iv-nv :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |params| :type |Int32| :direction :in :array t :size
+     (|pname|)))
+   :category "NV_point_sprite" :deprecated nil :version "1.2")
+  ("PointParameteriNV" point-parameter-i-nv :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |param| :type |Int32| :direction :in))
+   :category "NV_point_sprite" :deprecated nil :version "1.2"))) 

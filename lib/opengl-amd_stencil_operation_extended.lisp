@@ -12,5 +12,15 @@
 (defconstant +replace-value-amd+ #x874B) 
 (defconstant +stencil-op-value-amd+ #x874C) 
 (defconstant +stencil-back-op-value-amd+ #x874D) 
-(defglextfun "StencilOpValueAMD" stencil-op-value-amd :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |value| :type |UInt32| :direction :in)) :category "AMD_stencil_operation_extended" :deprecated nil :version "1.2") 
-(make-extension-loader |AMD_stencil_operation_extended| (("StencilOpValueAMD" stencil-op-value-amd :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |value| :type |UInt32| :direction :in)) :category "AMD_stencil_operation_extended" :deprecated nil :version "1.2"))) 
+(defglextfun "StencilOpValueAMD" stencil-op-value-amd :return "void"
+ :args
+ ((:name |face| :type |StencilFaceDirection| :direction :in)
+  (:name |value| :type |UInt32| :direction :in))
+ :category "AMD_stencil_operation_extended" :deprecated nil :version
+ "1.2") 
+(make-extension-loader |AMD_stencil_operation_extended|
+ (("StencilOpValueAMD" stencil-op-value-amd :return "void" :args
+   ((:name |face| :type |StencilFaceDirection| :direction :in)
+    (:name |value| :type |UInt32| :direction :in))
+   :category "AMD_stencil_operation_extended" :deprecated nil
+   :version "1.2"))) 

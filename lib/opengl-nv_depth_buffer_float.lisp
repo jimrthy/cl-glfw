@@ -13,7 +13,26 @@
 (defconstant +depth32f-stencil8-nv+ #x8DAC) 
 (defconstant +float-32-unsigned-int-24-8-rev-nv+ #x8DAD) 
 (defconstant +depth-buffer-float-mode-nv+ #x8DAF) 
-(defglextfun "DepthBoundsdNV" depth-bounds-d-nv :return "void" :args ((:name |zmin| :type |Float64| :direction :in) (:name |zmax| :type |Float64| :direction :in)) :category "NV_depth_buffer_float" :deprecated nil :version "2.0") 
-(defglextfun "ClearDepthdNV" clear-depth-d-nv :return "void" :args ((:name |depth| :type |Float64| :direction :in)) :category "NV_depth_buffer_float" :deprecated nil :version "2.0") 
-(defglextfun "DepthRangedNV" depth-range-d-nv :return "void" :args ((:name |zNear| :type |Float64| :direction :in) (:name |zFar| :type |Float64| :direction :in)) :category "NV_depth_buffer_float" :deprecated nil :version "2.0") 
-(make-extension-loader |NV_depth_buffer_float| (("DepthBoundsdNV" depth-bounds-d-nv :return "void" :args ((:name |zmin| :type |Float64| :direction :in) (:name |zmax| :type |Float64| :direction :in)) :category "NV_depth_buffer_float" :deprecated nil :version "2.0") ("ClearDepthdNV" clear-depth-d-nv :return "void" :args ((:name |depth| :type |Float64| :direction :in)) :category "NV_depth_buffer_float" :deprecated nil :version "2.0") ("DepthRangedNV" depth-range-d-nv :return "void" :args ((:name |zNear| :type |Float64| :direction :in) (:name |zFar| :type |Float64| :direction :in)) :category "NV_depth_buffer_float" :deprecated nil :version "2.0"))) 
+(defglextfun "DepthBoundsdNV" depth-bounds-d-nv :return "void" :args
+ ((:name |zmin| :type |Float64| :direction :in)
+  (:name |zmax| :type |Float64| :direction :in))
+ :category "NV_depth_buffer_float" :deprecated nil :version "2.0") 
+(defglextfun "ClearDepthdNV" clear-depth-d-nv :return "void" :args
+ ((:name |depth| :type |Float64| :direction :in)) :category
+ "NV_depth_buffer_float" :deprecated nil :version "2.0") 
+(defglextfun "DepthRangedNV" depth-range-d-nv :return "void" :args
+ ((:name |zNear| :type |Float64| :direction :in)
+  (:name |zFar| :type |Float64| :direction :in))
+ :category "NV_depth_buffer_float" :deprecated nil :version "2.0") 
+(make-extension-loader |NV_depth_buffer_float|
+ (("DepthBoundsdNV" depth-bounds-d-nv :return "void" :args
+   ((:name |zmin| :type |Float64| :direction :in)
+    (:name |zmax| :type |Float64| :direction :in))
+   :category "NV_depth_buffer_float" :deprecated nil :version "2.0")
+  ("ClearDepthdNV" clear-depth-d-nv :return "void" :args
+   ((:name |depth| :type |Float64| :direction :in)) :category
+   "NV_depth_buffer_float" :deprecated nil :version "2.0")
+  ("DepthRangedNV" depth-range-d-nv :return "void" :args
+   ((:name |zNear| :type |Float64| :direction :in)
+    (:name |zFar| :type |Float64| :direction :in))
+   :category "NV_depth_buffer_float" :deprecated nil :version "2.0"))) 

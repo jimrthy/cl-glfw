@@ -84,6 +84,21 @@
 (defconstant +dispatch-indirect-buffer+ #x90EE) 
 (defconstant +dispatch-indirect-buffer-binding+ #x90EF) 
 (defconstant +compute-shader-bit+ #x20) 
-(defglextfun "DispatchComputeIndirect" dispatch-compute-indirect :return "void" :args ((:name |indirect| :type |BufferOffset| :direction :in)) :category "ARB_compute_shader" :deprecated nil :version "4.3") 
-(defglextfun "DispatchCompute" dispatch-compute :return "void" :args ((:name |num_groups_x| :type |UInt32| :direction :in) (:name |num_groups_y| :type |UInt32| :direction :in) (:name |num_groups_z| :type |UInt32| :direction :in)) :category "ARB_compute_shader" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_compute_shader| (("DispatchComputeIndirect" dispatch-compute-indirect :return "void" :args ((:name |indirect| :type |BufferOffset| :direction :in)) :category "ARB_compute_shader" :deprecated nil :version "4.3") ("DispatchCompute" dispatch-compute :return "void" :args ((:name |num_groups_x| :type |UInt32| :direction :in) (:name |num_groups_y| :type |UInt32| :direction :in) (:name |num_groups_z| :type |UInt32| :direction :in)) :category "ARB_compute_shader" :deprecated nil :version "4.3"))) 
+(defglextfun "DispatchComputeIndirect" dispatch-compute-indirect
+ :return "void" :args
+ ((:name |indirect| :type |BufferOffset| :direction :in)) :category
+ "ARB_compute_shader" :deprecated nil :version "4.3") 
+(defglextfun "DispatchCompute" dispatch-compute :return "void" :args
+ ((:name |num_groups_x| :type |UInt32| :direction :in)
+  (:name |num_groups_y| :type |UInt32| :direction :in)
+  (:name |num_groups_z| :type |UInt32| :direction :in))
+ :category "ARB_compute_shader" :deprecated nil :version "4.3") 
+(make-extension-loader |ARB_compute_shader|
+ (("DispatchComputeIndirect" dispatch-compute-indirect :return "void"
+   :args ((:name |indirect| :type |BufferOffset| :direction :in))
+   :category "ARB_compute_shader" :deprecated nil :version "4.3")
+  ("DispatchCompute" dispatch-compute :return "void" :args
+   ((:name |num_groups_x| :type |UInt32| :direction :in)
+    (:name |num_groups_y| :type |UInt32| :direction :in)
+    (:name |num_groups_z| :type |UInt32| :direction :in))
+   :category "ARB_compute_shader" :deprecated nil :version "4.3"))) 

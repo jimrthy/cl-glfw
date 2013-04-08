@@ -94,6 +94,32 @@
 (defconstant +transform-feedback-barrier-bit-ext+ #x800) 
 (defconstant +atomic-counter-barrier-bit-ext+ #x1000) 
 (defconstant +all-barrier-bits-ext+ #xFFFFFFFF) 
-(defglextfun "MemoryBarrierEXT" memory-barrier-ext :return "void" :args ((:name |barriers| :type |GLbitfield| :direction :in)) :category "EXT_shader_image_load_store" :deprecated nil :version "4.1") 
-(defglextfun "BindImageTextureEXT" bind-image-texture-ext :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |layered| :type |Boolean| :direction :in) (:name |layer| :type |Int32| :direction :in) (:name |access| :type |GLenum| :direction :in) (:name |format| :type |Int32| :direction :in)) :category "EXT_shader_image_load_store" :deprecated nil :version "4.1") 
-(make-extension-loader |EXT_shader_image_load_store| (("MemoryBarrierEXT" memory-barrier-ext :return "void" :args ((:name |barriers| :type |GLbitfield| :direction :in)) :category "EXT_shader_image_load_store" :deprecated nil :version "4.1") ("BindImageTextureEXT" bind-image-texture-ext :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |texture| :type |UInt32| :direction :in) (:name |level| :type |Int32| :direction :in) (:name |layered| :type |Boolean| :direction :in) (:name |layer| :type |Int32| :direction :in) (:name |access| :type |GLenum| :direction :in) (:name |format| :type |Int32| :direction :in)) :category "EXT_shader_image_load_store" :deprecated nil :version "4.1"))) 
+(defglextfun "MemoryBarrierEXT" memory-barrier-ext :return "void"
+ :args ((:name |barriers| :type |GLbitfield| :direction :in))
+ :category "EXT_shader_image_load_store" :deprecated nil :version
+ "4.1") 
+(defglextfun "BindImageTextureEXT" bind-image-texture-ext :return
+ "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |texture| :type |UInt32| :direction :in)
+  (:name |level| :type |Int32| :direction :in)
+  (:name |layered| :type |Boolean| :direction :in)
+  (:name |layer| :type |Int32| :direction :in)
+  (:name |access| :type |GLenum| :direction :in)
+  (:name |format| :type |Int32| :direction :in))
+ :category "EXT_shader_image_load_store" :deprecated nil :version
+ "4.1") 
+(make-extension-loader |EXT_shader_image_load_store|
+ (("MemoryBarrierEXT" memory-barrier-ext :return "void" :args
+   ((:name |barriers| :type |GLbitfield| :direction :in)) :category
+   "EXT_shader_image_load_store" :deprecated nil :version "4.1")
+  ("BindImageTextureEXT" bind-image-texture-ext :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |texture| :type |UInt32| :direction :in)
+    (:name |level| :type |Int32| :direction :in)
+    (:name |layered| :type |Boolean| :direction :in)
+    (:name |layer| :type |Int32| :direction :in)
+    (:name |access| :type |GLenum| :direction :in)
+    (:name |format| :type |Int32| :direction :in))
+   :category "EXT_shader_image_load_store" :deprecated nil :version
+   "4.1"))) 

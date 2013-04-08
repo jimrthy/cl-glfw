@@ -216,5 +216,23 @@
 (defconstant +view-class-rgtc2-rg+ #x82D1) 
 (defconstant +view-class-bptc-unorm+ #x82D2) 
 (defconstant +view-class-bptc-float+ #x82D3) 
-(defglextfun "GetInternalformati64v" get-internalformati-64v :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |params| :type |Int64| :direction :out :array t :size bufsize)) :category "ARB_internalformat_query2" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_internalformat_query2| (("GetInternalformati64v" get-internalformati-64v :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |params| :type |Int64| :direction :out :array t :size bufsize)) :category "ARB_internalformat_query2" :deprecated nil :version "4.3"))) 
+(defglextfun "GetInternalformati64v" get-internalformati-64v :return
+ "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |params| :type |Int64| :direction :out :array t :size
+   bufsize))
+ :category "ARB_internalformat_query2" :deprecated nil :version "4.3") 
+(make-extension-loader |ARB_internalformat_query2|
+ (("GetInternalformati64v" get-internalformati-64v :return "void"
+   :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |params| :type |Int64| :direction :out :array t :size
+     bufsize))
+   :category "ARB_internalformat_query2" :deprecated nil :version
+   "4.3"))) 

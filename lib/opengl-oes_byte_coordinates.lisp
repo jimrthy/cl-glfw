@@ -4,26 +4,212 @@
 
 ;;;; oes_byte_coordinates
 
-(defglextfun "Vertex4bvOES" vertex-4bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x4)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "Vertex4bOES" vertex-4b-oes :return "void" :args ((:name \x :type |Int8| :direction :in) (:name \y :type |Int8| :direction :in) (:name \z :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "Vertex3bvOES" vertex-3bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x3)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "Vertex3bOES" vertex-3b-oes :return "void" :args ((:name \x :type |Int8| :direction :in) (:name \y :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "Vertex2bvOES" vertex-2bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x2)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "Vertex2bOES" vertex-2b-oes :return "void" :args ((:name \x :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord4bvOES" tex-coord-4bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x4)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord4bOES" tex-coord-4b-oes :return "void" :args ((:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in) (:name \q :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord3bvOES" tex-coord-3bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x3)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord3bOES" tex-coord-3b-oes :return "void" :args ((:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord2bvOES" tex-coord-2bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x2)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord2bOES" tex-coord-2b-oes :return "void" :args ((:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord1bvOES" tex-coord-1bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x1)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "TexCoord1bOES" tex-coord-1b-oes :return "void" :args ((:name \s :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord4bvOES" multi-tex-coord-4bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x4)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord4bOES" multi-tex-coord-4b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in) (:name \q :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord3bvOES" multi-tex-coord-3bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x3)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord3bOES" multi-tex-coord-3b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord2bvOES" multi-tex-coord-2bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x2)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord2bOES" multi-tex-coord-2b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord1bvOES" multi-tex-coord-1bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x1)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(defglextfun "MultiTexCoord1bOES" multi-tex-coord-1b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
-(make-extension-loader |OES_byte_coordinates| (("Vertex4bvOES" vertex-4bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x4)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("Vertex4bOES" vertex-4b-oes :return "void" :args ((:name \x :type |Int8| :direction :in) (:name \y :type |Int8| :direction :in) (:name \z :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("Vertex3bvOES" vertex-3bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x3)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("Vertex3bOES" vertex-3b-oes :return "void" :args ((:name \x :type |Int8| :direction :in) (:name \y :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("Vertex2bvOES" vertex-2bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x2)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("Vertex2bOES" vertex-2b-oes :return "void" :args ((:name \x :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord4bvOES" tex-coord-4bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x4)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord4bOES" tex-coord-4b-oes :return "void" :args ((:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in) (:name \q :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord3bvOES" tex-coord-3bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x3)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord3bOES" tex-coord-3b-oes :return "void" :args ((:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord2bvOES" tex-coord-2bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x2)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord2bOES" tex-coord-2b-oes :return "void" :args ((:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord1bvOES" tex-coord-1bv-oes :return "void" :args ((:name |coords| :type |ConstByte| :direction :in :array t :size #x1)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("TexCoord1bOES" tex-coord-1b-oes :return "void" :args ((:name \s :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord4bvOES" multi-tex-coord-4bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x4)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord4bOES" multi-tex-coord-4b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in) (:name \q :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord3bvOES" multi-tex-coord-3bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x3)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord3bOES" multi-tex-coord-3b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in) (:name \r :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord2bvOES" multi-tex-coord-2bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x2)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord2bOES" multi-tex-coord-2b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in) (:name \t :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord1bvOES" multi-tex-coord-1bv-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name |coords| :type |ConstByte| :direction :in :array t :size #x1)) :category "OES_byte_coordinates" :deprecated nil :version "4.3") ("MultiTexCoord1bOES" multi-tex-coord-1b-oes :return "void" :args ((:name |texture| :type |GLenum| :direction :in) (:name \s :type |Int8| :direction :in)) :category "OES_byte_coordinates" :deprecated nil :version "4.3"))) 
+(defglextfun "Vertex4bvOES" vertex-4bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x4))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "Vertex4bOES" vertex-4b-oes :return "void" :args
+ ((:name \x :type |Int8| :direction :in)
+  (:name \y :type |Int8| :direction :in)
+  (:name \z :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "Vertex3bvOES" vertex-3bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x3))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "Vertex3bOES" vertex-3b-oes :return "void" :args
+ ((:name \x :type |Int8| :direction :in)
+  (:name \y :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "Vertex2bvOES" vertex-2bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x2))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "Vertex2bOES" vertex-2b-oes :return "void" :args
+ ((:name \x :type |Int8| :direction :in)) :category
+ "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord4bvOES" tex-coord-4bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x4))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord4bOES" tex-coord-4b-oes :return "void" :args
+ ((:name \s :type |Int8| :direction :in)
+  (:name \t :type |Int8| :direction :in)
+  (:name \r :type |Int8| :direction :in)
+  (:name \q :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord3bvOES" tex-coord-3bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x3))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord3bOES" tex-coord-3b-oes :return "void" :args
+ ((:name \s :type |Int8| :direction :in)
+  (:name \t :type |Int8| :direction :in)
+  (:name \r :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord2bvOES" tex-coord-2bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x2))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord2bOES" tex-coord-2b-oes :return "void" :args
+ ((:name \s :type |Int8| :direction :in)
+  (:name \t :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord1bvOES" tex-coord-1bv-oes :return "void" :args
+ ((:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x1))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "TexCoord1bOES" tex-coord-1b-oes :return "void" :args
+ ((:name \s :type |Int8| :direction :in)) :category
+ "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord4bvOES" multi-tex-coord-4bv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x4))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord4bOES" multi-tex-coord-4b-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Int8| :direction :in)
+  (:name \t :type |Int8| :direction :in)
+  (:name \r :type |Int8| :direction :in)
+  (:name \q :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord3bvOES" multi-tex-coord-3bv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x3))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord3bOES" multi-tex-coord-3b-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Int8| :direction :in)
+  (:name \t :type |Int8| :direction :in)
+  (:name \r :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord2bvOES" multi-tex-coord-2bv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x2))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord2bOES" multi-tex-coord-2b-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Int8| :direction :in)
+  (:name \t :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord1bvOES" multi-tex-coord-1bv-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name |coords| :type |ConstByte| :direction :in :array t :size
+   #x1))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(defglextfun "MultiTexCoord1bOES" multi-tex-coord-1b-oes :return
+ "void" :args
+ ((:name |texture| :type |GLenum| :direction :in)
+  (:name \s :type |Int8| :direction :in))
+ :category "OES_byte_coordinates" :deprecated nil :version "4.3") 
+(make-extension-loader |OES_byte_coordinates|
+ (("Vertex4bvOES" vertex-4bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x4))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("Vertex4bOES" vertex-4b-oes :return "void" :args
+   ((:name \x :type |Int8| :direction :in)
+    (:name \y :type |Int8| :direction :in)
+    (:name \z :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("Vertex3bvOES" vertex-3bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x3))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("Vertex3bOES" vertex-3b-oes :return "void" :args
+   ((:name \x :type |Int8| :direction :in)
+    (:name \y :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("Vertex2bvOES" vertex-2bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x2))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("Vertex2bOES" vertex-2b-oes :return "void" :args
+   ((:name \x :type |Int8| :direction :in)) :category
+   "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord4bvOES" tex-coord-4bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x4))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord4bOES" tex-coord-4b-oes :return "void" :args
+   ((:name \s :type |Int8| :direction :in)
+    (:name \t :type |Int8| :direction :in)
+    (:name \r :type |Int8| :direction :in)
+    (:name \q :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord3bvOES" tex-coord-3bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x3))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord3bOES" tex-coord-3b-oes :return "void" :args
+   ((:name \s :type |Int8| :direction :in)
+    (:name \t :type |Int8| :direction :in)
+    (:name \r :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord2bvOES" tex-coord-2bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x2))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord2bOES" tex-coord-2b-oes :return "void" :args
+   ((:name \s :type |Int8| :direction :in)
+    (:name \t :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord1bvOES" tex-coord-1bv-oes :return "void" :args
+   ((:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x1))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("TexCoord1bOES" tex-coord-1b-oes :return "void" :args
+   ((:name \s :type |Int8| :direction :in)) :category
+   "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord4bvOES" multi-tex-coord-4bv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x4))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord4bOES" multi-tex-coord-4b-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Int8| :direction :in)
+    (:name \t :type |Int8| :direction :in)
+    (:name \r :type |Int8| :direction :in)
+    (:name \q :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord3bvOES" multi-tex-coord-3bv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x3))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord3bOES" multi-tex-coord-3b-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Int8| :direction :in)
+    (:name \t :type |Int8| :direction :in)
+    (:name \r :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord2bvOES" multi-tex-coord-2bv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x2))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord2bOES" multi-tex-coord-2b-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Int8| :direction :in)
+    (:name \t :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord1bvOES" multi-tex-coord-1bv-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name |coords| :type |ConstByte| :direction :in :array t :size
+     #x1))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3")
+  ("MultiTexCoord1bOES" multi-tex-coord-1b-oes :return "void" :args
+   ((:name |texture| :type |GLenum| :direction :in)
+    (:name \s :type |Int8| :direction :in))
+   :category "OES_byte_coordinates" :deprecated nil :version "4.3"))) 

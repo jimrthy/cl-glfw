@@ -4,5 +4,16 @@
 
 ;;;; ext_blend_color
 
-(defglextfun "BlendColorEXT" blend-color-ext :return "void" :args ((:name |red| :type |ColorF| :direction :in) (:name |green| :type |ColorF| :direction :in) (:name |blue| :type |ColorF| :direction :in) (:name |alpha| :type |ColorF| :direction :in)) :category "EXT_blend_color" :deprecated nil :version "1.0") 
-(make-extension-loader |EXT_blend_color| (("BlendColorEXT" blend-color-ext :return "void" :args ((:name |red| :type |ColorF| :direction :in) (:name |green| :type |ColorF| :direction :in) (:name |blue| :type |ColorF| :direction :in) (:name |alpha| :type |ColorF| :direction :in)) :category "EXT_blend_color" :deprecated nil :version "1.0"))) 
+(defglextfun "BlendColorEXT" blend-color-ext :return "void" :args
+ ((:name |red| :type |ColorF| :direction :in)
+  (:name |green| :type |ColorF| :direction :in)
+  (:name |blue| :type |ColorF| :direction :in)
+  (:name |alpha| :type |ColorF| :direction :in))
+ :category "EXT_blend_color" :deprecated nil :version "1.0") 
+(make-extension-loader |EXT_blend_color|
+ (("BlendColorEXT" blend-color-ext :return "void" :args
+   ((:name |red| :type |ColorF| :direction :in)
+    (:name |green| :type |ColorF| :direction :in)
+    (:name |blue| :type |ColorF| :direction :in)
+    (:name |alpha| :type |ColorF| :direction :in))
+   :category "EXT_blend_color" :deprecated nil :version "1.0"))) 

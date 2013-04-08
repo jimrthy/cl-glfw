@@ -37,5 +37,18 @@
 (defconstant +shader-storage-barrier-bit+ #x2000) 
 (defconstant +max-combined-shader-output-resources+ #x8F39) 
 (defconstant +max-combined-image-units-and-fragment-outputs+ #x8F39) 
-(defglextfun "ShaderStorageBlockBinding" shader-storage-block-binding :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |storageBlockIndex| :type |UInt32| :direction :in) (:name |storageBlockBinding| :type |UInt32| :direction :in)) :category "ARB_shader_storage_buffer_object" :deprecated nil :version "4.3") 
-(make-extension-loader |ARB_shader_storage_buffer_object| (("ShaderStorageBlockBinding" shader-storage-block-binding :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |storageBlockIndex| :type |UInt32| :direction :in) (:name |storageBlockBinding| :type |UInt32| :direction :in)) :category "ARB_shader_storage_buffer_object" :deprecated nil :version "4.3"))) 
+(defglextfun "ShaderStorageBlockBinding" shader-storage-block-binding
+ :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |storageBlockIndex| :type |UInt32| :direction :in)
+  (:name |storageBlockBinding| :type |UInt32| :direction :in))
+ :category "ARB_shader_storage_buffer_object" :deprecated nil
+ :version "4.3") 
+(make-extension-loader |ARB_shader_storage_buffer_object|
+ (("ShaderStorageBlockBinding" shader-storage-block-binding :return
+   "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |storageBlockIndex| :type |UInt32| :direction :in)
+    (:name |storageBlockBinding| :type |UInt32| :direction :in))
+   :category "ARB_shader_storage_buffer_object" :deprecated nil
+   :version "4.3"))) 

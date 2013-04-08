@@ -68,6 +68,25 @@
 (defconstant +uniform-block-referenced-by-tess-evaluation-shader+ #x84F1) 
 (defconstant +tess-evaluation-shader+ #x8E87) 
 (defconstant +tess-control-shader+ #x8E88) 
-(defglextfun "PatchParameterfv" patch-parameter-fv :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |values| :type |Float32| :direction :in :array t :size (|pname|))) :category "ARB_tessellation_shader" :deprecated nil :version "1.2") 
-(defglextfun "PatchParameteri" patch-parameter-i :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |value| :type |Int32| :direction :in)) :category "ARB_tessellation_shader" :deprecated nil :version "1.2") 
-(make-extension-loader |ARB_tessellation_shader| (("PatchParameterfv" patch-parameter-fv :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |values| :type |Float32| :direction :in :array t :size (|pname|))) :category "ARB_tessellation_shader" :deprecated nil :version "1.2") ("PatchParameteri" patch-parameter-i :return "void" :args ((:name |pname| :type |GLenum| :direction :in) (:name |value| :type |Int32| :direction :in)) :category "ARB_tessellation_shader" :deprecated nil :version "1.2"))) 
+(defglextfun "PatchParameterfv" patch-parameter-fv :return "void"
+ :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |values| :type |Float32| :direction :in :array t :size
+   (|pname|)))
+ :category "ARB_tessellation_shader" :deprecated nil :version "1.2") 
+(defglextfun "PatchParameteri" patch-parameter-i :return "void" :args
+ ((:name |pname| :type |GLenum| :direction :in)
+  (:name |value| :type |Int32| :direction :in))
+ :category "ARB_tessellation_shader" :deprecated nil :version "1.2") 
+(make-extension-loader |ARB_tessellation_shader|
+ (("PatchParameterfv" patch-parameter-fv :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |values| :type |Float32| :direction :in :array t :size
+     (|pname|)))
+   :category "ARB_tessellation_shader" :deprecated nil :version
+   "1.2")
+  ("PatchParameteri" patch-parameter-i :return "void" :args
+   ((:name |pname| :type |GLenum| :direction :in)
+    (:name |value| :type |Int32| :direction :in))
+   :category "ARB_tessellation_shader" :deprecated nil :version
+   "1.2"))) 

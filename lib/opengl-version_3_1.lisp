@@ -4,7 +4,13 @@
 
 ;;;; version_3_1
 
-(eval-when (:load-toplevel) (when (and (boundp '*version-loaded*) (not (eq 'version_3_1 *version-loaded*))) (warn "Loading cl-glfw-opengl-~a over the top of already-loaded cl-glfw-opengl-~a~%" 'version_3_1 *version-loaded*)) (defparameter *version-loaded* 'version_3_1)) 
+(eval-when (:load-toplevel)
+  (when (and (boundp '*version-loaded*)
+             (not (eq 'version_3_1 *version-loaded*)))
+    (warn "Loading cl-glfw-opengl-~a over the top of already-loaded cl-glfw-opengl-~a~%"
+          'version_3_1
+          *version-loaded*))
+  (defparameter *version-loaded* 'version_3_1)) 
 (defconstant +max-elements-vertices+ #x80E8) 
 (defconstant +max-elements-indices+ #x80E9) 
 (defconstant +unsigned-byte-3-3-2+ #x8032) 
@@ -1105,213 +1111,2079 @@
 (defconstant +uniform-block-referenced-by-vertex-shader+ #x8A44) 
 (defconstant +uniform-block-referenced-by-fragment-shader+ #x8A46) 
 (defconstant +invalid-index+ #xFFFFFFFF) 
-(defglfun "Viewport" viewport :return "void" :args ((:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "DepthRange" depth-range :return "void" :args ((:name |near| :type |Float64| :direction :in) (:name |far| :type |Float64| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "IsEnabled" is-enabled :return "Boolean" :args ((:name |cap| :type |EnableCap| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetTexLevelParameteriv" get-tex-level-parameter-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetTexLevelParameterfv" get-tex-level-parameter-fv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetTexParameteriv" get-tex-parameter-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetTexParameterfv" get-tex-parameter-fv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetTexImage" get-tex-image :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :out :array t :size (|target| |level| |format| |type|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetString" get-string :return "String" :args ((:name |name| :type |StringName| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetIntegerv" get-integerv :return "void" :args ((:name |pname| :type |GetPName| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetFloatv" get-floatv :return "void" :args ((:name |pname| :type |GetPName| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetError" get-error :return "ErrorCode" :args nil :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetDoublev" get-doublev :return "void" :args ((:name |pname| :type |GetPName| :direction :in) (:name |params| :type |Float64| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "GetBooleanv" get-booleanv :return "void" :args ((:name |pname| :type |GetPName| :direction :in) (:name |params| :type |Boolean| :direction :out :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "ReadPixels" read-pixels :return "void" :args ((:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :out :array t :size (|format| |type| |width| |height|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "ReadBuffer" read-buffer :return "void" :args ((:name |mode| :type |ReadBufferMode| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "PixelStorei" pixel-store-i :return "void" :args ((:name |pname| :type |PixelStoreParameter| :direction :in) (:name |param| :type |CheckedInt32| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "PixelStoref" pixel-store-f :return "void" :args ((:name |pname| :type |PixelStoreParameter| :direction :in) (:name |param| :type |CheckedFloat32| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "DepthFunc" depth-func :return "void" :args ((:name |func| :type |DepthFunction| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "StencilOp" stencil-op :return "void" :args ((:name |fail| :type |StencilOp| :direction :in) (:name |zfail| :type |StencilOp| :direction :in) (:name |zpass| :type |StencilOp| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "StencilFunc" stencil-func :return "void" :args ((:name |func| :type |StencilFunction| :direction :in) (:name |ref| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "LogicOp" logic-op :return "void" :args ((:name |opcode| :type |LogicOp| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "BlendFunc" blend-func :return "void" :args ((:name |sfactor| :type |BlendingFactorSrc| :direction :in) (:name |dfactor| :type |BlendingFactorDest| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Flush" flush :return "void" :args nil :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Finish" finish :return "void" :args nil :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Enable" enable :return "void" :args ((:name |cap| :type |EnableCap| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Disable" disable :return "void" :args ((:name |cap| :type |EnableCap| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "DepthMask" depth-mask :return "void" :args ((:name |flag| :type |Boolean| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "ColorMask" color-mask :return "void" :args ((:name |red| :type |Boolean| :direction :in) (:name |green| :type |Boolean| :direction :in) (:name |blue| :type |Boolean| :direction :in) (:name |alpha| :type |Boolean| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "StencilMask" stencil-mask :return "void" :args ((:name |mask| :type |MaskedStencilValue| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "ClearDepth" clear-depth :return "void" :args ((:name |depth| :type |Float64| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "ClearStencil" clear-stencil :return "void" :args ((:name \s :type |StencilValue| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "ClearColor" clear-color :return "void" :args ((:name |red| :type |ColorF| :direction :in) (:name |green| :type |ColorF| :direction :in) (:name |blue| :type |ColorF| :direction :in) (:name |alpha| :type |ColorF| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Clear" clear :return "void" :args ((:name |mask| :type |ClearBufferMask| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "DrawBuffer" draw-buffer :return "void" :args ((:name |mode| :type |DrawBufferMode| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "TexImage2D" tex-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |TextureComponentCount| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :in :array t :size (|format| |type| |width| |height|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "TexImage1D" tex-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |TextureComponentCount| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :in :array t :size (|format| |type| |width|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "TexParameteriv" tex-parameter-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |params| :type |CheckedInt32| :direction :in :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "TexParameteri" tex-parameter-i :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |param| :type |CheckedInt32| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "TexParameterfv" tex-parameter-fv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "TexParameterf" tex-parameter-f :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |param| :type |CheckedFloat32| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Scissor" scissor :return "void" :args ((:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "PolygonMode" polygon-mode :return "void" :args ((:name |face| :type |MaterialFace| :direction :in) (:name |mode| :type |PolygonMode| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "PointSize" point-size :return "void" :args ((:name |size| :type |CheckedFloat32| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "LineWidth" line-width :return "void" :args ((:name |width| :type |CheckedFloat32| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Hint" hint :return "void" :args ((:name |target| :type |HintTarget| :direction :in) (:name |mode| :type |HintMode| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "FrontFace" front-face :return "void" :args ((:name |mode| :type |FrontFaceDirection| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "CullFace" cull-face :return "void" :args ((:name |mode| :type |CullFaceMode| :direction :in)) :category "VERSION_1_0" :deprecated nil :version "1.0") 
-(defglfun "Indexubv" index-ubv :return "void" :args ((:name |c| :type |ColorIndexValueUB| :direction :in :array t :size #x1)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "Indexub" index-ub :return "void" :args ((:name |c| :type |ColorIndexValueUB| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "IsTexture" is-texture :return "Boolean" :args ((:name |texture| :type |Texture| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "GenTextures" gen-textures :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |textures| :type |Texture| :direction :out :array t :size n)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "DeleteTextures" delete-textures :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |textures| :type |Texture| :direction :in :array t :size n)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "BindTexture" bind-texture :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |texture| :type |Texture| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "TexSubImage2D" tex-sub-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :in :array t :size (|format| |type| |width| |height|))) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "TexSubImage1D" tex-sub-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :in :array t :size (|format| |type| |width|))) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "CopyTexSubImage2D" copy-tex-sub-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "CopyTexSubImage1D" copy-tex-sub-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "CopyTexImage2D" copy-tex-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "CopyTexImage1D" copy-tex-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "PolygonOffset" polygon-offset :return "void" :args ((:name |factor| :type |Float32| :direction :in) (:name |units| :type |Float32| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "GetPointerv" get-pointerv :return "void" :args ((:name |pname| :type |GetPointervPName| :direction :in) ("params" "VoidPointer" "out" "reference")) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "DrawElements" draw-elements :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |Void| :direction :in :array t :size (|count| |type|))) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglfun "DrawArrays" draw-arrays :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |first| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in)) :category "VERSION_1_1" :deprecated nil :version "1.1") 
-(defglextfun "CopyTexSubImage3D" copy-tex-sub-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |zoffset| :type |CheckedInt32| :direction :in) (:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "VERSION_1_2" :deprecated nil :version "1.2") 
-(defglextfun "TexSubImage3D" tex-sub-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |zoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :in :array t :size (|format| |type| |width| |height| |depth|))) :category "VERSION_1_2" :deprecated nil :version "1.2") 
-(defglextfun "DrawRangeElements" draw-range-elements :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |start| :type |UInt32| :direction :in) (:name |end| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |Void| :direction :in :array t :size (|count| |type|))) :category "VERSION_1_2" :deprecated nil :version "1.2") 
-(defglextfun "BlendEquation" blend-equation :return "void" :args ((:name |mode| :type |BlendEquationMode| :direction :in)) :category "VERSION_1_2" :deprecated nil :version "1.2") 
-(defglextfun "BlendColor" blend-color :return "void" :args ((:name |red| :type |ColorF| :direction :in) (:name |green| :type |ColorF| :direction :in) (:name |blue| :type |ColorF| :direction :in) (:name |alpha| :type |ColorF| :direction :in)) :category "VERSION_1_2" :deprecated nil :version "1.2") 
-(defglextfun "GetCompressedTexImage" get-compressed-tex-image :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |img| :type |CompressedTextureARB| :direction :out :array t :size (|target| |level|))) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "CompressedTexSubImage1D" compressed-tex-sub-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "CompressedTexSubImage2D" compressed-tex-sub-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "CompressedTexSubImage3D" compressed-tex-sub-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |zoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "CompressedTexImage1D" compressed-tex-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "CompressedTexImage2D" compressed-tex-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "CompressedTexImage3D" compressed-tex-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "SampleCoverage" sample-coverage :return "void" :args ((:name |value| :type |Float32| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "ActiveTexture" active-texture :return "void" :args ((:name |texture| :type |TextureUnit| :direction :in)) :category "VERSION_1_3" :deprecated nil :version "1.3") 
-(defglextfun "PointParameteriv" point-parameter-iv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size (|pname|))) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "PointParameteri" point-parameter-i :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "PointParameterfv" point-parameter-fv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "PointParameterf" point-parameter-f :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |CheckedFloat32| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "MultiDrawElements" multi-draw-elements :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |count| :type |SizeI| :direction :in :array t :size (|drawcount|)) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |ConstVoidPointer| :direction :in :array t :size (|drawcount|)) (:name |drawcount| :type |SizeI| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "MultiDrawArrays" multi-draw-arrays :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |first| :type |Int32| :direction :in :array t :size (|count|)) (:name |count| :type |SizeI| :direction :in :array t :size (|drawcount|)) (:name |drawcount| :type |SizeI| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "BlendFuncSeparate" blend-func-separate :return "void" :args ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") 
-(defglextfun "GetBufferPointerv" get-buffer-pointerv :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |pname| :type |BufferPointerNameARB| :direction :in) (:name |params| :type |VoidPointer| :direction :out :array t :size #x1)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GetBufferParameteriv" get-buffer-parameter-iv :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |pname| :type |BufferPNameARB| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "UnmapBuffer" unmap-buffer :return "Boolean" :args ((:name |target| :type |BufferTargetARB| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "MapBuffer" map-buffer :return "VoidPointer" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |access| :type |BufferAccessARB| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GetBufferSubData" get-buffer-sub-data :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in) (:name |data| :type |Void| :direction :out :array t :size size)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "BufferSubData" buffer-sub-data :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in) (:name |data| :type |ConstVoid| :direction :in :array t :size size)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "BufferData" buffer-data :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |size| :type |BufferSize| :direction :in) (:name |data| :type |ConstVoid| :direction :in :array t :size size) (:name |usage| :type |BufferUsageARB| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "IsBuffer" is-buffer :return "Boolean" :args ((:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GenBuffers" gen-buffers :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |buffers| :type |UInt32| :direction :out :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "DeleteBuffers" delete-buffers :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |buffers| :type |ConstUInt32| :direction :in :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "BindBuffer" bind-buffer :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GetQueryObjectuiv" get-query-object-uiv :return "void" :args ((:name |id| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size pname)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GetQueryObjectiv" get-query-object-iv :return "void" :args ((:name |id| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GetQueryiv" get-query-iv :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "EndQuery" end-query :return "void" :args ((:name |target| :type |GLenum| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "BeginQuery" begin-query :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |id| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "IsQuery" is-query :return "Boolean" :args ((:name |id| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "DeleteQueries" delete-queries :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |ids| :type |UInt32| :direction :in :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "GenQueries" gen-queries :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |ids| :type |UInt32| :direction :out :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") 
-(defglextfun "VertexAttribPointer" vertex-attrib-pointer :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |type| :type |VertexAttribPointerTypeARB| :direction :in) (:name |normalized| :type |Boolean| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size (|size| |type| |stride|) :retained t)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "ValidateProgram" validate-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "UniformMatrix4fv" uniform-matrix-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "UniformMatrix3fv" uniform-matrix-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "UniformMatrix2fv" uniform-matrix-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform4iv" uniform-4iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform3iv" uniform-3iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform2iv" uniform-2iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform1iv" uniform-1iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform4fv" uniform-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform3fv" uniform-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform2fv" uniform-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform1fv" uniform-1fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform4i" uniform-4i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in) (:name \v1 :type |Int32| :direction :in) (:name \v2 :type |Int32| :direction :in) (:name \v3 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform3i" uniform-3i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in) (:name \v1 :type |Int32| :direction :in) (:name \v2 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform2i" uniform-2i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in) (:name \v1 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform1i" uniform-1i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform4f" uniform-4f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in) (:name \v1 :type |Float32| :direction :in) (:name \v2 :type |Float32| :direction :in) (:name \v3 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform3f" uniform-3f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in) (:name \v1 :type |Float32| :direction :in) (:name \v2 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform2f" uniform-2f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in) (:name \v1 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "Uniform1f" uniform-1f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "UseProgram" use-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "ShaderSource" shader-source :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |string| :type |ConstCharPointer| :direction :in :array t :size count) (:name |length| :type |Int32| :direction :in :array t :size #x1)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "LinkProgram" link-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "IsShader" is-shader :return "Boolean" :args ((:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "IsProgram" is-program :return "Boolean" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetVertexAttribPointerv" get-vertex-attrib-pointerv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPointerPropertyARB| :direction :in) (:name |pointer| :type |VoidPointer| :direction :out :array t :size #x1)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetVertexAttribiv" get-vertex-attrib-iv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPropertyARB| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size #x4)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetVertexAttribfv" get-vertex-attrib-fv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPropertyARB| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size #x4)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetVertexAttribdv" get-vertex-attrib-dv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPropertyARB| :direction :in) (:name |params| :type |Float64| :direction :out :array t :size #x4)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetUniformiv" get-uniform-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |location| :type |Int32| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|location|))) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetUniformfv" get-uniform-fv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |location| :type |Int32| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|location|))) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetUniformLocation" get-uniform-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetShaderSource" get-shader-source :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |source| :type |Char| :direction :out :array t :size length)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetShaderInfoLog" get-shader-info-log :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |infoLog| :type |Char| :direction :out :array t :size length)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetShaderiv" get-shader-iv :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetProgramInfoLog" get-program-info-log :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |infoLog| :type |Char| :direction :out :array t :size length)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetProgramiv" get-program-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetAttribLocation" get-attrib-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetAttachedShaders" get-attached-shaders :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |maxCount| :type |SizeI| :direction :in) (:name |count| :type |SizeI| :direction :out :array t :size #x1) (:name |obj| :type |UInt32| :direction :out :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetActiveUniform" get-active-uniform :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |size| :type |Int32| :direction :out :array t :size #x1) (:name |type| :type |GLenum| :direction :out :array t :size #x1) (:name |name| :type |Char| :direction :out :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "GetActiveAttrib" get-active-attrib :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |size| :type |Int32| :direction :out :array t :size #x1) (:name |type| :type |GLenum| :direction :out :array t :size #x1) (:name |name| :type |Char| :direction :out :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "EnableVertexAttribArray" enable-vertex-attrib-array :return "void" :args ((:name |index| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "DisableVertexAttribArray" disable-vertex-attrib-array :return "void" :args ((:name |index| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "DetachShader" detach-shader :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "DeleteShader" delete-shader :return "void" :args ((:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "DeleteProgram" delete-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "CreateShader" create-shader :return "UInt32" :args ((:name |type| :type |GLenum| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "CreateProgram" create-program :return "UInt32" :args nil :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "CompileShader" compile-shader :return "void" :args ((:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "BindAttribLocation" bind-attrib-location :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "AttachShader" attach-shader :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "StencilMaskSeparate" stencil-mask-separate :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "StencilFuncSeparate" stencil-func-separate :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |func| :type |StencilFunction| :direction :in) (:name |ref| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "StencilOpSeparate" stencil-op-separate :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |sfail| :type |StencilOp| :direction :in) (:name |dpfail| :type |StencilOp| :direction :in) (:name |dppass| :type |StencilOp| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "DrawBuffers" draw-buffers :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t :size n)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "BlendEquationSeparate" blend-equation-separate :return "void" :args ((:name |modeRGB| :type |BlendEquationModeEXT| :direction :in) (:name |modeAlpha| :type |BlendEquationModeEXT| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") 
-(defglextfun "UniformMatrix4x3fv" uniform-matrix-4x-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #xC)) :category "VERSION_2_1" :deprecated nil :version "2.1") 
-(defglextfun "UniformMatrix3x4fv" uniform-matrix-3x-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #xC)) :category "VERSION_2_1" :deprecated nil :version "2.1") 
-(defglextfun "UniformMatrix4x2fv" uniform-matrix-4x-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x8)) :category "VERSION_2_1" :deprecated nil :version "2.1") 
-(defglextfun "UniformMatrix2x4fv" uniform-matrix-2x-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x8)) :category "VERSION_2_1" :deprecated nil :version "2.1") 
-(defglextfun "UniformMatrix3x2fv" uniform-matrix-3x-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x6)) :category "VERSION_2_1" :deprecated nil :version "2.1") 
-(defglextfun "UniformMatrix2x3fv" uniform-matrix-2x-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x6)) :category "VERSION_2_1" :deprecated nil :version "2.1") 
-(defglextfun "GetStringi" get-string-i :return "String" :args ((:name |name| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "ClearBufferfi" clear-bufferf-i :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |depth| :type |Float32| :direction :in) (:name |stencil| :type |Int32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "ClearBufferfv" clear-buffer-fv :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size (|buffer|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "ClearBufferuiv" clear-buffer-uiv :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size (|buffer|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "ClearBufferiv" clear-buffer-iv :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size (|buffer|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetTexParameterIuiv" get-tex-parameter-i-uiv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetTexParameterIiv" get-tex-parameter-i-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "TexParameterIuiv" tex-parameter-i-uiv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |params| :type |UInt32| :direction :in :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "TexParameterIiv" tex-parameter-i-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform4uiv" uniform-4uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count*4)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform3uiv" uniform-3uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count*3)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform2uiv" uniform-2uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count*2)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform1uiv" uniform-1uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform4ui" uniform-4ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in) (:name \v1 :type |UInt32| :direction :in) (:name \v2 :type |UInt32| :direction :in) (:name \v3 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform3ui" uniform-3ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in) (:name \v1 :type |UInt32| :direction :in) (:name \v2 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform2ui" uniform-2ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in) (:name \v1 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Uniform1ui" uniform-1ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetFragDataLocation" get-frag-data-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "BindFragDataLocation" bind-frag-data-location :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |color| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetUniformuiv" get-uniform-uiv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |location| :type |Int32| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size (|program| |location|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetVertexAttribIuiv" get-vertex-attrib-i-uiv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribEnum| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size #x1)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetVertexAttribIiv" get-vertex-attrib-i-iv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribEnum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size #x1)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "VertexAttribIPointer" vertex-attrib-ipointer :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |type| :type |VertexAttribEnum| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size (|size| |type| |stride|) :retained t)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "EndConditionalRender" end-conditional-render :return "void" :args nil :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "BeginConditionalRender" begin-conditional-render :return "void" :args ((:name |id| :type |UInt32| :direction :in) (:name |mode| :type |TypeEnum| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "ClampColor" clamp-color :return "void" :args ((:name |target| :type |ClampColorTargetARB| :direction :in) (:name |clamp| :type |ClampColorModeARB| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetTransformFeedbackVarying" get-transform-feedback-varying :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |size| :type |SizeI| :direction :out :array t :size #x1) (:name |type| :type |GLenum| :direction :out :array t :size #x1) (:name |name| :type |Char| :direction :out :array t :size (|length|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "TransformFeedbackVaryings" transform-feedback-varyings :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |varyings| :type |ConstCharPointer| :direction :in :array t :size count) (:name |bufferMode| :type |GLenum| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "BindBufferBase" bind-buffer-base :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "BindBufferRange" bind-buffer-range :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "EndTransformFeedback" end-transform-feedback :return "void" :args nil :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "BeginTransformFeedback" begin-transform-feedback :return "void" :args ((:name |primitiveMode| :type |GLenum| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "IsEnabledi" is-enabled-i :return "Boolean" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Disablei" disable-i :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "Enablei" enable-i :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetIntegeri_v" get-integeri_v :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |data| :type |Int32| :direction :out :array t :size (|target|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "GetBooleani_v" get-booleani_v :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |data| :type |Boolean| :direction :out :array t :size (|target|))) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "ColorMaski" color-mask-i :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name \r :type |Boolean| :direction :in) (:name \g :type |Boolean| :direction :in) (:name |b| :type |Boolean| :direction :in) (:name |a| :type |Boolean| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") 
-(defglextfun "PrimitiveRestartIndex" primitive-restart-index :return "void" :args ((:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") 
-(defglextfun "TexBuffer" tex-buffer :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") 
-(defglextfun "DrawElementsInstanced" draw-elements-instanced :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |Void| :direction :in :array t :size (|count| |type|)) (:name |instancecount| :type |SizeI| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") 
-(defglextfun "DrawArraysInstanced" draw-arrays-instanced :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |first| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |instancecount| :type |SizeI| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") 
-(make-extension-loader version_3_1 (("CopyTexSubImage3D" copy-tex-sub-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |zoffset| :type |CheckedInt32| :direction :in) (:name \x :type |WinCoord| :direction :in) (:name \y :type |WinCoord| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in)) :category "VERSION_1_2" :deprecated nil :version "1.2") ("TexSubImage3D" tex-sub-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |zoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |type| :type |PixelType| :direction :in) (:name |pixels| :type |Void| :direction :in :array t :size (|format| |type| |width| |height| |depth|))) :category "VERSION_1_2" :deprecated nil :version "1.2") ("DrawRangeElements" draw-range-elements :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |start| :type |UInt32| :direction :in) (:name |end| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |Void| :direction :in :array t :size (|count| |type|))) :category "VERSION_1_2" :deprecated nil :version "1.2") ("BlendEquation" blend-equation :return "void" :args ((:name |mode| :type |BlendEquationMode| :direction :in)) :category "VERSION_1_2" :deprecated nil :version "1.2") ("BlendColor" blend-color :return "void" :args ((:name |red| :type |ColorF| :direction :in) (:name |green| :type |ColorF| :direction :in) (:name |blue| :type |ColorF| :direction :in) (:name |alpha| :type |ColorF| :direction :in)) :category "VERSION_1_2" :deprecated nil :version "1.2") ("GetCompressedTexImage" get-compressed-tex-image :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |img| :type |CompressedTextureARB| :direction :out :array t :size (|target| |level|))) :category "VERSION_1_3" :deprecated nil :version "1.3") ("CompressedTexSubImage1D" compressed-tex-sub-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("CompressedTexSubImage2D" compressed-tex-sub-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("CompressedTexSubImage3D" compressed-tex-sub-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |xoffset| :type |CheckedInt32| :direction :in) (:name |yoffset| :type |CheckedInt32| :direction :in) (:name |zoffset| :type |CheckedInt32| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |format| :type |PixelFormat| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("CompressedTexImage1D" compressed-tex-image-1d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("CompressedTexImage2D" compressed-tex-image-2d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("CompressedTexImage3D" compressed-tex-image-3d :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |level| :type |CheckedInt32| :direction :in) (:name |internalformat| :type |PixelInternalFormat| :direction :in) (:name |width| :type |SizeI| :direction :in) (:name |height| :type |SizeI| :direction :in) (:name |depth| :type |SizeI| :direction :in) (:name |border| :type |CheckedInt32| :direction :in) (:name |imageSize| :type |SizeI| :direction :in) (:name |data| :type |CompressedTextureARB| :direction :in :array t :size imagesize)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("SampleCoverage" sample-coverage :return "void" :args ((:name |value| :type |Float32| :direction :in) (:name |invert| :type |Boolean| :direction :in)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("ActiveTexture" active-texture :return "void" :args ((:name |texture| :type |TextureUnit| :direction :in)) :category "VERSION_1_3" :deprecated nil :version "1.3") ("PointParameteriv" point-parameter-iv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size (|pname|))) :category "VERSION_1_4" :deprecated nil :version "1.4") ("PointParameteri" point-parameter-i :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |Int32| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") ("PointParameterfv" point-parameter-fv :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |params| :type |CheckedFloat32| :direction :in :array t :size (|pname|))) :category "VERSION_1_4" :deprecated nil :version "1.4") ("PointParameterf" point-parameter-f :return "void" :args ((:name |pname| :type |PointParameterNameARB| :direction :in) (:name |param| :type |CheckedFloat32| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") ("MultiDrawElements" multi-draw-elements :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |count| :type |SizeI| :direction :in :array t :size (|drawcount|)) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |ConstVoidPointer| :direction :in :array t :size (|drawcount|)) (:name |drawcount| :type |SizeI| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") ("MultiDrawArrays" multi-draw-arrays :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |first| :type |Int32| :direction :in :array t :size (|count|)) (:name |count| :type |SizeI| :direction :in :array t :size (|drawcount|)) (:name |drawcount| :type |SizeI| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") ("BlendFuncSeparate" blend-func-separate :return "void" :args ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in) (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT| :direction :in)) :category "VERSION_1_4" :deprecated nil :version "1.4") ("GetBufferPointerv" get-buffer-pointerv :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |pname| :type |BufferPointerNameARB| :direction :in) (:name |params| :type |VoidPointer| :direction :out :array t :size #x1)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GetBufferParameteriv" get-buffer-parameter-iv :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |pname| :type |BufferPNameARB| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_1_5" :deprecated nil :version "1.5") ("UnmapBuffer" unmap-buffer :return "Boolean" :args ((:name |target| :type |BufferTargetARB| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("MapBuffer" map-buffer :return "VoidPointer" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |access| :type |BufferAccessARB| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GetBufferSubData" get-buffer-sub-data :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in) (:name |data| :type |Void| :direction :out :array t :size size)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("BufferSubData" buffer-sub-data :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in) (:name |data| :type |ConstVoid| :direction :in :array t :size size)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("BufferData" buffer-data :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |size| :type |BufferSize| :direction :in) (:name |data| :type |ConstVoid| :direction :in :array t :size size) (:name |usage| :type |BufferUsageARB| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("IsBuffer" is-buffer :return "Boolean" :args ((:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GenBuffers" gen-buffers :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |buffers| :type |UInt32| :direction :out :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("DeleteBuffers" delete-buffers :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |buffers| :type |ConstUInt32| :direction :in :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("BindBuffer" bind-buffer :return "void" :args ((:name |target| :type |BufferTargetARB| :direction :in) (:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GetQueryObjectuiv" get-query-object-uiv :return "void" :args ((:name |id| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size pname)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GetQueryObjectiv" get-query-object-iv :return "void" :args ((:name |id| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GetQueryiv" get-query-iv :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("EndQuery" end-query :return "void" :args ((:name |target| :type |GLenum| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("BeginQuery" begin-query :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |id| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("IsQuery" is-query :return "Boolean" :args ((:name |id| :type |UInt32| :direction :in)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("DeleteQueries" delete-queries :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |ids| :type |UInt32| :direction :in :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("GenQueries" gen-queries :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |ids| :type |UInt32| :direction :out :array t :size n)) :category "VERSION_1_5" :deprecated nil :version "1.5") ("VertexAttribPointer" vertex-attrib-pointer :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |type| :type |VertexAttribPointerTypeARB| :direction :in) (:name |normalized| :type |Boolean| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size (|size| |type| |stride|) :retained t)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("ValidateProgram" validate-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("UniformMatrix4fv" uniform-matrix-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("UniformMatrix3fv" uniform-matrix-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("UniformMatrix2fv" uniform-matrix-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform4iv" uniform-4iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform3iv" uniform-3iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform2iv" uniform-2iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform1iv" uniform-1iv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform4fv" uniform-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform3fv" uniform-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform2fv" uniform-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform1fv" uniform-1fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform4i" uniform-4i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in) (:name \v1 :type |Int32| :direction :in) (:name \v2 :type |Int32| :direction :in) (:name \v3 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform3i" uniform-3i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in) (:name \v1 :type |Int32| :direction :in) (:name \v2 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform2i" uniform-2i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in) (:name \v1 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform1i" uniform-1i :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Int32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform4f" uniform-4f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in) (:name \v1 :type |Float32| :direction :in) (:name \v2 :type |Float32| :direction :in) (:name \v3 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform3f" uniform-3f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in) (:name \v1 :type |Float32| :direction :in) (:name \v2 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform2f" uniform-2f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in) (:name \v1 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("Uniform1f" uniform-1f :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |Float32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("UseProgram" use-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("ShaderSource" shader-source :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |string| :type |ConstCharPointer| :direction :in :array t :size count) (:name |length| :type |Int32| :direction :in :array t :size #x1)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("LinkProgram" link-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("IsShader" is-shader :return "Boolean" :args ((:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("IsProgram" is-program :return "Boolean" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetVertexAttribPointerv" get-vertex-attrib-pointerv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPointerPropertyARB| :direction :in) (:name |pointer| :type |VoidPointer| :direction :out :array t :size #x1)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetVertexAttribiv" get-vertex-attrib-iv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPropertyARB| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size #x4)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetVertexAttribfv" get-vertex-attrib-fv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPropertyARB| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size #x4)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetVertexAttribdv" get-vertex-attrib-dv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribPropertyARB| :direction :in) (:name |params| :type |Float64| :direction :out :array t :size #x4)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetUniformiv" get-uniform-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |location| :type |Int32| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|location|))) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetUniformfv" get-uniform-fv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |location| :type |Int32| :direction :in) (:name |params| :type |Float32| :direction :out :array t :size (|location|))) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetUniformLocation" get-uniform-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetShaderSource" get-shader-source :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |source| :type |Char| :direction :out :array t :size length)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetShaderInfoLog" get-shader-info-log :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |infoLog| :type |Char| :direction :out :array t :size length)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetShaderiv" get-shader-iv :return "void" :args ((:name |shader| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetProgramInfoLog" get-program-info-log :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |infoLog| :type |Char| :direction :out :array t :size length)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetProgramiv" get-program-iv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size pname)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetAttribLocation" get-attrib-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetAttachedShaders" get-attached-shaders :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |maxCount| :type |SizeI| :direction :in) (:name |count| :type |SizeI| :direction :out :array t :size #x1) (:name |obj| :type |UInt32| :direction :out :array t :size count)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetActiveUniform" get-active-uniform :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |size| :type |Int32| :direction :out :array t :size #x1) (:name |type| :type |GLenum| :direction :out :array t :size #x1) (:name |name| :type |Char| :direction :out :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("GetActiveAttrib" get-active-attrib :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |size| :type |Int32| :direction :out :array t :size #x1) (:name |type| :type |GLenum| :direction :out :array t :size #x1) (:name |name| :type |Char| :direction :out :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("EnableVertexAttribArray" enable-vertex-attrib-array :return "void" :args ((:name |index| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("DisableVertexAttribArray" disable-vertex-attrib-array :return "void" :args ((:name |index| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("DetachShader" detach-shader :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("DeleteShader" delete-shader :return "void" :args ((:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("DeleteProgram" delete-program :return "void" :args ((:name |program| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("CreateShader" create-shader :return "UInt32" :args ((:name |type| :type |GLenum| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("CreateProgram" create-program :return "UInt32" :args nil :category "VERSION_2_0" :deprecated nil :version "2.0") ("CompileShader" compile-shader :return "void" :args ((:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("BindAttribLocation" bind-attrib-location :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("AttachShader" attach-shader :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |shader| :type |UInt32| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("StencilMaskSeparate" stencil-mask-separate :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("StencilFuncSeparate" stencil-func-separate :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |func| :type |StencilFunction| :direction :in) (:name |ref| :type |StencilValue| :direction :in) (:name |mask| :type |MaskedStencilValue| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("StencilOpSeparate" stencil-op-separate :return "void" :args ((:name |face| :type |StencilFaceDirection| :direction :in) (:name |sfail| :type |StencilOp| :direction :in) (:name |dpfail| :type |StencilOp| :direction :in) (:name |dppass| :type |StencilOp| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("DrawBuffers" draw-buffers :return "void" :args ((:name \n :type |SizeI| :direction :in) (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t :size n)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("BlendEquationSeparate" blend-equation-separate :return "void" :args ((:name |modeRGB| :type |BlendEquationModeEXT| :direction :in) (:name |modeAlpha| :type |BlendEquationModeEXT| :direction :in)) :category "VERSION_2_0" :deprecated nil :version "2.0") ("UniformMatrix4x3fv" uniform-matrix-4x-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #xC)) :category "VERSION_2_1" :deprecated nil :version "2.1") ("UniformMatrix3x4fv" uniform-matrix-3x-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #xC)) :category "VERSION_2_1" :deprecated nil :version "2.1") ("UniformMatrix4x2fv" uniform-matrix-4x-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x8)) :category "VERSION_2_1" :deprecated nil :version "2.1") ("UniformMatrix2x4fv" uniform-matrix-2x-4fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x8)) :category "VERSION_2_1" :deprecated nil :version "2.1") ("UniformMatrix3x2fv" uniform-matrix-3x-2fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x6)) :category "VERSION_2_1" :deprecated nil :version "2.1") ("UniformMatrix2x3fv" uniform-matrix-2x-3fv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |transpose| :type |Boolean| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size #x6)) :category "VERSION_2_1" :deprecated nil :version "2.1") ("GetStringi" get-string-i :return "String" :args ((:name |name| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("ClearBufferfi" clear-bufferf-i :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |depth| :type |Float32| :direction :in) (:name |stencil| :type |Int32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("ClearBufferfv" clear-buffer-fv :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |value| :type |Float32| :direction :in :array t :size (|buffer|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("ClearBufferuiv" clear-buffer-uiv :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size (|buffer|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("ClearBufferiv" clear-buffer-iv :return "void" :args ((:name |buffer| :type |GLenum| :direction :in) (:name |drawbuffer| :type |DrawBufferName| :direction :in) (:name |value| :type |Int32| :direction :in :array t :size (|buffer|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetTexParameterIuiv" get-tex-parameter-i-uiv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetTexParameterIiv" get-tex-parameter-i-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |GetTextureParameter| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("TexParameterIuiv" tex-parameter-i-uiv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |params| :type |UInt32| :direction :in :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("TexParameterIiv" tex-parameter-i-iv :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |pname| :type |TextureParameterName| :direction :in) (:name |params| :type |Int32| :direction :in :array t :size (|pname|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform4uiv" uniform-4uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count*4)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform3uiv" uniform-3uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count*3)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform2uiv" uniform-2uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count*2)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform1uiv" uniform-1uiv :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |value| :type |UInt32| :direction :in :array t :size count)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform4ui" uniform-4ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in) (:name \v1 :type |UInt32| :direction :in) (:name \v2 :type |UInt32| :direction :in) (:name \v3 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform3ui" uniform-3ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in) (:name \v1 :type |UInt32| :direction :in) (:name \v2 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform2ui" uniform-2ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in) (:name \v1 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Uniform1ui" uniform-1ui :return "void" :args ((:name |location| :type |Int32| :direction :in) (:name \v0 :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetFragDataLocation" get-frag-data-location :return "Int32" :args ((:name |program| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("BindFragDataLocation" bind-frag-data-location :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |color| :type |UInt32| :direction :in) (:name |name| :type |Char| :direction :in :array t :size (|name|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetUniformuiv" get-uniform-uiv :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |location| :type |Int32| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size (|program| |location|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetVertexAttribIuiv" get-vertex-attrib-i-uiv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribEnum| :direction :in) (:name |params| :type |UInt32| :direction :out :array t :size #x1)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetVertexAttribIiv" get-vertex-attrib-i-iv :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |pname| :type |VertexAttribEnum| :direction :in) (:name |params| :type |Int32| :direction :out :array t :size #x1)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("VertexAttribIPointer" vertex-attrib-ipointer :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name |size| :type |Int32| :direction :in) (:name |type| :type |VertexAttribEnum| :direction :in) (:name |stride| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size (|size| |type| |stride|) :retained t)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("EndConditionalRender" end-conditional-render :return "void" :args nil :category "VERSION_3_0" :deprecated nil :version "3.0") ("BeginConditionalRender" begin-conditional-render :return "void" :args ((:name |id| :type |UInt32| :direction :in) (:name |mode| :type |TypeEnum| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("ClampColor" clamp-color :return "void" :args ((:name |target| :type |ClampColorTargetARB| :direction :in) (:name |clamp| :type |ClampColorModeARB| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetTransformFeedbackVarying" get-transform-feedback-varying :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |bufSize| :type |SizeI| :direction :in) (:name |length| :type |SizeI| :direction :out :array t :size #x1) (:name |size| :type |SizeI| :direction :out :array t :size #x1) (:name |type| :type |GLenum| :direction :out :array t :size #x1) (:name |name| :type |Char| :direction :out :array t :size (|length|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("TransformFeedbackVaryings" transform-feedback-varyings :return "void" :args ((:name |program| :type |UInt32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |varyings| :type |ConstCharPointer| :direction :in :array t :size count) (:name |bufferMode| :type |GLenum| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("BindBufferBase" bind-buffer-base :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("BindBufferRange" bind-buffer-range :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |buffer| :type |UInt32| :direction :in) (:name |offset| :type |BufferOffset| :direction :in) (:name |size| :type |BufferSize| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("EndTransformFeedback" end-transform-feedback :return "void" :args nil :category "VERSION_3_0" :deprecated nil :version "3.0") ("BeginTransformFeedback" begin-transform-feedback :return "void" :args ((:name |primitiveMode| :type |GLenum| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("IsEnabledi" is-enabled-i :return "Boolean" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Disablei" disable-i :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("Enablei" enable-i :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetIntegeri_v" get-integeri_v :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |data| :type |Int32| :direction :out :array t :size (|target|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("GetBooleani_v" get-booleani_v :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |index| :type |UInt32| :direction :in) (:name |data| :type |Boolean| :direction :out :array t :size (|target|))) :category "VERSION_3_0" :deprecated nil :version "3.0") ("ColorMaski" color-mask-i :return "void" :args ((:name |index| :type |UInt32| :direction :in) (:name \r :type |Boolean| :direction :in) (:name \g :type |Boolean| :direction :in) (:name |b| :type |Boolean| :direction :in) (:name |a| :type |Boolean| :direction :in)) :category "VERSION_3_0" :deprecated nil :version "3.0") ("PrimitiveRestartIndex" primitive-restart-index :return "void" :args ((:name |index| :type |UInt32| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") ("TexBuffer" tex-buffer :return "void" :args ((:name |target| :type |TextureTarget| :direction :in) (:name |internalformat| :type |GLenum| :direction :in) (:name |buffer| :type |UInt32| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") ("DrawElementsInstanced" draw-elements-instanced :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |type| :type |DrawElementsType| :direction :in) (:name |indices| :type |Void| :direction :in :array t :size (|count| |type|)) (:name |instancecount| :type |SizeI| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1") ("DrawArraysInstanced" draw-arrays-instanced :return "void" :args ((:name |mode| :type |BeginMode| :direction :in) (:name |first| :type |Int32| :direction :in) (:name |count| :type |SizeI| :direction :in) (:name |instancecount| :type |SizeI| :direction :in)) :category "VERSION_3_1" :deprecated nil :version "3.1"))) 
+(defglfun "Viewport" viewport :return "void" :args
+ ((:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "DepthRange" depth-range :return "void" :args
+ ((:name |near| :type |Float64| :direction :in)
+  (:name |far| :type |Float64| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "IsEnabled" is-enabled :return "Boolean" :args
+ ((:name |cap| :type |EnableCap| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetTexLevelParameteriv" get-tex-level-parameter-iv :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |pname| :type |GetTextureParameter| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetTexLevelParameterfv" get-tex-level-parameter-fv :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |pname| :type |GetTextureParameter| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetTexParameteriv" get-tex-parameter-iv :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |GetTextureParameter| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetTexParameterfv" get-tex-parameter-fv :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |GetTextureParameter| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetTexImage" get-tex-image :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :out :array t :size
+   (|target| |level| |format| |type|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetString" get-string :return "String" :args
+ ((:name |name| :type |StringName| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetIntegerv" get-integerv :return "void" :args
+ ((:name |pname| :type |GetPName| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetFloatv" get-floatv :return "void" :args
+ ((:name |pname| :type |GetPName| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetError" get-error :return "ErrorCode" :args nil
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetDoublev" get-doublev :return "void" :args
+ ((:name |pname| :type |GetPName| :direction :in)
+  (:name |params| :type |Float64| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "GetBooleanv" get-booleanv :return "void" :args
+ ((:name |pname| :type |GetPName| :direction :in)
+  (:name |params| :type |Boolean| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "ReadPixels" read-pixels :return "void" :args
+ ((:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :out :array t :size
+   (|format| |type| |width| |height|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "ReadBuffer" read-buffer :return "void" :args
+ ((:name |mode| :type |ReadBufferMode| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "PixelStorei" pixel-store-i :return "void" :args
+ ((:name |pname| :type |PixelStoreParameter| :direction :in)
+  (:name |param| :type |CheckedInt32| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "PixelStoref" pixel-store-f :return "void" :args
+ ((:name |pname| :type |PixelStoreParameter| :direction :in)
+  (:name |param| :type |CheckedFloat32| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "DepthFunc" depth-func :return "void" :args
+ ((:name |func| :type |DepthFunction| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "StencilOp" stencil-op :return "void" :args
+ ((:name |fail| :type |StencilOp| :direction :in)
+  (:name |zfail| :type |StencilOp| :direction :in)
+  (:name |zpass| :type |StencilOp| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "StencilFunc" stencil-func :return "void" :args
+ ((:name |func| :type |StencilFunction| :direction :in)
+  (:name |ref| :type |StencilValue| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "LogicOp" logic-op :return "void" :args
+ ((:name |opcode| :type |LogicOp| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "BlendFunc" blend-func :return "void" :args
+ ((:name |sfactor| :type |BlendingFactorSrc| :direction :in)
+  (:name |dfactor| :type |BlendingFactorDest| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Flush" flush :return "void" :args nil :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Finish" finish :return "void" :args nil :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Enable" enable :return "void" :args
+ ((:name |cap| :type |EnableCap| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Disable" disable :return "void" :args
+ ((:name |cap| :type |EnableCap| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "DepthMask" depth-mask :return "void" :args
+ ((:name |flag| :type |Boolean| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "ColorMask" color-mask :return "void" :args
+ ((:name |red| :type |Boolean| :direction :in)
+  (:name |green| :type |Boolean| :direction :in)
+  (:name |blue| :type |Boolean| :direction :in)
+  (:name |alpha| :type |Boolean| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "StencilMask" stencil-mask :return "void" :args
+ ((:name |mask| :type |MaskedStencilValue| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "ClearDepth" clear-depth :return "void" :args
+ ((:name |depth| :type |Float64| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "ClearStencil" clear-stencil :return "void" :args
+ ((:name \s :type |StencilValue| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "ClearColor" clear-color :return "void" :args
+ ((:name |red| :type |ColorF| :direction :in)
+  (:name |green| :type |ColorF| :direction :in)
+  (:name |blue| :type |ColorF| :direction :in)
+  (:name |alpha| :type |ColorF| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Clear" clear :return "void" :args
+ ((:name |mask| :type |ClearBufferMask| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "DrawBuffer" draw-buffer :return "void" :args
+ ((:name |mode| :type |DrawBufferMode| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "TexImage2D" tex-image-2d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |TextureComponentCount| :direction
+   :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :in :array t :size
+   (|format| |type| |width| |height|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "TexImage1D" tex-image-1d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |TextureComponentCount| :direction
+   :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :in :array t :size
+   (|format| |type| |width|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "TexParameteriv" tex-parameter-iv :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |TextureParameterName| :direction :in)
+  (:name |params| :type |CheckedInt32| :direction :in :array t :size
+   (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "TexParameteri" tex-parameter-i :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |TextureParameterName| :direction :in)
+  (:name |param| :type |CheckedInt32| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "TexParameterfv" tex-parameter-fv :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |TextureParameterName| :direction :in)
+  (:name |params| :type |CheckedFloat32| :direction :in :array t
+   :size (|pname|)))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "TexParameterf" tex-parameter-f :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |TextureParameterName| :direction :in)
+  (:name |param| :type |CheckedFloat32| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Scissor" scissor :return "void" :args
+ ((:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "PolygonMode" polygon-mode :return "void" :args
+ ((:name |face| :type |MaterialFace| :direction :in)
+  (:name |mode| :type |PolygonMode| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "PointSize" point-size :return "void" :args
+ ((:name |size| :type |CheckedFloat32| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "LineWidth" line-width :return "void" :args
+ ((:name |width| :type |CheckedFloat32| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Hint" hint :return "void" :args
+ ((:name |target| :type |HintTarget| :direction :in)
+  (:name |mode| :type |HintMode| :direction :in))
+ :category "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "FrontFace" front-face :return "void" :args
+ ((:name |mode| :type |FrontFaceDirection| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "CullFace" cull-face :return "void" :args
+ ((:name |mode| :type |CullFaceMode| :direction :in)) :category
+ "VERSION_1_0" :deprecated nil :version "1.0") 
+(defglfun "Indexubv" index-ubv :return "void" :args
+ ((:name |c| :type |ColorIndexValueUB| :direction :in :array t :size
+   #x1))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "Indexub" index-ub :return "void" :args
+ ((:name |c| :type |ColorIndexValueUB| :direction :in)) :category
+ "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "IsTexture" is-texture :return "Boolean" :args
+ ((:name |texture| :type |Texture| :direction :in)) :category
+ "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "GenTextures" gen-textures :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |textures| :type |Texture| :direction :out :array t :size
+   n))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "DeleteTextures" delete-textures :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |textures| :type |Texture| :direction :in :array t :size n))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "BindTexture" bind-texture :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |texture| :type |Texture| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "TexSubImage2D" tex-sub-image-2d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |yoffset| :type |CheckedInt32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :in :array t :size
+   (|format| |type| |width| |height|)))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "TexSubImage1D" tex-sub-image-1d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :in :array t :size
+   (|format| |type| |width|)))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "CopyTexSubImage2D" copy-tex-sub-image-2d :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |yoffset| :type |CheckedInt32| :direction :in)
+  (:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "CopyTexSubImage1D" copy-tex-sub-image-1d :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "CopyTexImage2D" copy-tex-image-2d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |PixelInternalFormat| :direction :in)
+  (:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "CopyTexImage1D" copy-tex-image-1d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |PixelInternalFormat| :direction :in)
+  (:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "PolygonOffset" polygon-offset :return "void" :args
+ ((:name |factor| :type |Float32| :direction :in)
+  (:name |units| :type |Float32| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "GetPointerv" get-pointerv :return "void" :args
+ ((:name |pname| :type |GetPointervPName| :direction :in)
+  ("params" "VoidPointer" "out" "reference"))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "DrawElements" draw-elements :return "void" :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |type| :type |DrawElementsType| :direction :in)
+  (:name |indices| :type |Void| :direction :in :array t :size
+   (|count| |type|)))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglfun "DrawArrays" draw-arrays :return "void" :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |first| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in))
+ :category "VERSION_1_1" :deprecated nil :version "1.1") 
+(defglextfun "CopyTexSubImage3D" copy-tex-sub-image-3d :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |yoffset| :type |CheckedInt32| :direction :in)
+  (:name |zoffset| :type |CheckedInt32| :direction :in)
+  (:name \x :type |WinCoord| :direction :in)
+  (:name \y :type |WinCoord| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in))
+ :category "VERSION_1_2" :deprecated nil :version "1.2") 
+(defglextfun "TexSubImage3D" tex-sub-image-3d :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |yoffset| :type |CheckedInt32| :direction :in)
+  (:name |zoffset| :type |CheckedInt32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |type| :type |PixelType| :direction :in)
+  (:name |pixels| :type |Void| :direction :in :array t :size
+   (|format| |type| |width| |height| |depth|)))
+ :category "VERSION_1_2" :deprecated nil :version "1.2") 
+(defglextfun "DrawRangeElements" draw-range-elements :return "void"
+ :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |start| :type |UInt32| :direction :in)
+  (:name |end| :type |UInt32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |type| :type |DrawElementsType| :direction :in)
+  (:name |indices| :type |Void| :direction :in :array t :size
+   (|count| |type|)))
+ :category "VERSION_1_2" :deprecated nil :version "1.2") 
+(defglextfun "BlendEquation" blend-equation :return "void" :args
+ ((:name |mode| :type |BlendEquationMode| :direction :in)) :category
+ "VERSION_1_2" :deprecated nil :version "1.2") 
+(defglextfun "BlendColor" blend-color :return "void" :args
+ ((:name |red| :type |ColorF| :direction :in)
+  (:name |green| :type |ColorF| :direction :in)
+  (:name |blue| :type |ColorF| :direction :in)
+  (:name |alpha| :type |ColorF| :direction :in))
+ :category "VERSION_1_2" :deprecated nil :version "1.2") 
+(defglextfun "GetCompressedTexImage" get-compressed-tex-image :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |img| :type |CompressedTextureARB| :direction :out :array t
+   :size (|target| |level|)))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "CompressedTexSubImage1D" compressed-tex-sub-image-1d
+ :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |imageSize| :type |SizeI| :direction :in)
+  (:name |data| :type |CompressedTextureARB| :direction :in :array t
+   :size imagesize))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "CompressedTexSubImage2D" compressed-tex-sub-image-2d
+ :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |yoffset| :type |CheckedInt32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |imageSize| :type |SizeI| :direction :in)
+  (:name |data| :type |CompressedTextureARB| :direction :in :array t
+   :size imagesize))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "CompressedTexSubImage3D" compressed-tex-sub-image-3d
+ :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |xoffset| :type |CheckedInt32| :direction :in)
+  (:name |yoffset| :type |CheckedInt32| :direction :in)
+  (:name |zoffset| :type |CheckedInt32| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |format| :type |PixelFormat| :direction :in)
+  (:name |imageSize| :type |SizeI| :direction :in)
+  (:name |data| :type |CompressedTextureARB| :direction :in :array t
+   :size imagesize))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "CompressedTexImage1D" compressed-tex-image-1d :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |PixelInternalFormat| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in)
+  (:name |imageSize| :type |SizeI| :direction :in)
+  (:name |data| :type |CompressedTextureARB| :direction :in :array t
+   :size imagesize))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "CompressedTexImage2D" compressed-tex-image-2d :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |PixelInternalFormat| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in)
+  (:name |imageSize| :type |SizeI| :direction :in)
+  (:name |data| :type |CompressedTextureARB| :direction :in :array t
+   :size imagesize))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "CompressedTexImage3D" compressed-tex-image-3d :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |level| :type |CheckedInt32| :direction :in)
+  (:name |internalformat| :type |PixelInternalFormat| :direction :in)
+  (:name |width| :type |SizeI| :direction :in)
+  (:name |height| :type |SizeI| :direction :in)
+  (:name |depth| :type |SizeI| :direction :in)
+  (:name |border| :type |CheckedInt32| :direction :in)
+  (:name |imageSize| :type |SizeI| :direction :in)
+  (:name |data| :type |CompressedTextureARB| :direction :in :array t
+   :size imagesize))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "SampleCoverage" sample-coverage :return "void" :args
+ ((:name |value| :type |Float32| :direction :in)
+  (:name |invert| :type |Boolean| :direction :in))
+ :category "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "ActiveTexture" active-texture :return "void" :args
+ ((:name |texture| :type |TextureUnit| :direction :in)) :category
+ "VERSION_1_3" :deprecated nil :version "1.3") 
+(defglextfun "PointParameteriv" point-parameter-iv :return "void"
+ :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |params| :type |Int32| :direction :in :array t :size
+   (|pname|)))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "PointParameteri" point-parameter-i :return "void" :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |param| :type |Int32| :direction :in))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "PointParameterfv" point-parameter-fv :return "void"
+ :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |params| :type |CheckedFloat32| :direction :in :array t
+   :size (|pname|)))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "PointParameterf" point-parameter-f :return "void" :args
+ ((:name |pname| :type |PointParameterNameARB| :direction :in)
+  (:name |param| :type |CheckedFloat32| :direction :in))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "MultiDrawElements" multi-draw-elements :return "void"
+ :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |count| :type |SizeI| :direction :in :array t :size
+   (|drawcount|))
+  (:name |type| :type |DrawElementsType| :direction :in)
+  (:name |indices| :type |ConstVoidPointer| :direction :in :array t
+   :size (|drawcount|))
+  (:name |drawcount| :type |SizeI| :direction :in))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "MultiDrawArrays" multi-draw-arrays :return "void" :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |first| :type |Int32| :direction :in :array t :size
+   (|count|))
+  (:name |count| :type |SizeI| :direction :in :array t :size
+   (|drawcount|))
+  (:name |drawcount| :type |SizeI| :direction :in))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "BlendFuncSeparate" blend-func-separate :return "void"
+ :args
+ ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT|
+   :direction :in)
+  (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT|
+   :direction :in)
+  (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+   :direction :in)
+  (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+   :direction :in))
+ :category "VERSION_1_4" :deprecated nil :version "1.4") 
+(defglextfun "GetBufferPointerv" get-buffer-pointerv :return "void"
+ :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |pname| :type |BufferPointerNameARB| :direction :in)
+  (:name |params| :type |VoidPointer| :direction :out :array t :size
+   #x1))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GetBufferParameteriv" get-buffer-parameter-iv :return
+ "void" :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |pname| :type |BufferPNameARB| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "UnmapBuffer" unmap-buffer :return "Boolean" :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)) :category
+ "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "MapBuffer" map-buffer :return "VoidPointer" :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |access| :type |BufferAccessARB| :direction :in))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GetBufferSubData" get-buffer-sub-data :return "void"
+ :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |offset| :type |BufferOffset| :direction :in)
+  (:name |size| :type |BufferSize| :direction :in)
+  (:name |data| :type |Void| :direction :out :array t :size size))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "BufferSubData" buffer-sub-data :return "void" :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |offset| :type |BufferOffset| :direction :in)
+  (:name |size| :type |BufferSize| :direction :in)
+  (:name |data| :type |ConstVoid| :direction :in :array t :size
+   size))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "BufferData" buffer-data :return "void" :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |size| :type |BufferSize| :direction :in)
+  (:name |data| :type |ConstVoid| :direction :in :array t :size size)
+  (:name |usage| :type |BufferUsageARB| :direction :in))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "IsBuffer" is-buffer :return "Boolean" :args
+ ((:name |buffer| :type |UInt32| :direction :in)) :category
+ "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GenBuffers" gen-buffers :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |buffers| :type |UInt32| :direction :out :array t :size n))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "DeleteBuffers" delete-buffers :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |buffers| :type |ConstUInt32| :direction :in :array t :size
+   n))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "BindBuffer" bind-buffer :return "void" :args
+ ((:name |target| :type |BufferTargetARB| :direction :in)
+  (:name |buffer| :type |UInt32| :direction :in))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GetQueryObjectuiv" get-query-object-uiv :return "void"
+ :args
+ ((:name |id| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |UInt32| :direction :out :array t :size
+   pname))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GetQueryObjectiv" get-query-object-iv :return "void"
+ :args
+ ((:name |id| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   pname))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GetQueryiv" get-query-iv :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   pname))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "EndQuery" end-query :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)) :category
+ "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "BeginQuery" begin-query :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |id| :type |UInt32| :direction :in))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "IsQuery" is-query :return "Boolean" :args
+ ((:name |id| :type |UInt32| :direction :in)) :category "VERSION_1_5"
+ :deprecated nil :version "1.5") 
+(defglextfun "DeleteQueries" delete-queries :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |ids| :type |UInt32| :direction :in :array t :size n))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "GenQueries" gen-queries :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |ids| :type |UInt32| :direction :out :array t :size n))
+ :category "VERSION_1_5" :deprecated nil :version "1.5") 
+(defglextfun "VertexAttribPointer" vertex-attrib-pointer :return
+ "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |size| :type |Int32| :direction :in)
+  (:name |type| :type |VertexAttribPointerTypeARB| :direction :in)
+  (:name |normalized| :type |Boolean| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in)
+  (:name |pointer| :type |Void| :direction :in :array t :size
+   (|size| |type| |stride|) :retained t))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "ValidateProgram" validate-program :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "UniformMatrix4fv" uniform-matrix-4fv :return "void"
+ :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "UniformMatrix3fv" uniform-matrix-3fv :return "void"
+ :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "UniformMatrix2fv" uniform-matrix-2fv :return "void"
+ :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform4iv" uniform-4iv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Int32| :direction :in :array t :size count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform3iv" uniform-3iv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Int32| :direction :in :array t :size count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform2iv" uniform-2iv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Int32| :direction :in :array t :size count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform1iv" uniform-1iv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Int32| :direction :in :array t :size count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform4fv" uniform-4fv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform3fv" uniform-3fv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform2fv" uniform-2fv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform1fv" uniform-1fv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform4i" uniform-4i :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Int32| :direction :in)
+  (:name \v1 :type |Int32| :direction :in)
+  (:name \v2 :type |Int32| :direction :in)
+  (:name \v3 :type |Int32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform3i" uniform-3i :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Int32| :direction :in)
+  (:name \v1 :type |Int32| :direction :in)
+  (:name \v2 :type |Int32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform2i" uniform-2i :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Int32| :direction :in)
+  (:name \v1 :type |Int32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform1i" uniform-1i :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Int32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform4f" uniform-4f :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Float32| :direction :in)
+  (:name \v1 :type |Float32| :direction :in)
+  (:name \v2 :type |Float32| :direction :in)
+  (:name \v3 :type |Float32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform3f" uniform-3f :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Float32| :direction :in)
+  (:name \v1 :type |Float32| :direction :in)
+  (:name \v2 :type |Float32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform2f" uniform-2f :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Float32| :direction :in)
+  (:name \v1 :type |Float32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "Uniform1f" uniform-1f :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |Float32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "UseProgram" use-program :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "ShaderSource" shader-source :return "void" :args
+ ((:name |shader| :type |UInt32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |string| :type |ConstCharPointer| :direction :in :array t
+   :size count)
+  (:name |length| :type |Int32| :direction :in :array t :size #x1))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "LinkProgram" link-program :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "IsShader" is-shader :return "Boolean" :args
+ ((:name |shader| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "IsProgram" is-program :return "Boolean" :args
+ ((:name |program| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetVertexAttribPointerv" get-vertex-attrib-pointerv
+ :return "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |pname| :type |VertexAttribPointerPropertyARB| :direction
+   :in)
+  (:name |pointer| :type |VoidPointer| :direction :out :array t :size
+   #x1))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetVertexAttribiv" get-vertex-attrib-iv :return "void"
+ :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |pname| :type |VertexAttribPropertyARB| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size #x4))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetVertexAttribfv" get-vertex-attrib-fv :return "void"
+ :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |pname| :type |VertexAttribPropertyARB| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   #x4))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetVertexAttribdv" get-vertex-attrib-dv :return "void"
+ :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |pname| :type |VertexAttribPropertyARB| :direction :in)
+  (:name |params| :type |Float64| :direction :out :array t :size
+   #x4))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetUniformiv" get-uniform-iv :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |location| :type |Int32| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|location|)))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetUniformfv" get-uniform-fv :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |location| :type |Int32| :direction :in)
+  (:name |params| :type |Float32| :direction :out :array t :size
+   (|location|)))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetUniformLocation" get-uniform-location :return
+ "Int32" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetShaderSource" get-shader-source :return "void" :args
+ ((:name |shader| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |source| :type |Char| :direction :out :array t :size
+   length))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetShaderInfoLog" get-shader-info-log :return "void"
+ :args
+ ((:name |shader| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |infoLog| :type |Char| :direction :out :array t :size
+   length))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetShaderiv" get-shader-iv :return "void" :args
+ ((:name |shader| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   pname))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetProgramInfoLog" get-program-info-log :return "void"
+ :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |infoLog| :type |Char| :direction :out :array t :size
+   length))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetProgramiv" get-program-iv :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   pname))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetAttribLocation" get-attrib-location :return "Int32"
+ :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetAttachedShaders" get-attached-shaders :return "void"
+ :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |maxCount| :type |SizeI| :direction :in)
+  (:name |count| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |obj| :type |UInt32| :direction :out :array t :size count))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetActiveUniform" get-active-uniform :return "void"
+ :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |size| :type |Int32| :direction :out :array t :size #x1)
+  (:name |type| :type |GLenum| :direction :out :array t :size #x1)
+  (:name |name| :type |Char| :direction :out :array t))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "GetActiveAttrib" get-active-attrib :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |size| :type |Int32| :direction :out :array t :size #x1)
+  (:name |type| :type |GLenum| :direction :out :array t :size #x1)
+  (:name |name| :type |Char| :direction :out :array t))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "EnableVertexAttribArray" enable-vertex-attrib-array
+ :return "void" :args ((:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "DisableVertexAttribArray" disable-vertex-attrib-array
+ :return "void" :args ((:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "DetachShader" detach-shader :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |shader| :type |UInt32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "DeleteShader" delete-shader :return "void" :args
+ ((:name |shader| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "DeleteProgram" delete-program :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "CreateShader" create-shader :return "UInt32" :args
+ ((:name |type| :type |GLenum| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "CreateProgram" create-program :return "UInt32" :args
+ nil :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "CompileShader" compile-shader :return "void" :args
+ ((:name |shader| :type |UInt32| :direction :in)) :category
+ "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "BindAttribLocation" bind-attrib-location :return "void"
+ :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "AttachShader" attach-shader :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |shader| :type |UInt32| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "StencilMaskSeparate" stencil-mask-separate :return
+ "void" :args
+ ((:name |face| :type |StencilFaceDirection| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "StencilFuncSeparate" stencil-func-separate :return
+ "void" :args
+ ((:name |face| :type |StencilFaceDirection| :direction :in)
+  (:name |func| :type |StencilFunction| :direction :in)
+  (:name |ref| :type |StencilValue| :direction :in)
+  (:name |mask| :type |MaskedStencilValue| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "StencilOpSeparate" stencil-op-separate :return "void"
+ :args
+ ((:name |face| :type |StencilFaceDirection| :direction :in)
+  (:name |sfail| :type |StencilOp| :direction :in)
+  (:name |dpfail| :type |StencilOp| :direction :in)
+  (:name |dppass| :type |StencilOp| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "DrawBuffers" draw-buffers :return "void" :args
+ ((:name \n :type |SizeI| :direction :in)
+  (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t
+   :size n))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "BlendEquationSeparate" blend-equation-separate :return
+ "void" :args
+ ((:name |modeRGB| :type |BlendEquationModeEXT| :direction :in)
+  (:name |modeAlpha| :type |BlendEquationModeEXT| :direction :in))
+ :category "VERSION_2_0" :deprecated nil :version "2.0") 
+(defglextfun "UniformMatrix4x3fv" uniform-matrix-4x-3fv :return
+ "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size #xC))
+ :category "VERSION_2_1" :deprecated nil :version "2.1") 
+(defglextfun "UniformMatrix3x4fv" uniform-matrix-3x-4fv :return
+ "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size #xC))
+ :category "VERSION_2_1" :deprecated nil :version "2.1") 
+(defglextfun "UniformMatrix4x2fv" uniform-matrix-4x-2fv :return
+ "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size #x8))
+ :category "VERSION_2_1" :deprecated nil :version "2.1") 
+(defglextfun "UniformMatrix2x4fv" uniform-matrix-2x-4fv :return
+ "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size #x8))
+ :category "VERSION_2_1" :deprecated nil :version "2.1") 
+(defglextfun "UniformMatrix3x2fv" uniform-matrix-3x-2fv :return
+ "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size #x6))
+ :category "VERSION_2_1" :deprecated nil :version "2.1") 
+(defglextfun "UniformMatrix2x3fv" uniform-matrix-2x-3fv :return
+ "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |transpose| :type |Boolean| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size #x6))
+ :category "VERSION_2_1" :deprecated nil :version "2.1") 
+(defglextfun "GetStringi" get-string-i :return "String" :args
+ ((:name |name| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "ClearBufferfi" clear-bufferf-i :return "void" :args
+ ((:name |buffer| :type |GLenum| :direction :in)
+  (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+  (:name |depth| :type |Float32| :direction :in)
+  (:name |stencil| :type |Int32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "ClearBufferfv" clear-buffer-fv :return "void" :args
+ ((:name |buffer| :type |GLenum| :direction :in)
+  (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+  (:name |value| :type |Float32| :direction :in :array t :size
+   (|buffer|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "ClearBufferuiv" clear-buffer-uiv :return "void" :args
+ ((:name |buffer| :type |GLenum| :direction :in)
+  (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+  (:name |value| :type |UInt32| :direction :in :array t :size
+   (|buffer|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "ClearBufferiv" clear-buffer-iv :return "void" :args
+ ((:name |buffer| :type |GLenum| :direction :in)
+  (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+  (:name |value| :type |Int32| :direction :in :array t :size
+   (|buffer|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetTexParameterIuiv" get-tex-parameter-i-uiv :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |GetTextureParameter| :direction :in)
+  (:name |params| :type |UInt32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetTexParameterIiv" get-tex-parameter-i-iv :return
+ "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |GetTextureParameter| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size
+   (|pname|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "TexParameterIuiv" tex-parameter-i-uiv :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |TextureParameterName| :direction :in)
+  (:name |params| :type |UInt32| :direction :in :array t :size
+   (|pname|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "TexParameterIiv" tex-parameter-i-iv :return "void"
+ :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |pname| :type |TextureParameterName| :direction :in)
+  (:name |params| :type |Int32| :direction :in :array t :size
+   (|pname|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform4uiv" uniform-4uiv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |UInt32| :direction :in :array t :size
+   count*4))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform3uiv" uniform-3uiv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |UInt32| :direction :in :array t :size
+   count*3))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform2uiv" uniform-2uiv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |UInt32| :direction :in :array t :size
+   count*2))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform1uiv" uniform-1uiv :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |value| :type |UInt32| :direction :in :array t :size count))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform4ui" uniform-4ui :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |UInt32| :direction :in)
+  (:name \v1 :type |UInt32| :direction :in)
+  (:name \v2 :type |UInt32| :direction :in)
+  (:name \v3 :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform3ui" uniform-3ui :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |UInt32| :direction :in)
+  (:name \v1 :type |UInt32| :direction :in)
+  (:name \v2 :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform2ui" uniform-2ui :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |UInt32| :direction :in)
+  (:name \v1 :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Uniform1ui" uniform-1ui :return "void" :args
+ ((:name |location| :type |Int32| :direction :in)
+  (:name \v0 :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetFragDataLocation" get-frag-data-location :return
+ "Int32" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t :size (|name|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "BindFragDataLocation" bind-frag-data-location :return
+ "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |color| :type |UInt32| :direction :in)
+  (:name |name| :type |Char| :direction :in :array t :size (|name|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetUniformuiv" get-uniform-uiv :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |location| :type |Int32| :direction :in)
+  (:name |params| :type |UInt32| :direction :out :array t :size
+   (|program| |location|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetVertexAttribIuiv" get-vertex-attrib-i-uiv :return
+ "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |pname| :type |VertexAttribEnum| :direction :in)
+  (:name |params| :type |UInt32| :direction :out :array t :size #x1))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetVertexAttribIiv" get-vertex-attrib-i-iv :return
+ "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |pname| :type |VertexAttribEnum| :direction :in)
+  (:name |params| :type |Int32| :direction :out :array t :size #x1))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "VertexAttribIPointer" vertex-attrib-ipointer :return
+ "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name |size| :type |Int32| :direction :in)
+  (:name |type| :type |VertexAttribEnum| :direction :in)
+  (:name |stride| :type |SizeI| :direction :in)
+  (:name |pointer| :type |Void| :direction :in :array t :size
+   (|size| |type| |stride|) :retained t))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "EndConditionalRender" end-conditional-render :return
+ "void" :args nil :category "VERSION_3_0" :deprecated nil :version
+ "3.0") 
+(defglextfun "BeginConditionalRender" begin-conditional-render
+ :return "void" :args
+ ((:name |id| :type |UInt32| :direction :in)
+  (:name |mode| :type |TypeEnum| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "ClampColor" clamp-color :return "void" :args
+ ((:name |target| :type |ClampColorTargetARB| :direction :in)
+  (:name |clamp| :type |ClampColorModeARB| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetTransformFeedbackVarying"
+ get-transform-feedback-varying :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |bufSize| :type |SizeI| :direction :in)
+  (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |size| :type |SizeI| :direction :out :array t :size #x1)
+  (:name |type| :type |GLenum| :direction :out :array t :size #x1)
+  (:name |name| :type |Char| :direction :out :array t :size
+   (|length|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "TransformFeedbackVaryings" transform-feedback-varyings
+ :return "void" :args
+ ((:name |program| :type |UInt32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |varyings| :type |ConstCharPointer| :direction :in :array t
+   :size count)
+  (:name |bufferMode| :type |GLenum| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "BindBufferBase" bind-buffer-base :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |buffer| :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "BindBufferRange" bind-buffer-range :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |buffer| :type |UInt32| :direction :in)
+  (:name |offset| :type |BufferOffset| :direction :in)
+  (:name |size| :type |BufferSize| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "EndTransformFeedback" end-transform-feedback :return
+ "void" :args nil :category "VERSION_3_0" :deprecated nil :version
+ "3.0") 
+(defglextfun "BeginTransformFeedback" begin-transform-feedback
+ :return "void" :args
+ ((:name |primitiveMode| :type |GLenum| :direction :in)) :category
+ "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "IsEnabledi" is-enabled-i :return "Boolean" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Disablei" disable-i :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "Enablei" enable-i :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetIntegeri_v" get-integeri_v :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |data| :type |Int32| :direction :out :array t :size
+   (|target|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "GetBooleani_v" get-booleani_v :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |index| :type |UInt32| :direction :in)
+  (:name |data| :type |Boolean| :direction :out :array t :size
+   (|target|)))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "ColorMaski" color-mask-i :return "void" :args
+ ((:name |index| :type |UInt32| :direction :in)
+  (:name \r :type |Boolean| :direction :in)
+  (:name \g :type |Boolean| :direction :in)
+  (:name |b| :type |Boolean| :direction :in)
+  (:name |a| :type |Boolean| :direction :in))
+ :category "VERSION_3_0" :deprecated nil :version "3.0") 
+(defglextfun "PrimitiveRestartIndex" primitive-restart-index :return
+ "void" :args ((:name |index| :type |UInt32| :direction :in))
+ :category "VERSION_3_1" :deprecated nil :version "3.1") 
+(defglextfun "TexBuffer" tex-buffer :return "void" :args
+ ((:name |target| :type |TextureTarget| :direction :in)
+  (:name |internalformat| :type |GLenum| :direction :in)
+  (:name |buffer| :type |UInt32| :direction :in))
+ :category "VERSION_3_1" :deprecated nil :version "3.1") 
+(defglextfun "DrawElementsInstanced" draw-elements-instanced :return
+ "void" :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |type| :type |DrawElementsType| :direction :in)
+  (:name |indices| :type |Void| :direction :in :array t :size
+   (|count| |type|))
+  (:name |instancecount| :type |SizeI| :direction :in))
+ :category "VERSION_3_1" :deprecated nil :version "3.1") 
+(defglextfun "DrawArraysInstanced" draw-arrays-instanced :return
+ "void" :args
+ ((:name |mode| :type |BeginMode| :direction :in)
+  (:name |first| :type |Int32| :direction :in)
+  (:name |count| :type |SizeI| :direction :in)
+  (:name |instancecount| :type |SizeI| :direction :in))
+ :category "VERSION_3_1" :deprecated nil :version "3.1") 
+(make-extension-loader version_3_1
+ (("CopyTexSubImage3D" copy-tex-sub-image-3d :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |xoffset| :type |CheckedInt32| :direction :in)
+    (:name |yoffset| :type |CheckedInt32| :direction :in)
+    (:name |zoffset| :type |CheckedInt32| :direction :in)
+    (:name \x :type |WinCoord| :direction :in)
+    (:name \y :type |WinCoord| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in))
+   :category "VERSION_1_2" :deprecated nil :version "1.2")
+  ("TexSubImage3D" tex-sub-image-3d :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |xoffset| :type |CheckedInt32| :direction :in)
+    (:name |yoffset| :type |CheckedInt32| :direction :in)
+    (:name |zoffset| :type |CheckedInt32| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |format| :type |PixelFormat| :direction :in)
+    (:name |type| :type |PixelType| :direction :in)
+    (:name |pixels| :type |Void| :direction :in :array t :size
+     (|format| |type| |width| |height| |depth|)))
+   :category "VERSION_1_2" :deprecated nil :version "1.2")
+  ("DrawRangeElements" draw-range-elements :return "void" :args
+   ((:name |mode| :type |BeginMode| :direction :in)
+    (:name |start| :type |UInt32| :direction :in)
+    (:name |end| :type |UInt32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |type| :type |DrawElementsType| :direction :in)
+    (:name |indices| :type |Void| :direction :in :array t :size
+     (|count| |type|)))
+   :category "VERSION_1_2" :deprecated nil :version "1.2")
+  ("BlendEquation" blend-equation :return "void" :args
+   ((:name |mode| :type |BlendEquationMode| :direction :in))
+   :category "VERSION_1_2" :deprecated nil :version "1.2")
+  ("BlendColor" blend-color :return "void" :args
+   ((:name |red| :type |ColorF| :direction :in)
+    (:name |green| :type |ColorF| :direction :in)
+    (:name |blue| :type |ColorF| :direction :in)
+    (:name |alpha| :type |ColorF| :direction :in))
+   :category "VERSION_1_2" :deprecated nil :version "1.2")
+  ("GetCompressedTexImage" get-compressed-tex-image :return "void"
+   :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |img| :type |CompressedTextureARB| :direction :out :array
+     t :size (|target| |level|)))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("CompressedTexSubImage1D" compressed-tex-sub-image-1d :return
+   "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |xoffset| :type |CheckedInt32| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |format| :type |PixelFormat| :direction :in)
+    (:name |imageSize| :type |SizeI| :direction :in)
+    (:name |data| :type |CompressedTextureARB| :direction :in :array
+     t :size imagesize))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("CompressedTexSubImage2D" compressed-tex-sub-image-2d :return
+   "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |xoffset| :type |CheckedInt32| :direction :in)
+    (:name |yoffset| :type |CheckedInt32| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |format| :type |PixelFormat| :direction :in)
+    (:name |imageSize| :type |SizeI| :direction :in)
+    (:name |data| :type |CompressedTextureARB| :direction :in :array
+     t :size imagesize))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("CompressedTexSubImage3D" compressed-tex-sub-image-3d :return
+   "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |xoffset| :type |CheckedInt32| :direction :in)
+    (:name |yoffset| :type |CheckedInt32| :direction :in)
+    (:name |zoffset| :type |CheckedInt32| :direction :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |format| :type |PixelFormat| :direction :in)
+    (:name |imageSize| :type |SizeI| :direction :in)
+    (:name |data| :type |CompressedTextureARB| :direction :in :array
+     t :size imagesize))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("CompressedTexImage1D" compressed-tex-image-1d :return "void"
+   :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |internalformat| :type |PixelInternalFormat| :direction
+     :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |border| :type |CheckedInt32| :direction :in)
+    (:name |imageSize| :type |SizeI| :direction :in)
+    (:name |data| :type |CompressedTextureARB| :direction :in :array
+     t :size imagesize))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("CompressedTexImage2D" compressed-tex-image-2d :return "void"
+   :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |internalformat| :type |PixelInternalFormat| :direction
+     :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |border| :type |CheckedInt32| :direction :in)
+    (:name |imageSize| :type |SizeI| :direction :in)
+    (:name |data| :type |CompressedTextureARB| :direction :in :array
+     t :size imagesize))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("CompressedTexImage3D" compressed-tex-image-3d :return "void"
+   :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |level| :type |CheckedInt32| :direction :in)
+    (:name |internalformat| :type |PixelInternalFormat| :direction
+     :in)
+    (:name |width| :type |SizeI| :direction :in)
+    (:name |height| :type |SizeI| :direction :in)
+    (:name |depth| :type |SizeI| :direction :in)
+    (:name |border| :type |CheckedInt32| :direction :in)
+    (:name |imageSize| :type |SizeI| :direction :in)
+    (:name |data| :type |CompressedTextureARB| :direction :in :array
+     t :size imagesize))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("SampleCoverage" sample-coverage :return "void" :args
+   ((:name |value| :type |Float32| :direction :in)
+    (:name |invert| :type |Boolean| :direction :in))
+   :category "VERSION_1_3" :deprecated nil :version "1.3")
+  ("ActiveTexture" active-texture :return "void" :args
+   ((:name |texture| :type |TextureUnit| :direction :in)) :category
+   "VERSION_1_3" :deprecated nil :version "1.3")
+  ("PointParameteriv" point-parameter-iv :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |params| :type |Int32| :direction :in :array t :size
+     (|pname|)))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("PointParameteri" point-parameter-i :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |param| :type |Int32| :direction :in))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("PointParameterfv" point-parameter-fv :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |params| :type |CheckedFloat32| :direction :in :array t
+     :size (|pname|)))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("PointParameterf" point-parameter-f :return "void" :args
+   ((:name |pname| :type |PointParameterNameARB| :direction :in)
+    (:name |param| :type |CheckedFloat32| :direction :in))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("MultiDrawElements" multi-draw-elements :return "void" :args
+   ((:name |mode| :type |BeginMode| :direction :in)
+    (:name |count| :type |SizeI| :direction :in :array t :size
+     (|drawcount|))
+    (:name |type| :type |DrawElementsType| :direction :in)
+    (:name |indices| :type |ConstVoidPointer| :direction :in :array t
+     :size (|drawcount|))
+    (:name |drawcount| :type |SizeI| :direction :in))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("MultiDrawArrays" multi-draw-arrays :return "void" :args
+   ((:name |mode| :type |BeginMode| :direction :in)
+    (:name |first| :type |Int32| :direction :in :array t :size
+     (|count|))
+    (:name |count| :type |SizeI| :direction :in :array t :size
+     (|drawcount|))
+    (:name |drawcount| :type |SizeI| :direction :in))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("BlendFuncSeparate" blend-func-separate :return "void" :args
+   ((:name |sfactorRGB| :type |BlendFuncSeparateParameterEXT|
+     :direction :in)
+    (:name |dfactorRGB| :type |BlendFuncSeparateParameterEXT|
+     :direction :in)
+    (:name |sfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+     :direction :in)
+    (:name |dfactorAlpha| :type |BlendFuncSeparateParameterEXT|
+     :direction :in))
+   :category "VERSION_1_4" :deprecated nil :version "1.4")
+  ("GetBufferPointerv" get-buffer-pointerv :return "void" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |pname| :type |BufferPointerNameARB| :direction :in)
+    (:name |params| :type |VoidPointer| :direction :out :array t
+     :size #x1))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GetBufferParameteriv" get-buffer-parameter-iv :return "void"
+   :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |pname| :type |BufferPNameARB| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("UnmapBuffer" unmap-buffer :return "Boolean" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("MapBuffer" map-buffer :return "VoidPointer" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |access| :type |BufferAccessARB| :direction :in))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GetBufferSubData" get-buffer-sub-data :return "void" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |offset| :type |BufferOffset| :direction :in)
+    (:name |size| :type |BufferSize| :direction :in)
+    (:name |data| :type |Void| :direction :out :array t :size size))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("BufferSubData" buffer-sub-data :return "void" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |offset| :type |BufferOffset| :direction :in)
+    (:name |size| :type |BufferSize| :direction :in)
+    (:name |data| :type |ConstVoid| :direction :in :array t :size
+     size))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("BufferData" buffer-data :return "void" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |size| :type |BufferSize| :direction :in)
+    (:name |data| :type |ConstVoid| :direction :in :array t :size
+     size)
+    (:name |usage| :type |BufferUsageARB| :direction :in))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("IsBuffer" is-buffer :return "Boolean" :args
+   ((:name |buffer| :type |UInt32| :direction :in)) :category
+   "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GenBuffers" gen-buffers :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |buffers| :type |UInt32| :direction :out :array t :size
+     n))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("DeleteBuffers" delete-buffers :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |buffers| :type |ConstUInt32| :direction :in :array t
+     :size n))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("BindBuffer" bind-buffer :return "void" :args
+   ((:name |target| :type |BufferTargetARB| :direction :in)
+    (:name |buffer| :type |UInt32| :direction :in))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GetQueryObjectuiv" get-query-object-uiv :return "void" :args
+   ((:name |id| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |UInt32| :direction :out :array t :size
+     pname))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GetQueryObjectiv" get-query-object-iv :return "void" :args
+   ((:name |id| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     pname))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GetQueryiv" get-query-iv :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     pname))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("EndQuery" end-query :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)) :category
+   "VERSION_1_5" :deprecated nil :version "1.5")
+  ("BeginQuery" begin-query :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |id| :type |UInt32| :direction :in))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("IsQuery" is-query :return "Boolean" :args
+   ((:name |id| :type |UInt32| :direction :in)) :category
+   "VERSION_1_5" :deprecated nil :version "1.5")
+  ("DeleteQueries" delete-queries :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |ids| :type |UInt32| :direction :in :array t :size n))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("GenQueries" gen-queries :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |ids| :type |UInt32| :direction :out :array t :size n))
+   :category "VERSION_1_5" :deprecated nil :version "1.5")
+  ("VertexAttribPointer" vertex-attrib-pointer :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |size| :type |Int32| :direction :in)
+    (:name |type| :type |VertexAttribPointerTypeARB| :direction :in)
+    (:name |normalized| :type |Boolean| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in)
+    (:name |pointer| :type |Void| :direction :in :array t :size
+     (|size| |type| |stride|) :retained t))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("ValidateProgram" validate-program :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("UniformMatrix4fv" uniform-matrix-4fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("UniformMatrix3fv" uniform-matrix-3fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("UniformMatrix2fv" uniform-matrix-2fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform4iv" uniform-4iv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Int32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform3iv" uniform-3iv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Int32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform2iv" uniform-2iv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Int32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform1iv" uniform-1iv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Int32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform4fv" uniform-4fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform3fv" uniform-3fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform2fv" uniform-2fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform1fv" uniform-1fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform4i" uniform-4i :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Int32| :direction :in)
+    (:name \v1 :type |Int32| :direction :in)
+    (:name \v2 :type |Int32| :direction :in)
+    (:name \v3 :type |Int32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform3i" uniform-3i :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Int32| :direction :in)
+    (:name \v1 :type |Int32| :direction :in)
+    (:name \v2 :type |Int32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform2i" uniform-2i :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Int32| :direction :in)
+    (:name \v1 :type |Int32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform1i" uniform-1i :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Int32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform4f" uniform-4f :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Float32| :direction :in)
+    (:name \v1 :type |Float32| :direction :in)
+    (:name \v2 :type |Float32| :direction :in)
+    (:name \v3 :type |Float32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform3f" uniform-3f :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Float32| :direction :in)
+    (:name \v1 :type |Float32| :direction :in)
+    (:name \v2 :type |Float32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform2f" uniform-2f :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Float32| :direction :in)
+    (:name \v1 :type |Float32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("Uniform1f" uniform-1f :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |Float32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("UseProgram" use-program :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("ShaderSource" shader-source :return "void" :args
+   ((:name |shader| :type |UInt32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |string| :type |ConstCharPointer| :direction :in :array t
+     :size count)
+    (:name |length| :type |Int32| :direction :in :array t :size #x1))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("LinkProgram" link-program :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("IsShader" is-shader :return "Boolean" :args
+   ((:name |shader| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("IsProgram" is-program :return "Boolean" :args
+   ((:name |program| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetVertexAttribPointerv" get-vertex-attrib-pointerv :return
+   "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |pname| :type |VertexAttribPointerPropertyARB| :direction
+     :in)
+    (:name |pointer| :type |VoidPointer| :direction :out :array t
+     :size #x1))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetVertexAttribiv" get-vertex-attrib-iv :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |pname| :type |VertexAttribPropertyARB| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     #x4))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetVertexAttribfv" get-vertex-attrib-fv :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |pname| :type |VertexAttribPropertyARB| :direction :in)
+    (:name |params| :type |Float32| :direction :out :array t :size
+     #x4))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetVertexAttribdv" get-vertex-attrib-dv :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |pname| :type |VertexAttribPropertyARB| :direction :in)
+    (:name |params| :type |Float64| :direction :out :array t :size
+     #x4))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetUniformiv" get-uniform-iv :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |location| :type |Int32| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|location|)))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetUniformfv" get-uniform-fv :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |location| :type |Int32| :direction :in)
+    (:name |params| :type |Float32| :direction :out :array t :size
+     (|location|)))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetUniformLocation" get-uniform-location :return "Int32" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetShaderSource" get-shader-source :return "void" :args
+   ((:name |shader| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |source| :type |Char| :direction :out :array t :size
+     length))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetShaderInfoLog" get-shader-info-log :return "void" :args
+   ((:name |shader| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |infoLog| :type |Char| :direction :out :array t :size
+     length))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetShaderiv" get-shader-iv :return "void" :args
+   ((:name |shader| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     pname))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetProgramInfoLog" get-program-info-log :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |infoLog| :type |Char| :direction :out :array t :size
+     length))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetProgramiv" get-program-iv :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     pname))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetAttribLocation" get-attrib-location :return "Int32" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetAttachedShaders" get-attached-shaders :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |maxCount| :type |SizeI| :direction :in)
+    (:name |count| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |obj| :type |UInt32| :direction :out :array t :size
+     count))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetActiveUniform" get-active-uniform :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |size| :type |Int32| :direction :out :array t :size #x1)
+    (:name |type| :type |GLenum| :direction :out :array t :size #x1)
+    (:name |name| :type |Char| :direction :out :array t))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("GetActiveAttrib" get-active-attrib :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |size| :type |Int32| :direction :out :array t :size #x1)
+    (:name |type| :type |GLenum| :direction :out :array t :size #x1)
+    (:name |name| :type |Char| :direction :out :array t))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("EnableVertexAttribArray" enable-vertex-attrib-array :return
+   "void" :args ((:name |index| :type |UInt32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("DisableVertexAttribArray" disable-vertex-attrib-array :return
+   "void" :args ((:name |index| :type |UInt32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("DetachShader" detach-shader :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |shader| :type |UInt32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("DeleteShader" delete-shader :return "void" :args
+   ((:name |shader| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("DeleteProgram" delete-program :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("CreateShader" create-shader :return "UInt32" :args
+   ((:name |type| :type |GLenum| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("CreateProgram" create-program :return "UInt32" :args nil
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("CompileShader" compile-shader :return "void" :args
+   ((:name |shader| :type |UInt32| :direction :in)) :category
+   "VERSION_2_0" :deprecated nil :version "2.0")
+  ("BindAttribLocation" bind-attrib-location :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("AttachShader" attach-shader :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |shader| :type |UInt32| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("StencilMaskSeparate" stencil-mask-separate :return "void" :args
+   ((:name |face| :type |StencilFaceDirection| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("StencilFuncSeparate" stencil-func-separate :return "void" :args
+   ((:name |face| :type |StencilFaceDirection| :direction :in)
+    (:name |func| :type |StencilFunction| :direction :in)
+    (:name |ref| :type |StencilValue| :direction :in)
+    (:name |mask| :type |MaskedStencilValue| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("StencilOpSeparate" stencil-op-separate :return "void" :args
+   ((:name |face| :type |StencilFaceDirection| :direction :in)
+    (:name |sfail| :type |StencilOp| :direction :in)
+    (:name |dpfail| :type |StencilOp| :direction :in)
+    (:name |dppass| :type |StencilOp| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("DrawBuffers" draw-buffers :return "void" :args
+   ((:name \n :type |SizeI| :direction :in)
+    (:name |bufs| :type |DrawBufferModeATI| :direction :in :array t
+     :size n))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("BlendEquationSeparate" blend-equation-separate :return "void"
+   :args
+   ((:name |modeRGB| :type |BlendEquationModeEXT| :direction :in)
+    (:name |modeAlpha| :type |BlendEquationModeEXT| :direction :in))
+   :category "VERSION_2_0" :deprecated nil :version "2.0")
+  ("UniformMatrix4x3fv" uniform-matrix-4x-3fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     #xC))
+   :category "VERSION_2_1" :deprecated nil :version "2.1")
+  ("UniformMatrix3x4fv" uniform-matrix-3x-4fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     #xC))
+   :category "VERSION_2_1" :deprecated nil :version "2.1")
+  ("UniformMatrix4x2fv" uniform-matrix-4x-2fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     #x8))
+   :category "VERSION_2_1" :deprecated nil :version "2.1")
+  ("UniformMatrix2x4fv" uniform-matrix-2x-4fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     #x8))
+   :category "VERSION_2_1" :deprecated nil :version "2.1")
+  ("UniformMatrix3x2fv" uniform-matrix-3x-2fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     #x6))
+   :category "VERSION_2_1" :deprecated nil :version "2.1")
+  ("UniformMatrix2x3fv" uniform-matrix-2x-3fv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |transpose| :type |Boolean| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     #x6))
+   :category "VERSION_2_1" :deprecated nil :version "2.1")
+  ("GetStringi" get-string-i :return "String" :args
+   ((:name |name| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("ClearBufferfi" clear-bufferf-i :return "void" :args
+   ((:name |buffer| :type |GLenum| :direction :in)
+    (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+    (:name |depth| :type |Float32| :direction :in)
+    (:name |stencil| :type |Int32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("ClearBufferfv" clear-buffer-fv :return "void" :args
+   ((:name |buffer| :type |GLenum| :direction :in)
+    (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+    (:name |value| :type |Float32| :direction :in :array t :size
+     (|buffer|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("ClearBufferuiv" clear-buffer-uiv :return "void" :args
+   ((:name |buffer| :type |GLenum| :direction :in)
+    (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+    (:name |value| :type |UInt32| :direction :in :array t :size
+     (|buffer|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("ClearBufferiv" clear-buffer-iv :return "void" :args
+   ((:name |buffer| :type |GLenum| :direction :in)
+    (:name |drawbuffer| :type |DrawBufferName| :direction :in)
+    (:name |value| :type |Int32| :direction :in :array t :size
+     (|buffer|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetTexParameterIuiv" get-tex-parameter-i-uiv :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |pname| :type |GetTextureParameter| :direction :in)
+    (:name |params| :type |UInt32| :direction :out :array t :size
+     (|pname|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetTexParameterIiv" get-tex-parameter-i-iv :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |pname| :type |GetTextureParameter| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     (|pname|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("TexParameterIuiv" tex-parameter-i-uiv :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |pname| :type |TextureParameterName| :direction :in)
+    (:name |params| :type |UInt32| :direction :in :array t :size
+     (|pname|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("TexParameterIiv" tex-parameter-i-iv :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |pname| :type |TextureParameterName| :direction :in)
+    (:name |params| :type |Int32| :direction :in :array t :size
+     (|pname|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform4uiv" uniform-4uiv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |UInt32| :direction :in :array t :size
+     count*4))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform3uiv" uniform-3uiv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |UInt32| :direction :in :array t :size
+     count*3))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform2uiv" uniform-2uiv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |UInt32| :direction :in :array t :size
+     count*2))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform1uiv" uniform-1uiv :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |value| :type |UInt32| :direction :in :array t :size
+     count))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform4ui" uniform-4ui :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |UInt32| :direction :in)
+    (:name \v1 :type |UInt32| :direction :in)
+    (:name \v2 :type |UInt32| :direction :in)
+    (:name \v3 :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform3ui" uniform-3ui :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |UInt32| :direction :in)
+    (:name \v1 :type |UInt32| :direction :in)
+    (:name \v2 :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform2ui" uniform-2ui :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |UInt32| :direction :in)
+    (:name \v1 :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Uniform1ui" uniform-1ui :return "void" :args
+   ((:name |location| :type |Int32| :direction :in)
+    (:name \v0 :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetFragDataLocation" get-frag-data-location :return "Int32" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t :size
+     (|name|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("BindFragDataLocation" bind-frag-data-location :return "void"
+   :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |color| :type |UInt32| :direction :in)
+    (:name |name| :type |Char| :direction :in :array t :size
+     (|name|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetUniformuiv" get-uniform-uiv :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |location| :type |Int32| :direction :in)
+    (:name |params| :type |UInt32| :direction :out :array t :size
+     (|program| |location|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetVertexAttribIuiv" get-vertex-attrib-i-uiv :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |pname| :type |VertexAttribEnum| :direction :in)
+    (:name |params| :type |UInt32| :direction :out :array t :size
+     #x1))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetVertexAttribIiv" get-vertex-attrib-i-iv :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |pname| :type |VertexAttribEnum| :direction :in)
+    (:name |params| :type |Int32| :direction :out :array t :size
+     #x1))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("VertexAttribIPointer" vertex-attrib-ipointer :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name |size| :type |Int32| :direction :in)
+    (:name |type| :type |VertexAttribEnum| :direction :in)
+    (:name |stride| :type |SizeI| :direction :in)
+    (:name |pointer| :type |Void| :direction :in :array t :size
+     (|size| |type| |stride|) :retained t))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("EndConditionalRender" end-conditional-render :return "void" :args
+   nil :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("BeginConditionalRender" begin-conditional-render :return "void"
+   :args
+   ((:name |id| :type |UInt32| :direction :in)
+    (:name |mode| :type |TypeEnum| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("ClampColor" clamp-color :return "void" :args
+   ((:name |target| :type |ClampColorTargetARB| :direction :in)
+    (:name |clamp| :type |ClampColorModeARB| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetTransformFeedbackVarying" get-transform-feedback-varying
+   :return "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |bufSize| :type |SizeI| :direction :in)
+    (:name |length| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |size| :type |SizeI| :direction :out :array t :size #x1)
+    (:name |type| :type |GLenum| :direction :out :array t :size #x1)
+    (:name |name| :type |Char| :direction :out :array t :size
+     (|length|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("TransformFeedbackVaryings" transform-feedback-varyings :return
+   "void" :args
+   ((:name |program| :type |UInt32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |varyings| :type |ConstCharPointer| :direction :in :array
+     t :size count)
+    (:name |bufferMode| :type |GLenum| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("BindBufferBase" bind-buffer-base :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |buffer| :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("BindBufferRange" bind-buffer-range :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |buffer| :type |UInt32| :direction :in)
+    (:name |offset| :type |BufferOffset| :direction :in)
+    (:name |size| :type |BufferSize| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("EndTransformFeedback" end-transform-feedback :return "void" :args
+   nil :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("BeginTransformFeedback" begin-transform-feedback :return "void"
+   :args ((:name |primitiveMode| :type |GLenum| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("IsEnabledi" is-enabled-i :return "Boolean" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Disablei" disable-i :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("Enablei" enable-i :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetIntegeri_v" get-integeri_v :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |data| :type |Int32| :direction :out :array t :size
+     (|target|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("GetBooleani_v" get-booleani_v :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |index| :type |UInt32| :direction :in)
+    (:name |data| :type |Boolean| :direction :out :array t :size
+     (|target|)))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("ColorMaski" color-mask-i :return "void" :args
+   ((:name |index| :type |UInt32| :direction :in)
+    (:name \r :type |Boolean| :direction :in)
+    (:name \g :type |Boolean| :direction :in)
+    (:name |b| :type |Boolean| :direction :in)
+    (:name |a| :type |Boolean| :direction :in))
+   :category "VERSION_3_0" :deprecated nil :version "3.0")
+  ("PrimitiveRestartIndex" primitive-restart-index :return "void"
+   :args ((:name |index| :type |UInt32| :direction :in)) :category
+   "VERSION_3_1" :deprecated nil :version "3.1")
+  ("TexBuffer" tex-buffer :return "void" :args
+   ((:name |target| :type |TextureTarget| :direction :in)
+    (:name |internalformat| :type |GLenum| :direction :in)
+    (:name |buffer| :type |UInt32| :direction :in))
+   :category "VERSION_3_1" :deprecated nil :version "3.1")
+  ("DrawElementsInstanced" draw-elements-instanced :return "void"
+   :args
+   ((:name |mode| :type |BeginMode| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |type| :type |DrawElementsType| :direction :in)
+    (:name |indices| :type |Void| :direction :in :array t :size
+     (|count| |type|))
+    (:name |instancecount| :type |SizeI| :direction :in))
+   :category "VERSION_3_1" :deprecated nil :version "3.1")
+  ("DrawArraysInstanced" draw-arrays-instanced :return "void" :args
+   ((:name |mode| :type |BeginMode| :direction :in)
+    (:name |first| :type |Int32| :direction :in)
+    (:name |count| :type |SizeI| :direction :in)
+    (:name |instancecount| :type |SizeI| :direction :in))
+   :category "VERSION_3_1" :deprecated nil :version "3.1"))) 

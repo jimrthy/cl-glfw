@@ -16,6 +16,31 @@
 (defconstant +storage-private-apple+ #x85BD) 
 (defconstant +storage-cached-apple+ #x85BE) 
 (defconstant +storage-shared-apple+ #x85BF) 
-(defglextfun "GetTexParameterPointervAPPLE" get-tex-parameter-pointerv-apple :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |VoidPointer| :direction :out :array t :size #x1)) :category "APPLE_texture_range" :deprecated nil :version "1.2") 
-(defglextfun "TextureRangeAPPLE" texture-range-apple :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size length)) :category "APPLE_texture_range" :deprecated nil :version "1.2") 
-(make-extension-loader |APPLE_texture_range| (("GetTexParameterPointervAPPLE" get-tex-parameter-pointerv-apple :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |pname| :type |GLenum| :direction :in) (:name |params| :type |VoidPointer| :direction :out :array t :size #x1)) :category "APPLE_texture_range" :deprecated nil :version "1.2") ("TextureRangeAPPLE" texture-range-apple :return "void" :args ((:name |target| :type |GLenum| :direction :in) (:name |length| :type |SizeI| :direction :in) (:name |pointer| :type |Void| :direction :in :array t :size length)) :category "APPLE_texture_range" :deprecated nil :version "1.2"))) 
+(defglextfun "GetTexParameterPointervAPPLE"
+ get-tex-parameter-pointerv-apple :return "void" :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |pname| :type |GLenum| :direction :in)
+  (:name |params| :type |VoidPointer| :direction :out :array t :size
+   #x1))
+ :category "APPLE_texture_range" :deprecated nil :version "1.2") 
+(defglextfun "TextureRangeAPPLE" texture-range-apple :return "void"
+ :args
+ ((:name |target| :type |GLenum| :direction :in)
+  (:name |length| :type |SizeI| :direction :in)
+  (:name |pointer| :type |Void| :direction :in :array t :size
+   length))
+ :category "APPLE_texture_range" :deprecated nil :version "1.2") 
+(make-extension-loader |APPLE_texture_range|
+ (("GetTexParameterPointervAPPLE" get-tex-parameter-pointerv-apple
+   :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |pname| :type |GLenum| :direction :in)
+    (:name |params| :type |VoidPointer| :direction :out :array t
+     :size #x1))
+   :category "APPLE_texture_range" :deprecated nil :version "1.2")
+  ("TextureRangeAPPLE" texture-range-apple :return "void" :args
+   ((:name |target| :type |GLenum| :direction :in)
+    (:name |length| :type |SizeI| :direction :in)
+    (:name |pointer| :type |Void| :direction :in :array t :size
+     length))
+   :category "APPLE_texture_range" :deprecated nil :version "1.2"))) 
