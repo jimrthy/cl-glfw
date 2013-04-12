@@ -352,6 +352,8 @@ suitable for cl-glfw-types or CFFI."
 		 (format t "~A : ~A~%" enum-name enum-value)
 		 (let ((constant-name (constantize enum-name)))
 		   (push constant-name *exports*)
+		   ;; defconstant considered harmful
+		   ;; But does it possibly make sense in this context?
 		   (print `(defconstant ,constant-name ,enum-value) out)))
 	    (format out "~&~%;;;; }}}~%"))
 	  (remf *enum-specs* enum-group-name)))))
