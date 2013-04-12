@@ -1,14 +1,16 @@
 ;; You should nominially invoke this file via ./generators/make-opengl-bindings.rb
 ;; as that performs the necessary setup.
+;; Then again, it *is* hard-coded to rely on SBCL...which may or may not be an issue
+;; for anyone else.
 
 (declaim (optimize (speed 0) (space 0) (debug 3)))
 
-;;; Deal with Unicode issues
 ;;; Annoyingly enough, this doesn't quite work.
 ;;; If I try to load this once from the REPL, it errors
 ;;; out. If I try to load it a second time, it loads fine.
 ;;; Then (main) restores the "unable-to-resolve" duplicated
 ;;; constants.
+;;; Deal with Unicode issues
 #+sbcl (unless (eq sb-impl::*default-external-format* :UTF-8)
 	 (setf sb-impl::*default-external-format* :UTF-8))
 #+ccl (setf *print-pretty* t)
@@ -29,11 +31,15 @@
 (defparameter *core-opengl-versions* 
   (make-version-syms "1_0" "1_1"))
 
-(defparameter *opengl-versions* 
+(defparameter *opengl-versions*
+  ;; 1_2_1 is when ARB extensions were introduced (according
+  ;; to wikipedia)
   (make-version-syms "1_0" "1_1" "1_2" "1_3" "1_4" "1_5"
 		     "2_0" "2_1"
 		     "3_0" "3_1" "3_2" "3_3"
-		     "4_0" "4_1")
+		     "4_0" "4_1"
+		     ;; "4_2" "4_3" ; Need to add support for these
+		     )
   "List of versioned extensions for dependency generation. 
 Must be in the correct order.")
 
@@ -98,11 +104,19 @@ with +s."
 
 ;;}}}
 
-;;; {{{ FUNC-SPEC 
+;;; {{{ FUNC-SPEC
+;;; It seems like this could be made more obvious.
+;;; It looks like this is breaking down the bindings defined in gl.spec.lisp.
+;; Standard C function name
 (defun c-name-of (func-spec) (first func-spec))
+;; What are we calling it?
 (defun lisp-name-of (func-spec) (second func-spec))
+;; C return type
 (defun freturn-of (func-spec) (getf (cddr func-spec) :return))
+;; Parameters to the function.
+;; Defined by :param values to the spec.
 (defun args-of (func-spec) (getf (cddr func-spec) :args))
+;; ???
 (defun category-of (func-spec) (intern (getf (cddr func-spec) :category)))
 ;;; }}}
 
@@ -146,7 +160,10 @@ suitable for cl-glfw-types or CFFI."
    *type-map*
    (loop for src-type in (getf *spec* :type-map) by #'cddr
       for dst-type in (cdr (getf *spec* :type-map)) by #'cddr
-      nconc (list src-type (type-map-type-to-gl-type dst-type)))))
+      ;; Q: Is nconc really an appropriate choice here?
+      nconc (list src-type (type-map-type-to-gl-type dst-type))
+      ;; FIXME: Debug only. What is actually being built here?
+      format t "%A%~" *type-map*)))
 
 ;;; }}}
 
@@ -170,7 +187,13 @@ suitable for cl-glfw-types or CFFI."
                             (let ((resolved-value (getf enum-group enum-name)))
                               (when resolved-value
                                 (push enum-group-name used-groups)
-                                (return-from find-value resolved-value)))))
+				(format t "Found value: %A attached to %A%~" resolved-value enum-name)
+                                ;;(return-from find-value resolved-value)
+				(return-from resolve-enum resolved-value)
+				))))
+		    ;; SBCL is hitting this for a few specific duplicates.
+		    ;; CCL does not. What gives?
+		    (format t "Missing value: %A%~" enum-value)
                     (return-from resolve-enum :unable-to-resolve))
                   used-groups))
                 ;; it's a name of another symbol, re-resolve with that name
