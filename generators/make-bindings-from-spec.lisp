@@ -116,15 +116,26 @@ with +s."
 ;; Parameters to the function.
 ;; Defined by :param values to the spec.
 (defun args-of (func-spec) (getf (cddr func-spec) :args))
-;; ???
-(defun category-of (func-spec) (intern (getf (cddr func-spec) :category)))
+;; ??? What's going on here?
+(defun category-of (func-spec) 
+   #|
+  (intern
+   (getf (cddr func-spec) 
+	 :category)))
+   |#
+  (let ((category (getf (cddr func-spec) :category)))
+    (intern category)))
 ;;; }}}
 
-;;; {{{ FIX TYPE-MAPS 
+;;; {{{ FIX TYPE-MAPS
+    
+  
+  
+  
 (defparameter *strippable-type-endings*
   (list "NV" "ARB" "SGIX" "EXT" "ATI" "IBM" "3DFX" "SGIS" 
-        "SUNX" "HP" "GREMEDY" "APPLE" "MESA" "SUN" "INTEL"
-        "WIN"))
+	"SUNX" "HP" "GREMEDY" "APPLE" "MESA" "SUN" "INTEL"
+	"WIN"))
 
 (defun string-ends-with (string ending)
   "Returns t if string ends with ending."
@@ -163,7 +174,7 @@ suitable for cl-glfw-types or CFFI."
       ;; Q: Is nconc really an appropriate choice here?
       nconc (list src-type (type-map-type-to-gl-type dst-type))
       ;; FIXME: Debug only. What is actually being built here?
-      format t "%A%~" *type-map*)))
+      do ( format t "~A~%" *type-map*))))
 
 ;;; }}}
 
@@ -187,13 +198,13 @@ suitable for cl-glfw-types or CFFI."
                             (let ((resolved-value (getf enum-group enum-name)))
                               (when resolved-value
                                 (push enum-group-name used-groups)
-				(format t "Found value: %A attached to %A%~" resolved-value enum-name)
+				(format t "Found value: ~A attached to ~A~%" resolved-value enum-name)
                                 ;;(return-from find-value resolved-value)
 				(return-from resolve-enum resolved-value)
-				))))
-		    ;; SBCL is hitting this for a few specific duplicates.
-		    ;; CCL does not. What gives?
-		    (format t "Missing value: %A%~" enum-value)
+				)))
+		       ;; SBCL is hitting this for a few specific duplicates.
+		       ;; CCL does not. What gives?
+			 (format t "Missing value: ~A~%" enum-value))
                     (return-from resolve-enum :unable-to-resolve))
                   used-groups))
                 ;; it's a name of another symbol, re-resolve with that name
@@ -247,12 +258,13 @@ suitable for cl-glfw-types or CFFI."
          (sort (loop for name in *type-map* by #'cddr
                   for value in (cdr *type-map*) by #'cddr
                   collect (cons name value))
-               #'(lambda (a b)
-                   (string-lessp (string (cdr a)) (string (cdr b)))))
+               (lambda (a b)
+		 (string-lessp (string (cdr a)) (string (cdr b)))))
          do (format t "~&  ~s:~40t~s~%" (car n-v) (cdr n-v))))
   
   (set-enum-specs)
 
+  ;; FIXME: This seems dubious
   (remf *enum-specs* :extensions)
 
   ;; print out initial statistics
