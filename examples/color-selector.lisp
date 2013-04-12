@@ -45,11 +45,16 @@
 
     (when (eql (glfw:get-key glfw:+key-esc+) glfw:+press+)
       ;;; This next bit is ugly and really should be fixed.
+
+      #|
+      ;;; This next line just fails for me in general
       #+sbcl(return-from glfw:do-window)
       #+ccl(return-from color-selector)
       ;; Next line is the name of the loop we're inside. But it
       ;; errors out under CCL, at least.
       ;(return-from glfw:do-open-window)
+      |#
+      (return-from color-selector)
       )
 
     (setf t1 (glfw:get-time))
