@@ -1,10 +1,16 @@
 (require '#:asdf)
 (asdf:oos 'asdf:load-op '#:cl-glfw)
 ;; Hmm...extensions didn't exist for 1_1
+;; That still depends on cl-glfw-opengl-core,
+;; which loads opengl-extensions (the file where
+;; the error's coming from) as a component.
+;; Maybe I'm just reading the ASDF totally wrong?
 ;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_1)
 (asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_2)
 (asdf:oos 'asdf:load-op '#:cl-glfw-glu)
-;; This doesn't help
+;; ASDF can't find this component
+;;(asdf:oos 'asdf:load-op '#:opengl-extensions)
+;; This doesn't help (also a missing component)
 ;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-extensions)
 
 (defparameter *shader-program* nil)

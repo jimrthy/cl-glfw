@@ -30,9 +30,12 @@
 
 ;;; It looks as though this method may actually be obsolete.
 ;;; It was deliberately eliminated by wivlaro, 2 years ago
-;;; in commit 48dd42333bb16d216..
-;;; Except that it's most definitely needed for quite a few
-;;; examples.
+;;; in commit 48dd42333bb16d216.
+;;; Actually, the parts that actually try to do anything
+;;; were commented out before that, in commit
+;;; 65943f21aa7bb79bcae94337f3d41c38a7ac46ca.
+;;; The function itself is most definitely needed for quite a few
+;;; examples...however I'm supposed to get to it.
 (defun load-extension (extension)
   "Try to load an opengl extension where the extension name is a string of the form
    \"ARB_vertex_buffer_object\". Returns t if the extension is available and loads,
