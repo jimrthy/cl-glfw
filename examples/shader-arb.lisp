@@ -1,7 +1,11 @@
 (require '#:asdf)
 (asdf:oos 'asdf:load-op '#:cl-glfw)
-(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_1)
+;; Hmm...extensions didn't exist for 1_1
+;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_1)
+(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_2)
 (asdf:oos 'asdf:load-op '#:cl-glfw-glu)
+;; This doesn't help
+;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-extensions)
 
 (defparameter *shader-program* nil)
 (defparameter *uniform-time* nil)
