@@ -26,6 +26,9 @@
 ;;; I try to C-x C-e them here.
 ;(gl-ext:scan-available-extensions)
 ;;; Just running this one by itself seemed to hang the REPL
+;;; Actually, it dumped me to a kernel level debugger.
+;;; That seems like an interesting step in some direction,
+;;; at least.
 (gl-ext:available-extensions)
 
 (glfw:do-window (:title "An ARB Extension Shader Example")
