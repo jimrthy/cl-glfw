@@ -27,3 +27,21 @@
 (defun extension-available-p (extension)
   (declare (type string extension))
   (find extension (available-extensions) :test 'equalp))
+
+;;; It looks as though this method may actually be obsolete.
+;;; It was deliberately eliminated by wivlaro, 2 years ago
+;;; in commit 48dd42333bb16d216..
+;;; Except that it's most definitely needed for quite a few
+;;; examples.
+(defun load-extension (extension)
+  "Try to load an opengl extension where the extension name is a string of the form
+   \"ARB_vertex_buffer_object\". Returns t if the extension is available and loads,
+   otherwise, nil."
+  (let ((extension (extension-available-p extension)))
+    (when extension
+      #|
+      (handler-case
+	  (asdf:oos 'asdf:load-op (string-downcase (format nil "cl-glfw-opengl-~a" extension)))
+	(asdf:missing-component () (warn "Extension ~a has nothing to load ~%" extension)))
+      |#
+      t)))
