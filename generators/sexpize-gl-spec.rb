@@ -15,9 +15,9 @@ open("#{BASE}/src/gl.spec","r") do |i|
   end
 end
 function_name_map=function_names.lispify.inject(Hash.new) do |h,cl|
-  #puts "processing #{cl.inspect}"
+  puts "processing #{cl.inspect}"
   lisp_name=cl[1..-1].join('-').gsub(/-+/,'-').sub(/-$/,'').downcase
-  #puts "injecting #{cl[0].inspect} as #{lisp_name.inspect}"
+  puts "injecting #{cl[0].inspect} as #{lisp_name.inspect}"
   h[cl[0]]=lisp_name
   h
 end

@@ -13,6 +13,7 @@ def check_ok
 end
 
 def fetch_specs
+  puts "Fetching specs"
   puts `wget -P #{BASE}/src -N http://www.opengl.org/registry/api/gl.tm http://www.opengl.org/registry/api/gl.spec  http://www.opengl.org/registry/api/enum.spec  http://www.opengl.org/registry/api/enumext.spec`
   check_ok
 end
@@ -33,10 +34,11 @@ fetch_specs unless File::exists?("#{BASE}/src/gl.tm") and
     File::exists?("#{BASE}/src/enum.spec") and
     File::exists?("#{BASE}/src/enumext.spec")
 
-puts "Generating:"
+puts "Converting to sexps:"
 puts `ruby #{BASE}/generators/sexpize-gl-spec.rb`
 check_ok
-puts "Generated. Checking:"
+puts "Generating:"
+# Seems wrong to make this SBCL-specific
 puts `sbcl --end-runtime-options --load #{BASE}/generators/make-bindings-from-spec.lisp --eval "(progn (main) (sb-ext:quit))" --end-toplevel-options`
 check_ok
 
