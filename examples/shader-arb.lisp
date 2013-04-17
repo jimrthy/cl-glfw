@@ -5,8 +5,11 @@
 ;; which loads opengl-extensions (the file where
 ;; the error's coming from) as a component.
 ;; Maybe I'm just reading the ASDF totally wrong?
-;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_1)
-(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_2)
+;;; FIXME: Start here. Maybe try loading the pieces by
+;;; hand, one line at a time.
+(error "Make it so.")
+(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_1)
+;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_2)
 (asdf:oos 'asdf:load-op '#:cl-glfw-glu)
 ;; ASDF can't find this component
 ;;(asdf:oos 'asdf:load-op '#:opengl-extensions)
@@ -15,6 +18,15 @@
 
 (defparameter *shader-program* nil)
 (defparameter *uniform-time* nil)
+
+;;; Pretty much as expected, this fails.
+;(gl-ext:load-extension "ARB_shader_objects")
+
+;;; These next 2 lines don't seem to do anything when
+;;; I try to C-x C-e them here.
+;(gl-ext:scan-available-extensions)
+;;; Just running this one by itself seemed to hang the REPL
+(gl-ext:available-extensions)
 
 (glfw:do-window (:title "An ARB Extension Shader Example")
     ((gl:with-setup-projection
