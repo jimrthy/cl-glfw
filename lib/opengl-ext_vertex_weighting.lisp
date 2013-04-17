@@ -5,7 +5,8 @@
 ;;;; ext_vertex_weighting
 
 (defconstant +modelview1-stack-depth-ext+ #x8502) 
-(defconstant +modelview-matrix1-ext+ #x8506) 
+(defconstant +combine4-nv+ #x8503) 
+(defconstant +modelview1-matrix-ext+ #x8506) 
 (defconstant +incr-wrap+ #x8507) 
 (defconstant +decr-wrap+ #x8508) 
 (defconstant +vertex-weighting-ext+ #x8509) 
@@ -28,12 +29,9 @@
 (defconstant +texture-cube-map-negative-z+ #x851A) 
 (defconstant +proxy-texture-cube-map+ #x851B) 
 (defconstant +max-cube-map-texture-size+ #x851C) 
-(defconstant +modelview0-stack-depth-ext+ #xBA3) 
 (defconstant +modelview1-stack-depth-ext+ #x8502) 
-(defconstant +modelview0-matrix-ext+ #xBA6) 
 (defconstant +modelview1-matrix-ext+ #x8506) 
 (defconstant +vertex-weighting-ext+ #x8509) 
-(defconstant +modelview0-ext+ #x1700) 
 (defconstant +modelview1-ext+ #x850A) 
 (defconstant +current-vertex-weight-ext+ #x850B) 
 (defconstant +vertex-weight-array-ext+ #x850C) 

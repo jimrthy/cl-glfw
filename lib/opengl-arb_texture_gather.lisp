@@ -4,9 +4,8 @@
 
 ;;;; arb_texture_gather
 
-(defconstant +min-program-texture-gather-offset+ #x8E5E) 
-(defconstant +max-program-texture-gather-offset+ #x8E5F) 
-(defconstant +max-program-texture-gather-components-arb+ #x8F9F) 
+(defconstant +min-program-texture-gather-offset-arb+ #x8E5E) 
+(defconstant +max-program-texture-gather-offset-arb+ #x8E5F) 
 (defconstant +min-program-texture-gather-offset-arb+ #x8E5E) 
 (defconstant +max-program-texture-gather-offset-arb+ #x8E5F) 
 (defconstant +max-program-texture-gather-components-arb+ #x8F9F) 

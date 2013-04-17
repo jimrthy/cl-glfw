@@ -4,5 +4,4 @@
 
 ;;;; sgix_texture_coordinate_clamp
 
-(defconstant +fog-factor-to-alpha-sgix+ #x836F) 
 (defconstant +mirrored-repeat+ #x8370) 

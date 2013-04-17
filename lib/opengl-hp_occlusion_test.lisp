@@ -6,3 +6,5 @@
 
 (defconstant +occlusion-test-hp+ #x8165) 
 (defconstant +occlusion-test-result-hp+ #x8166) 
+(defconstant +occlusion-test-hp+ #x8165) 
+(defconstant +occlusion-test-result-hp+ #x8166) 

@@ -4,7 +4,7 @@
 
 ;;;; nv_texgen_reflection
 
-(defconstant +normal-map+ #x8511) 
-(defconstant +reflection-map+ #x8512) 
+(defconstant +normal-map-nv+ #x8511) 
+(defconstant +reflection-map-nv+ #x8512) 
 (defconstant +normal-map-nv+ #x8511) 
 (defconstant +reflection-map-nv+ #x8512) 

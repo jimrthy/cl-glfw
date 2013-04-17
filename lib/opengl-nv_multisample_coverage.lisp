@@ -5,5 +5,5 @@
 ;;;; nv_multisample_coverage
 
 (defconstant +color-samples-nv+ #x8E20) 
-(defconstant +coverage-samples-nv+ #x80A9) 
 (defconstant +color-samples-nv+ #x8E20) 
+(defconstant +samples-arb+ #x80A9) 

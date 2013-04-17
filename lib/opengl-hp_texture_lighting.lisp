@@ -7,3 +7,6 @@
 (defconstant +texture-lighting-mode-hp+ #x8167) 
 (defconstant +texture-post-specular-hp+ #x8168) 
 (defconstant +texture-pre-specular-hp+ #x8169) 
+(defconstant +texture-lighting-mode-hp+ #x8167) 
+(defconstant +texture-post-specular-hp+ #x8168) 
+(defconstant +texture-pre-specular-hp+ #x8169) 

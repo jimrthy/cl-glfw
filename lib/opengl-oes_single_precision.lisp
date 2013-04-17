@@ -11,7 +11,7 @@
    #x4))
  :category "OES_single_precision" :deprecated nil :version "4.3") 
 (defglextfun "ClearDepthfOES" clear-depthf-oes :return "void" :args
- ((:name |depth| :type |ClampedFloat64| :direction :in)) :category
+ ((:name |depth| :type |ClampedFloat32| :direction :in)) :category
  "OES_single_precision" :deprecated nil :version "4.3") 
 (defglextfun "ClipPlanefOES" clip-planef-oes :return "void" :args
  ((:name |plane| :type |GLenum| :direction :in)
@@ -45,7 +45,7 @@
      #x4))
    :category "OES_single_precision" :deprecated nil :version "4.3")
   ("ClearDepthfOES" clear-depthf-oes :return "void" :args
-   ((:name |depth| :type |ClampedFloat64| :direction :in)) :category
+   ((:name |depth| :type |ClampedFloat32| :direction :in)) :category
    "OES_single_precision" :deprecated nil :version "4.3")
   ("ClipPlanefOES" clip-planef-oes :return "void" :args
    ((:name |plane| :type |GLenum| :direction :in)

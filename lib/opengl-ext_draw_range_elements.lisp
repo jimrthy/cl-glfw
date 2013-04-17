@@ -6,6 +6,8 @@
 
 (defconstant +max-elements-vertices-ext+ #x80E8) 
 (defconstant +max-elements-indices-ext+ #x80E9) 
+(defconstant +max-elements-vertices-ext+ #x80E8) 
+(defconstant +max-elements-indices-ext+ #x80E9) 
 (defglextfun "DrawRangeElementsEXT" draw-range-elements-ext :return
  "void" :args
  ((:name |mode| :type |BeginMode| :direction :in)

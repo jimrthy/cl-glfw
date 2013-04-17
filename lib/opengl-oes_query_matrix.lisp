@@ -6,15 +6,15 @@
 
 (defglextfun "QueryMatrixxOES" query-matrixx-oes :return "GLbitfield"
  :args
- ((:name |mantissa| :type |ConstFixed| :direction :in :array t :size
+ ((:name |mantissa| :type |Fixed| :direction :out :array t :size
    #x10)
-  (:name |exponent| :type |ConstInt32| :direction :in :array t :size
+  (:name |exponent| :type |Int32| :direction :out :array t :size
    #x10))
  :category "OES_query_matrix" :deprecated nil :version "4.3") 
 (make-extension-loader |OES_query_matrix|
  (("QueryMatrixxOES" query-matrixx-oes :return "GLbitfield" :args
-   ((:name |mantissa| :type |ConstFixed| :direction :in :array t
-     :size #x10)
-    (:name |exponent| :type |ConstInt32| :direction :in :array t
-     :size #x10))
+   ((:name |mantissa| :type |Fixed| :direction :out :array t :size
+     #x10)
+    (:name |exponent| :type |Int32| :direction :out :array t :size
+     #x10))
    :category "OES_query_matrix" :deprecated nil :version "4.3"))) 

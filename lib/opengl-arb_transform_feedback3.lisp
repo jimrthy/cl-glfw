@@ -6,7 +6,7 @@
 
 (defconstant +max-transform-feedback-buffers+ #x8E70) 
 (defconstant +max-vertex-streams+ #x8E71) 
-(defconstant +max-vertex-streams+ :unable-to-resolve) 
+(defconstant +max-vertex-streams+ (:use |ARB_gpu_shader5|)) 
 (defconstant +max-transform-feedback-buffers+ #x8E70) 
 (defconstant +max-vertex-streams+ #x8E71) 
 (defglextfun "GetQueryIndexediv" get-query-indexed-iv :return "void"

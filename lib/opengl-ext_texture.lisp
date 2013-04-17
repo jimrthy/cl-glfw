@@ -46,6 +46,7 @@
 (defconstant +proxy-texture-2d-ext+ #x8064) 
 (defconstant +rgba4-oes+ #x8056) 
 (defconstant +rgb5-a1-oes+ #x8057) 
+(defconstant +rgba8-oes+ #x8058) 
 (defconstant +alpha4-ext+ #x803B) 
 (defconstant +alpha8-ext+ #x803C) 
 (defconstant +alpha12-ext+ #x803D) 

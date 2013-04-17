@@ -5,3 +5,4 @@
 ;;;; ibm_cull_vertex
 
 (defconstant +cull-vertex-ibm+ #x1928A) 
+(defconstant +cull-vertex-ibm+ #x1928A) 

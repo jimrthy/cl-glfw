@@ -5,3 +5,4 @@
 ;;;; ext_clip_volume_hint
 
 (defconstant +clip-volume-clipping-hint-ext+ #x80F0) 
+(defconstant +clip-volume-clipping-hint-ext+ #x80F0) 

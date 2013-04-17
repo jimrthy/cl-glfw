@@ -5,3 +5,4 @@
 ;;;; arb_shadow_ambient
 
 (defconstant +texture-compare-fail-value-arb+ #x80BF) 
+(defconstant +texture-compare-fail-value-arb+ #x80BF) 

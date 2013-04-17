@@ -12,7 +12,7 @@
 (defconstant +half-bias-normal-nv+ #x853A) 
 (defconstant +half-bias-negate-nv+ #x853B) 
 (defconstant +signed-identity-nv+ #x853C) 
-(defconstant +unsigned-negate-nv+ #x853D) 
+(defconstant +signed-negate-nv+ #x853D) 
 (defconstant +scale-by-two-nv+ #x853E) 
 (defconstant +scale-by-four-nv+ #x853F) 
 (defconstant +scale-by-one-half-nv+ #x8540) 

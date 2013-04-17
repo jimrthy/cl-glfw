@@ -6,3 +6,5 @@
 
 (defconstant +phong-win+ #x80EA) 
 (defconstant +phong-hint-win+ #x80EB) 
+(defconstant +phong-win+ #x80EA) 
+(defconstant +phong-hint-win+ #x80EB) 

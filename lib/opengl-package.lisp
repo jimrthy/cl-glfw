@@ -306,20 +306,21 @@
              #:+post-color-matrix-red-bias-sgi+
              #:+post-color-matrix-green-bias-sgi+
              #:+post-color-matrix-blue-bias-sgi+
-             #:+post-color-matrix-alpha-bias-sgi+ #:+alpha-test-qcom+
-             #:+alpha-test-func-qcom+ #:+alpha-test-ref-qcom+
-             #:+draw-buffer-ext+ #:+read-buffer-ext+
-             #:+read-buffer-nv+ #:+texture-mag-filter+
-             #:+texture-min-filter+ #:+texture-wrap-s+
-             #:+texture-wrap-t+ #:+texture-width+ #:+texture-height+
-             #:+texture-internal-format+ #:+texture-components+
-             #:+texture-border-color+ #:+texture-border+
-             #:+texture-red-size+ #:+texture-green-size+
-             #:+texture-blue-size+ #:+texture-alpha-size+
-             #:+texture-luminance-size+ #:+texture-intensity-size+
-             #:+texture-priority+ #:+texture-resident+
-             #:+texture-depth-ext+ #:+texture-wrap-r-ext+
-             #:+detail-texture-level-sgis+
+             #:+post-color-matrix-alpha-bias-sgi+
+             #:+modelview0-stack-depth-ext+ #:+modelview0-matrix-ext+
+             #:+alpha-test-qcom+ #:+alpha-test-func-qcom+
+             #:+alpha-test-ref-qcom+ #:+draw-buffer-ext+
+             #:+read-buffer-ext+ #:+read-buffer-nv+
+             #:+texture-mag-filter+ #:+texture-min-filter+
+             #:+texture-wrap-s+ #:+texture-wrap-t+ #:+texture-width+
+             #:+texture-height+ #:+texture-internal-format+
+             #:+texture-components+ #:+texture-border-color+
+             #:+texture-border+ #:+texture-red-size+
+             #:+texture-green-size+ #:+texture-blue-size+
+             #:+texture-alpha-size+ #:+texture-luminance-size+
+             #:+texture-intensity-size+ #:+texture-priority+
+             #:+texture-resident+ #:+texture-depth-ext+
+             #:+texture-wrap-r-ext+ #:+detail-texture-level-sgis+
              #:+detail-texture-mode-sgis+
              #:+detail-texture-func-points-sgis+
              #:+generate-mipmap-sgis+
@@ -356,13 +357,13 @@
              #:+nor+ #:+equiv+ #:+invert+ #:+or-reverse+
              #:+copy-inverted+ #:+or-inverted+ #:+nand+ #:+set+
              #:+shininess+ #:+color-indexes+ #:+modelview+
-             #:+projection+ #:+texture+ #:+point+ #:+line+ #:+fill+
-             #:+color+ #:+depth+ #:+stencil+ #:+color-ext+
-             #:+depth-ext+ #:+stencil-ext+ #:+color-index+
-             #:+stencil-index+ #:+depth-component+ #:+red+ #:+green+
-             #:+blue+ #:+alpha+ #:+rgb+ #:+rgba+ #:+luminance+
-             #:+luminance-alpha+ #:+abgr-ext+ #:+cmyk-ext+
-             #:+cmyka-ext+ #:+r5-g6-b5-icc-sgix+
+             #:+projection+ #:+texture+ #:+modelview0-ext+ #:+point+
+             #:+line+ #:+fill+ #:+color+ #:+depth+ #:+stencil+
+             #:+color-ext+ #:+depth-ext+ #:+stencil-ext+
+             #:+color-index+ #:+stencil-index+ #:+depth-component+
+             #:+red+ #:+green+ #:+blue+ #:+alpha+ #:+rgb+ #:+rgba+
+             #:+luminance+ #:+luminance-alpha+ #:+abgr-ext+
+             #:+cmyk-ext+ #:+cmyka-ext+ #:+r5-g6-b5-icc-sgix+
              #:+r5-g6-b5-a8-icc-sgix+ #:+alpha16-icc-sgix+
              #:+luminance16-icc-sgix+ #:+luminance16-alpha8-icc-sgix+
              #:+ycrcb-422-sgix+ #:+ycrcb-444-sgix+ #:+red-ext+
@@ -692,7 +693,6 @@
              #:+query-by-region-no-wait+ #:+buffer-access-flags+
              #:+buffer-map-length+ #:+buffer-map-offset+
              #:+clamp-vertex-color+ #:+clamp-fragment-color+
-             #:+max-program-texture-gather-components+
              #:+perfmon-global-mode-qcom+
              #:+binning-control-hint-qcom+ #:+cpu-optimized-qcom+
              #:+gpu-optimized-qcom+
@@ -725,8 +725,9 @@
              #:+max-fragment-input-components+
              #:+context-profile-mask+ #:+vertex-attrib-array-divisor+
              #:+sample-shading+ #:+min-sample-shading-value+
-             #:+etc1-rgb8-oes+ #:+texture-external-oes+
-             #:+sampler-external-oes+
+             #:+min-program-texture-gather-offset+
+             #:+max-program-texture-gather-offset+ #:+etc1-rgb8-oes+
+             #:+texture-external-oes+ #:+sampler-external-oes+
              #:+texture-binding-external-oes+
              #:+required-texture-image-units-oes+ #:viewport
              #:depth-range #:is-enabled #:get-tex-level-parameter-iv
@@ -812,17 +813,18 @@
              #:blend-func-separate-i #:blend-func-i
              #:blend-equation-separate-i #:blend-equation-i
              #:min-sample-shading #:load-version_4_1
-             #:+rgba-float-mode-ati+ #:+cull-vertex-ibm+
-             #:+wrap-border-sun+ #:+fog-scale-sgix+
-             #:+fog-scale-value-sgix+ #:+occlusion-test-hp+
-             #:+occlusion-test-result-hp+
-             #:+fog-specular-texture-win+ #:+phong-win+
-             #:+phong-hint-win+ #:+texture-lighting-mode-hp+
-             #:+texture-post-specular-hp+ #:+texture-pre-specular-hp+
-             #:+raster-position-unclipped-ibm+
-             #:+clip-volume-clipping-hint-ext+
+             #:+wrap-border-sun+ #:+rgb32f+ #:+rg+ #:+rg-integer+
+             #:+r8+ #:+r16+ #:+rg8+ #:+rg16+ #:+r16f+ #:+r32f+
+             #:+rg16f+ #:+rg32f+ #:+r8i+ #:+r8ui+ #:+r16i+ #:+r16ui+
+             #:+r32i+ #:+r32ui+ #:+rg8i+ #:+rg8ui+ #:+rg16i+
+             #:+rg16ui+ #:+rg32i+ #:+rg32ui+ #:+compressed-red-rgtc1+
+             #:+compressed-signed-red-rgtc1+ #:+compressed-rg-rgtc2+
+             #:+compressed-signed-rg-rgtc2+ #:+half-float+
+             #:+framebuffer-srgb+ #:+depth-component32f+
+             #:+depth32f-stencil8+ #:+float-32-unsigned-int-24-8-rev+
              #:+vertex-data-hint-pgi+ #:+vertex-consistent-hint-pgi+
              #:+material-side-hint-pgi+ #:+max-vertex-hint-pgi+
+             #:+vertex23-bit-pgi+ #:+vertex4-bit-pgi+
              #:+color3-bit-pgi+ #:+color4-bit-pgi+
              #:+edgeflag-bit-pgi+ #:+index-bit-pgi+
              #:+mat-ambient-bit-pgi+
@@ -832,17 +834,7 @@
              #:+mat-specular-bit-pgi+ #:+normal-bit-pgi+
              #:+texcoord1-bit-pgi+ #:+texcoord2-bit-pgi+
              #:+texcoord3-bit-pgi+ #:+texcoord4-bit-pgi+
-             #:+vertex23-bit-pgi+ #:+vertex4-bit-pgi+ #:+rgb32f+
-             #:+rg+ #:+rg-integer+ #:+r8+ #:+r16+ #:+rg8+ #:+rg16+
-             #:+r16f+ #:+r32f+ #:+rg16f+ #:+rg32f+ #:+r8i+ #:+r8ui+
-             #:+r16i+ #:+r16ui+ #:+r32i+ #:+r32ui+ #:+rg8i+ #:+rg8ui+
-             #:+rg16i+ #:+rg16ui+ #:+rg32i+ #:+rg32ui+
-             #:+compressed-red-rgtc1+ #:+compressed-signed-red-rgtc1+
-             #:+compressed-rg-rgtc2+ #:+compressed-signed-rg-rgtc2+
-             #:+half-float+ #:+framebuffer-srgb+
-             #:+depth-component32f+ #:+depth32f-stencil8+
-             #:+float-32-unsigned-int-24-8-rev+
-             #:+texture-compare-fail-value-arb+
+             #:+cull-vertex-ibm+ #:+raster-position-unclipped-ibm+
              #:+compressed-rgba-astc-4x4-khr+
              #:+compressed-rgba-astc-5x4-khr+
              #:+compressed-rgba-astc-5x5-khr+
@@ -916,14 +908,12 @@
              #:+unsigned-int-sampler-cube-map-array-arb+
              #:+coverage-component-nv+ #:+coverage-component4-nv+
              #:+coverage-attachment-nv+ #:+coverage-buffers-nv+
-             #:+coverage-all-fragments-nv+
+             #:+coverage-samples-nv+ #:+coverage-all-fragments-nv+
              #:+coverage-edge-fragments-nv+ #:+coverage-automatic-nv+
              #:+compressed-rgba-bptc-unorm-arb+
              #:+compressed-srgb-alpha-bptc-unorm-arb+
              #:+compressed-rgb-bptc-signed-float-arb+
              #:+compressed-rgb-bptc-unsigned-float-arb+
-             #:+min-program-texture-gather-offset+
-             #:+max-program-texture-gather-offset+
              #:+min-program-texture-gather-offset-arb+
              #:+max-program-texture-gather-offset-arb+
              #:+max-program-texture-gather-components-arb+
@@ -1074,9 +1064,17 @@
              #:+compare-ref-depth-to-texture-ext+
              #:+texture-compare-mode-arb+
              #:+texture-compare-func-arb+
-             #:+compare-r-to-texture-arb+ #:+rgba-float32-apple+
-             #:+rgb-float32-apple+ #:+alpha-float32-apple+
-             #:+intensity-float32-apple+ #:+luminance-float32-apple+
+             #:+compare-r-to-texture-arb+
+             #:+writeonly-rendering-qcom+ #:+max-draw-buffers+
+             #:+draw-buffer0+ #:+draw-buffer1+ #:+draw-buffer2+
+             #:+draw-buffer3+ #:+draw-buffer4+ #:+draw-buffer5+
+             #:+draw-buffer6+ #:+draw-buffer7+ #:+draw-buffer8+
+             #:+draw-buffer9+ #:+draw-buffer10+ #:+draw-buffer11+
+             #:+draw-buffer12+ #:+draw-buffer13+ #:+draw-buffer14+
+             #:+draw-buffer15+ #:+rgba-float-mode-ati+
+             #:+rgba-float32-apple+ #:+rgb-float32-apple+
+             #:+alpha-float32-apple+ #:+intensity-float32-apple+
+             #:+luminance-float32-apple+
              #:+luminance-alpha-float32-apple+ #:+rgba-float16-apple+
              #:+rgb-float16-apple+ #:+alpha-float16-apple+
              #:+intensity-float16-apple+ #:+luminance-float16-apple+
@@ -1147,10 +1145,10 @@
              #:+dsdt-mag-intensity-nv+ #:+shader-consistent-nv+
              #:+texture-shader-nv+ #:+shader-operation-nv+
              #:+cull-modes-nv+ #:+offset-texture-matrix-nv+
-             #:+offset-texture-scale-nv+ #:+offset-texture-bias-nv+
              #:+offset-texture-2d-matrix-nv+
+             #:+offset-texture-scale-nv+
              #:+offset-texture-2d-scale-nv+
-             #:+offset-texture-2d-bias-nv+
+             #:+offset-texture-bias-nv+ #:+offset-texture-2d-bias-nv+
              #:+previous-texture-input-nv+ #:+const-eye-nv+
              #:+pass-through-nv+ #:+cull-fragment-nv+
              #:+offset-texture-2d-nv+ #:+dependent-ar-texture-2d-nv+
@@ -1201,13 +1199,12 @@
              #:+unsigned-short-8-8-apple+
              #:+unsigned-short-8-8-rev-apple+
              #:+unpack-client-storage-apple+ #:+transform-hint-apple+
-             #:+light-model-specular-vector-apple+ #:+combine4-nv+
-             #:+source3-rgb-nv+ #:+source3-alpha-nv+
-             #:+operand3-rgb-nv+ #:+operand3-alpha-nv+
-             #:+combine-ext+ #:+combine-rgb-ext+
-             #:+combine-alpha-ext+ #:+rgb-scale-ext+
-             #:+add-signed-ext+ #:+interpolate-ext+ #:+constant-ext+
-             #:+primary-color-ext+ #:+previous-ext+
+             #:+light-model-specular-vector-apple+ #:+source3-rgb-nv+
+             #:+source3-alpha-nv+ #:+operand3-rgb-nv+
+             #:+operand3-alpha-nv+ #:+combine-ext+
+             #:+combine-rgb-ext+ #:+combine-alpha-ext+
+             #:+rgb-scale-ext+ #:+add-signed-ext+ #:+interpolate-ext+
+             #:+constant-ext+ #:+primary-color-ext+ #:+previous-ext+
              #:+source0-rgb-ext+ #:+source1-rgb-ext+
              #:+source2-rgb-ext+ #:+source0-alpha-ext+
              #:+source1-alpha-ext+ #:+source2-alpha-ext+
@@ -1228,10 +1225,9 @@
              #:+green-max-clamp-ingr+ #:+blue-max-clamp-ingr+
              #:+alpha-max-clamp-ingr+ #:+emboss-light-nv+
              #:+emboss-constant-nv+ #:+emboss-map-nv+
-             #:+fog-gen-mode-nv+ #:+fog-distance-mode-nv+
-             #:+eye-radial-nv+ #:+eye-plane-absolute-nv+
-             #:+normal-map-oes+ #:+reflection-map-oes+
-             #:+texture-cube-map-oes+
+             #:+fog-distance-mode-nv+ #:+eye-radial-nv+
+             #:+eye-plane-absolute-nv+ #:+normal-map-oes+
+             #:+reflection-map-oes+ #:+texture-cube-map-oes+
              #:+texture-binding-cube-map-oes+
              #:+texture-cube-map-positive-x-oes+
              #:+texture-cube-map-negative-x-oes+
@@ -1292,15 +1288,6 @@
              #:+previous-arb+ #:+active-texture+
              #:+client-active-texture+ #:+max-texture-units+
              #:+screen-coordinates-rend+ #:+inverted-screen-w-rend+
-             #:+fog-coord-src+ #:+fog-coord+ #:+current-fog-coord+
-             #:+fog-coord-array-type+ #:+fog-coord-array-stride+
-             #:+fog-coord-array-pointer+ #:+fog-coord-array+
-             #:+fog-coordinate-source+ #:+fog-coordinate+
-             #:+fragment-depth+ #:+current-fog-coordinate+
-             #:+fog-coordinate-array-type+
-             #:+fog-coordinate-array-stride+
-             #:+fog-coordinate-array-pointer+
-             #:+fog-coordinate-array+
              #:+compressed-rgba-s3tc-dxt3-angle+
              #:+compressed-rgba-s3tc-dxt5-angle+
              #:+compressed-rgb-s3tc-dxt1-ext+
@@ -1310,9 +1297,9 @@
              #:+rgb4-s3tc+ #:+rgba-s3tc+ #:+rgba4-s3tc+
              #:+rgba-dxt5-s3tc+ #:+rgba4-dxt5-s3tc+
              #:+mirrored-repeat-oes+ #:+mirrored-repeat-ibm+
-             #:+mirrored-repeat-arb+ #:+fog-factor-to-alpha-sgix+
-             #:+mirrored-repeat+ #:+line-quality-hint-sgix+
-             #:+scalebias-hint-sgix+ #:+unpack-compressed-size-sgix+
+             #:+mirrored-repeat-arb+ #:+mirrored-repeat+
+             #:+line-quality-hint-sgix+ #:+scalebias-hint-sgix+
+             #:+unpack-compressed-size-sgix+
              #:+pack-max-compressed-size-sgix+
              #:+pack-compressed-size-sgix+ #:+slim8u-sgix+
              #:+slim10u-sgix+ #:+slim12s-sgix+ #:+ycrcb-sgix+
@@ -1330,13 +1317,18 @@
              #:+texture-depth-size-arb+ #:+depth-texture-mode-arb+
              #:+depth-component16+ #:+depth-component24+
              #:+depth-component32+ #:+generate-mipmap+
-             #:+generate-mipmap-hint+ #:+ignore-border-hp+
-             #:+constant-border-hp+ #:+replicate-border-hp+
-             #:+convolution-border-color-hp+ #:+clamp-to-edge+
-             #:+clamp-to-border-nv+ #:+clamp-to-border-arb+
-             #:+point-size-min+ #:+point-size-max+
-             #:+point-fade-threshold-size+
-             #:+point-distance-attenuation+ #:+bgr-ext+ #:+bgra-ext+
+             #:+generate-mipmap-hint+ #:+texture-lighting-mode-hp+
+             #:+texture-post-specular-hp+ #:+texture-pre-specular-hp+
+             #:+occlusion-test-hp+ #:+occlusion-test-result-hp+
+             #:+ignore-border-hp+ #:+constant-border-hp+
+             #:+replicate-border-hp+ #:+convolution-border-color-hp+
+             #:+clamp-to-edge+ #:+clamp-to-border-nv+
+             #:+clamp-to-border-arb+ #:+point-size-min+
+             #:+point-size-max+ #:+point-fade-threshold-size+
+             #:+point-distance-attenuation+
+             #:+clip-volume-clipping-hint-ext+
+             #:+fog-specular-texture-win+ #:+phong-win+
+             #:+phong-hint-win+ #:+bgr-ext+ #:+bgra-ext+
              #:+color-table+ #:+post-convolution-color-table+
              #:+post-color-matrix-color-table+ #:+proxy-color-table+
              #:+proxy-post-convolution-color-table+
@@ -1350,7 +1342,8 @@
              #:+422-rev-ext+ #:+422-average-ext+
              #:+422-rev-average-ext+ #:+blend-dst-rgb+
              #:+blend-src-rgb+ #:+blend-dst-alpha+
-             #:+blend-src-alpha+ #:+rgba4-oes+ #:+rgb5-a1-oes+
+             #:+blend-src-alpha+ #:+texture-compare-fail-value-arb+
+             #:+rgba4-oes+ #:+rgb5-a1-oes+ #:+rgba8-oes+
              #:+alpha4-ext+ #:+alpha8-ext+ #:+alpha12-ext+
              #:+alpha16-ext+ #:+luminance4-ext+ #:+luminance8-ext+
              #:+luminance12-ext+ #:+luminance16-ext+
@@ -1707,14 +1700,7 @@
              #:+draw-buffer11-arb+ #:+draw-buffer12-arb+
              #:+draw-buffer13-arb+ #:+draw-buffer14-arb+
              #:+draw-buffer15-arb+ #:draw-buffers-arb
-             #:load-arb_draw_buffers #:+type-rgba-float-ati+
-             #:+writeonly-rendering-qcom+ #:+max-draw-buffers+
-             #:+draw-buffer0+ #:+draw-buffer1+ #:+draw-buffer2+
-             #:+draw-buffer3+ #:+draw-buffer4+ #:+draw-buffer5+
-             #:+draw-buffer6+ #:+draw-buffer7+ #:+draw-buffer8+
-             #:+draw-buffer9+ #:+draw-buffer10+ #:+draw-buffer11+
-             #:+draw-buffer12+ #:+draw-buffer13+ #:+draw-buffer14+
-             #:+draw-buffer15+ #:+rgba-float-mode-arb+
+             #:load-arb_draw_buffers #:+rgba-float-mode-arb+
              #:+clamp-vertex-color-arb+ #:+clamp-fragment-color-arb+
              #:+clamp-read-color-arb+ #:+fixed-only-arb+
              #:clamp-color-arb #:load-arb_color_buffer_float
@@ -2690,11 +2676,19 @@
              #:+fog-coordinate-array-pointer-ext+
              #:+fog-coordinate-array-ext+ #:fog-coord-pointer-ext
              #:fog-coord-dv-ext #:fog-coord-d-ext #:fog-coord-fv-ext
-             #:fog-coord-f-ext #:load-ext_fog_coord
-             #:+tangent-array-ext+ #:+binormal-array-ext+
-             #:+current-tangent-ext+ #:+current-binormal-ext+
-             #:+tangent-array-type-ext+ #:+tangent-array-stride-ext+
-             #:+binormal-array-type-ext+
+             #:fog-coord-f-ext #:load-ext_fog_coord #:+fog-coord-src+
+             #:+fog-coord+ #:+current-fog-coord+
+             #:+fog-coord-array-type+ #:+fog-coord-array-stride+
+             #:+fog-coord-array-pointer+ #:+fog-coord-array+
+             #:+fog-coordinate-source+ #:+fog-coordinate+
+             #:+fragment-depth+ #:+current-fog-coordinate+
+             #:+fog-coordinate-array-type+
+             #:+fog-coordinate-array-stride+
+             #:+fog-coordinate-array-pointer+
+             #:+fog-coordinate-array+ #:+tangent-array-ext+
+             #:+binormal-array-ext+ #:+current-tangent-ext+
+             #:+current-binormal-ext+ #:+tangent-array-type-ext+
+             #:+tangent-array-stride-ext+ #:+binormal-array-type-ext+
              #:+binormal-array-stride-ext+
              #:+tangent-array-pointer-ext+
              #:+binormal-array-pointer-ext+ #:+map1-tangent-ext+
@@ -2775,9 +2769,9 @@
              #:+blend-src-alpha-ext+ #:blend-func-separate-ext
              #:load-ext_blend_func_separate
              #:blend-func-separate-ingr
-             #:load-ingr_blend_func_separate
-             #:+modelview-matrix1-ext+ #:+incr-wrap+ #:+decr-wrap+
-             #:+normal-map+ #:+reflection-map+ #:+texture-cube-map+
+             #:load-ingr_blend_func_separate #:+combine4-nv+
+             #:+incr-wrap+ #:+decr-wrap+ #:+normal-map+
+             #:+reflection-map+ #:+texture-cube-map+
              #:+texture-binding-cube-map+
              #:+texture-cube-map-positive-x+
              #:+texture-cube-map-negative-x+
@@ -2786,10 +2780,8 @@
              #:+texture-cube-map-positive-z+
              #:+texture-cube-map-negative-z+
              #:+proxy-texture-cube-map+ #:+max-cube-map-texture-size+
-             #:+modelview0-stack-depth-ext+
-             #:+modelview1-stack-depth-ext+ #:+modelview0-matrix-ext+
-             #:+modelview1-matrix-ext+ #:+vertex-weighting-ext+
-             #:+modelview0-ext+ #:+modelview1-ext+
+             #:+modelview1-stack-depth-ext+ #:+modelview1-matrix-ext+
+             #:+vertex-weighting-ext+ #:+modelview1-ext+
              #:+current-vertex-weight-ext+
              #:+vertex-weight-array-ext+
              #:+vertex-weight-array-size-ext+
@@ -2812,8 +2804,8 @@
              #:+variable-g-nv+ #:+constant-color0-nv+
              #:+constant-color1-nv+ #:+spare0-nv+ #:+spare1-nv+
              #:+discard-nv+ #:+e-times-f-nv+
-             #:+spare0-plus-secondary-color-nv+ #:+signed-negate-nv+
-             #:+texture0-arb+ #:+texture1-arb+
+             #:+spare0-plus-secondary-color-nv+ #:+texture0-arb+
+             #:+texture1-arb+
              #:get-final-combiner-input-parameter-iv-nv
              #:get-final-combiner-input-parameter-fv-nv
              #:get-combiner-output-parameter-iv-nv
@@ -2840,6 +2832,28 @@
              #:load-mesa_window_pos #:multi-mode-draw-elements-ibm
              #:multi-mode-draw-arrays-ibm
              #:load-ibm_multimode_draw_arrays
+             #:vertex-pointer-list-ibm #:tex-coord-pointer-list-ibm
+             #:normal-pointer-list-ibm #:index-pointer-list-ibm
+             #:fog-coord-pointer-list-ibm
+             #:edge-flag-pointer-list-ibm
+             #:secondary-color-pointer-list-ibm
+             #:color-pointer-list-ibm #:load-ibm_vertex_array_lists
+             #:tbuffer-mask-3dfx #:load-3dfx_tbuffer
+             #:+multisample-ext+ #:+sample-alpha-to-mask-ext+
+             #:+sample-alpha-to-one-ext+ #:+sample-mask-ext+
+             #:+1pass-ext+ #:+2pass-0-ext+ #:+2pass-1-ext+
+             #:+4pass-0-ext+ #:+4pass-1-ext+ #:+4pass-2-ext+
+             #:+4pass-3-ext+ #:+sample-buffers-ext+ #:+samples-ext+
+             #:+sample-mask-value-ext+ #:+sample-mask-invert-ext+
+             #:+sample-pattern-ext+ #:+multisample-bit-ext+
+             #:sample-pattern-ext #:sample-mask-ext
+             #:load-ext_multisample #:+texture-color-writemask-sgis+
+             #:texture-color-mask-sgis #:load-sgis_texture_color_mask
+             #:igloo-interface-sgix #:load-sgix_igloo_interface
+             #:+all-completed-nv+ #:+fence-status-nv+
+             #:+fence-condition-nv+ #:set-fence-nv #:finish-fence-nv
+             #:get-fence-iv-nv #:test-fence-nv #:is-fence-nv
+             #:gen-fences-nv #:delete-fences-nv #:load-nv_fence
              #:+vertex-array-list-ibm+ #:+normal-array-list-ibm+
              #:+color-array-list-ibm+ #:+index-array-list-ibm+
              #:+texture-coord-array-list-ibm+
@@ -2854,37 +2868,8 @@
              #:+edge-flag-array-list-stride-ibm+
              #:+fog-coordinate-array-list-stride-ibm+
              #:+secondary-color-array-list-stride-ibm+
-             #:vertex-pointer-list-ibm #:tex-coord-pointer-list-ibm
-             #:normal-pointer-list-ibm #:index-pointer-list-ibm
-             #:fog-coord-pointer-list-ibm
-             #:edge-flag-pointer-list-ibm
-             #:secondary-color-pointer-list-ibm
-             #:color-pointer-list-ibm #:load-ibm_vertex_array_lists
-             #:tbuffer-mask-3dfx #:load-3dfx_tbuffer
-             #:+coverage-samples-nv+ #:+multisample-ext+
-             #:+sample-alpha-to-mask-ext+ #:+sample-alpha-to-one-ext+
-             #:+sample-mask-ext+ #:+1pass-ext+ #:+2pass-0-ext+
-             #:+2pass-1-ext+ #:+4pass-0-ext+ #:+4pass-1-ext+
-             #:+4pass-2-ext+ #:+4pass-3-ext+ #:+sample-buffers-ext+
-             #:+samples-ext+ #:+sample-mask-value-ext+
-             #:+sample-mask-invert-ext+ #:+sample-pattern-ext+
-             #:+multisample-bit-ext+ #:sample-pattern-ext
-             #:sample-mask-ext #:load-ext_multisample
-             #:+texture-color-writemask-sgis+
-             #:texture-color-mask-sgis #:load-sgis_texture_color_mask
-             #:igloo-interface-sgix #:load-sgix_igloo_interface
-             #:+all-completed-nv+ #:+fence-status-nv+
-             #:+fence-condition-nv+ #:set-fence-nv #:finish-fence-nv
-             #:get-fence-iv-nv #:test-fence-nv #:is-fence-nv
-             #:gen-fences-nv #:delete-fences-nv #:load-nv_fence
-             #:+eval-vertex-atrrib0-nv+ #:+eval-vertex-atrrib1-nv+
-             #:+eval-vertex-atrrib2-nv+ #:+eval-vertex-atrrib3-nv+
-             #:+eval-vertex-atrrib4-nv+ #:+eval-vertex-atrrib5-nv+
-             #:+eval-vertex-atrrib6-nv+ #:+eval-vertex-atrrib7-nv+
-             #:+eval-vertex-atrrib8-nv+ #:+eval-vertex-atrrib9-nv+
-             #:+eval-vertex-atrrib10-nv+ #:+eval-vertex-atrrib11-nv+
-             #:+eval-vertex-atrrib12-nv+ #:+eval-vertex-atrrib13-nv+
-             #:+eval-vertex-atrrib14-nv+ #:+eval-vertex-atrrib15-nv+
+             #:+all-static-data-ibm+ #:+static-vertex-array-ibm+
+             #:flush-static-data-ibm #:load-ibm_static_data
              #:+eval-2d-nv+ #:+eval-triangular-2d-nv+
              #:+map-tessellation-nv+ #:+map-attrib-u-order-nv+
              #:+map-attrib-v-order-nv+
@@ -2908,7 +2893,7 @@
              #:+unsigned-invert-nv+ #:+expand-normal-nv+
              #:+expand-negate-nv+ #:+half-bias-normal-nv+
              #:+half-bias-negate-nv+ #:+signed-identity-nv+
-             #:+unsigned-negate-nv+ #:+scale-by-two-nv+
+             #:+signed-negate-nv+ #:+scale-by-two-nv+
              #:+scale-by-four-nv+ #:+scale-by-one-half-nv+
              #:+bias-by-negative-one-half-nv+ #:+combiner-input-nv+
              #:+combiner-mapping-nv+ #:+combiner-component-usage-nv+
@@ -3964,7 +3949,7 @@
              #:+tessellation-mode-amd+ #:+tessellation-factor-amd+
              #:+discrete-amd+ #:+continuous-amd+
              #:tessellation-mode-amd #:tessellation-factor-amd
-             #:load-amd_vertex_shader_tesselator
+             #:load-amd_vertex_shader_tessellator
              #:+quads-follow-provoking-vertex-convention-ext+
              #:+first-vertex-convention-ext+
              #:+last-vertex-convention-ext+ #:+provoking-vertex-ext+
@@ -4135,13 +4120,13 @@
              #:+all-barrier-bits-ext+ #:memory-barrier-ext
              #:bind-image-texture-ext
              #:load-ext_shader_image_load_store
-             #:+mali-shader-binary-arm+ #:+double-vec2-ext+
-             #:+double-vec3-ext+ #:+double-vec4-ext+
-             #:+double-mat2-ext+ #:+double-mat3-ext+
-             #:+double-mat4-ext+ #:+double-mat2x3-ext+
-             #:+double-mat2x4-ext+ #:+double-mat3x2-ext+
-             #:+double-mat3x4-ext+ #:+double-mat4x2-ext+
-             #:+double-mat4x3-ext+
+             #:+mali-shader-binary-arm+ #:+mali-program-binary-arm+
+             #:+double-vec2-ext+ #:+double-vec3-ext+
+             #:+double-vec4-ext+ #:+double-mat2-ext+
+             #:+double-mat3-ext+ #:+double-mat4-ext+
+             #:+double-mat2x3-ext+ #:+double-mat2x4-ext+
+             #:+double-mat3x2-ext+ #:+double-mat3x4-ext+
+             #:+double-mat4x2-ext+ #:+double-mat4x3-ext+
              #:vertex-array-vertex-attrib-loffset-ext
              #:get-vertex-attrib-l-dv-ext
              #:vertex-attrib-lpointer-ext #:vertex-attrib-l-4dv-ext

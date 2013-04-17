@@ -5,3 +5,4 @@
 ;;;; win_specular_fog
 
 (defconstant +fog-specular-texture-win+ #x80EC) 
+(defconstant +fog-specular-texture-win+ #x80EC) 

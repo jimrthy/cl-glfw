@@ -8,7 +8,6 @@
 (defconstant +active-program+ #x8259) 
 (defconstant +program-pipeline-binding+ #x825A) 
 (defconstant +program-separable-ext+ #x8258) 
-(defconstant +active-program-ext+ #x8259) 
 (defconstant +program-pipeline-binding-ext+ #x825A) 
 (defconstant +vertex-shader-bit+ #x1) 
 (defconstant +fragment-shader-bit+ #x2) 

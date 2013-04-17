@@ -11,6 +11,13 @@
 (defconstant +color-index12-ext+ #x80E6) 
 (defconstant +color-index16-ext+ #x80E7) 
 (defconstant +texture-index-size-ext+ #x80ED) 
+(defconstant +color-index1-ext+ #x80E2) 
+(defconstant +color-index2-ext+ #x80E3) 
+(defconstant +color-index4-ext+ #x80E4) 
+(defconstant +color-index8-ext+ #x80E5) 
+(defconstant +color-index12-ext+ #x80E6) 
+(defconstant +color-index16-ext+ #x80E7) 
+(defconstant +texture-index-size-ext+ #x80ED) 
 (defglextfun "GetColorTableParameterfvEXT"
  get-color-table-parameter-fv-ext :return "void" :args
  ((:name |target| :type |ColorTableTarget| :direction :in)

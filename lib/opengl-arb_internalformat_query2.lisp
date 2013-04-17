@@ -114,8 +114,10 @@
 (defconstant +texture-cube-map-array+ #x9009) 
 (defconstant +texture-rectangle+ #x84F5) 
 (defconstant +texture-buffer+ #x8C2A) 
-(defconstant +texture-2d-multisample+ #x9100) 
-(defconstant +texture-2d-multisample-array+ #x9102) 
+(defconstant +texture-2d-multisample+ (:use
+                                       |ARB_texture_multisample|)) 
+(defconstant +texture-2d-multisample-array+ (:use
+                                             |ARB_texture_multisample|)) 
 (defconstant +texture-compressed+ #x86A1) 
 (defconstant +internalformat-supported+ #x826F) 
 (defconstant +internalformat-preferred+ #x8270) 

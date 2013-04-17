@@ -483,7 +483,7 @@
 (defconstant +clamp-read-color-arb+ #x891C) 
 (defconstant +fixed-only-arb+ #x891D) 
 (defconstant +max-varying-components+ #x8B4B) 
-(defconstant +max-varying-components+ :unable-to-resolve) 
+(defconstant +max-varying-components+ (:use version_3_0)) 
 (defconstant +max-varying-components-ext+ #x8B4B) 
 (defconstant +texture-red-type+ #x8C10) 
 (defconstant +texture-green-type+ #x8C11) 

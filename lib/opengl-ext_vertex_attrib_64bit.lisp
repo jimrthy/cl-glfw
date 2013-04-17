@@ -14,6 +14,7 @@
 (defconstant +double-mat4x2-ext+ #x8F4D) 
 (defconstant +double-mat4x3-ext+ #x8F4E) 
 (defconstant +mali-shader-binary-arm+ #x8F60) 
+(defconstant +mali-program-binary-arm+ #x8F61) 
 (defconstant +double-vec2-ext+ #x8FFC) 
 (defconstant +double-vec3-ext+ #x8FFD) 
 (defconstant +double-vec4-ext+ #x8FFE) 

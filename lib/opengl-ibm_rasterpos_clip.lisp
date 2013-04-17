@@ -5,3 +5,4 @@
 ;;;; ibm_rasterpos_clip
 
 (defconstant +raster-position-unclipped-ibm+ #x19262) 
+(defconstant +raster-position-unclipped-ibm+ #x19262) 
