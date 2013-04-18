@@ -1,9 +1,4 @@
 src
-#src/gl.spec.lisp
-#src/gl.spec
-#src/gl.tm
-#src/enum.spec
-#src/enumext.spec
 *.fasl
 *.fas
 *~
