@@ -3,6 +3,8 @@
   (:use #:cl)
   (:export #:scan-available-extensions #:available-extensions #:extension-available-p #:load-extension))
 
+(error "Test")
+
 (in-package #:gl-ext)
 
 (declaim (optimize (debug 3) (speed 0) (space 0)))

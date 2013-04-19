@@ -7,7 +7,7 @@
 ;; Maybe I'm just reading the ASDF totally wrong?
 ;;; FIXME: Start here. Maybe try loading the pieces by
 ;;; hand, one line at a time.
-(error "Make it so.")
+;(error "Make it so.")
 (asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_1)
 ;;(asdf:oos 'asdf:load-op '#:cl-glfw-opengl-version_1_2)
 (asdf:oos 'asdf:load-op '#:cl-glfw-glu)
