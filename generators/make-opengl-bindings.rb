@@ -38,7 +38,8 @@ puts "Converting to sexps:"
 puts `ruby #{BASE}/generators/sexpize-gl-spec.rb`
 check_ok
 puts "Generating:"
-# Seems wrong to make this SBCL-specific
-puts `sbcl --end-runtime-options --load #{BASE}/generators/make-bindings-from-spec.lisp --eval "(progn (main) (sb-ext:quit))" --end-toplevel-options`
+# Seems wrong to make this SBCL-specific.
+# Especially since it apparently does not work.
+puts `sbcl --load #{BASE}/generators/make-bindings-from-spec.lisp --eval "(progn (main) (sb-ext:quit))"`
 check_ok
 
