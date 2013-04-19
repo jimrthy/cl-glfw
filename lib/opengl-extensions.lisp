@@ -3,7 +3,8 @@
   (:use #:cl)
   (:export #:scan-available-extensions #:available-extensions #:extension-available-p #:load-extension))
 
-(error "Test")
+;; OK. I wasn't getting here because of ASDF caching issues.
+;(error "Test")
 
 (in-package #:gl-ext)
 
