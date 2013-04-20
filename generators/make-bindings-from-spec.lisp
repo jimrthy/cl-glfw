@@ -10,10 +10,17 @@
 ;;; out. If I try to load it a second time, it loads fine.
 ;;; Then (main) restores the "unable-to-resolve" duplicated
 ;;; constants.
+
 ;;; Deal with Unicode issues
 #+sbcl (unless (eq sb-impl::*default-external-format* :UTF-8)
 	 (setf sb-impl::*default-external-format* :UTF-8))
-#+ccl (setf *print-pretty* t)
+;;; CCL currently defaults to UTF-8 for external files. Doesn't
+;;; hurt to make that explicit.
+;;; More importantly (perhaps), it defaults to ugly printing
+#+ccl (progn
+	(setf *print-pretty* t)
+	(unless (eq ccl:*default-file-character-encoding* :UTF-8)
+	  (setf ccl:*default-file-character-encoding* :UTF-8)))
 
 ;;; {{{ PARAMETERS
 
@@ -38,7 +45,6 @@
 		     "2_0" "2_1"
 		     "3_0" "3_1" "3_2" "3_3"
 		     "4_0" "4_1"
-		     ;; "4_2" "4_3" ; Need to add support for these
 		     )
   "List of versioned extensions for dependency generation. 
 Must be in the correct order.")
@@ -89,11 +95,25 @@ Must be in the correct order.")
   "Converts a symbol into a nice constant-style symbol,
 changing non-alphanumeric characters to - and surrounding it
 with +s."
+  ;; This function is needed for backwards compatibility
+  #+obsolete(error "Like most 'constants', the ones in OpenGL aren't")
   (let ((name (format nil "+~A+"
 		       (map 'string #'(lambda (c) (if (alphanumericp c) c #\-))
 			    (string-upcase (string symbol))))))
     (format t "Constantizing ~A to ~A" (string symbol) name)
     (intern name)))
+
+;; Doesn't really belong here...want to separate "new" generation from original.
+#+todo(defun paramaterize (symbol)
+  "Converts a symbol into an ear-muffed thing with A/N's converted to -"
+  (let ((name (format nil "*~A*"
+		      (map 'string (lambda (c))
+			   (if (alphanumericp c)
+			       c
+			       #\-)
+			   (string-upcase (string symbol))))
+	  (format t "Parameterizing ~A to ~A" (string symbol) name)
+	  (intern name)))))
 
 (defun deconstant (symbol)
   "Sometimes argument names of OpenGL™ functions have silly names like
@@ -102,29 +122,31 @@ with +s."
       symbol
       (deconstant (intern (concatenate 'string "_" (symbol-name symbol))))))
 
-;;}}}
+    ;;}}}
 
 ;;; {{{ FUNC-SPEC
 ;;; It seems like this could be made more obvious.
 ;;; It looks like this is breaking down the bindings defined in gl.spec.lisp.
-;; Standard C function name
+    ;; Standard C function name
+  
+
+
+
 (defun c-name-of (func-spec) (first func-spec))
-;; What are we calling it?
+  ;; What are we calling it?
+  
 (defun lisp-name-of (func-spec) (second func-spec))
 ;; C return type
 (defun freturn-of (func-spec) (getf (cddr func-spec) :return))
 ;; Parameters to the function.
 ;; Defined by :param values to the spec.
 (defun args-of (func-spec) (getf (cddr func-spec) :args))
-;; ??? What's going on here?
+
 (defun category-of (func-spec) 
-   #|
-  (intern
-   (getf (cddr func-spec) 
-	 :category)))
-   |#
   (let ((category (getf (cddr func-spec) :category)))
     (intern category)))
+
+
 ;;; }}}
 
 ;;; {{{ FIX TYPE-MAPS
