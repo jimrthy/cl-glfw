@@ -86,3 +86,51 @@ vision.
 
 In the meantime, I should be about breaking things so I
 can get a feel for the way they work.
+
+Actual Sequence
+---------------
+
+(cl-glfw:init)
+Initializes glfw. The first thing that must be called.
+Sets cl-glfw::*was-init* to T
+
+(cl-glfw:terminate)
+Cleans up the mess.
+
+(cl-glfw:with-init)
+Wrapper around those 2.
+
+(cl-glfw:do-window)
+Higher level wrapper that makes callback functions nicer to bother with.
+
+(cl-glfw:swap-interval interval)
+interval is the minimum # of vertical refreshes between redraws.
+0 turns off vsync.
+1 sets it to monitor's refresh rate.
+Very much depends on hardware and drivers.
+
+(cl-glfw:get-video-modes count)
+Returns a description of up to count available video modes
+
+(cl-glfw:get-desktop-mode)
+Returns a description of the current desktop video mode.
+Note that this isn't necessarily particularly accurate.
+Especially when multiple monitors are involved.
+
+(cl-glfw:extension-supported extension-name)
+extension-name is a string.
+Only works after an OpenGL context has been created.
+
+i.e. glfwOpenWindow has been called.
+
+(cl-glfw:get-gl-version)
+Should be extremely useful.
+
+Again, only after an OpenGL context has been created.
+
+(cl-glfw:enable)
+(cl-glfw:disable)
+Useful for configuring options.
+
+See source.
+
