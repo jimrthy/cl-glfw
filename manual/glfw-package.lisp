@@ -19,3 +19,8 @@
 				     (loop for s being each symbol in '#:glfw collecting s)))
 	      #'string<))
 |#
+
+(defpackage #:cl-glfw3
+  (:nicknames #:glfw3)
+  (:use #:cl #:cffi)
+  (:export #:with-glfw-init))
