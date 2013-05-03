@@ -72,7 +72,7 @@
   (minor :pointer :int)
   (rev   :pointer :int))
 
-(defun glfw-get-version ()
+#+null(defun glfw-get-version ()
   "Return a list of major-minor-revision"
   (let (parameters)
     (unwind-protect 
@@ -81,6 +81,10 @@
 	   (list (mem-aptr parameters :int 0) (mem-aptr parameters :int 1) (mem-aptr parameters :int 2)))
       (when parameters
 	(foreign-free parameters)))))
+(defun glfw-get-version ()
+  (with-foreign-object (array :int 3)
+    (glfw-get-version-official array (inc-pointer array 1) (inc-pointer array 2))
+    (list (mem-aref array :int) (mem-aref array :int 1) (mem-aref array :int 2))))
 
 ;; Debugging version
 ;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
