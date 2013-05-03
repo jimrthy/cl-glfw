@@ -69,6 +69,12 @@
 (defcfun ("glfwPollEvents" glfw-poll-events)
     :void)
 
+;; Sleeps until an event appears. Then processes all that are available
+;; Only callable from main thread
+;; Not from a callback.
+(defcfun ("glfwWaitEvents" glfw-wait-events)
+    :void)
+
 ;;;; Initialization
 
 ;; glfw basics:
@@ -169,26 +175,7 @@ Note that this is likely to be quite distinct from your OpenGL library."
 (defcfun ("glfwGetVersionString" glfw-get-version-string)
     :string)
 
-;;; Here's where things start getting interesting.
-;;; Following along with the header, we get into things like error callbacks
-;;; and the "main monitor."
-
-;;; FIXME: Callbacks belong in their own section.
-;;; Several useful ones...especially the WM_SIZE handler. 
-;; This looks as though it works. It hasn't actually been tested by causing
-;; an error yet.
-    "new-callback is a function that accepts an int error-code and const char* description.
-The description string is only valid within the scope of the callback.
-Returns the previous callback on success, NULL on failure.
-Runs in the context of whichever thread caused the error."
-(defcfun ("glfwSetErrorCallback" glfw-set-error-callback)
-    :pointer
-  (new-callback :pointer))
-(defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
-  (format nil "Error Code ~A: ~A~%" error-code description))
-(defparameter *original-error-handler* (glfw-set-error-callback (callback default-error-handler)))
-;;; At the very least, it should be dead simple to swap in more meaningful error handlers.
-;;; It's something at least vaguely interesting to consider.
+;;; UI info
 
 (defcfun ("glfwGetWindowPos" glfw-get-window-pos-native)
     :void
@@ -214,7 +201,79 @@ OSX note: screen coordinate system is inverted."
   (window glfw-window)
   (param :int))
 
+;;; Lots of useful options here!
 
+;; Are these next 3 enums, or what?
+(defparameter *glfw-cursor-mode* GLFW_CURSOR_MODE)
+(defparameter *glfw-sticky-keys* GLFW_STICKY_KEYS)
+(defparameter *glfw-sticky-mouse* GLFW_STICKY_MOUSE_BUTTONS)
+;;; This seems like another that's probably worth breaking into
+;;; several explicit functions
+(defcfun ("glfwGetInputMode" glfw-get-input-mode)
+    :int
+  (window glfw-window)
+  (mode :int))
+;; FIXME: See the documentation!
+(defun glfw-get-cursor-mode (window)
+  (glfw-get-input-mode window *glfw-cursor-mode*))
+(defun glfw-get-sticky-keys (window)
+  (glfw-get-input-mode window *glfw-sticky-keys*))
+(defun glfw-get-sticky-mouse (window)
+  (glfw-get-input-mode window *glfw-sticky-mouse*))
+
+(defcfun ("glfwSetInputMode" glfw-set-input-mode)
+    :void
+  (window glfw-window)
+  (mode :int)
+  (value :int))
+(defun glfw-set-cursor-mode (window value)
+  "Value must be one of GLFW_CURSOR_NORMAL, GLFW_CURSOR_HIDDEN, or GLFW_CURSOR_CAPTURED"
+  (glfw-set-input-mode window *glfw-cursor-mode* value))
+(defun glfw-set-sticky-keys (window sticky-p)
+  (glfw-set-input-mode window *glfw-sticky-keys* sticky-p))
+(defun glfw-set-sticky-mouse (window sticky-p)
+  (glfw-set-input-mode window *glfw-sticky-mouse* sticky-p))
+
+;;; Returns GLFW_PRESS or GLFW_RELEASE.
+;;; Details depend on *sticky-keys*
+;;; Used for key state. Don't try to use for inputting text.
+;;; There's a callback for that instead.
+(defcfun ("glfwGetKey" glfw-get-key)
+    :int
+  (window glfw-window)
+  (key-code :int))
+
+;;; Still not useful for getting text.
+;;; Basically an event-driven version of glfw-get-key.
+;;; The .h has some useful info about what happens on loss of focus.
+(defcfun ("glfwSetKeyCallback" set-key-callback)
+    :pointer
+  (window glfw-window)
+  (:pointer callback))
+
+;;; Returns GLFW_PRESS or GLFW_RELEASE.
+;;; Details depend on *sticky-mouse*
+(defcfun ("glfwGetMouseButton" get-mouse-button)
+    :int
+  (window glfw-window)
+  (button :int))
+
+(defcfun ("glfwGetCursorPos" get-cursor-pos-native)
+    :void
+  (window glfw-window)
+  (xpos :pointer :double)
+  (ypos :pointer :double))
+
+(defun get-cursor-pos (window)
+  (with-foreign-object (array :double 2)
+    (get-cursor-pos-native window array (inc-pointer array 1))
+    (list (mem-aref array :double) (mem-aref array :double 1))))
+
+(defcfun ("glfwSetCursorPos" set-cursor-pos)
+    :void
+  (window glfw-window)
+  (xpos :double)
+  (ypos :double))
 
 ;; What's the window's close flag?
 (defcfun ("glfwWindowShouldClose" window-should-close-p)
@@ -252,6 +311,40 @@ Useful for the monitor-querying functions that I haven't translated yet."
 ;;; FIXME: There's a big chunk of functions dealing with the actual monitors,
 ;;; using those handles. Really should get those added.
 			 
+;;; Here's where things start getting interesting.
+;;; Following along with the header, we get into things like error callbacks
+;;; and the "main monitor."
+
+;;;; Callbacks
+
+;;; FIXME: At the very least, also want the size handler.
+
+;; This looks as though it works. It hasn't actually been tested by causing
+;; an error yet.
+    "new-callback is a function that accepts an int error-code and const char* description.
+The description string is only valid within the scope of the callback.
+Returns the previous callback on success, NULL on failure.
+Runs in the context of whichever thread caused the error."
+(defcfun ("glfwSetErrorCallback" glfw-set-error-callback)
+    :pointer
+  (new-callback :pointer))
+(defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
+  (format nil "Error Code ~A: ~A~%" error-code description))
+(defparameter *original-error-handler* (glfw-set-error-callback (callback default-error-handler)))
+;;; At the very least, it should be dead simple to swap in more meaningful error handlers.
+;;; It's something at least vaguely interesting to consider.
+
+;;; Used for actual text input.
+;;; callback is a void (*fn)(GLFWwindow*, unsigned int code-point)
+;;; Returns the previous callback, or NULL on error.
+;;; Call w/ NULL to clear.
+;;; This is where I definitely need to start thinking about the actual API.
+;;; Or just steal whatever Bill already wrote.
+(defcfun ("glfwSetCharCallback" set-char-callback-native)
+    :pointer
+  (window glfw-window)
+  (callback :pointer))
+
 ;;;; Termination
 
 ;; Override user's attempt to close, or signal that a window should close
