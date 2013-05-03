@@ -1,5 +1,28 @@
 (in-package #:cl-glfw3)
 
+#|
+;;; Macros (no, of course they don't belong here)
+
+;; Starting:
+(with-int-pointer (major minor rev)
+  (glfw-get-version-official major minor rev)
+  (list major minor rev))
+
+;; End Goal:
+(with-foreign-object (array :int 3)
+  (glfw-get-version-official array (inc-pointer array 1) (inc-pointer array 2))
+  (list (mem-aref array :int) (mem-aref array :int 1) (mem-aref array :int 2)))
+
+;; This isn't as simple as I'd hoped:
+(defmacro with-foreign-int-pointers (args &body body)
+  ;; The nastiness is that reaching the result uses a totally different
+  ;; syntax than the setters.
+  ;; I could probably add a setf handler to the mix, but that may
+  ;; very well be overkill.
+  `(with-gensyms ,args
+     ))
+|#
+
 ;; This next function seems to destroy my dreams of multi-level
 ;; compatibility. It obviously doesn't, but it looks horribly
 ;; dubious.
@@ -173,16 +196,19 @@ Runs in the context of whichever thread caused the error."
   (xpos :pointer :int)
   (ypos :pointer :int))
 
-(defun glfw-get-window-pos ()
+(defun glfw-get-window-pos (window)
   "Returns a list of the window's client area's upper-left screen coordinates.
 OSX note: screen coordinate system is inverted."
-  ;; Allocating int pointers by hand is just annoying.
-  (error "This is annoying. Has to be a better way"))
+  (with-foreign-object (array :int 2)
+    (glfw-get-window-pos-native window array (inc-pointer array 1))
+    (list (mem-aref array :int) (mem-aref array :int 1))))
 
 ;;; This next function takes several interesting parameters.
 ;;; It seems arguably worth breaking it into multiple functions
 ;;; that are each more explicit about what information they're
 ;;; actually retrieving.
+  
+
 (defcfun ("glfwGetWindowParam" glfw-get-window-param-native)
     :int
   (window glfw-window)
