@@ -14,6 +14,8 @@
   (t (:default "libglfw")))
 
 (use-foreign-library libglfw)
+;; N.B.:
+;; Do not forget to (close-foreign-library libglfw)!!
 
 (defctype glfw-window :pointer)
 
@@ -54,18 +56,31 @@
 ;; Just checking:
 ;; (defparameter *window* (glfw-create-window 640 480 "Test" 0 0))
 ;; fails for the same reason. So...what are those "something*" parameters?
+;; (defparameter *window* (glfw-create-window 640 480 "Test" (null-pointer) (null-pointer))) 
+;; Works fine. So there.
+
 
 ;;; Information
 
 ;; "Official" Get Version method.
-(defcfun ("glfwGetVersion" glfw-get-version)
+(defcfun ("glfwGetVersion" glfw-get-version-official)
     :void
   ;; These next parameters are actually int*.
   ;; Translating these back and forth is more than a little important.
   ;; FIXME: How is this currently handled?
-  (major :pointer)
-  (minor :pointer)
-  (rev   :pointer))
+  (major :pointer :int)
+  (minor :pointer :int)
+  (rev   :pointer :int))
+
+(defun glfw-get-version ()
+  "Return a list of major-minor-revision"
+  (let (parameters)
+    (unwind-protect 
+	 (let ((parameters (foreign-alloc :int :count 3)))
+	   (glfw-get-version-official parameters (inc-pointer parameters 1) (inc-pointer parameters 2))
+	   (list (mem-aptr parameters :int 0) (mem-aptr parameters :int 1) (mem-aptr parameters :int 2)))
+      (when parameters
+	(foreign-free parameters)))))
 
 ;; Debugging version
 ;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
