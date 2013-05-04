@@ -76,6 +76,14 @@
 (defcfun ("glfwWaitEvents" glfw-wait-events)
     :void)
 
+;;;; Vital!
+;;;; Swaps front and back buffers
+
+;;; In previous versions, this would also call poll-events
+(defcfun ("glfwSwapBuffers" swap-buffers)
+    :void
+  (window glfw-window))
+
 ;;;; Initialization
 
 ;; glfw basics:
@@ -128,6 +136,16 @@
 ;; (defparameter *window* (glfw-create-window 640 480 "Test" (null-pointer) (null-pointer))) 
 ;; Works fine. So there.
 
+;; !!!!!!!!!!!!!!!
+;; Make Current
+;; Makes a window the "current context".
+;; Window can only be current on a single thread at a time.
+;; One thread can only have one current context.
+;; Callable from secondary threads.
+(defcfun ("glfwMakeContextCurrent" make-context-current)
+    :void
+  (window glfw-window))
+
 ;; Only callable from main thread.
 ;; title is actually a const char*...my test window isn't updating,
 ;; but that could be because I'm totally ignoring its events.
@@ -149,6 +167,21 @@
   (window glfw-window)
   (xpos :int)
   (ypos :int))
+
+;; Sets the current value of time.
+;; System continues to count up from there.
+(defcfun ("glfwSetTime" set-time)
+    :void
+  (time :double))
+
+;; The vsync: number of frames to wait between swapping buffers
+;; and returning from swap-buffers.
+;; Platforms that support either the WGL_EXT_swap_control_tear
+;; or the GLX_EXT_swap_control_tear accept negative swap intervals.
+;; Check with extension-supported (or use something like GLEW)
+(defcfun ("glfwSwapInterval" swap-interval)
+    :void
+  (interval int))
 
 ;;;; Information
 
@@ -178,6 +211,40 @@ Note that this is likely to be quite distinct from your OpenGL library."
 
 ;;; UI info
 
+;; Returns the window whose context is current on the calling thread.
+(defcfun ("glfwGetCurrentContext" get-current-context)
+    glfw-window)
+
+;; Extensions
+
+;; The original cl-glfw went to a great deal of effort to try to do fancy
+;; things with this to avoid dependencies. That seems like a great deal
+;; of repeated effort that I simply do not have time for.
+;; I'm including this because it's simple to wrap it here, but I don't
+;; honestly expect people to spend a lot of time actually using it.
+;;
+;; Returns GL_TRUE if an extension is supported, GL_FALSE if not.
+;;
+;; It's recommended to cache the results. They won't change over the course
+;; of a context's lifetime.
+;;
+;; Callable from secondary threads.
+(defcfun ("glfwExtensionSupported" extension-supported)
+    :int
+  (extension-name :string))
+
+;; Returns a void (*GLFWglproc)()for the specified function.
+;; It's all about client API and extenion functions supported by the current context.
+;; Returns NULL if the function isn't available
+;; Callable from secondary threads
+;;
+;; N.B. Not guaranteed to be the same for all contexts!
+;; Especialy if they use different client APIs or context creation hints.
+(defcfun ("glfwGetProcAddress" get-proc-address)
+    :pointer
+  (proc-name :string))
+
+;; Window Position
 (defcfun ("glfwGetWindowPos" glfw-get-window-pos-native)
     :void
   (window glfw-window)
@@ -273,7 +340,16 @@ OSX note: screen coordinate system is inverted."
     :int 
   (window glfw-window))
 
-;(error "Start here with glfwGetTime")
+;; What time is it?
+;; Returns the value of the timer.
+;; Unless it's been overridden by glfw-set-time, that's the elapsed
+;; time since GLFW was initialized.
+;; Return value is in seconds.
+;; Resolution is system-dependent. But it's usually on the order of
+;; micro- or nanoseconds.
+;; May be called from secondary threads
+(defcfun ("glfwGetTime" glfw-get-time)
+    :double)
 
 ;;;; Monitor information
 
