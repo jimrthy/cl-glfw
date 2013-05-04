@@ -62,6 +62,7 @@
 (defctype glfw-monitor :pointer)
 
 ;;;; Vital!
+;;;; This makes event processing happen.
 
 ;; Only callable from the main thread
 ;; Not callable from a callback
@@ -243,14 +244,6 @@ OSX note: screen coordinate system is inverted."
   (window glfw-window)
   (key-code :int))
 
-;;; Still not useful for getting text.
-;;; Basically an event-driven version of glfw-get-key.
-;;; The .h has some useful info about what happens on loss of focus.
-(defcfun ("glfwSetKeyCallback" set-key-callback)
-    :pointer
-  (window glfw-window)
-  (:pointer callback))
-
 ;;; Returns GLFW_PRESS or GLFW_RELEASE.
 ;;; Details depend on *sticky-mouse*
 (defcfun ("glfwGetMouseButton" get-mouse-button)
@@ -279,6 +272,8 @@ OSX note: screen coordinate system is inverted."
 (defcfun ("glfwWindowShouldClose" window-should-close-p)
     :int 
   (window glfw-window))
+
+;(error "Start here with glfwGetTime")
 
 ;;;; Monitor information
 
@@ -311,11 +306,11 @@ Useful for the monitor-querying functions that I haven't translated yet."
 ;;; FIXME: There's a big chunk of functions dealing with the actual monitors,
 ;;; using those handles. Really should get those added.
 			 
+;;;; Callbacks
 ;;; Here's where things start getting interesting.
 ;;; Following along with the header, we get into things like error callbacks
 ;;; and the "main monitor."
 
-;;;; Callbacks
 
 ;;; FIXME: At the very least, also want the size handler.
 
@@ -334,13 +329,49 @@ Runs in the context of whichever thread caused the error."
 ;;; At the very least, it should be dead simple to swap in more meaningful error handlers.
 ;;; It's something at least vaguely interesting to consider.
 
+;;; Still not useful for getting text.
+;;; Basically an event-driven version of glfw-get-key.
+;;; The .h has some useful info about what happens on loss of focus.
+(defcfun ("glfwSetKeyCallback" set-key-callback)
+    :pointer
+  (window glfw-window)
+  (:pointer callback))
+
 ;;; Used for actual text input.
 ;;; callback is a void (*fn)(GLFWwindow*, unsigned int code-point)
 ;;; Returns the previous callback, or NULL on error.
 ;;; Call w/ NULL to clear.
 ;;; This is where I definitely need to start thinking about the actual API.
 ;;; Or just steal whatever Bill already wrote.
+;;; It seems probable that this really belongs in the section with the callback
+;;; declarations
 (defcfun ("glfwSetCharCallback" set-char-callback-native)
+    :pointer
+  (window glfw-window)
+  (callback :pointer))
+
+;;; The callback is a void (*GLFWmousebuttonfun)(GLFWwindow*, int, int)
+;;; First int parameter: the button that changed state
+;;; Second: GLFW_PRESS or GLFW_RELEASE
+(defcfun ("glfwSetMouseButtonCallback" glfw-set-mouse-button-callback)
+    :pointer
+  (window glfw-window)
+  (callback :pointer))
+
+;;; void (*GLFWcursorposfun)(GLFWwindow*, double, double);
+;;; The parameters are the new cursor coordinates, relative to the window's
+;;; top left corner.
+(defcfun ("glfwSetCursorPosCallback" glfw-set-cursor-pos-callback)
+    :pointer
+  (window glfw-window)
+  (callback :pointer))
+
+;;; void (*GLFWscrollfun)(GLFWwindow*, double, double)
+;;; Parameters are the scroll offsets along the x- and y- axes (respectively).
+;;; It's all about handling input from a mouse wheel or trackpad.
+;;; Or any other scrolling device.
+;;; Based on the description, it's tough to tell what the actual values mean.
+(defcfun ("glfwSetScrollCallback" glfw-set-scroll-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
