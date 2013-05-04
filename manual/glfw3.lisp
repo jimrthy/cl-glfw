@@ -124,7 +124,7 @@
 ;; Window can only be current on a single thread at a time.
 ;; One thread can only have one current context.
 ;; Callable from secondary threads.
-(defcfun ("glfwMakeContextCurrent" context-current)
+(defcfun ("glfwMakeContextCurrent" make-context-current)
     :void
   (window glfw-window))
 
@@ -247,8 +247,7 @@ OSX note: screen coordinate system is inverted."
 ;;; It seems arguably worth breaking it into multiple functions
 ;;; that are each more explicit about what information they're
 ;;; actually retrieving.
-  
-
+(defparameter *opened* :undefined) ; really deserves a better name.
 (defcfun ("glfwGetWindowParam" glfw-get-window-param-native)
     :int
   (window glfw-window)
