@@ -71,13 +71,13 @@
 
 ;;; This obviously does not go here.
 (defmacro with-glfw (&body body)
-  (unwind-protect
-       (progn
-	 (initialize)
-	 (glfw-init)
-	 ,@body)
-    (progn (terminate)
-	   (clean-up))))
+  `(unwind-protect
+	(progn
+	  (initialize)
+	  (glfw-init)
+	  ,@body)
+     (progn (terminate)
+	    (clean-up))))
 
 ;; Resets all window hints to their default values
 ;; Only callable from main thread
@@ -108,7 +108,7 @@
   (monitor glfw-monitor) ; Or NULL for windowed mode.
   ;; The window whose context to share resources with, or NULL
   ;; to be selfish.
-  (shared-window :glfw-window))
+  (shared-window glfw-window))
 ;; I want to be able to call that as:
 ;; (defparameter *window* (glfw-create-window 640 480 "Test" () ()))
 ;; That fails because nil is an invalid CCL:MACPTR.
@@ -163,7 +163,7 @@
 ;; Check with extension-supported (or use something like GLEW)
 (defcfun ("glfwSwapInterval" swap-interval)
     :void
-  (interval int))
+  (interval :int))
 
 ;;;; Information
 
@@ -256,10 +256,13 @@ OSX note: screen coordinate system is inverted."
 
 ;;; Lots of useful options here!
 
-;; FIXME: Are these next 3 enums, or what?
-(defparameter *glfw-cursor-mode* GLFW_CURSOR_MODE)
-(defparameter *glfw-sticky-keys* GLFW_STICKY_KEYS)
-(defparameter *glfw-sticky-mouse* GLFW_STICKY_MOUSE_BUTTONS)
+;; Q: Are these next 3 enums, or what?
+;; A: They're preprocessor #defines.
+;; This isn't what I'd call a good solution, but it seems as
+;; good as any, at the moment.
+(defparameter *glfw-cursor-mode*  #x00030001)
+(defparameter *glfw-sticky-keys*  #x00030002)
+(defparameter *glfw-sticky-mouse* #x00030003)
 ;;; This seems like another that's probably worth breaking into
 ;;; several explicit functions
 (defcfun ("glfwGetInputMode" glfw-get-input-mode-native)
@@ -288,7 +291,7 @@ OSX note: screen coordinate system is inverted."
   (glfw-set-input-mode-native window *glfw-sticky-mouse* sticky-p))
 
 ;;; Returns GLFW_PRESS or GLFW_RELEASE.
-;;; Details depend on *sticky-keys*
+;;; Details depend on *glfw-sticky-keys*
 ;;; Used for key state. Don't try to use for inputting text.
 ;;; There's a callback for that instead.
 (defcfun ("glfwGetKey" get-key)
@@ -297,7 +300,7 @@ OSX note: screen coordinate system is inverted."
   (key-code :int))
 
 ;;; Returns GLFW_PRESS or GLFW_RELEASE.
-;;; Details depend on *sticky-mouse*
+;;; Details depend on *glfw-sticky-mouse*
 (defcfun ("glfwGetMouseButton" get-mouse-button)
     :int
   (window glfw-window)
@@ -320,7 +323,7 @@ OSX note: screen coordinate system is inverted."
   (xpos :double)
   (ypos :double))
 
-;; What's the window's close flag?
+;; Does the window believe it should close?
 (defcfun ("glfwWindowShouldClose" window-should-close-p)
     :int 
   (window glfw-window))
@@ -404,7 +407,7 @@ Runs in the context of whichever thread caused the error."
 (defcfun ("glfwSetKeyCallback" set-key-callback)
     :pointer
   (window glfw-window)
-  (:pointer callback))
+  (callback :pointer))
 
 ;;; Used for actual text input.
 ;;; callback is a void (*fn)(GLFWwindow*, unsigned int code-point)
@@ -450,7 +453,7 @@ Runs in the context of whichever thread caused the error."
 ;; Override user's attempt to close, or signal that a window should close
 (defcfun ("glfwSetWindowShouldClose" set-window-should-close)
     :void
-  (glfw-window window)
+  (glfw-window glfw-window)
   (flag :int))
 
 ;; Only callable from the main thread

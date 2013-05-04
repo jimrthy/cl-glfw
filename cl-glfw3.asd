@@ -6,9 +6,9 @@
 (defsystem cl-glfw3
   :description "Common Lisp bindings for GLFW3"
   :version "0.1"
-  :author "James Ashley <james.ashley@gmail.com>"
+  :author "James Gatannah <james.gatannah@gmail.com>"
   :licence "Eclipse Public License"
   :depends-on (cffi alexandria)
-  :components ((:module manual) :serial t
-	       :components ((:file "glfw-package"
-				   "glfw3"))))
+  :components ((:module manual :serial t
+			:components ((:file "glfw-package")
+				     (:file "glfw3")))))
