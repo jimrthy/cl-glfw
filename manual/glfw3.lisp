@@ -54,11 +54,8 @@
 
 ;;; Overall library initialization:
 (defun initialize ()
+  "Don't forget to call clean-up!"
   (use-foreign-library libglfw))
-;; N.B.:
-;; Do not forget to (close-foreign-library libglfw)!!
-(defun clean-up ()
-  (close-foreign-library libglfw))
 
 ;; Basics:
 ;; Everything has to start with glfw-init
@@ -108,8 +105,8 @@
 ;; (defparameter *window* (glfw-create-window 640 480 "Test" (null-pointer) (null-pointer))) 
 ;; Works fine. So there.
 
-(defun open-window (&key (width 640) (height 480) (title "Untitled") (monitor nil))
-  (create-window :width :height :title :monitor nil))
+(defun open-window (&key (width 640) (height 480) (title "Untitled") (monitor (null-pointer)))
+  (create-window width height title monitor (null-pointer)))
 
 ;; !!!!!!!!!!!!!!!
 ;; Make Current
@@ -465,4 +462,6 @@ Runs in the context of whichever thread caused the error."
 ;; No window's context may be current on another thread when this one is called!
 (defcfun ("glfwTerminate" terminate) :void)
 
-
+(defun clean-up ()
+  "The companion to initialize. Don't use one without the other."
+  (close-foreign-library libglfw))

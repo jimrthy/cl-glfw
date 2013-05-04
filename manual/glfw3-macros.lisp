@@ -5,6 +5,13 @@
 
 (in-package #:glfw3)
 
+(defmacro with-open-window ((&rest open-window-keys)
+			       &body forms)
+  `(let ((handle (glfw3::open-window ,@open-window-keys)))
+     (unwind-protect
+	  (block with-open-window ,@forms)
+       (destroy-window handle))))
+
 (defmacro do-open-window ((&rest open-window-keys)
 			     (&body setup-forms)
 			  &body forms)
@@ -14,12 +21,15 @@ was an error opening the window.
 Takes the same parameters as open-window, with the addition of 'title'
 which will set the window title after opening.
 Wrapped in a block named glfw3:with-open-window."
-  `(progn
-     (let ((handle (glfw3::open-window ,@open-window-keys)))
-       (unwind-protect
-	    (progn (glfw3::make-context-current handle)
-	      (block with-open-window ,@forms))
-	 (destroy-window handle)))))
+  `(with-open-window (,@open-window-keys)
+     ,@setup-forms
+     (loop named do-open-window do
+	  (progn
+	    ,@forms
+	    (glfw3:swap-buffers)
+	    (glfw3:poll-events)
+	    ;; FIXME: Really need a gentle signal to close.
+	    ))))
 
 (defmacro do-window ((&rest open-window-keys)
 			(&body setup-forms)
