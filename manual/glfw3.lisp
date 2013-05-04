@@ -69,16 +69,6 @@
 ;; May only be called from the main thread.
 (defcfun ("glfwInit" glfw-init) glfw-bool)
 
-;;; This obviously does not go here.
-(defmacro with-glfw (&body body)
-  `(unwind-protect
-	(progn
-	  (initialize)
-	  (glfw-init)
-	  ,@body)
-     (progn (terminate)
-	    (clean-up))))
-
 ;; Resets all window hints to their default values
 ;; Only callable from main thread
 (defcfun ("glfwDefaultWindowHints" default-window-hints)
@@ -117,6 +107,9 @@
 ;; fails for the same reason. So...what are those "something*" parameters?
 ;; (defparameter *window* (glfw-create-window 640 480 "Test" (null-pointer) (null-pointer))) 
 ;; Works fine. So there.
+
+(defun open-window (&key (width 640) (height 480) (title "Untitled") (monitor nil))
+  (create-window :width :height :title :monitor nil))
 
 ;; !!!!!!!!!!!!!!!
 ;; Make Current
