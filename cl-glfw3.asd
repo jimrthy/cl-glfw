@@ -1,5 +1,6 @@
 (defpackage #:cl-glfw-system
-  (:use #:asdf #:cl #:alexandria))
+  (:use #:asdf #:cl))
+
 (in-package #:cl-glfw-system)
 
 (defsystem cl-glfw3
