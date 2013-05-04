@@ -69,7 +69,7 @@
 ;; May only be called from the main thread.
 (defcfun ("glfwInit" glfw-init) glfw-bool)
 
-;;; These obviously do not go here:
+;;; This obviously does not go here.
 (defmacro with-glfw (&body body)
   (unwind-protect
        (progn
@@ -204,6 +204,9 @@ Note that this is likely to be quite distinct from your OpenGL library."
 ;; of repeated effort that I simply do not have time for.
 ;; I'm including this because it's simple to wrap it here, but I don't
 ;; honestly expect people to spend a lot of time actually using it.
+;;
+;; Then again, cl-opengl also seems to have done a bit of punting in this
+;; field...I need to do more research. 
 ;;
 ;; Returns GL_TRUE if an extension is supported, GL_FALSE if not.
 ;;
