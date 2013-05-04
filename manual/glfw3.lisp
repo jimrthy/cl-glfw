@@ -1,49 +1,14 @@
 (in-package #:cl-glfw3)
 
-#|
-;;; Macros (no, of course they don't belong here)
-
-;; Starting:
-(with-int-pointer (major minor rev)
-  (glfw-get-version-official major minor rev)
-  (list major minor rev))
-
-;; End Goal:
-(with-foreign-object (array :int 3)
-  (glfw-get-version-official array (inc-pointer array 1) (inc-pointer array 2))
-  (list (mem-aref array :int) (mem-aref array :int 1) (mem-aref array :int 2)))
-
-;; This isn't as simple as I'd hoped:
-(defmacro with-foreign-int-pointers (args &body body)
-  ;; The nastiness is that reaching the result uses a totally different
-  ;; syntax than the setters.
-  ;; I could probably add a setf handler to the mix, but that may
-  ;; very well be overkill.
-  `(with-gensyms ,args
-     ))
-|#
-
-;; This next function seems to destroy my dreams of multi-level
-;; compatibility. It obviously doesn't, but it looks horribly
-;; dubious.
-;; The fact that the way the GNU library conventions interact
-;; with linux package managers sort of screws this plan over
-;; leaves me less than optimistic.
-;; (I don't see gentoo's portage and revdep-rebuild playing nicely
-;; with quicklisp anytime in the near future. Don't get me
-;; started on Debian...)
+;;; This seems to make playing nicely with libglfw.so.2 less promising.
 (define-foreign-library libglfw
   (:unix (:or "libglfw.so.3" "libglfw.so"))
   (t (:default "libglfw")))
 
-(use-foreign-library libglfw)
-;; N.B.:
-;; Do not forget to (close-foreign-library libglfw)!!
-
-
 ;;;; Type aliases
 
 ;; It very well might be using something like grovel to pick up more details.
+;; Except that this is supposed to be a totally opaque type.
 (defctype glfw-window :pointer)
 
 ;;; Booleans...this is more than a little lame
@@ -58,7 +23,8 @@
 ;; (convert-to-foreign nil 'glfw-bool)
 ;; (convert-from-foreign 354 'glfw-bool)
 
-;; Really, these are handles.
+;; Handles. The fact that they're implemented as pointers to
+;; structs is totally irrelevant.
 (defctype glfw-monitor :pointer)
 
 ;;;; Vital!
@@ -67,13 +33,13 @@
 ;; Only callable from the main thread
 ;; Not callable from a callback
 ;; Processes events that have already been received, then returns immediately.
-(defcfun ("glfwPollEvents" glfw-poll-events)
+(defcfun ("glfwPollEvents" poll-events)
     :void)
 
 ;; Sleeps until an event appears. Then processes all that are available
 ;; Only callable from main thread
 ;; Not from a callback.
-(defcfun ("glfwWaitEvents" glfw-wait-events)
+(defcfun ("glfwWaitEvents" wait-events)
     :void)
 
 ;;;; Vital!
@@ -86,7 +52,15 @@
 
 ;;;; Initialization
 
-;; glfw basics:
+;;; Overall library initialization:
+(defun initialize ()
+  (use-foreign-library libglfw))
+;; N.B.:
+;; Do not forget to (close-foreign-library libglfw)!!
+(defun clean-up ()
+  (close-foreign-library libglfw))
+
+;; Basics:
 ;; Everything has to start with glfw-init
 ;; The return spec is wrong:
 ;; It's GL_TRUE on success, GL_FALSE on failure.
@@ -95,22 +69,30 @@
 ;; May only be called from the main thread.
 (defcfun ("glfwInit" glfw-init) glfw-bool)
 
+;;; These obviously do not go here:
+(defmacro with-glfw (&body body)
+  (unwind-protect
+       (progn
+	 (initialize)
+	 (glfw-init)
+	 ,@body)
+    (progn (terminate)
+	   (clean-up))))
+
 ;; Resets all window hints to their default values
 ;; Only callable from main thread
-(defcfun ("glfwDefaultWindowHints" glfw-default-window-hints)
+(defcfun ("glfwDefaultWindowHints" default-window-hints)
     :void)
 
-;; FIXME: This may make more sense in a configuration section.
-;; Along with functions like set-input-mode
 ;; Used to tell the system how we want the window to look/act
 ;; Callable only from the main thread
-(defcfun ("glfwWindowHint" glfw-window-hint)
+(defcfun ("glfwWindowHint" window-hint)
     :void
   (target :int)
   (hint :int))
 
 ;; Lots of interesting stuff here!
-(defcfun ("glfwSetInputMode" glfw-set-input-mode)
+(defcfun ("glfwSetInputMode" set-input-mode)
     :void
   (window glfw-window)
   (mode :int)
@@ -118,7 +100,7 @@
 
 ;; Window Creation:
 ;; May only be called from the main thread.
-(defcfun ("glfwCreateWindow" glfw-create-window)
+(defcfun ("glfwCreateWindow" create-window)
     glfw-window
   (width :int)
   (height :int)
@@ -142,14 +124,14 @@
 ;; Window can only be current on a single thread at a time.
 ;; One thread can only have one current context.
 ;; Callable from secondary threads.
-(defcfun ("glfwMakeContextCurrent" make-context-current)
+(defcfun ("glfwMakeContextCurrent" context-current)
     :void
   (window glfw-window))
 
 ;; Only callable from main thread.
 ;; title is actually a const char*...my test window isn't updating,
 ;; but that could be because I'm totally ignoring its events.
-(defcfun ("glfwSetWindowTitle" glfw-set-window-title)
+(defcfun ("glfwSetWindowTitle" set-window-title)
     :void
   (window glfw-window)
   (title :string))
@@ -162,7 +144,7 @@
 ;; Rarely a good idea to manually move an already visible window.
 ;; Only callable from the main thread
 ;; X11 note: some window managers ignore the set position of hidden windows
-(defcfun ("glfwSetWindowPos" glfw-set-window-pos)
+(defcfun ("glfwSetWindowPos" set-window-pos)
     :void
   (window glfw-window)
   (xpos :int)
@@ -196,7 +178,7 @@
   (major :pointer :int)
   (minor :pointer :int)
   (rev   :pointer :int))
-(defun glfw-get-version ()
+(defun get-version ()
   "Returns a list of the major-minor-revision of the GLFW library in use.
 Note that this is likely to be quite distinct from your OpenGL library."
   (with-foreign-object (array :int 3)
@@ -206,7 +188,7 @@ Note that this is likely to be quite distinct from your OpenGL library."
 ;; Debugging version
 ;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
 ;; Can be called from any thread, before glfw-init.
-(defcfun ("glfwGetVersionString" glfw-get-version-string)
+(defcfun ("glfwGetVersionString" get-version-string)
     :string)
 
 ;;; UI info
@@ -251,7 +233,7 @@ Note that this is likely to be quite distinct from your OpenGL library."
   (xpos :pointer :int)
   (ypos :pointer :int))
 
-(defun glfw-get-window-pos (window)
+(defun get-window-pos (window)
   "Returns a list of the window's client area's upper-left screen coordinates.
 OSX note: screen coordinate system is inverted."
   (with-foreign-object (array :int 2)
@@ -271,42 +253,42 @@ OSX note: screen coordinate system is inverted."
 
 ;;; Lots of useful options here!
 
-;; Are these next 3 enums, or what?
+;; FIXME: Are these next 3 enums, or what?
 (defparameter *glfw-cursor-mode* GLFW_CURSOR_MODE)
 (defparameter *glfw-sticky-keys* GLFW_STICKY_KEYS)
 (defparameter *glfw-sticky-mouse* GLFW_STICKY_MOUSE_BUTTONS)
 ;;; This seems like another that's probably worth breaking into
 ;;; several explicit functions
-(defcfun ("glfwGetInputMode" glfw-get-input-mode)
+(defcfun ("glfwGetInputMode" glfw-get-input-mode-native)
     :int
   (window glfw-window)
   (mode :int))
 ;; FIXME: See the documentation!
-(defun glfw-get-cursor-mode (window)
-  (glfw-get-input-mode window *glfw-cursor-mode*))
-(defun glfw-get-sticky-keys (window)
-  (glfw-get-input-mode window *glfw-sticky-keys*))
-(defun glfw-get-sticky-mouse (window)
-  (glfw-get-input-mode window *glfw-sticky-mouse*))
+(defun get-cursor-mode (window)
+  (glfw-get-input-mode-native window *glfw-cursor-mode*))
+(defun get-sticky-keys (window)
+  (glfw-get-input-mode-native window *glfw-sticky-keys*))
+(defun get-sticky-mouse (window)
+  (glfw-get-input-mode-native window *glfw-sticky-mouse*))
 
-(defcfun ("glfwSetInputMode" glfw-set-input-mode)
+(defcfun ("glfwSetInputMode" glfw-set-input-mode-native)
     :void
   (window glfw-window)
   (mode :int)
   (value :int))
-(defun glfw-set-cursor-mode (window value)
+(defun set-cursor-mode (window value)
   "Value must be one of GLFW_CURSOR_NORMAL, GLFW_CURSOR_HIDDEN, or GLFW_CURSOR_CAPTURED"
-  (glfw-set-input-mode window *glfw-cursor-mode* value))
-(defun glfw-set-sticky-keys (window sticky-p)
-  (glfw-set-input-mode window *glfw-sticky-keys* sticky-p))
-(defun glfw-set-sticky-mouse (window sticky-p)
-  (glfw-set-input-mode window *glfw-sticky-mouse* sticky-p))
+  (glfw-set-input-mode-native window *glfw-cursor-mode* value))
+(defun set-sticky-keys (window sticky-p)
+  (glfw-set-input-mode-native window *glfw-sticky-keys* sticky-p))
+(defun set-sticky-mouse (window sticky-p)
+  (glfw-set-input-mode-native window *glfw-sticky-mouse* sticky-p))
 
 ;;; Returns GLFW_PRESS or GLFW_RELEASE.
 ;;; Details depend on *sticky-keys*
 ;;; Used for key state. Don't try to use for inputting text.
 ;;; There's a callback for that instead.
-(defcfun ("glfwGetKey" glfw-get-key)
+(defcfun ("glfwGetKey" get-key)
     :int
   (window glfw-window)
   (key-code :int))
@@ -318,7 +300,7 @@ OSX note: screen coordinate system is inverted."
   (window glfw-window)
   (button :int))
 
-(defcfun ("glfwGetCursorPos" get-cursor-pos-native)
+(defcfun ("glfwGetCursorPos" glfw-get-cursor-pos-native)
     :void
   (window glfw-window)
   (xpos :pointer :double)
@@ -348,7 +330,7 @@ OSX note: screen coordinate system is inverted."
 ;; Resolution is system-dependent. But it's usually on the order of
 ;; micro- or nanoseconds.
 ;; May be called from secondary threads
-(defcfun ("glfwGetTime" glfw-get-time)
+(defcfun ("glfwGetTime" get-time)
     :double)
 
 ;;;; Monitor information
@@ -364,7 +346,7 @@ OSX note: screen coordinate system is inverted."
     (count :pointer :int))
 ;; This returns a pair of monitor* on my system, which seems totally correct.
 ;; No idea whether they're valid or meaningful.
-(defun glfw-get-monitors ()
+(defun get-monitors ()
   "Get a list of monitor handles.
 Useful for the monitor-querying functions that I haven't translated yet."
   (let ((count (foreign-alloc :int)))
@@ -376,7 +358,7 @@ Useful for the monitor-querying functions that I haven't translated yet."
 	   result)
       (foreign-free count))))
 
-(defcfun ("glfwGetPrimaryMonitor" glfw-get-primary-monitor)
+(defcfun ("glfwGetPrimaryMonitor" get-primary-monitor)
     glfw-monitor)
 
 ;;; FIXME: There's a big chunk of functions dealing with the actual monitors,
@@ -396,14 +378,22 @@ Useful for the monitor-querying functions that I haven't translated yet."
 The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
 Runs in the context of whichever thread caused the error."
-(defcfun ("glfwSetErrorCallback" glfw-set-error-callback)
+(defcfun ("glfwSetErrorCallback" set-error-callback)
     :pointer
   (new-callback :pointer))
 (defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
   (format nil "Error Code ~A: ~A~%" error-code description))
-(defparameter *original-error-handler* (glfw-set-error-callback (callback default-error-handler)))
+(defparameter *original-error-handler* (set-error-callback (callback default-error-handler)))
 ;;; At the very least, it should be dead simple to swap in more meaningful error handlers.
 ;;; It's something at least vaguely interesting to consider.
+
+;; callback is a void (*GLFWwindowsizefun)(GLFWwindow*, int, int)
+;; Parameters are the new size of the window, in screen coordinates.
+;; Yet another candidate for an API wrapper.
+(defcfun ("glfwSetWindowSizeCallback" glfw-set-window-size-callback-native)
+    :pointer
+  (window glfw-window)
+  (callback :pointer))
 
 ;;; Still not useful for getting text.
 ;;; Basically an event-driven version of glfw-get-key.
@@ -429,7 +419,7 @@ Runs in the context of whichever thread caused the error."
 ;;; The callback is a void (*GLFWmousebuttonfun)(GLFWwindow*, int, int)
 ;;; First int parameter: the button that changed state
 ;;; Second: GLFW_PRESS or GLFW_RELEASE
-(defcfun ("glfwSetMouseButtonCallback" glfw-set-mouse-button-callback)
+(defcfun ("glfwSetMouseButtonCallback" set-mouse-button-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -437,7 +427,7 @@ Runs in the context of whichever thread caused the error."
 ;;; void (*GLFWcursorposfun)(GLFWwindow*, double, double);
 ;;; The parameters are the new cursor coordinates, relative to the window's
 ;;; top left corner.
-(defcfun ("glfwSetCursorPosCallback" glfw-set-cursor-pos-callback)
+(defcfun ("glfwSetCursorPosCallback" set-cursor-pos-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -447,7 +437,7 @@ Runs in the context of whichever thread caused the error."
 ;;; It's all about handling input from a mouse wheel or trackpad.
 ;;; Or any other scrolling device.
 ;;; Based on the description, it's tough to tell what the actual values mean.
-(defcfun ("glfwSetScrollCallback" glfw-set-scroll-callback)
+(defcfun ("glfwSetScrollCallback" set-scroll-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -455,7 +445,7 @@ Runs in the context of whichever thread caused the error."
 ;;;; Termination
 
 ;; Override user's attempt to close, or signal that a window should close
-(defcfun ("glfwSetWindowShouldClose" glfw-set-window-should-close)
+(defcfun ("glfwSetWindowShouldClose" set-window-should-close)
     :void
   (glfw-window window)
   (flag :int))
@@ -464,7 +454,7 @@ Runs in the context of whichever thread caused the error."
 ;; Cannot be called from a callback
 ;; If the context is current on the main thread, it is detached before destruction.
 ;; Context must *not* be current on any other thread.
-(defcfun ("glfwDestroyWindow" glfw-destroy-window)
+(defcfun ("glfwDestroyWindow" destroy-window)
     :void
   (window glfw-window))
 
@@ -475,6 +465,6 @@ Runs in the context of whichever thread caused the error."
 ;; Must re-call (glfw-init) to start using glfw again.
 ;; May only be called from the main thread.
 ;; No window's context may be current on another thread when this one is called!
-(defcfun ("glfwTerminate" glfw-terminate) :void)
+(defcfun ("glfwTerminate" terminate) :void)
 
 
