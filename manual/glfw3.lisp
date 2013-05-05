@@ -43,8 +43,11 @@
     :void)
 
 ;;;; Vital!
-;;;; Swaps front and back buffers
+;;;; These pieces are important enough that I'm putting them at the top of
+;;;; this file. It feels incorrect, since initialization should come first.
+;;;; Worry about that later.
 
+;;; Swaps front and back buffers
 ;;; In previous versions, this would also call poll-events
 (defcfun ("glfwSwapBuffers" swap-buffers)
     :void
