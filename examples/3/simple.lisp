@@ -1,8 +1,6 @@
 
-;;;; Bare-bones usage example, with macros making it prettier.
-;;;; This should be exactly the same as simple.lisp...just
-;;;; taking advantage of macros that haven't been written yet.
-;;;; (Well, they've been written. They just don't work).
+;;;; Bare-bones usage example
+
 (require '#:asdf)
 (asdf:oos 'asdf:load-op '#:cl-glfw3)
 (asdf:oos 'asdf:load-op '#:cl-opengl)
