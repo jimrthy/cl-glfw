@@ -7,10 +7,11 @@
 
 (defmacro with-open-window ((&rest open-window-keys)
 			       &body forms)
-  `(let ((handle (glfw3::open-window ,@open-window-keys)))
+  ;; Hmm...this wasn't intentionally anaphoric
+  `(let ((hwnd (glfw3::open-window ,@open-window-keys)))
      (unwind-protect
 	  (block with-open-window ,@forms)
-       (destroy-window handle))))
+       (destroy-window hwnd))))
 
 (defmacro do-open-window ((&rest open-window-keys)
 			     (&body setup-forms)
@@ -26,9 +27,13 @@ Wrapped in a block named glfw3:with-open-window."
      (loop named do-open-window do
 	  (progn
 	    ,@forms
-	    (glfw3:swap-buffers)
+	    ;; Here's where this plan falls apart:
+	    ;; swap-buffers takes a glfw-window parameter. Without that,
+	    ;; this entire idea is pretty much dead in the water.
+	    (glfw3:swap-buffers hwnd)
 	    (glfw3:poll-events)
 	    ;; FIXME: Really need a gentle signal to close.
+	    (format t "Frame~%")
 	    ))))
 
 (defmacro do-window ((&rest open-window-keys)

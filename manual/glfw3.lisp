@@ -303,7 +303,7 @@ OSX note: screen coordinate system is inverted."
 
 (defun get-cursor-pos (window)
   (with-foreign-object (array :double 2)
-    (get-cursor-pos-native window array (inc-pointer array 1))
+    (glfw-get-cursor-pos-native window array (inc-pointer array 1))
     (list (mem-aref array :double) (mem-aref array :double 1))))
 
 (defcfun ("glfwSetCursorPos" set-cursor-pos)
@@ -349,7 +349,7 @@ Useful for the monitor-querying functions that I haven't translated yet."
 	 (let ((monitors (glfw-get-monitors-native count))
 	       (result ()))
 	   (dotimes (i (mem-ref count :int))
-	     (push (mem-aref monitors glfw-monitor i) result))
+	     (push (mem-aref monitors 'glfw-monitor i) result))
 	   result)
       (foreign-free count))))
 
@@ -378,7 +378,10 @@ Runs in the context of whichever thread caused the error."
   (new-callback :pointer))
 (defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
   (format nil "Error Code ~A: ~A~%" error-code description))
-(defparameter *original-error-handler* (set-error-callback (callback default-error-handler)))
+;; I very much want to do this.
+;; Unfortunately, it means trying to call glfwSetErrorCallback before the lib's
+;; actually been loaded.
+;;(defparameter *original-error-handler* (set-error-callback (callback default-error-handler)))
 ;;; At the very least, it should be dead simple to swap in more meaningful error handlers.
 ;;; It's something at least vaguely interesting to consider.
 
@@ -464,4 +467,4 @@ Runs in the context of whichever thread caused the error."
 
 (defun clean-up ()
   "The companion to initialize. Don't use one without the other."
-  (close-foreign-library libglfw))
+  (close-foreign-library 'libglfw))
