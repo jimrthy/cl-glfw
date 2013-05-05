@@ -3,18 +3,21 @@
 
 (require '#:asdf)
 (asdf:oos 'asdf:load-op '#:cl-glfw3)
+;; Get a warning about pre-save hook re: core dump for CCL.
+;; This is a true warning. Really should figure out what's
+;; going on and add that to cl-opengl.
 (asdf:oos 'asdf:load-op '#:cl-opengl)
 
-(defpackage glfw3-example
-  :use #:glfw3)
+(defpackage #:glfw3-example
+  (:use #:cl #:cl-glfw3))
 (in-package #:glfw3-example)
 
 ;;; These next really should be wrapped inside unwind-protect.
-(glfw3:initialize)
-(glfw3:glfw-init)
+(glfw3::initialize)
+(glfw3::glfw-init)
 
-(defparameter (*simple-window* create-window 640 480 "A Simple Example" (null-pointer) (null-pointer)))
-(make-context-current *simple-window*)
+(defparameter *simple-window* (glfw3::create-window 640 480 "A Simple Example" (cffi:null-pointer) (cffi:null-pointer)))
+(glfw3::make-context-current *simple-window*)
 
 (defun setup-view ()
   (gl:matrix-mode :projection)
@@ -40,6 +43,12 @@
   (loop named do-open-window do
        (draw)
        (glfw3:swap-buffers *simple-window*)
-       (glfw3:poll-events)))
+       (glfw3:poll-events)
+       (when (glfw3:window-should-close-p *simple-window*)
+	 (glfw3:destroy-window *simple-window*)
+	 (return-from do-open-window))))
 (run)
 
+(setf *simple-window* nil)
+(glfw3:terminate)
+(glfw3:clean-up)

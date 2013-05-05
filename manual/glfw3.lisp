@@ -27,6 +27,20 @@
 ;; structs is totally irrelevant.
 (defctype glfw-monitor :pointer)
 
+;;; Constants
+;;; Pulled in from #define's in the .H
+;;; This seems like a bad way to handle these.
+
+;; Key states
+(defparameter *key-release* 0)
+(defparameter *key-press* 1)
+(defparameter *key-repeat* 2)
+
+;; Cursor state
+(defparameter *cursor-normal*   #x00040001)
+(defparameter *cursor-hidden*   #x00040002)
+(defparameter *cursor-captured* #x00040003)
+
 ;;;; Vital!
 ;;;; This makes event processing happen.
 
