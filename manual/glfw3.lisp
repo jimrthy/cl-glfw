@@ -1,7 +1,7 @@
 (in-package #:cl-glfw3)
 
 ;;; This seems to make playing nicely with libglfw.so.2 less promising.
-(define-foreign-library libglfw
+(define-foreign-library *libglfw*
   (:unix (:or "libglfw.so.3" "libglfw.so"))
   (t (:default "libglfw")))
 
@@ -71,8 +71,10 @@
 
 ;;; Overall library initialization:
 (defun initialize ()
-  "Don't forget to call clean-up!"
-  (use-foreign-library libglfw))
+  "Don't forget to call clean-up!
+This is actually returning a foreign-library instance. What are the odds that
+that's what I need to be cleaning up, rather than the named value?"
+  (use-foreign-library *libglfw*))
 
 ;; Basics:
 ;; Everything has to start with glfw-init
@@ -484,4 +486,4 @@ Runs in the context of whichever thread caused the error."
 
 (defun clean-up ()
   "The companion to initialize. Don't use one without the other."
-  (close-foreign-library 'libglfw))
+  (close-foreign-library *libglfw*))
