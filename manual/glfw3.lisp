@@ -50,12 +50,6 @@
 (defcfun ("glfwPollEvents" poll-events)
     :void)
 
-;; Sleeps until an event appears. Then processes all that are available
-;; Only callable from main thread
-;; Not from a callback.
-(defcfun ("glfwWaitEvents" wait-events)
-    :void)
-
 ;;;; Vital!
 ;;;; These pieces are important enough that I'm putting them at the top of
 ;;;; this file. It feels incorrect, since initialization should come first.
@@ -65,6 +59,11 @@
 ;;; In previous versions, this would also call poll-events
 (defcfun ("glfwSwapBuffers" swap-buffers)
     :void
+  (window glfw-window))
+
+;;; Sign to exit the window's event loop.
+(defcfun ("glfwWindowShouldClose" window-should-close-p)
+    :int
   (window glfw-window))
 
 ;;;; Initialization
@@ -458,6 +457,14 @@ Runs in the context of whichever thread caused the error."
     :pointer
   (window glfw-window)
   (callback :pointer))
+
+;; Sleeps until an event appears. Then processes all that are available
+;; Only callable from main thread
+;; Not from a callback.
+;; Strongly related to poll-events, but it didn't strike me as anywhere near
+;; as important.
+(defcfun ("glfwWaitEvents" wait-events)
+    :void)
 
 ;;;; Termination
 
