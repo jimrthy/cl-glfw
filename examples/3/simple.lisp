@@ -13,7 +13,6 @@
 (in-package #:glfw3-example)
 
 ;;; These next really should be wrapped inside unwind-protect.
-(glfw3::initialize)
 (glfw3::glfw-init)
 
 (defparameter *simple-window* (glfw3::create-window 640 480 "A Simple Example" 
@@ -23,6 +22,7 @@
 
 (defun setup-view ()
   ;;; I'm getting hung up here apparently. WTF?
+  ;; So far, it's the first line that's dumping me into the kernel debugger.
   (gl:matrix-mode :projection)
   (gl:load-identity)
   (gl:ortho 0 1 0 1 -1 1))

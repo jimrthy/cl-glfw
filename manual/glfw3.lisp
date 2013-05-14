@@ -31,6 +31,8 @@
 
 ;;; Booleans...this is more than a little lame
 ;;; FIXME: I know the original GLFW has a better way to handle these
+;;; Along with all the other basic opengl types.
+;;; I suppose the real question: is there any point?
 (defun bool-c-to-lisp (value)
   (not (zerop value)))
 (defun bool-lisp-to-c (value)
@@ -58,6 +60,9 @@
 (defparameter *cursor-normal*   #x00040001)
 (defparameter *cursor-hidden*   #x00040002)
 (defparameter *cursor-captured* #x00040003)
+
+;; Just because it's quite useful. Esp. when creating a basic window.
+(defparameter *null* (cffi:null-pointer))
 
 ;;;; Vital!
 ;;;; This makes event processing happen.
