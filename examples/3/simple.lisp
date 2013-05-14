@@ -16,7 +16,9 @@
 (glfw3::initialize)
 (glfw3::glfw-init)
 
-(defparameter *simple-window* (glfw3::create-window 640 480 "A Simple Example" (cffi:null-pointer) (cffi:null-pointer)))
+(defparameter *simple-window* (glfw3::create-window 640 480 "A Simple Example" 
+						    (cffi:null-pointer) 
+						    (cffi:null-pointer)))
 (glfw3::make-context-current *simple-window*)
 
 (defun setup-view ()
@@ -30,6 +32,7 @@
 (setup-view)
 ;;; Running each of the commands within setup-view individually, from the REPL,
 ;;; seems to run absolutely fine.
+;;; Actually, I'm getting dumped into the kernel debugger. Hmm.
 
 (defun key-callback (window key-code action)
   (when (and (eql action glfw3::*glfw-press*)

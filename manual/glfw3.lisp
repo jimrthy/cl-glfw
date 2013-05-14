@@ -1,15 +1,33 @@
 (in-package #:cl-glfw3)
 
+(asdf:oos 'asdf:load-op :cffi)
+
 ;;; This seems to make playing nicely with libglfw.so.2 less promising.
-(define-foreign-library *libglfw*
+#+ecl(ffi:load-foreign-library "glfw3" :system-library t)
+
+(defparameter *libglfw* nil)
+;; This just is not working...failing on :framework
+#-ecl
+(cffi:define-foreign-library *libglfw*
+  (:darwin (:or "libglfw.dylib" (:framework "GLFW")))
   (:unix (:or "libglfw.so.3" "libglfw.so"))
+  (:windows (:or "glfw.dll" "libglfw.dll")) 
   (t (:default "libglfw")))
+#+nil(cffi:define-foreign-library *libglfw*
+       (:unix (:or "libglfw.so.3" "libglfw.so"))
+       (t (:default "libglfw3")))
+
+;;; Overall library initialization:
+;; Don't forget to call clean-up!
+;; This is actually returning a foreign-library instance. What are the odds that
+;; that's what I need to be cleaning up, rather than the named value?
+#-ecl(cffi:use-foreign-library *libglfw*)
 
 ;;;; Type aliases
 
 ;; It very well might be using something like grovel to pick up more details.
 ;; Except that this is supposed to be a totally opaque type.
-(defctype glfw-window :pointer)
+(cffi:defctype glfw-window :pointer)
 
 ;;; Booleans...this is more than a little lame
 ;;; FIXME: I know the original GLFW has a better way to handle these
@@ -17,15 +35,15 @@
   (not (zerop value)))
 (defun bool-lisp-to-c (value)
   (if value 1 0))
-(defctype glfw-bool (:wrapper :int :from-c bool-c-to-lisp
-			      :to-c bool-lisp-to-c))
+(cffi:defctype glfw-bool (:wrapper :int :from-c bool-c-to-lisp
+				   :to-c bool-lisp-to-c))
 ;;; Examples:
 ;; (convert-to-foreign nil 'glfw-bool)
 ;; (convert-from-foreign 354 'glfw-bool)
 
 ;; Handles. The fact that they're implemented as pointers to
 ;; structs is totally irrelevant.
-(defctype glfw-monitor :pointer)
+(cffi:defctype glfw-monitor :pointer)
 
 ;;; Constants
 ;;; Pulled in from #define's in the .H
@@ -47,7 +65,7 @@
 ;; Only callable from the main thread
 ;; Not callable from a callback
 ;; Processes events that have already been received, then returns immediately.
-(defcfun ("glfwPollEvents" poll-events)
+(cffi:defcfun ("glfwPollEvents" poll-events)
     :void)
 
 ;;;; Vital!
@@ -57,23 +75,16 @@
 
 ;;; Swaps front and back buffers
 ;;; In previous versions, this would also call poll-events
-(defcfun ("glfwSwapBuffers" swap-buffers)
+(cffi:defcfun ("glfwSwapBuffers" swap-buffers)
     :void
   (window glfw-window))
 
 ;;; Sign to exit the window's event loop.
-(defcfun ("glfwWindowShouldClose" window-should-close-p)
+(cffi:defcfun ("glfwWindowShouldClose" window-should-close-p)
     :int
   (window glfw-window))
 
 ;;;; Initialization
-
-;;; Overall library initialization:
-(defun initialize ()
-  "Don't forget to call clean-up!
-This is actually returning a foreign-library instance. What are the odds that
-that's what I need to be cleaning up, rather than the named value?"
-  (use-foreign-library *libglfw*))
 
 ;; Basics:
 ;; Everything has to start with glfw-init
@@ -82,22 +93,22 @@ that's what I need to be cleaning up, rather than the named value?"
 ;; N.B.: *If* it succeeds, you *must* call gl-terminate.
 ;; If it fails, that happens automatically.
 ;; May only be called from the main thread.
-(defcfun ("glfwInit" glfw-init) glfw-bool)
+(cffi:defcfun ("glfwInit" glfw-init) glfw-bool)
 
 ;; Resets all window hints to their default values
 ;; Only callable from main thread
-(defcfun ("glfwDefaultWindowHints" default-window-hints)
+(cffi:defcfun ("glfwDefaultWindowHints" default-window-hints)
     :void)
 
 ;; Used to tell the system how we want the window to look/act
 ;; Callable only from the main thread
-(defcfun ("glfwWindowHint" window-hint)
+(cffi:defcfun ("glfwWindowHint" window-hint)
     :void
   (target :int)
   (hint :int))
 
 ;; Lots of interesting stuff here!
-(defcfun ("glfwSetInputMode" set-input-mode)
+(cffi:defcfun ("glfwSetInputMode" set-input-mode)
     :void
   (window glfw-window)
   (mode :int)
@@ -105,7 +116,7 @@ that's what I need to be cleaning up, rather than the named value?"
 
 ;; Window Creation:
 ;; May only be called from the main thread.
-(defcfun ("glfwCreateWindow" create-window)
+(cffi:defcfun ("glfwCreateWindow" create-window)
     glfw-window
   (width :int)
   (height :int)
@@ -123,8 +134,8 @@ that's what I need to be cleaning up, rather than the named value?"
 ;; (defparameter *window* (glfw-create-window 640 480 "Test" (null-pointer) (null-pointer))) 
 ;; Works fine. So there.
 
-(defun open-window (&key (width 640) (height 480) (title "Untitled") (monitor (null-pointer)))
-  (create-window width height title monitor (null-pointer)))
+(defun open-window (&key (width 640) (height 480) (title "Untitled") (monitor (cffi:null-pointer)))
+  (create-window width height title monitor (cffi:null-pointer)))
 
 ;; !!!!!!!!!!!!!!!
 ;; Make Current
@@ -132,14 +143,14 @@ that's what I need to be cleaning up, rather than the named value?"
 ;; Window can only be current on a single thread at a time.
 ;; One thread can only have one current context.
 ;; Callable from secondary threads.
-(defcfun ("glfwMakeContextCurrent" make-context-current)
+(cffi:defcfun ("glfwMakeContextCurrent" make-context-current)
     :void
   (window glfw-window))
 
 ;; Only callable from main thread.
 ;; title is actually a const char*...my test window isn't updating,
 ;; but that could be because I'm totally ignoring its events.
-(defcfun ("glfwSetWindowTitle" set-window-title)
+(cffi:defcfun ("glfwSetWindowTitle" set-window-title)
     :void
   (window glfw-window)
   (title :string))
@@ -152,7 +163,7 @@ that's what I need to be cleaning up, rather than the named value?"
 ;; Rarely a good idea to manually move an already visible window.
 ;; Only callable from the main thread
 ;; X11 note: some window managers ignore the set position of hidden windows
-(defcfun ("glfwSetWindowPos" set-window-pos)
+(cffi:defcfun ("glfwSetWindowPos" set-window-pos)
     :void
   (window glfw-window)
   (xpos :int)
@@ -160,7 +171,7 @@ that's what I need to be cleaning up, rather than the named value?"
 
 ;; Sets the current value of time.
 ;; System continues to count up from there.
-(defcfun ("glfwSetTime" set-time)
+(cffi:defcfun ("glfwSetTime" set-time)
     :void
   (time :double))
 
@@ -169,7 +180,7 @@ that's what I need to be cleaning up, rather than the named value?"
 ;; Platforms that support either the WGL_EXT_swap_control_tear
 ;; or the GLX_EXT_swap_control_tear accept negative swap intervals.
 ;; Check with extension-supported (or use something like GLEW)
-(defcfun ("glfwSwapInterval" swap-interval)
+(cffi:defcfun ("glfwSwapInterval" swap-interval)
     :void
   (interval :int))
 
@@ -178,7 +189,7 @@ that's what I need to be cleaning up, rather than the named value?"
 ;;; Version
 
 ;; "Official" Get Version method.
-(defcfun ("glfwGetVersion" glfw-get-version-official)
+(cffi:defcfun ("glfwGetVersion" glfw-get-version-official)
     :void
   ;; These next parameters are actually int*.
   ;; Translating these back and forth is more than a little important.
@@ -189,20 +200,20 @@ that's what I need to be cleaning up, rather than the named value?"
 (defun get-version ()
   "Returns a list of the major-minor-revision of the GLFW library in use.
 Note that this is likely to be quite distinct from your OpenGL library."
-  (with-foreign-object (array :int 3)
-    (glfw-get-version-official array (inc-pointer array 1) (inc-pointer array 2))
-    (list (mem-aref array :int) (mem-aref array :int 1) (mem-aref array :int 2))))
+  (cffi:with-foreign-object (array :int 3)
+    (glfw-get-version-official array (cffi:inc-pointer array 1) (cffi:inc-pointer array 2))
+    (list (cffi:mem-aref array :int) (cffi:mem-aref array :int 1) (cffi:mem-aref array :int 2))))
 
 ;; Debugging version
 ;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
 ;; Can be called from any thread, before glfw-init.
-(defcfun ("glfwGetVersionString" get-version-string)
+(cffi:defcfun ("glfwGetVersionString" get-version-string)
     :string)
 
 ;;; UI info
 
 ;; Returns the window whose context is current on the calling thread.
-(defcfun ("glfwGetCurrentContext" get-current-context)
+(cffi:defcfun ("glfwGetCurrentContext" get-current-context)
     glfw-window)
 
 ;; Extensions
@@ -222,7 +233,7 @@ Note that this is likely to be quite distinct from your OpenGL library."
 ;; of a context's lifetime.
 ;;
 ;; Callable from secondary threads.
-(defcfun ("glfwExtensionSupported" extension-supported)
+(cffi:defcfun ("glfwExtensionSupported" extension-supported)
     :int
   (extension-name :string))
 
@@ -233,12 +244,12 @@ Note that this is likely to be quite distinct from your OpenGL library."
 ;;
 ;; N.B. Not guaranteed to be the same for all contexts!
 ;; Especialy if they use different client APIs or context creation hints.
-(defcfun ("glfwGetProcAddress" get-proc-address)
+(cffi:defcfun ("glfwGetProcAddress" get-proc-address)
     :pointer
   (proc-name :string))
 
 ;; Window Position
-(defcfun ("glfwGetWindowPos" glfw-get-window-pos-native)
+(cffi:defcfun ("glfwGetWindowPos" glfw-get-window-pos-native)
     :void
   (window glfw-window)
   (xpos :pointer :int)
@@ -247,16 +258,16 @@ Note that this is likely to be quite distinct from your OpenGL library."
 (defun get-window-pos (window)
   "Returns a list of the window's client area's upper-left screen coordinates.
 OSX note: screen coordinate system is inverted."
-  (with-foreign-object (array :int 2)
-    (glfw-get-window-pos-native window array (inc-pointer array 1))
-    (list (mem-aref array :int) (mem-aref array :int 1))))
+  (cffi:with-foreign-object (array :int 2)
+    (glfw-get-window-pos-native window array (cffi:inc-pointer array 1))
+    (list (cffi:mem-aref array :int) (cffi:mem-aref array :int 1))))
 
 ;;; This next function takes several interesting parameters.
 ;;; It seems arguably worth breaking it into multiple functions
 ;;; that are each more explicit about what information they're
 ;;; actually retrieving.
 (defparameter *opened* :undefined) ; really deserves a better name.
-(defcfun ("glfwGetWindowParam" glfw-get-window-param-native)
+(cffi:defcfun ("glfwGetWindowParam" glfw-get-window-param-native)
     :int
   (window glfw-window)
   (param :int))
@@ -272,7 +283,7 @@ OSX note: screen coordinate system is inverted."
 (defparameter *glfw-sticky-mouse* #x00030003)
 ;;; This seems like another that's probably worth breaking into
 ;;; several explicit functions
-(defcfun ("glfwGetInputMode" glfw-get-input-mode-native)
+(cffi:defcfun ("glfwGetInputMode" glfw-get-input-mode-native)
     :int
   (window glfw-window)
   (mode :int))
@@ -284,7 +295,7 @@ OSX note: screen coordinate system is inverted."
 (defun get-sticky-mouse (window)
   (glfw-get-input-mode-native window *glfw-sticky-mouse*))
 
-(defcfun ("glfwSetInputMode" glfw-set-input-mode-native)
+(cffi:defcfun ("glfwSetInputMode" glfw-set-input-mode-native)
     :void
   (window glfw-window)
   (mode :int)
@@ -301,39 +312,34 @@ OSX note: screen coordinate system is inverted."
 ;;; Details depend on *glfw-sticky-keys*
 ;;; Used for key state. Don't try to use for inputting text.
 ;;; There's a callback for that instead.
-(defcfun ("glfwGetKey" get-key)
+(cffi:defcfun ("glfwGetKey" get-key)
     :int
   (window glfw-window)
   (key-code :int))
 
 ;;; Returns GLFW_PRESS or GLFW_RELEASE.
 ;;; Details depend on *glfw-sticky-mouse*
-(defcfun ("glfwGetMouseButton" get-mouse-button)
+(cffi:defcfun ("glfwGetMouseButton" get-mouse-button)
     :int
   (window glfw-window)
   (button :int))
 
-(defcfun ("glfwGetCursorPos" glfw-get-cursor-pos-native)
+(cffi:defcfun ("glfwGetCursorPos" glfw-get-cursor-pos-native)
     :void
   (window glfw-window)
   (xpos :pointer :double)
   (ypos :pointer :double))
 
 (defun get-cursor-pos (window)
-  (with-foreign-object (array :double 2)
-    (glfw-get-cursor-pos-native window array (inc-pointer array 1))
-    (list (mem-aref array :double) (mem-aref array :double 1))))
+  (cffi:with-foreign-object (array :double 2)
+    (glfw-get-cursor-pos-native window array (cffi:inc-pointer array 1))
+    (list (cffi:mem-aref array :double) (cffi:mem-aref array :double 1))))
 
-(defcfun ("glfwSetCursorPos" set-cursor-pos)
+(cffi:defcfun ("glfwSetCursorPos" set-cursor-pos)
     :void
   (window glfw-window)
   (xpos :double)
   (ypos :double))
-
-;; Does the window believe it should close?
-(defcfun ("glfwWindowShouldClose" window-should-close-p)
-    :int 
-  (window glfw-window))
 
 ;; What time is it?
 ;; Returns the value of the timer.
@@ -343,7 +349,7 @@ OSX note: screen coordinate system is inverted."
 ;; Resolution is system-dependent. But it's usually on the order of
 ;; micro- or nanoseconds.
 ;; May be called from secondary threads
-(defcfun ("glfwGetTime" get-time)
+(cffi:defcfun ("glfwGetTime" get-time)
     :double)
 
 ;;;; Monitor information
@@ -354,7 +360,7 @@ OSX note: screen coordinate system is inverted."
 ;; Returns an array of handles for all currently connected monitors.
 ;; Only valid until the monitor configuration changes
 ;; Returns NULL on error
-(defcfun ("glfwGetMonitors" glfw-get-monitors-native)
+(cffi:defcfun ("glfwGetMonitors" glfw-get-monitors-native)
     glfw-monitor  ; really an array
     (count :pointer :int))
 ;; This returns a pair of monitor* on my system, which seems totally correct.
@@ -362,16 +368,16 @@ OSX note: screen coordinate system is inverted."
 (defun get-monitors ()
   "Get a list of monitor handles.
 Useful for the monitor-querying functions that I haven't translated yet."
-  (let ((count (foreign-alloc :int)))
+  (let ((count (cffi:foreign-alloc :int)))
     (unwind-protect 
 	 (let ((monitors (glfw-get-monitors-native count))
 	       (result ()))
-	   (dotimes (i (mem-ref count :int))
-	     (push (mem-aref monitors 'glfw-monitor i) result))
+	   (dotimes (i (cffi:mem-ref count :int))
+	     (push (cffi:mem-aref monitors 'glfw-monitor i) result))
 	   result)
-      (foreign-free count))))
+      (cffi:foreign-free count))))
 
-(defcfun ("glfwGetPrimaryMonitor" get-primary-monitor)
+(cffi:defcfun ("glfwGetPrimaryMonitor" get-primary-monitor)
     glfw-monitor)
 
 ;;; FIXME: There's a big chunk of functions dealing with the actual monitors,
@@ -391,10 +397,10 @@ Useful for the monitor-querying functions that I haven't translated yet."
 The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
 Runs in the context of whichever thread caused the error."
-(defcfun ("glfwSetErrorCallback" set-error-callback)
+(cffi:defcfun ("glfwSetErrorCallback" set-error-callback)
     :pointer
   (new-callback :pointer))
-(defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
+(cffi:defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
   (format nil "Error Code ~A: ~A~%" error-code description))
 ;; I very much want to do this.
 ;; Unfortunately, it means trying to call glfwSetErrorCallback before the lib's
@@ -406,7 +412,7 @@ Runs in the context of whichever thread caused the error."
 ;; callback is a void (*GLFWwindowsizefun)(GLFWwindow*, int, int)
 ;; Parameters are the new size of the window, in screen coordinates.
 ;; Yet another candidate for an API wrapper.
-(defcfun ("glfwSetWindowSizeCallback" glfw-set-window-size-callback-native)
+(cffi:defcfun ("glfwSetWindowSizeCallback" glfw-set-window-size-callback-native)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -414,7 +420,7 @@ Runs in the context of whichever thread caused the error."
 ;;; Still not useful for getting text.
 ;;; Basically an event-driven version of glfw-get-key.
 ;;; The .h has some useful info about what happens on loss of focus.
-(defcfun ("glfwSetKeyCallback" set-key-callback)
+(cffi:defcfun ("glfwSetKeyCallback" set-key-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -427,7 +433,7 @@ Runs in the context of whichever thread caused the error."
 ;;; Or just steal whatever Bill already wrote.
 ;;; It seems probable that this really belongs in the section with the callback
 ;;; declarations
-(defcfun ("glfwSetCharCallback" set-char-callback-native)
+(cffi:defcfun ("glfwSetCharCallback" set-char-callback-native)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -435,7 +441,7 @@ Runs in the context of whichever thread caused the error."
 ;;; The callback is a void (*GLFWmousebuttonfun)(GLFWwindow*, int, int)
 ;;; First int parameter: the button that changed state
 ;;; Second: GLFW_PRESS or GLFW_RELEASE
-(defcfun ("glfwSetMouseButtonCallback" set-mouse-button-callback)
+(cffi:defcfun ("glfwSetMouseButtonCallback" set-mouse-button-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -443,7 +449,7 @@ Runs in the context of whichever thread caused the error."
 ;;; void (*GLFWcursorposfun)(GLFWwindow*, double, double);
 ;;; The parameters are the new cursor coordinates, relative to the window's
 ;;; top left corner.
-(defcfun ("glfwSetCursorPosCallback" set-cursor-pos-callback)
+(cffi:defcfun ("glfwSetCursorPosCallback" set-cursor-pos-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -453,7 +459,7 @@ Runs in the context of whichever thread caused the error."
 ;;; It's all about handling input from a mouse wheel or trackpad.
 ;;; Or any other scrolling device.
 ;;; Based on the description, it's tough to tell what the actual values mean.
-(defcfun ("glfwSetScrollCallback" set-scroll-callback)
+(cffi:defcfun ("glfwSetScrollCallback" set-scroll-callback)
     :pointer
   (window glfw-window)
   (callback :pointer))
@@ -463,13 +469,13 @@ Runs in the context of whichever thread caused the error."
 ;; Not from a callback.
 ;; Strongly related to poll-events, but it didn't strike me as anywhere near
 ;; as important.
-(defcfun ("glfwWaitEvents" wait-events)
+(cffi:defcfun ("glfwWaitEvents" wait-events)
     :void)
 
 ;;;; Termination
 
 ;; Override user's attempt to close, or signal that a window should close
-(defcfun ("glfwSetWindowShouldClose" set-window-should-close)
+(cffi:defcfun ("glfwSetWindowShouldClose" set-window-should-close)
     :void
   (glfw-window glfw-window)
   (flag :int))
@@ -478,7 +484,7 @@ Runs in the context of whichever thread caused the error."
 ;; Cannot be called from a callback
 ;; If the context is current on the main thread, it is detached before destruction.
 ;; Context must *not* be current on any other thread.
-(defcfun ("glfwDestroyWindow" destroy-window)
+(cffi:defcfun ("glfwDestroyWindow" destroy-window)
     :void
   (window glfw-window))
 
@@ -489,8 +495,8 @@ Runs in the context of whichever thread caused the error."
 ;; Must re-call (glfw-init) to start using glfw again.
 ;; May only be called from the main thread.
 ;; No window's context may be current on another thread when this one is called!
-(defcfun ("glfwTerminate" terminate) :void)
+(cffi:defcfun ("glfwTerminate" terminate) :void)
 
 (defun clean-up ()
   "The companion to initialize. Don't use one without the other."
-  (close-foreign-library *libglfw*))
+  (cffi:close-foreign-library *libglfw*))
