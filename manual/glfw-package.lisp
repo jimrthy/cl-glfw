@@ -1,6 +1,7 @@
+
 (defpackage #:cl-glfw
   (:nicknames #:glfw)
-  (:use #:cl #:cffi #:cl-glfw-types)
+  (:use #:cl #:cffi #:cl-glfw-macros #:cl-glfw-types)
   (:shadowing-import-from #:cl-glfw-types #:boolean #:byte #:float #:char #:string)
   (:shadow #:sleep #:+red-bits+ #:+green-bits+ #:+blue-bits+
 	   #:+alpha-bits+ #:+stencil-bits+ #:+depth-bits+

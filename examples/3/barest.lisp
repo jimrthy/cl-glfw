@@ -1,6 +1,11 @@
 ;;;; Sample translated straight from the latest glfw3 tutorial
 ;;;; source: http://www.glfw.org/docs/3.0/quick.html
 
+;;; This desperately needs to be worked over. I'm sure I have
+;;; all sorts of unjustified expectations about symbols being
+;;; imported and such.
+;(error "Start here!")
+
 (require '#:asdf)
 (asdf:oos 'asdf:load-op '#:cl-glfw3)
 (asdf:oos 'asdf:load-op '#:cl-opengl)
@@ -9,6 +14,7 @@
   (:use #:cl #:cl-glfw3 #:cl-opengl))
 (in-package #:glfw3-example)
 
+;; FAIL: Can't translate the lambda() to a MACPTR
 (glfw3:set-error-callback (lambda (error-code description)
 			    (format t "Error ~A: '~A'~%" error-code description)))
 
@@ -27,7 +33,7 @@
 						      (let ((ratio (/ width height)))
 							(gl:ortho (- ratio) ratio -1 1 1 -1))))
 	     (do ()
-		 ((glfw3:window-should-close window) t)
+		 ((glfw3:window-should-close-p window) t)
 	       (progn
 		 ;; The event loop
 		 (let ((time (glfw3:get-time)))

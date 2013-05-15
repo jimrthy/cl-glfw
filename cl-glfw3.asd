@@ -11,5 +11,6 @@
   :depends-on (cffi #| alexandria |#)
   :components ((:module manual :serial t
 			:components ((:file "glfw3-package")
+				     (:file "glfw-macros")
 				     (:file "glfw3-macros")
 				     (:file "glfw3")))))

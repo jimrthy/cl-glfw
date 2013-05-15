@@ -13,9 +13,6 @@
   (:unix (:or "libglfw.so.3" "libglfw.so"))
   (:windows (:or "glfw.dll" "libglfw.dll")) 
   (t (:default "libglfw")))
-#+nil(cffi:define-foreign-library *libglfw*
-       (:unix (:or "libglfw.so.3" "libglfw.so"))
-       (t (:default "libglfw3")))
 
 ;;; Overall library initialization:
 ;; Don't forget to call clean-up!
@@ -92,7 +89,7 @@
 ;;;; Initialization
 
 ;; Basics:
-;; Everything has to start with glfw-init
+;; Everything has to start with glfw-init...after the library itself is loaded, of course.
 ;; The return spec is wrong:
 ;; It's GL_TRUE on success, GL_FALSE on failure.
 ;; N.B.: *If* it succeeds, you *must* call gl-terminate.
@@ -130,15 +127,9 @@
   ;; The window whose context to share resources with, or NULL
   ;; to be selfish.
   (shared-window glfw-window))
-;; I want to be able to call that as:
-;; (defparameter *window* (glfw-create-window 640 480 "Test" () ()))
-;; That fails because nil is an invalid CCL:MACPTR.
-;; Just checking:
-;; (defparameter *window* (glfw-create-window 640 480 "Test" 0 0))
-;; fails for the same reason. So...what are those "something*" parameters?
-;; (defparameter *window* (glfw-create-window 640 480 "Test" (null-pointer) (null-pointer))) 
-;; Works fine. So there.
-
+;; Call as:
+;; (defparameter *window* (glfw-create-window 640 480 "Test" *null* *null))
+;; e.g.
 (defun open-window (&key (width 640) (height 480) (title "Untitled") (monitor (cffi:null-pointer)))
   (create-window width height title monitor (cffi:null-pointer)))
 
@@ -396,84 +387,371 @@ Useful for the monitor-querying functions that I haven't translated yet."
 
 ;;; FIXME: At the very least, also want the size handler.
 
-;; This looks as though it works. It hasn't actually been tested by causing
-;; an error yet.
-    "new-callback is a function that accepts an int error-code and const char* description.
+(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+  (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
+         (special-name (intern (format nil "*~S*" callback-name)))
+         (setter-name (intern (format nil "SET-~S" callback-name)))
+         (internal-setter-name (intern (format nil "%~S" setter-name))))
+    `(progn
+       (defparameter ,special-name nil)
+       (cffi:defcallback ,callback-name ,return-type ,args
+         (when ,special-name
+           (prog2
+               ,before-form
+               (funcall ,special-name ,@(mapcar #'car args))
+             ,after-form)))
+       (cffi:defcfun (,c-name ,internal-setter-name) :void (cbfun :pointer))
+       (defun ,setter-name (callback)
+         ,(format nil "GENERAL CL-GLFW CALLBACK NOTES
+
+All callback setting functions can take either a pointer to a C function,
+a function object, a function symbol, or nil to clear the callback function.
+
+THIS CALLBACK FUNCTION
+
+~a" documentation)
+         (cl:cond
+           ((null callback)
+            (,internal-setter-name (cffi:null-pointer)))
+           ((symbolp callback)
+            (setf ,special-name callback)
+            (,internal-setter-name (cffi:callback ,callback-name)))
+           ((functionp callback)
+            (setf ,special-name callback)
+            (,internal-setter-name (cffi:callback ,callback-name)))
+           ((cffi:pointerp callback)
+            (,internal-setter-name callback))
+           (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))))))
+
+
+(define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ()
+                        :documentation
+                        "
+Function that will be called when a user requests that the window should be
+closed, typically by clicking the window close icon (e.g. the cross in the upper right corner of a
+window under Microsoft Windows). The function should have the following type:
+ (function () integer)
+
+The return value of the callback function indicates whether or not the window close action 
+should continue. If the function returns
+gl:+true+, the window will be closed. If the function returns gl:+false+, the window will not
+be closed. If you give a CFFI callback returning glfw:boolean, you can use t and nil as return types.
+
+Notes
+Window close events are recorded continuously, but only reported when glfwPollEvents,
+glfwWaitEvents or glfwSwapBuffers is called.
+The OpenGL context is still valid when this function is called.
+Note that the window close callback function is not called when glfwCloseWindow is called, but only
+when the close request comes from the window manager.
+Do not call glfwCloseWindow from a window close callback function. Close the window by returning
+gl:+true+ from the function.
+")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Error Callback Setter
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-callback-setter "glfwSetErrorCallback" #:error
+  :void
+  ((error-code :int) (description :string))
+  :documentation
+  "
 The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
-Runs in the context of whichever thread caused the error."
-(cffi:defcfun ("glfwSetErrorCallback" set-error-callback)
-    :pointer
-  (new-callback :pointer))
-(cffi:defcallback default-error-handler :void ((error-code :int) (description :pointer :char))
-  (format nil "Error Code ~A: ~A~%" error-code description))
-;; I very much want to do this.
-;; Unfortunately, it means trying to call glfwSetErrorCallback before the lib's
-;; actually been loaded.
-;;(defparameter *original-error-handler* (set-error-callback (callback default-error-handler)))
-;;; At the very least, it should be dead simple to swap in more meaningful error handlers.
-;;; It's something at least vaguely interesting to consider.
+Runs in the context of whichever thread caused the error.
+")
 
-;; callback is a void (*GLFWwindowsizefun)(GLFWwindow*, int, int)
-;; Parameters are the new size of the window, in screen coordinates.
-;; Yet another candidate for an API wrapper.
-(cffi:defcfun ("glfwSetWindowSizeCallback" glfw-set-window-size-callback-native)
-    :pointer
-  (window glfw-window)
-  (callback :pointer))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Window Size Callback Setter
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-callback-setter "glfwSetWindowSizeCallback" #:window-size 
+  :void
+  ((window glfw-window) (width :int) (height :int))
+  :documentation
+  "
+Function that will be called every time the window size changes. The
+function should takes the arguments (width height) giving the new width and height of the window client area.
+
+A window has to be opened for this function to have any effect.
+Notes
+Window size changes are recorded continuously, but only reported when glfwPollEvents,
+glfwWaitEvents or glfwSwapBuffers is called.
+")
+
+;; Keyboard key definitions: 8-bit ISO-8859-1 (Latin 1) encoding is used
+;; for printable keys (such as A-Z, 0-9 etc), and values above 256
+;; represent special (non-printable) keys (e.g. F1, Page Up etc).
+;; Stolen from the original, except that I'm avoiding defconstant.
+;; Considering the fact that the "constants" have changed, that seems
+;; wise.
+(defparameter *key-unknown* -1)
+(defparameter *key-space* 32)
+(defparameter *key-special* 256)
+(defparameter *key-esc*(+ *key-special* 0))
+(defparameter *key-f1* (+ *key-special* 2))
+(defparameter *key-f2* (+ *key-special* 3))
+(defparameter *key-f3* (+ *key-special* 4))
+(defparameter *key-f4* (+ *key-special* 5))
+(defparameter *key-f5* (+ *key-special* 6))
+(defparameter *key-f6* (+ *key-special* 7))
+(defparameter *key-f7* (+ *key-special* 8))
+(defparameter *key-f8* (+ *key-special* 9))
+(defparameter *key-f9* (+ *key-special* 10))
+(defparameter *key-f10* (+ *key-special* 11))
+(defparameter *key-f11* (+ *key-special* 12))
+(defparameter *key-f12* (+ *key-special* 13))
+(defparameter *key-f13* (+ *key-special* 14))
+(defparameter *key-f14* (+ *key-special* 15))
+(defparameter *key-f15* (+ *key-special* 16))
+(defparameter *key-f16* (+ *key-special* 17))
+(defparameter *key-f17* (+ *key-special* 18))
+(defparameter *key-f18* (+ *key-special* 19))
+(defparameter *key-f19* (+ *key-special* 20))
+(defparameter *key-f20* (+ *key-special* 21))
+(defparameter *key-f21* (+ *key-special* 22))
+(defparameter *key-f22* (+ *key-special* 23))
+(defparameter *key-f23* (+ *key-special* 24))
+(defparameter *key-f24* (+ *key-special* 25))
+(defparameter *key-f25* (+ *key-special* 26))
+(defparameter *key-up* (+ *key-special* 27))
+(defparameter *key-down* (+ *key-special* 28))
+(defparameter *key-left* (+ *key-special* 29))
+(defparameter *key-right* (+ *key-special* 30))
+(defparameter *key-lshift* (+ *key-special* 31))
+(defparameter *key-rshift* (+ *key-special* 32))
+(defparameter *key-lctrl* (+ *key-special* 33))
+(defparameter *key-rctrl* (+ *key-special* 34))
+(defparameter *key-lalt* (+ *key-special* 35))
+(defparameter *key-ralt* (+ *key-special* 36))
+(defparameter *key-tab* (+ *key-special* 37))
+(defparameter *key-enter* (+ *key-special* 38))
+(defparameter *key-backspace* (+ *key-special* 39))
+(defparameter *key-insert* (+ *key-special* 40))
+(defparameter *key-del* (+ *key-special* 41))
+(defparameter *key-pageup* (+ *key-special* 42))
+(defparameter *key-pagedown* (+ *key-special* 43))
+(defparameter *key-home* (+ *key-special* 44))
+(defparameter *key-end* (+ *key-special* 45))
+(defparameter *key-kp-0* (+ *key-special* 46))
+(defparameter *key-kp-1* (+ *key-special* 47))
+(defparameter *key-kp-2* (+ *key-special* 48))
+(defparameter *key-kp-3* (+ *key-special* 49))
+(defparameter *key-kp-4* (+ *key-special* 50))
+(defparameter *key-kp-5* (+ *key-special* 51))
+(defparameter *key-kp-6* (+ *key-special* 52))
+(defparameter *key-kp-7* (+ *key-special* 53))
+(defparameter *key-kp-8* (+ *key-special* 54))
+(defparameter *key-kp-9* (+ *key-special* 55))
+(defparameter *key-kp-divide* (+ *key-special* 56))
+(defparameter *key-kp-multiply* (+ *key-special* 57))
+(defparameter *key-kp-subtract* (+ *key-special* 58))
+(defparameter *key-kp-add* (+ *key-special* 59))
+(defparameter *key-kp-decimal* (+ *key-special* 60))
+(defparameter *key-kp-equal* (+ *key-special* 61))
+(defparameter *key-kp-enter* (+ *key-special* 62))
+(defparameter *key-kp-num-lock* (+ *key-special* 63))
+(defparameter *key-caps-lock* (+ *key-special* 64))
+(defparameter *key-scroll-lock* (+ *key-special* 65))
+(defparameter *key-pause* (+ *key-special* 66))
+(defparameter *key-lsuper* (+ *key-special* 67))
+(defparameter *key-rsuper* (+ *key-special* 68))
+(defparameter *key-menu* (+ *key-special* 69))
+(defparameter *key-last* *key-menu*)
+
+(defmacro key-int-to-symbol (key-form)
+  "
+This turns messy very quickly, since I very specifically do not want to define these constants"
+  `(case ,key-form
+     ,@(sort
+        (loop for special-key in  '("backspace" "del" "down" "end" "enter" "esc" "f1" "f10" "f11" "f12" "f13"
+                                    "f14" "f15" "f16" "f17" "f18" "f19" "f2" "f20" "f21" "f22" "f23" "f24" "f25"
+                                    "f3" "f4" "f5" "f6" "f7" "f8" "f9" "home" "insert" "kp-0" "kp-1" "kp-2" "kp-3"
+                                    "kp-4" "kp-5" "kp-6" "kp-7" "kp-8" "kp-9" "kp-add" "kp-decimal" "kp-divide"
+                                    "kp-enter" "kp-equal" "kp-multiply" "kp-subtract" "lalt" "lctrl" "left"
+                                    "lshift" "pagedown" "pageup" "ralt" "rctrl" "right" "rshift"
+                                    "special" "tab" "unknown" "up"
+				    "kp-num-lock" "caps-lock" "scroll-lock" "pause" "lsuper" "rsuper" "menu")
+           collect
+           `(,(symbol-value (find-symbol (string-upcase (format nil "*key-~a*" special-key)) (find-package '#:glfw3)))
+              ,(intern (string-upcase special-key) (find-package '#:keyword))))
+        #'(lambda (a b) (< (car a) (car b))))))
+
+;; This *will* blow up on special keys.
+(defun lispify-key (key-int)
+  "Convert key-int from GLFW's integer representation to lisp characters if from 0 to 255, or keywords, if not within 0-255 inclusive."
+  (if (and (>= key-int 0) (< key-int 256))
+      (code-char key-int)
+      (key-int-to-symbol key-int)))
 
 ;;; Still not useful for getting text.
 ;;; Basically an event-driven version of glfw-get-key.
 ;;; The .h has some useful info about what happens on loss of focus.
-(cffi:defcfun ("glfwSetKeyCallback" set-key-callback)
-    :pointer
-  (window glfw-window)
-  (callback :pointer))
+(define-callback-setter "glfwSetKeyCallback" #:key :void ((window glfw-window) (key :int) (action :int))
+                        :before-form (setf key (lispify-key key))
+                        :documentation
+                        "
+Function that will be called every time a key is pressed or released.
+Function should take the arguments (key action), where key is either a character,
+if the key pressed was a member of iso-8859-1, or a keyword representing the key pressed if not.
+See the GLFW manual, table 3.3 for special key identifiers. Action is either glfw:+press+ or
+glfw:+release+. Use set-char-callback instead if you want to read just characters.
 
-;;; Used for actual text input.
-;;; callback is a void (*fn)(GLFWwindow*, unsigned int code-point)
-;;; Returns the previous callback, or NULL on error.
-;;; Call w/ NULL to clear.
-;;; This is where I definitely need to start thinking about the actual API.
-;;; Or just steal whatever Bill already wrote.
-;;; It seems probable that this really belongs in the section with the callback
-;;; declarations
-(cffi:defcfun ("glfwSetCharCallback" set-char-callback-native)
-    :pointer
-  (window glfw-window)
-  (callback :pointer))
+Description
+The function selects which function to be called upon a keyboard key event. The callback function is
+called every time the state of a single key is changed (from released to pressed or vice versa). The
+reported keys are unaffected by any modifiers (such as shift or alt).
+A window has to be opened for this function to have any effect.
 
-;;; The callback is a void (*GLFWmousebuttonfun)(GLFWwindow*, int, int)
-;;; First int parameter: the button that changed state
-;;; Second: GLFW_PRESS or GLFW_RELEASE
-(cffi:defcfun ("glfwSetMouseButtonCallback" set-mouse-button-callback)
-    :pointer
-  (window glfw-window)
-  (callback :pointer))
+Notes
+Keyboard events are recorded continuously, but only reported when glfw::PollEvents, glfw::WaitEvents
+or glfw::SwapBuffers is called.
+")
 
-;;; void (*GLFWcursorposfun)(GLFWwindow*, double, double);
-;;; The parameters are the new cursor coordinates, relative to the window's
-;;; top left corner.
-(cffi:defcfun ("glfwSetCursorPosCallback" set-cursor-pos-callback)
-    :pointer
-  (window glfw-window)
-  (callback :pointer))
+(define-callback-setter "glfwSetCharCallback" #:char :void ((window glfw-window) (character :int) (action :int))
+                        :before-form (setf character (code-char character))
+                        :documentation
+                        "
+Function that will be called every time a printable character is generated by
+the keyboard. The function should take the arguments (character action)
+where character is a lisp character and action is either glfw:+press+ or glfw:+release+.
 
-;;; void (*GLFWscrollfun)(GLFWwindow*, double, double)
-;;; Parameters are the scroll offsets along the x- and y- axes (respectively).
-;;; It's all about handling input from a mouse wheel or trackpad.
-;;; Or any other scrolling device.
-;;; Based on the description, it's tough to tell what the actual values mean.
-(cffi:defcfun ("glfwSetScrollCallback" set-scroll-callback)
-    :pointer
-  (window glfw-window)
-  (callback :pointer))
+NB this makes the presumption that your lisp implementation will use Unicode for code-char.
+
+Description
+The function selects which function to be called upon a keyboard character event. The callback function
+is called every time a key that results in a printable Unicode character is pressed or released. Characters
+are affected by modifiers (such as shift or alt).
+A window has to be opened for this function to have any effect.
+
+Notes
+Character events are recorded continuously, but only reported when glfw::PollEvents, glfw::WaitEvents
+or glfw::SwapBuffers is called.
+Control characters, such as tab and carriage return, are not reported to the character callback function,
+since they are not part of the Unicode character set. Use the key callback function for such events (see
+glfw::SetKeyCallback).
+The Unicode character set supports character codes above 255, so never cast a Unicode character to an
+eight bit data type (e.g. the C language char type) without first checking that the character code is less
+than 256. Also note that Unicode character codes 0 to 255 are equal to ISO 8859-1 (Latin 1).
+")
+
+;;; Required for the current incarnation of lispify-mouse-button.
+;;; I don't particularly like this approach, but nothing better
+;;; really springs to mind.
+;;; These are the #defines used in glfw.h
+(defparameter *mouse-button-left* 0)
+(defparameter *mouse-button-middle* 1)
+(defparameter *mouse-button-right* 2)
+(defparameter *mouse-button-4* 3)
+(defparameter *mouse-button-5* 4)
+(defparameter *mouse-button-6* 5)
+(defparameter *mouse-button-7* 6)
+(defparameter *mouse-button-8* 7)
+(defun lispify-mouse-button (button-int)
+  "Convert button-int from GLFW's integer representation to a lisp keyword."
+  (case button-int
+    (#.glfw3::*mouse-button-left* :left)
+    (#.glfw3::*mouse-button-middle* :middle)
+    (#.glfw3::*mouse-button-right* :right)
+    (#.glfw3::*mouse-button-4* :button-4)
+    (#.glfw3::*mouse-button-5* :button-5)
+    (#.glfw3::*mouse-button-6* :button-6)
+    (#.glfw3::*mouse-button-7* :button-7)
+    (#.glfw3::*mouse-button-8* :button-8)))
+
+(define-callback-setter "glfwSetMouseButtonCallback" #:mouse-button :void ((window glfw-window) (button :int) (action :int))
+                        :before-form (setf button (lispify-mouse-button button))
+                        :documentation
+                        "
+Function that will be called every time a mouse button is pressed or released.
+The function takes the arguments (button action), where button is a keyword symbol as returned by
+lispify-mouse-button and action is either glfw:+press+ or glfw:+release+.
+
+Description
+The function selects which function to be called upon a mouse button event.
+A window has to be opened for this function to have any effect.
+
+Notes
+Mouse button events are recorded continuously, but only reported when glfw::PollEvents,
+glfw::WaitEvents or glfw::SwapBuffers is called.
++MOUSE_BUTTON_LEFT+ is equal to +MOUSE_BUTTON_1+
++MOUSE_BUTTON_RIGHT+ is equal to +MOUSE_BUTTON_2+
++MOUSE_BUTTON_MIDDLE+ is equal to +MOUSE_BUTTON_3+
+")
+
+(define-callback-setter "glfwSetMousePosCallback" #:mouse-pos :void ((window glfw-window) (x :int) (y :int))
+                        :documentation
+                        "
+Function that will be called every time the mouse is moved.
+The function takes the arguments (x y), where x and y are the current position of the mouse.
+
+Description
+The function selects which function to be called upon a mouse motion event.
+A window has to be opened for this function to have any effect.
+
+Notes
+Mouse motion events are recorded continuously, but only reported when glfw::PollEvents,
+glfw::WaitEvents or glfw::SwapBuffers is called.
+")
+
+;;; This next definition was failing:
+(cl-glfw-macros:defcfun+doc ("glfwSetMouseWheel" set-mouse-wheel) :void ((pos :int))
+	     "Parameters
+pos
+     Position of the mouse wheel.
+Description
+The function changes the position of the mouse wheel.
+")
+;;; This version works:
+;(cffi:defcfun ("glfwSetMouseWheel" set-mouse-wheel)
+;    :void
+;  (pos :int))
+;;; The first really should expand into:
+;(progn (cffi:defcfun ("glfwSetMouseWheel" set-mouse-wheel) :void (pos :int))
+;       (setf (documentation #'set-mouse-wheel 'function) "blah"))
+;; The last built fine...problem seems to have been packaging
+;; (as shocking as that is...)
+
+(defparameter *mouse-wheel-cumulative* nil)
+(define-callback-setter "glfwSetMouseWheelCallback" #:mouse-wheel :void ((window glfw-window) (pos :int))
+                        :after-form (unless *mouse-wheel-cumulative* (glfw3::set-mouse-wheel 0))
+                        :documentation
+                        "
+Function that will be called every time the mouse wheel is moved.
+The function takes one argument: the position of the mouse wheel.
+This DIFFERS FROM GLFW's DEFAULT behaviour in that the position is
+reset after every call to this function, effectively giving the delta.
+As most programs are only interested in the delta anyway, this is thought
+to save others recording the state of it again.
+If you wish to have the original GLFW behaviour, set cl-glfw3::*mouse-wheel-cumulative* to t.
+
+Description
+The function selects which function to be called upon a mouse wheel event.
+A window has to be opened for this function to have any effect.
+Notes
+Mouse wheel events are recorded continuously, but only reported when glfw::PollEvents,
+glfw::WaitEvents or glfw::SwapBuffers is called.
+")
+
+(cl-glfw-macros:defcfun+doc ("glfwGetJoystickParam" get-joystick-param) :int ((window glfw-window) (joy :int) (param :int))
+	     "Parameters
+joy
+      A joystick identifier, which should be +JOYSTICK_n+ where n is in the range 1 to 16.
+param
+      A token selecting which parameter the function should return (see table 3.5).
+Return values
+The function returns different parameters depending on the value of param. Table 3.5 lists valid param
+values, and their corresponding return values.
+Description
+The function is used for acquiring various properties of a joystick.
+Notes
+The joystick information is updated every time the function is called.
+No window has to be opened for joystick information to be valid.
+")
 
 ;; Sleeps until an event appears. Then processes all that are available
 ;; Only callable from main thread
 ;; Not from a callback.
-;; Strongly related to poll-events, but it didn't strike me as anywhere near
-;; as important.
+;; Strongly related to poll-events.
 (cffi:defcfun ("glfwWaitEvents" wait-events)
     :void)
 
@@ -482,7 +760,7 @@ Runs in the context of whichever thread caused the error."
 ;; Override user's attempt to close, or signal that a window should close
 (cffi:defcfun ("glfwSetWindowShouldClose" set-window-should-close)
     :void
-  (glfw-window glfw-window)
+  (window glfw-window)
   (flag :int))
 
 ;; Only callable from the main thread
@@ -503,5 +781,10 @@ Runs in the context of whichever thread caused the error."
 (cffi:defcfun ("glfwTerminate" terminate) :void)
 
 (defun clean-up ()
-  "The companion to initialize. Don't use one without the other."
-  (cffi:close-foreign-library *libglfw*))
+  "The companion to initialize. Don't use one without the other.
+This probably doesn't play very nicely with ecl"
+  (if *libglfw*
+      (progn
+	(cffi:close-foreign-library *libglfw*)
+	(setf *libglfw* nil))
+      (format t "Calling clean-up before library initialization")))
