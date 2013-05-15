@@ -560,11 +560,11 @@ glfwWaitEvents or glfwSwapBuffers is called.
 (defparameter *key-ralt* (+ *key-special* 90))
 (defparameter *key-rsuper* (+ *key-special* 91))
 (defparameter *key-menu* (+ *key-special* 92))
+;; Next line causes compiler warning about duplicate key form in case statement.
+;; Actually, the problem lies with including *special-key* in the key-int-to-symbol loop.
 (defparameter *key-last* *key-menu*)
 
 (defmacro key-int-to-symbol (key-form)
-  "
-This turns messy very quickly, since I very specifically do not want to define these constants"
   `(case ,key-form
      ,@(sort
         (loop for special-key in  '("backspace" "del" "down" "end" "enter" "esc" "f1" "f10" "f11" "f12" "f13"
@@ -573,7 +573,7 @@ This turns messy very quickly, since I very specifically do not want to define t
                                     "kp-4" "kp-5" "kp-6" "kp-7" "kp-8" "kp-9" "kp-add" "kp-decimal" "kp-divide"
                                     "kp-enter" "kp-equal" "kp-multiply" "kp-subtract" "lalt" "lctrl" "left"
                                     "lshift" "pagedown" "pageup" "ralt" "rctrl" "right" "rshift" "print-screen"
-                                    "special" "tab" "unknown" "up"
+                                    "tab" "unknown" "up"
 				    "kp-num-lock" "caps-lock" "scroll-lock" "pause" "lsuper" "rsuper" "menu")
            collect
            `(,(symbol-value (find-symbol (string-upcase (format nil "*key-~a*" special-key)) (find-package '#:glfw3)))
@@ -696,7 +696,6 @@ Mouse motion events are recorded continuously, but only reported when glfw::Poll
 glfw::WaitEvents or glfw::SwapBuffers is called.
 ")
 
-;;; This next definition was failing:
 (cl-glfw-macros:defcfun+doc ("glfwSetMouseWheel" set-mouse-wheel) :void ((pos :int))
 	     "Parameters
 pos
