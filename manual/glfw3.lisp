@@ -1,7 +1,15 @@
 (in-package #:cl-glfw3)
 
 ;; At least, I'm about 90% certain that this is required.
-(error "Replace every occurence of defparameter with defvar")
+;(error "Replace every occurence of defparameter with defvar")
+;; After sleeping on it, I'm no longer sure.
+;; The real difference is the theory about loading a file during
+;; a long running process.
+;; With defvar, I could reload it and change anything.
+;; With defparameter, I can redefine specifics, as needed,
+;; then reload without worrying about changes being lost.
+;; Really should double-check on #lisp, but I think defparameter
+;; is what I actually want
 
 (asdf:oos 'asdf:load-op :cffi)
 
@@ -384,13 +392,22 @@ Useful for the monitor-querying functions that I haven't translated yet."
 			 
 ;;;; Callbacks
 ;;; Here's where things start getting interesting.
-;;; Following along with the header, we get into things like error callbacks
-;;; and the "main monitor."
 
+;;; Setting the error callback is universal.
+;;; Setting almost every other callback is specific to each window.
+;;; Breaking change from 2 to 3.
 
-;;; FIXME: At the very least, also want the size handler.
+;;; That totally destroys this macro (or so it looks)
+;(error "So. How do I want to handle this?")
+;;; It really doesn't.
+;;; Error and monitor callbacks are universal: they apply to everything.
+;;; So far, all the other callbacks are specific to individual windows.
 
-(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+(defmacro define-global-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+  "Define a callback for everything.
+Currently only legal for the error and monitor callbacks.
+I really should be more clever about this and allow setting this for every window that doesn't have something defined for itself.
+Therein lies madness."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
          (special-name (intern (format nil "*~S*" callback-name)))
          (setter-name (intern (format nil "SET-~S" callback-name)))
@@ -402,6 +419,53 @@ Useful for the monitor-querying functions that I haven't translated yet."
            (prog2
                ,before-form
                (funcall ,special-name ,@(mapcar #'car args))
+             ,after-form)))
+       (cffi:defcfun (,c-name ,internal-setter-name) :void (cbfun :pointer))
+       (defun ,setter-name (callback)
+         ,(format nil "GENERAL CL-GLFW CALLBACK NOTES
+
+All callback setting functions can take either a pointer to a C function,
+a function object, a function symbol, or nil to clear the callback function.
+
+The kicker is that this is very dependent on the actual window.
+Except...not here. This is about global stuff.
+
+THIS CALLBACK FUNCTION
+
+~a" documentation)
+         (cl:cond
+           ((null callback)
+            (,internal-setter-name (cffi:null-pointer)))
+           ((symbolp callback)
+            (setf ,special-name callback)
+            (,internal-setter-name (cffi:callback ,callback-name)))
+           ((functionp callback)
+            (setf ,special-name callback)
+            (,internal-setter-name (cffi:callback ,callback-name)))
+           ((cffi:pointerp callback)
+            (,internal-setter-name callback))
+           (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))))))
+
+;; I am a leaf on the wind. Totally different than global callbacks, though they
+;; should look exactly the same to clients.
+;;(error "This is going to fail spectacularly")
+(defmacro define-callback-setter (c-name callback-prefix window return-type (&body args) &key before-form after-form documentation)
+  "Define a callback for a specific window."
+  (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
+         (special-name (intern (format nil "*~S-~S*" callback-name window)))  ; !!! can't be this simple
+         (setter-name (intern (format nil "SET-~S-~S" callback-name window)))
+         (internal-setter-name (intern (format nil "%~S" setter-name))))
+    `(progn
+       (defparameter ,special-name nil)
+       (cffi:defcallback ,callback-name ,return-type ,args
+	 ;; Whoa, whoa, whoa! ROLLBACK! This cannot be right!
+	 ;; special-name is now reliant on window...can that possibly be correct?!
+         (when ,special-name
+           (prog2 
+               ,before-form
+	       ;; This seems dicey. Maybe especially since it can't possibly work.
+               ;(funcall ,special-name ,window ,@(mapcar #'car args))
+	       (funcall ,special-name ,@(mapcar #'car args))
              ,after-form)))
        (cffi:defcfun (,c-name ,internal-setter-name) :void (cbfun :pointer))
        (defun ,setter-name (callback)

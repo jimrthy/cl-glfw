@@ -45,6 +45,8 @@
     (glfw3:make-context-current window)
     
     ;; Have to have the OpenGL context before we can do this
+    ;; And the macro for this doesn't make sense.
+    ;; Each window deserves its own sizer callback.
     (glfw3:set-window-size-callback window (lambda (window width height)
 					     (gl:viewport 0 0 width height)
 					     (gl:matrix-mode :projection)
