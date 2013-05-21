@@ -396,7 +396,7 @@ Useful for the monitor-querying functions that I haven't translated yet."
 ;;;; Callbacks
 ;;; Here's where things start getting interesting.
 
-(defmacro -set-callback (callback internal-setter-name special-name callback-name)
+#+nill(defmacro -set-callback (callback internal-setter-name special-name callback-name)
   "Refactor common pieces from the callback setters below.
 Q: How much of this could actually happen in some sort of a function?
 A: Not much, really.
@@ -412,13 +412,14 @@ Q: How about thinking of hygiene?"
      (,internal-setter-name (cffi:callback ,callback-name)))
     ((cffi:pointerp callback)
      (,internal-setter-name callback))
-    (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil."))))
+    (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
+)
 
 ;;; Breaking change from 2 to 3.
 ;;; Error and monitor callbacks are universal: they apply to everything.
 ;;; So far, all the other callbacks are specific to individual windows.
 
-(defmacro define-global-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a universal callback.
 Currently only legal for the error and monitor callbacks."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
@@ -446,11 +447,24 @@ Except...not here. This is about global stuff.
 THIS CALLBACK FUNCTION
 
 ~a" documentation)
+  (cl:cond
+    ((null callback)
+     (,internal-setter-name (cffi:null-pointer)))
+    ((symbolp callback)
+     (setf ,special-name callback)
+     (,internal-setter-name (cffi:callback ,callback-name)))
+    ((functionp callback)
+     (setf ,special-name callback)
+     (,internal-setter-name (cffi:callback ,callback-name)))
+    ((cffi:pointerp callback)
+     (,internal-setter-name callback))
+    (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
 	 ;; I have a more than sneaky suspicion that this needs to be a ,@
-	 ,(-set-callback callback internal-setter-name special-name callback-name)))))
+  ;;,(-set-callback callback internal-setter-name special-name callback-name)
+  ))))
 
 ;; This is more than a little ugly...don't want window handles polluting the package.
-(defmacro define-callback-setter (c-name callback-prefix window return-type (&body args) &key before-form after-form documentation)
+#+nill(defmacro define-callback-setter (c-name callback-prefix window return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
   (let* ((callback-name (intern (format nil "~A-~A-CALLBACK" window callback-prefix)))
          (special-name (intern (format nil "*~S*" callback-name)))  ; !!! can't be this simple
@@ -480,13 +494,13 @@ THIS CALLBACK FUNCTION
 	 ,@(-set-callback callback internal-setter-name special-name callback-name)))))
 
 
-(define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ()
+(define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window))
                         :documentation
                         "
 Function that will be called when a user requests that the window should be
 closed, typically by clicking the window close icon (e.g. the cross in the upper right corner of a
 window under Microsoft Windows). The function should have the following type:
- (function () integer)
+ (function (window) integer)
 
 The return value of the callback function indicates whether or not the window close action 
 should continue. If the function returns
@@ -494,8 +508,8 @@ gl:+true+, the window will be closed. If the function returns gl:+false+, the wi
 be closed. If you give a CFFI callback returning glfw:boolean, you can use t and nil as return types.
 
 Notes
-Window close events are recorded continuously, but only reported when glfwPollEvents,
-glfwWaitEvents or glfwSwapBuffers is called.
+Window close events are recorded continuously, but only reported when glfwPollEvents or
+glfwWaitEvents is called.
 The OpenGL context is still valid when this function is called.
 Note that the window close callback function is not called when glfwCloseWindow is called, but only
 when the close request comes from the window manager.
@@ -756,15 +770,6 @@ pos
 Description
 The function changes the position of the mouse wheel.
 ")
-;;; This version works:
-;(cffi:defcfun ("glfwSetMouseWheel" set-mouse-wheel)
-;    :void
-;  (pos :int))
-;;; The first really should expand into:
-;(progn (cffi:defcfun ("glfwSetMouseWheel" set-mouse-wheel) :void (pos :int))
-;       (setf (documentation #'set-mouse-wheel 'function) "blah"))
-;; The last built fine...problem seems to have been packaging
-;; (as shocking as that is...)
 
 (defparameter *mouse-wheel-cumulative* nil)
 (define-callback-setter "glfwSetMouseWheelCallback" #:mouse-wheel :void ((window glfw-window) (pos :int))
