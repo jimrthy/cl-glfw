@@ -48,6 +48,7 @@
     ;; And the macro for this doesn't make sense.
     ;; Each window deserves its own sizer callback.
     (glfw3:set-window-size-callback window (lambda (window width height)
+					     (declare (ignore window))
 					     (gl:viewport 0 0 width height)
 					     (gl:matrix-mode :projection)
 					     (gl:load-identity)
@@ -56,9 +57,9 @@
     (event-loop window)))
 
 (if (glfw3:glfw-init)
-    (let ((window (glfw3:create-window 640 480 "My Title" (glfw3:*null*) (glfw3:*null*))))
+    (let ((window (glfw3:create-window 640 480 "My Title" glfw3::*null* glfw3::*null*)))
       (unwind-protect ; pretty obviously, protect using a with- macro instead.
-	   (run)
+	   (run window)
 	(glfw3:destroy-window window)))
     (format t "Failed to initialize"))
 

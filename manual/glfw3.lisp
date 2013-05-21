@@ -396,7 +396,7 @@ Useful for the monitor-querying functions that I haven't translated yet."
 ;;;; Callbacks
 ;;; Here's where things start getting interesting.
 
-#+nill(defmacro -set-callback (callback internal-setter-name special-name callback-name)
+#| (defmacro -set-callback (callback internal-setter-name special-name callback-name)
   "Refactor common pieces from the callback setters below.
 Q: How much of this could actually happen in some sort of a function?
 A: Not much, really.
@@ -413,7 +413,7 @@ Q: How about thinking of hygiene?"
     ((cffi:pointerp callback)
      (,internal-setter-name callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
-)
+) |#
 
 ;;; Breaking change from 2 to 3.
 ;;; Error and monitor callbacks are universal: they apply to everything.
@@ -459,16 +459,14 @@ THIS CALLBACK FUNCTION
     ((cffi:pointerp callback)
      (,internal-setter-name callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
-	 ;; I have a more than sneaky suspicion that this needs to be a ,@
-  ;;,(-set-callback callback internal-setter-name special-name callback-name)
   ))))
 
 ;; This is more than a little ugly...don't want window handles polluting the package.
-#+nill(defmacro define-callback-setter (c-name callback-prefix window return-type (&body args) &key before-form after-form documentation)
+#| (defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
-  (let* ((callback-name (intern (format nil "~A-~A-CALLBACK" window callback-prefix)))
+  (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
          (special-name (intern (format nil "*~S*" callback-name)))  ; !!! can't be this simple
-         (setter-name (intern (format nil "SET-~S-~S" window callback-name)))
+         (setter-name (intern (format nil "SET-~S" callback-name)))
          (internal-setter-name (intern (format nil "%~S" setter-name))))
     `(progn
        (defparameter ,special-name nil)
@@ -477,12 +475,16 @@ THIS CALLBACK FUNCTION
            (prog2 
                ,before-form
 	       ;; This seems dicey. Maybe especially since it can't possibly work.
-	       ; Q: Why not?
-	       (funcall ,special-name ,window ,@(mapcar #'car args))
+	       ;; Q: Why not?
+	       ;; A: I was originally looking at the way the ,@(mapcar...) call would
+	       ;; do things to the argument list. That really shouldn't be an issue.
+	       ;; OTOH, how can we possibly ever get here? (When would ,special-name *not* be nil?)
+	       (funcall ,special-name window ,@(mapcar #'car args))
 	       ;;(funcall ,special-name ,@(mapcar #'car args))
              ,after-form)))
        (cffi:defcfun (,c-name ,internal-setter-name) :void (cbfun :pointer))
-       (defun ,setter-name (callback)
+       ;; Yay! This does *not* need to take the window as a parameter.
+       (defun ,setter-name (window callback)
          ,(format nil "GENERAL CL-GLFW CALLBACK NOTES
 
 All callback setting functions can take either a pointer to a C function,
@@ -491,8 +493,19 @@ a function object, a function symbol, or nil to clear the callback function.
 THIS CALLBACK FUNCTION
 
 ~a" documentation)
-	 ,@(-set-callback callback internal-setter-name special-name callback-name)))))
-
+  (cl:cond
+    ((null callback)
+     (,internal-setter-name (cffi:null-pointer)))
+    ((symbolp callback)
+     (setf ,special-name callback)
+     (,internal-setter-name (cffi:callback ,callback-name)))
+    ((functionp callback)
+     (setf ,special-name callback)
+     (,internal-setter-name (cffi:callback ,callback-name)))
+    ((cffi:pointerp callback)
+     (,internal-setter-name callback))
+    (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
+)))) |#
 
 (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window))
                         :documentation
