@@ -462,10 +462,13 @@ THIS CALLBACK FUNCTION
   ))))
 
 ;; This is more than a little ugly...don't want window handles polluting the package.
-(defmacro define-callback-setter (c-name callback-prefix return-type window (&body args) &key before-form after-form documentation)
+(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
-  (let* ((callback-name (intern (format nil "~A-~A-CALLBACK" window callback-prefix)))
-         (special-name (intern (format nil "*~S*" callback-name)))  ; !!! can't be this simple
+  (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
+	 ;; !!! can't be this simple.
+	 ;; Simplest approach is to make special-name go away.
+	 ;; What are the odds that will actually work?
+         (special-name (intern (format nil "*~S*" callback-name)))  ; No, it isn't.
          (setter-name (intern (format nil "SET-~S" callback-name)))
          (internal-setter-name (intern (format nil "%~S" setter-name))))
     `(progn
@@ -474,17 +477,14 @@ THIS CALLBACK FUNCTION
          (when ,special-name
            (prog2 
                ,before-form
-	       ;; This seems dicey. Maybe especially since it can't possibly work.
-	       ;; Q: Why not?
-	       ;; A: I was originally looking at the way the ,@(mapcar...) call would
-	       ;; do things to the argument list. That really shouldn't be an issue.
-	       ;; OTOH, how can we possibly ever get here? (When would ,special-name *not* be nil?)
+	       ;; I'm iffy about when ,special-name might not be nil.
+	       ;; It seems obvious that defcallback must assign it. Duh.
 	       (funcall ,special-name window ,@(mapcar #'car args))
 	       ;;(funcall ,special-name ,@(mapcar #'car args))
              ,after-form)))
        (cffi:defcfun (,c-name ,internal-setter-name) :void (cbfun :pointer))
-       ;; Yay! This does *not* need to take the window as a parameter.
-       ;; Umm...yes it does.
+
+       ;; And then the truly interesting part.
        (defun ,setter-name (window callback)
          ,(format nil "GENERAL CL-GLFW CALLBACK NOTES
 
@@ -496,15 +496,15 @@ THIS CALLBACK FUNCTION
 ~a" documentation)
   (cl:cond
     ((null callback)
-     (,internal-setter-name *null*))
+     (,internal-setter-name ,window *null*))
     ((symbolp callback)
-     (setf ,special-name callback)
-     (,internal-setter-name (cffi:callback ,callback-name)))
+     (setf ,special-name callback) ; FAIL!!!
+     (,internal-setter-name ,window (cffi:callback ,callback-name)))
     ((functionp callback)
-     (setf ,special-name callback)
-     (,internal-setter-name (cffi:callback ,callback-name)))
+     (setf ,special-name callback) ; FAIL!!!
+     (,internal-setter-name ,window (cffi:callback ,callback-name)))
     ((cffi:pointerp callback)
-     (,internal-setter-name callback))
+     (,internal-setter-name ,window callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
 ))))
 

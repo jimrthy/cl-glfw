@@ -5,4 +5,4 @@
 	   #:set-error-callback #:glfw-init #:create-window *null*
 	   #:make-context-current #:set-window-size-callback
 	   #:window-should-close-p #:get-time #:destroy-window
-	   #:clean-up))
+	   #:clean-up #:define-callback-setter))
