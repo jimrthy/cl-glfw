@@ -470,7 +470,7 @@ THIS CALLBACK FUNCTION
          (internal-setter-name (intern (format nil "%~S" setter-name))))
     `(progn
        (defparameter ,special-name nil)
-       (cffi:defcallback ,callback-name ,return-type window ,args
+       (cffi:defcallback ,callback-name ,return-type ,args
          (when ,special-name
            (prog2 
                ,before-form
@@ -480,7 +480,7 @@ THIS CALLBACK FUNCTION
 	       (funcall ,special-name window ,@(mapcar #'car args))
 	       ;;(funcall ,special-name ,@(mapcar #'car args))
              ,after-form)))
-       (cffi:defcfun (,c-name ,internal-setter-name) :void (handle glfw-window cbfun :pointer))
+       (cffi:defcfun (,c-name ,internal-setter-name) :void ((handle glfw-window) (cbfun :pointer)))
 
        ;; And then the truly interesting part.
        ;; This is really a horrible hygenic FAIL because it captures both window and callback.
@@ -507,7 +507,7 @@ THIS CALLBACK FUNCTION
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
 ))))
 
-(define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int handle ()
+(define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window)) 
                         :documentation
                         "
 Function that will be called when a user requests that the window should be
