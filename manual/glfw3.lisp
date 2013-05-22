@@ -12,6 +12,7 @@
 ;; is what I actually want
 
 (asdf:oos 'asdf:load-op :cffi)
+(asdf:oos 'asdf:load-op :cl-glfw-macros)
 
 ;;; This seems to make playing nicely with libglfw.so.2 less promising.
 #+ecl(ffi:load-foreign-library "glfw3" :system-library t)
@@ -419,7 +420,7 @@ Q: How about thinking of hygiene?"
 ;;; Error and monitor callbacks are universal: they apply to everything.
 ;;; So far, all the other callbacks are specific to individual windows.
 
-(defmacro define-global-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+#| (defmacro define-global-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a universal callback.
 Currently only legal for the error and monitor callbacks."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
@@ -459,10 +460,10 @@ THIS CALLBACK FUNCTION
     ((cffi:pointerp callback)
      (,internal-setter-name callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
-  ))))
+  )))) |#
 
 ;; This is more than a little ugly...don't want window handles polluting the package.
-(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+#| (defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
          (special-name (intern (format nil "*~S*" callback-name)))
@@ -505,9 +506,9 @@ THIS CALLBACK FUNCTION
     ((cffi:pointerp callback)
      (,internal-setter-name window callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
-))))
+)))) |#
 
-(define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window)) 
+#| (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window)) 
                         :documentation
                         "
 Function that will be called when a user requests that the window should be
@@ -528,10 +529,10 @@ Note that the window close callback function is not called when glfwCloseWindow 
 when the close request comes from the window manager.
 Do not call glfwCloseWindow from a window close callback function. Close the window by returning
 gl:+true+ from the function.
-")
+") |#
 
-#|(defcfun+doc "glfwSetname" cl-name :return-value ((param :type))
-	     "Docs")|#
+(cl-glfw-macros:defcfun+doc ("glfwSetWindowCloseCallback" set-window-close-callback) :int ((handle glfw-window))
+			    "Docs")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Error Callback Setter
