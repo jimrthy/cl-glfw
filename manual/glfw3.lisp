@@ -465,26 +465,25 @@ THIS CALLBACK FUNCTION
 (defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
-	 ;; !!! can't be this simple.
-	 ;; Simplest approach is to make special-name go away.
-	 ;; What are the odds that will actually work?
-         (special-name (intern (format nil "*~S*" callback-name)))  ; No, it isn't.
+         (special-name (intern (format nil "*~S*" callback-name)))
          (setter-name (intern (format nil "SET-~S" callback-name)))
          (internal-setter-name (intern (format nil "%~S" setter-name))))
     `(progn
        (defparameter ,special-name nil)
-       (cffi:defcallback ,callback-name ,return-type ,args
+       (cffi:defcallback ,callback-name ,return-type window ,args
          (when ,special-name
            (prog2 
                ,before-form
 	       ;; I'm iffy about when ,special-name might not be nil.
-	       ;; It seems obvious that defcallback must assign it. Duh.
+	       ;; It seems obvious that defcallback must assign it.
+	       ;; Except that it very explicitly does not.
 	       (funcall ,special-name window ,@(mapcar #'car args))
 	       ;;(funcall ,special-name ,@(mapcar #'car args))
              ,after-form)))
-       (cffi:defcfun (,c-name ,internal-setter-name) :void (cbfun :pointer))
+       (cffi:defcfun (,c-name ,internal-setter-name) :void (handle glfw-window cbfun :pointer))
 
        ;; And then the truly interesting part.
+       ;; This is really a horrible hygenic FAIL because it captures both window and callback.
        (defun ,setter-name (window callback)
          ,(format nil "GENERAL CL-GLFW CALLBACK NOTES
 
@@ -496,18 +495,17 @@ THIS CALLBACK FUNCTION
 ~a" documentation)
   (cl:cond
     ((null callback)
-     (,internal-setter-name ,window *null*))
+     (,internal-setter-name window *null*))
     ((symbolp callback)
      (setf ,special-name callback) ; FAIL!!!
-     (,internal-setter-name ,window (cffi:callback ,callback-name)))
+     (,internal-setter-name window (cffi:callback ,callback-name)))
     ((functionp callback)
      (setf ,special-name callback) ; FAIL!!!
-     (,internal-setter-name ,window (cffi:callback ,callback-name)))
+     (,internal-setter-name window (cffi:callback ,callback-name)))
     ((cffi:pointerp callback)
-     (,internal-setter-name ,window callback))
+     (,internal-setter-name window callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
 ))))
-
 
 (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int handle ()
                         :documentation
@@ -531,6 +529,9 @@ when the close request comes from the window manager.
 Do not call glfwCloseWindow from a window close callback function. Close the window by returning
 gl:+true+ from the function.
 ")
+
+#|(defcfun+doc "glfwSetname" cl-name :return-value ((param :type))
+	     "Docs")|#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Error Callback Setter
