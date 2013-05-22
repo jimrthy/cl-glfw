@@ -644,11 +644,48 @@ glfwWaitEvents or glfwSwapBuffers is called.
 (defparameter *key-ralt* (+ *key-special* 90))
 (defparameter *key-rsuper* (+ *key-special* 91))
 (defparameter *key-menu* (+ *key-special* 92))
-;; Next line causes compiler warning about duplicate key form in case statement.
-;; Actually, the problem lies with including *special-key* in the key-int-to-symbol loop.
 (defparameter *key-last* *key-menu*)
 
-(defmacro key-int-to-symbol (key-form)
+;; Cheesy cowboy-coding at its finest.
+;; This next is a prime example of why I want to use lisp instead of the
+;; alternatives. It's just that the alternatives seems more obvious this
+;; evening.
+;; I really shouldn't be repeating myself so much.
+(defparameter *key-map* (make-hash-table))
+(mapc (lambda (key value)
+	(setf (gethash key *key-map*) value))
+      (list '*key-unknown* '*key-space* '*key-special* '*key-esc* '*key-enter* '*key-tab*
+	    '*key-backspace* '*key-insert* '*key-del* '*key-right* '*key-left* '*key-down*
+	    '*key-up* '*key-pageup* '*key-pagedown* '*key-home* '*key-end* '*key-caps-lock*
+	    '*key-scroll-lock* '*key-kp-num-lock* '*key-print-screen* '*key-pause*
+	    '*key-f1* '*key-f2* '*key-f3* '*key-f4* '*key-f5* '*key-f6* '*key-f7* '*key-f8* '*key-f9* 
+	    '*key-f10* '*key-f11* '*key-f12* '*key-f13* '*key-f14* '*key-f15* '*key-f16*
+	    '*key-f17* '*key-f18* '*key-f19* 
+	    '*key-f20* '*key-f21* '*key-f22* '*key-f23* '*key-f24* '*key-f25*
+	    '*key-kp-0* '*key-kp-1* '*key-kp-2* '*key-kp-3* '*key-kp-4* '*key-kp-5* '*key-kp-6* 
+	    '*key-kp-7* '*key-kp-8* '*key-kp-9*
+	    '*key-kp-decimal* '*key-kp-divide* '*key-kp-multiply* '*key-kp-subtract* '*key-kp-add*
+	    '*key-kp-enter* '*key-kp-equal* '*key-lshift* '*key-lctrl* '*key-lalt* '*key-lsuper*
+	    '*key-rshift* '*key-rctrl* '*key-ralt* '*key-rsuper* '*key-menu*
+)
+      (list *key-unknown* *key-space* *key-special* *key-esc* *key-enter* *key-tab*
+	    *key-backspace* *key-insert* *key-del* *key-right* *key-left* *key-down*
+	    *key-up* *key-pageup* *key-pagedown* *key-home* *key-end* *key-caps-lock*
+	    *key-scroll-lock* *key-kp-num-lock* *key-print-screen* *key-pause*
+	    *key-f1* *key-f2* *key-f3* *key-f4* *key-f5* *key-f6* *key-f7* *key-f8* *key-f9*
+	    *key-f10* *key-f11* *key-f12* *key-f13* *key-f14* *key-f15* *key-f16*
+	    *key-f17* *key-f18* *key-f19*
+	    *key-f20* *key-f21* *key-f22* *key-f23* *key-f24* *key-f25*
+	    *key-kp-0* *key-kp-1* *key-kp-2* *key-kp-3* *key-kp-4* *key-kp-5* *key-kp-6* 
+	    *key-kp-7* *key-kp-8* *key-kp-9*
+	    *key-kp-decimal* *key-kp-divide* *key-kp-multiply* *key-kp-subtract* *key-kp-add*
+	    *key-kp-enter* *key-kp-equal* *key-lshift* *key-lctrl* *key-lalt* *key-lsuper*
+	    *key-rshift* *key-rctrl* *key-ralt* *key-rsuper* *key-menu*
+))
+
+;; The following special keys are not defined at compile-time.
+;; Using them in a macro is dubious, at best.
+#| (defmacro key-int-to-symbol (key-form)
   `(case ,key-form
      ,@(sort
         (loop for special-key in  '("backspace" "del" "down" "end" "enter" "esc" "f1" "f10" "f11" "f12" "f13"
@@ -663,6 +700,14 @@ glfwWaitEvents or glfwSwapBuffers is called.
            `(,(symbol-value (find-symbol (string-upcase (format nil "*key-~a*" special-key)) (find-package '#:glfw3)))
               ,(intern (string-upcase special-key) (find-package '#:keyword))))
         #'(lambda (a b) (< (car a) (car b))))))
+|#
+
+(defun key-int-to-symbol (key-form)
+  ;; Original version was a macro that created a map of special keys (?) and used their values as maps
+  ;; to the closest constant symbol value.
+  ;; Go with the assumption that a lot of premature optimization was happening (though that feels
+  ;; dangerous).
+  (gethash key-form *key-map*))
 
 (defun lispify-key (key-int)
   "Convert key-int from GLFW's integer representation to lisp characters if from 0 to 255, or keywords, if not within 0-255 inclusive."
