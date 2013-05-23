@@ -538,10 +538,19 @@ gl:+true+ from the function.
 ;;; Error Callback Setter
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-callback-setter "glfwSetErrorCallback" #:error
+#| (define-callback-setter "glfwSetErrorCallback" #:error
   :void
   ((error-code :int) (description :string))
   :documentation
+  "
+The description string is only valid within the scope of the callback.
+Returns the previous callback on success, NULL on failure.
+Runs in the context of whichever thread caused the error.
+") |#
+
+(cl-glfw-macros:defcfun+doc ("glfwSetErrorCallback" set-error-callback)
+    :void
+  ((error-code :int) (description :string))
   "
 The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
@@ -551,7 +560,19 @@ Runs in the context of whichever thread caused the error.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Window Size Callback Setter
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define-callback-setter "glfwSetWindowSizeCallback" #:window-size 
+(cl-glfw-macros:defcfun+doc ("glfwSetWindowSizeCallback" set-window-size-callback)
+    :int
+  ((handle glfw-window) (width :int) (height :int))
+  "
+Function that will be called every time the window size changes. The
+function should takes the arguments (width height) giving the new width and height of the window client area.
+
+A window has to be opened for this function to have any effect.
+Notes
+Window size changes are recorded continuously, but only reported when glfwPollEvents,
+glfwWaitEvents or glfwSwapBuffers is called.
+")
+#| (define-callback-setter "glfwSetWindowSizeCallback" #:window-size 
   :void
   ((window glfw-window) (width :int) (height :int))
   :documentation
@@ -563,7 +584,7 @@ A window has to be opened for this function to have any effect.
 Notes
 Window size changes are recorded continuously, but only reported when glfwPollEvents,
 glfwWaitEvents or glfwSwapBuffers is called.
-")
+") |#
 
 ;; Keyboard key definitions: 8-bit ISO-8859-1 (Latin 1) encoding is used
 ;; for printable keys (such as A-Z, 0-9 etc), and values above 256
@@ -571,6 +592,7 @@ glfwWaitEvents or glfwSwapBuffers is called.
 ;; Stolen from the original, except that I'm avoiding defconstant.
 ;; Considering the fact that the "constants" have changed, that seems
 ;; wise.
+;; Another factor to consider: these pollute the package namespace, and really shouldn't.
 (defparameter *key-unknown* -1)
 (defparameter *key-space* 32)
 (defparameter *key-special* 256)
@@ -651,6 +673,7 @@ glfwWaitEvents or glfwSwapBuffers is called.
 ;; alternatives. It's just that the alternatives seems more obvious this
 ;; evening.
 ;; I really shouldn't be repeating myself so much.
+;; Best-case scenario: keys and values are backwards.
 (defparameter *key-map* (make-hash-table))
 (mapc (lambda (key value)
 	(setf (gethash key *key-map*) value))
@@ -702,12 +725,12 @@ glfwWaitEvents or glfwSwapBuffers is called.
         #'(lambda (a b) (< (car a) (car b))))))
 |#
 
-(defun key-int-to-symbol (key-form)
+(defun key-int-to-symbol (key-code)
   ;; Original version was a macro that created a map of special keys (?) and used their values as maps
   ;; to the closest constant symbol value.
   ;; Go with the assumption that a lot of premature optimization was happening (though that feels
   ;; dangerous).
-  (gethash key-form *key-map*))
+  (gethash key-code *key-map*))
 
 (defun lispify-key (key-int)
   "Convert key-int from GLFW's integer representation to lisp characters if from 0 to 255, or keywords, if not within 0-255 inclusive."
@@ -718,7 +741,11 @@ glfwWaitEvents or glfwSwapBuffers is called.
 ;;; Still not useful for getting text.
 ;;; Basically an event-driven version of glfw-get-key.
 ;;; The .h has some useful info about what happens on loss of focus.
-(define-callback-setter "glfwSetKeyCallback" #:key :void ((window glfw-window) (key :int) (action :int))
+(cl-glfw-macros:defcfun+doc ("glfwSetKeyCalback" set-key-callback)
+    :void
+  ((window glfw-window) (key :int) (action :int))
+  "And this fails because I have no real way to specify a before-form")
+#| (define-callback-setter "glfwSetKeyCallback" #:key :void ((window glfw-window) (key :int) (action :int))
                         :before-form (setf key (lispify-key key))
                         :documentation
                         "
@@ -737,9 +764,15 @@ A window has to be opened for this function to have any effect.
 Notes
 Keyboard events are recorded continuously, but only reported when glfw::PollEvents, glfw::WaitEvents
 or glfw::SwapBuffers is called.
-")
+") |#
 
-(define-callback-setter "glfwSetCharCallback" #:char :void ((window glfw-window) (character :int) (action :int))
+(cl-glfw-macros:defcfun+doc ("glfwSetCharCallback" set-char-callback)
+    :void
+  ((window glfw-window)
+   (character :int)
+   (action :int))
+  "Another failure because my current approach lacks before semantics")
+#|(define-callback-setter "glfwSetCharCallback" #:char :void ((window glfw-window) (character :int) (action :int))
                         :before-form (setf character (code-char character))
                         :documentation
                         "
@@ -764,7 +797,7 @@ glfw::SetKeyCallback).
 The Unicode character set supports character codes above 255, so never cast a Unicode character to an
 eight bit data type (e.g. the C language char type) without first checking that the character code is less
 than 256. Also note that Unicode character codes 0 to 255 are equal to ISO 8859-1 (Latin 1).
-")
+") |#
 
 ;;; Required for the current incarnation of lispify-mouse-button.
 ;;; I don't particularly like this approach, but nothing better
@@ -778,19 +811,26 @@ than 256. Also note that Unicode character codes 0 to 255 are equal to ISO 8859-
 (defparameter *mouse-button-6* 5)
 (defparameter *mouse-button-7* 6)
 (defparameter *mouse-button-8* 7)
+;; This alternative, then filling it, springs to mind.
+;; Does it gain me anything?
+(defparameter *mouse-buttons* (make-hash-table))
 (defun lispify-mouse-button (button-int)
   "Convert button-int from GLFW's integer representation to a lisp keyword."
   (case button-int
-    (#.glfw3::*mouse-button-left* :left)
-    (#.glfw3::*mouse-button-middle* :middle)
-    (#.glfw3::*mouse-button-right* :right)
-    (#.glfw3::*mouse-button-4* :button-4)
-    (#.glfw3::*mouse-button-5* :button-5)
-    (#.glfw3::*mouse-button-6* :button-6)
-    (#.glfw3::*mouse-button-7* :button-7)
-    (#.glfw3::*mouse-button-8* :button-8)))
+    (*mouse-button-left* :left)
+    (*mouse-button-middle* :middle)
+    (*mouse-button-right* :right)
+    (*mouse-button-4* :button-4)
+    (*mouse-button-5* :button-5)
+    (*mouse-button-6* :button-6)
+    (*mouse-button-7* :button-7)
+    (*mouse-button-8* :button-8)))
 
-(define-callback-setter "glfwSetMouseButtonCallback" #:mouse-button :void ((window glfw-window) (button :int) (action :int))
+(cl-glfw-macro:defcfun+doc ("glfwSetMouseButtonCallback" set-mouse-button-callback)
+    :void
+  ((window glfw-window) (button :int) (action :int))
+  "Yet again: before action is mandatory")
+#| (define-callback-setter "glfwSetMouseButtonCallback" #:mouse-button :void ((window glfw-window) (button :int) (action :int))
                         :before-form (setf button (lispify-mouse-button button))
                         :documentation
                         "
@@ -808,9 +848,13 @@ glfw::WaitEvents or glfw::SwapBuffers is called.
 +MOUSE_BUTTON_LEFT+ is equal to +MOUSE_BUTTON_1+
 +MOUSE_BUTTON_RIGHT+ is equal to +MOUSE_BUTTON_2+
 +MOUSE_BUTTON_MIDDLE+ is equal to +MOUSE_BUTTON_3+
-")
+") |#
 
-(define-callback-setter "glfwSetMousePosCallback" #:mouse-pos :void ((window glfw-window) (x :int) (y :int))
+(cl-glfw-macros:defcfun+doc ("glfwSetMousePosCallback" set-mouse-pos-callback)
+    :void
+  ((window glfw-window) (x :int) (y :int))
+  "This one should work")
+#| (define-callback-setter "glfwSetMousePosCallback" #:mouse-pos :void ((window glfw-window) (x :int) (y :int))
                         :documentation
                         "
 Function that will be called every time the mouse is moved.
@@ -821,9 +865,9 @@ The function selects which function to be called upon a mouse motion event.
 A window has to be opened for this function to have any effect.
 
 Notes
-Mouse motion events are recorded continuously, but only reported when glfw::PollEvents,
-glfw::WaitEvents or glfw::SwapBuffers is called.
-")
+Mouse motion events are recorded continuously, but only reported when glfw::PollEvents
+or glfw::WaitEvents is called.
+") |#
 
 (cl-glfw-macros:defcfun+doc ("glfwSetMouseWheel" set-mouse-wheel) :void ((pos :int))
 	     "Parameters
@@ -834,7 +878,11 @@ The function changes the position of the mouse wheel.
 ")
 
 (defparameter *mouse-wheel-cumulative* nil)
-(define-callback-setter "glfwSetMouseWheelCallback" #:mouse-wheel :void ((window glfw-window) (pos :int))
+(cl-glfw-macros:defcfun+doc ("glfwSetMouseWheelCallback" set-mouse-wheel-callback)
+    :void
+  ((window glfw-window) (pos :int))
+  "This fails because the original requires an :after method")
+#|(define-callback-setter "glfwSetMouseWheelCallback" #:mouse-wheel :void ((window glfw-window) (pos :int))
                         :after-form (unless *mouse-wheel-cumulative* (glfw3::set-mouse-wheel 0))
                         :documentation
                         "
@@ -852,7 +900,7 @@ A window has to be opened for this function to have any effect.
 Notes
 Mouse wheel events are recorded continuously, but only reported when glfw::PollEvents,
 glfw::WaitEvents or glfw::SwapBuffers is called.
-")
+") |#
 
 (cl-glfw-macros:defcfun+doc ("glfwGetJoystickParam" get-joystick-param) :int ((window glfw-window) (joy :int) (param :int))
 	     "Parameters
