@@ -1,6 +1,3 @@
-(defpackage #:cl-glfw-macros
-  (:use #:cl)
-  (:export #:defcfun+doc #:defcfun+out+doc))
 (in-package #:cl-glfw-macros)
 
 (defmacro defcfun+doc ((c-name lisp-name) return-type (&body args) docstring)

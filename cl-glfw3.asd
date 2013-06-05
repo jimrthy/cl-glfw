@@ -8,8 +8,12 @@
   :version "0.1"
   :author "James Gatannah <james.gatannah@gmail.com>"
   :licence "Eclipse Public License"
+  :long-description "Minimalist wrapper around the GLFW3 library"
   :depends-on (cffi #| alexandria |#)
-  :components ((:module manual :serial t
+  :serial t
+  :components ((:module manual
 			:components ((:file "glfw3-package")
 				     (:file "glfw-macros")
-				     (:file "glfw3")))))
+				     (:file "glfw3"
+					    :depends-on ("glfw3-package" "glfw-macros"))))))
+

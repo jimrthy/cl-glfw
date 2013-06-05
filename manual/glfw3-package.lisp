@@ -7,3 +7,6 @@
 	   #:make-context-current #:set-window-size-callback
 	   #:window-should-close-p #:get-time #:destroy-window
 	   #:clean-up #:define-callback-setter))
+(defpackage #:cl-glfw-macros
+  (:use #:cl)
+  (:export #:defcfun+doc #:defcfun+out+doc))

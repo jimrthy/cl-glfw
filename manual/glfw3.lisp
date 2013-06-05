@@ -1,18 +1,8 @@
 (in-package #:cl-glfw3)
 
-;; At least, I'm about 90% certain that this is required.
-;(error "Replace every occurence of defparameter with defvar")
-;; After sleeping on it, I'm no longer sure.
-;; The real difference is the theory about loading a file during
-;; a long running process.
-;; With defvar, I could reload it and change anything.
-;; With defparameter, I can redefine specifics, as needed,
-;; then reload without worrying about changes being lost.
-;; Really should double-check on #lisp, but I think defparameter
-;; is what I actually want
-
 (asdf:oos 'asdf:load-op :cffi)
-(asdf:oos 'asdf:load-op :cl-glfw-macros)
+;; Not needed:
+;;(asdf:oos 'asdf:load-op :cl-glfw-macros)
 
 ;;; This seems to make playing nicely with libglfw.so.2 less promising.
 #+ecl(ffi:load-foreign-library "glfw3" :system-library t)
@@ -826,7 +816,7 @@ than 256. Also note that Unicode character codes 0 to 255 are equal to ISO 8859-
     (*mouse-button-7* :button-7)
     (*mouse-button-8* :button-8)))
 
-(cl-glfw-macro:defcfun+doc ("glfwSetMouseButtonCallback" set-mouse-button-callback)
+(cl-glfw-macros:defcfun+doc ("glfwSetMouseButtonCallback" set-mouse-button-callback)
     :void
   ((window glfw-window) (button :int) (action :int))
   "Yet again: before action is mandatory")
