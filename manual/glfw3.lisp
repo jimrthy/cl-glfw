@@ -501,6 +501,10 @@ THIS CALLBACK FUNCTION
 #| (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window)) 
                         :documentation
                         "
+") |#
+
+(cl-glfw-macros:defcfun+doc ("glfwSetWindowCloseCallback" set-window-close-callback) :int ((handle glfw-window))
+			    "
 Function that will be called when a user requests that the window should be
 closed, typically by clicking the window close icon (e.g. the cross in the upper right corner of a
 window under Microsoft Windows). The function should have the following type:
@@ -519,10 +523,7 @@ Note that the window close callback function is not called when glfwCloseWindow 
 when the close request comes from the window manager.
 Do not call glfwCloseWindow from a window close callback function. Close the window by returning
 gl:+true+ from the function.
-") |#
-
-(cl-glfw-macros:defcfun+doc ("glfwSetWindowCloseCallback" set-window-close-callback) :int ((handle glfw-window))
-			    "Docs")
+")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Error Callback Setter
@@ -533,9 +534,6 @@ gl:+true+ from the function.
   ((error-code :int) (description :string))
   :documentation
   "
-The description string is only valid within the scope of the callback.
-Returns the previous callback on success, NULL on failure.
-Runs in the context of whichever thread caused the error.
 ") |#
 
 (cl-glfw-macros:defcfun+doc ("glfwSetErrorCallback" set-error-callback)
@@ -567,13 +565,6 @@ glfwWaitEvents or glfwSwapBuffers is called.
   ((window glfw-window) (width :int) (height :int))
   :documentation
   "
-Function that will be called every time the window size changes. The
-function should takes the arguments (width height) giving the new width and height of the window client area.
-
-A window has to be opened for this function to have any effect.
-Notes
-Window size changes are recorded continuously, but only reported when glfwPollEvents,
-glfwWaitEvents or glfwSwapBuffers is called.
 ") |#
 
 ;; Keyboard key definitions: 8-bit ISO-8859-1 (Latin 1) encoding is used
@@ -663,24 +654,11 @@ glfwWaitEvents or glfwSwapBuffers is called.
 ;; alternatives. It's just that the alternatives seems more obvious this
 ;; evening.
 ;; I really shouldn't be repeating myself so much.
-;; Best-case scenario: keys and values are backwards.
+;; What's really obnoxious is that part of me wants to do this both
+;; forward and backwards so I can quickly and easily go both ways.
 (defparameter *key-map* (make-hash-table))
 (mapc (lambda (key value)
 	(setf (gethash key *key-map*) value))
-      (list '*key-unknown* '*key-space* '*key-special* '*key-esc* '*key-enter* '*key-tab*
-	    '*key-backspace* '*key-insert* '*key-del* '*key-right* '*key-left* '*key-down*
-	    '*key-up* '*key-pageup* '*key-pagedown* '*key-home* '*key-end* '*key-caps-lock*
-	    '*key-scroll-lock* '*key-kp-num-lock* '*key-print-screen* '*key-pause*
-	    '*key-f1* '*key-f2* '*key-f3* '*key-f4* '*key-f5* '*key-f6* '*key-f7* '*key-f8* '*key-f9* 
-	    '*key-f10* '*key-f11* '*key-f12* '*key-f13* '*key-f14* '*key-f15* '*key-f16*
-	    '*key-f17* '*key-f18* '*key-f19* 
-	    '*key-f20* '*key-f21* '*key-f22* '*key-f23* '*key-f24* '*key-f25*
-	    '*key-kp-0* '*key-kp-1* '*key-kp-2* '*key-kp-3* '*key-kp-4* '*key-kp-5* '*key-kp-6* 
-	    '*key-kp-7* '*key-kp-8* '*key-kp-9*
-	    '*key-kp-decimal* '*key-kp-divide* '*key-kp-multiply* '*key-kp-subtract* '*key-kp-add*
-	    '*key-kp-enter* '*key-kp-equal* '*key-lshift* '*key-lctrl* '*key-lalt* '*key-lsuper*
-	    '*key-rshift* '*key-rctrl* '*key-ralt* '*key-rsuper* '*key-menu*
-)
       (list *key-unknown* *key-space* *key-special* *key-esc* *key-enter* *key-tab*
 	    *key-backspace* *key-insert* *key-del* *key-right* *key-left* *key-down*
 	    *key-up* *key-pageup* *key-pagedown* *key-home* *key-end* *key-caps-lock*
@@ -693,8 +671,29 @@ glfwWaitEvents or glfwSwapBuffers is called.
 	    *key-kp-7* *key-kp-8* *key-kp-9*
 	    *key-kp-decimal* *key-kp-divide* *key-kp-multiply* *key-kp-subtract* *key-kp-add*
 	    *key-kp-enter* *key-kp-equal* *key-lshift* *key-lctrl* *key-lalt* *key-lsuper*
-	    *key-rshift* *key-rctrl* *key-ralt* *key-rsuper* *key-menu*
-))
+	    *key-rshift* *key-rctrl* *key-ralt* *key-rsuper* *key-menu*)
+      (list '*key-unknown* '*key-space* '*key-special* '*key-esc* '*key-enter* '*key-tab*
+	    '*key-backspace* '*key-insert* '*key-del* '*key-right* '*key-left* '*key-down*
+	    '*key-up* '*key-pageup* '*key-pagedown* '*key-home* '*key-end* '*key-caps-lock*
+	    '*key-scroll-lock* '*key-kp-num-lock* '*key-print-screen* '*key-pause*
+	    '*key-f1* '*key-f2* '*key-f3* '*key-f4* '*key-f5* '*key-f6* '*key-f7* '*key-f8* '*key-f9* 
+	    '*key-f10* '*key-f11* '*key-f12* '*key-f13* '*key-f14* '*key-f15* '*key-f16*
+	    '*key-f17* '*key-f18* '*key-f19* 
+	    '*key-f20* '*key-f21* '*key-f22* '*key-f23* '*key-f24* '*key-f25*
+	    '*key-kp-0* '*key-kp-1* '*key-kp-2* '*key-kp-3* '*key-kp-4* '*key-kp-5* '*key-kp-6* 
+	    '*key-kp-7* '*key-kp-8* '*key-kp-9*
+	    '*key-kp-decimal* '*key-kp-divide* '*key-kp-multiply* '*key-kp-subtract* '*key-kp-add*
+	    '*key-kp-enter* '*key-kp-equal* '*key-lshift* '*key-lctrl* '*key-lalt* '*key-lsuper*
+	    '*key-rshift* '*key-rctrl* '*key-ralt* '*key-rsuper* '*key-menu*))
+
+(defun key-map->string ()
+  ;; maphash always returns nil:
+  ;; need to format out to a string
+  (with-output-to-string (s)
+    (maphash (lambda (k v) 
+	       (format s "~S : ~S~%" k v)) 
+	     *key-map*)
+    s))
 
 ;; The following special keys are not defined at compile-time.
 ;; Using them in a macro is dubious, at best.
@@ -723,7 +722,8 @@ glfwWaitEvents or glfwSwapBuffers is called.
   (gethash key-code *key-map*))
 
 (defun lispify-key (key-int)
-  "Convert key-int from GLFW's integer representation to lisp characters if from 0 to 255, or keywords, if not within 0-255 inclusive."
+  "Convert key-int from GLFW's integer representation to lisp characters
+if from 0 to 255, or keywords, if not within 0-255 inclusive."
   (if (and (>= key-int 0) (< key-int 256))
       (code-char key-int)
       (key-int-to-symbol key-int)))
