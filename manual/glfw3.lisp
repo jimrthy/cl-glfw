@@ -453,7 +453,7 @@ THIS CALLBACK FUNCTION
   )))) |#
 
 ;; This is more than a little ugly...don't want window handles polluting the package.
-#| (defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
          (special-name (intern (format nil "*~S*" callback-name)))
@@ -471,7 +471,7 @@ THIS CALLBACK FUNCTION
 	       (funcall ,special-name window ,@(mapcar #'car args))
 	       ;;(funcall ,special-name ,@(mapcar #'car args))
              ,after-form)))
-       (cffi:defcfun (,c-name ,internal-setter-name) :void ((handle glfw-window) (cbfun :pointer)))
+       (cffi:defcfun (,c-name ,internal-setter-name) :void ((cbfun :pointer)))
 
        ;; And then the truly interesting part.
        ;; This is really a horrible hygenic FAIL because it captures both window and callback.
@@ -496,7 +496,7 @@ THIS CALLBACK FUNCTION
     ((cffi:pointerp callback)
      (,internal-setter-name window callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
-)))) |#
+))))
 
 #| (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window)) 
                         :documentation
