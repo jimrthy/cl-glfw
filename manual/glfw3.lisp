@@ -1,8 +1,6 @@
 (in-package #:cl-glfw3)
 
 (asdf:oos 'asdf:load-op :cffi)
-;; Not needed:
-;;(asdf:oos 'asdf:load-op :cl-glfw-macros)
 
 ;;; This seems to make playing nicely with libglfw.so.2 less promising.
 #+ecl(ffi:load-foreign-library "glfw3" :system-library t)
@@ -453,7 +451,8 @@ THIS CALLBACK FUNCTION
   )))) |#
 
 ;; This is more than a little ugly...don't want window handles polluting the package.
-(defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
+;; The real problem is probably the hygiene. An arg named window is pretty much mandatory...I think.
+#| (defmacro define-callback-setter (c-name callback-prefix return-type (&body args) &key before-form after-form documentation)
   "Define a callback for a specific window."
   (let* ((callback-name (intern (format nil "~A-CALLBACK" callback-prefix)))
          (special-name (intern (format nil "*~S*" callback-name)))
@@ -488,22 +487,77 @@ THIS CALLBACK FUNCTION
     ((null callback)
      (,internal-setter-name window *null*))
     ((symbolp callback)
-     (setf ,special-name callback) ; FAIL!!!
+     ;; The problem with the next is that it doesn't really make any sense to have a dynamic
+     ;; package-level var named after the callback...we could (and probably will) have multiple
+     ;; callbacks of the same type attached to various windows at any given time.
+     ;; The fact that this is the mechanism used for the :before and :after mechanism
+     ;; just emphasizes that this approach will not work given the updated architecture.
+     (setf ,special-name callback)
      (,internal-setter-name window (cffi:callback ,callback-name)))
     ((functionp callback)
-     (setf ,special-name callback) ; FAIL!!!
+     ;; This has the same problem as passing in a symbol.
+     (setf ,special-name callback)
      (,internal-setter-name window (cffi:callback ,callback-name)))
     ((cffi:pointerp callback)
      (,internal-setter-name window callback))
     (t (error "Not an acceptable callback. Must be foreign pointer, function object, function's symbol, or nil.")))
-))))
+)))) |#
 
-#| (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window)) 
+;; So...back to the drawing board.
+
+#| (define-callback-setter "glfwSetWindowCloseCallback" #:window-close :int ((handle glfw-window))
                         :documentation
                         "
 ") |#
 
-(cl-glfw-macros:defcfun+doc ("glfwSetWindowCloseCallback" set-window-close-callback) :int ((handle glfw-window))
+;;; Is it worth trying to compress the next few lines into a macro?
+(defgeneric window-close-callback (handle)
+  (:documentation "Override this to do something different when the user tries to close a window.
+Returning nil keeps the window from closing."))
+(defmethod window-close-callback ((handle t))
+  t)
+(defun %window-close-callback (handle)
+  (window-close-callback handle))
+(cffi:defcallback window-close-callback :int ((handle glfw-window)))
+(cffi:defcfun ("glfwSetWindowCloseCallback" %set-window-close-callback) :void ((handle glfw-window) (cbfun :pointer)))
+;;; Note that the callback isn't actually being used. Yet.
+;;; What does the rest of the original macro-expansion give us?
+#| (defun set-window-close-callback (window callback)
+  (cond ((null callback) (%set-window-close-callback window *null*))
+	;; These next 2 cases seem redundant without the callback assigned to something
+	;; like the original special var.
+	((symbolp callback)
+	 (%set-window-close-callback window %window-close-callback
+				     (cffi:callback window-close-callback)))
+	((functionp callback)
+	 (%set-window-close-callback window
+				     (cffi:callback window-close-callback)))
+	((ccl:pointerp callback)
+	 (%set-window-close-callback window callback))
+	(t
+	 (error "FAIL.")))) |#
+;;; I'm not sure that really offers any benefit in this case.
+#| (%set-window-close-callback window (cffi:callback %window-close-callback)) |#
+;; doesn't work...there's no window defined at this point.
+
+;;; Therefore:
+;;; The idea of using generics here is appealing, and it probably makes sense in
+;;; a higher-level framework.
+;;; It doesn't seem to offer any real advantages at this level, though.
+;;; I could get opinionated, and set up a "real" framework the way the original
+;;; did. Define a window in a macro, and it also defines all the related callbacks
+;;; at the same time.
+;;; The disadvantage to that approach is pretty much totally losing the dynamic
+;;; nature of the system. If you want to re-define the callback later, you pretty
+;;; much have to do it by hand anyway.
+;;; So this approach seems pretty much pointless, given the underlying API.
+;;; And one theme to this approach is to keep it as un-opinionated as possible.
+
+;;; So, sleep on it.
+;;; Right now, it seems best to just provide a bare-bones wrapper and let
+;;; library users pick and choose their approach.
+
+#| (cl-glfw-macros:defcfun+doc ("glfwSetWindowCloseCallback" set-window-close-callback) :int ((handle glfw-window))
 			    "
 Function that will be called when a user requests that the window should be
 closed, typically by clicking the window close icon (e.g. the cross in the upper right corner of a
@@ -523,7 +577,7 @@ Note that the window close callback function is not called when glfwCloseWindow 
 when the close request comes from the window manager.
 Do not call glfwCloseWindow from a window close callback function. Close the window by returning
 gl:+true+ from the function.
-")
+") |#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Error Callback Setter
@@ -536,14 +590,22 @@ gl:+true+ from the function.
   "
 ") |#
 
-(cl-glfw-macros:defcfun+doc ("glfwSetErrorCallback" set-error-callback)
+;; This really seems problematic...how can I distinguish what to call?
+;; (i.e. there isn't anything to override.
+(defgeneric error-callback ()
+  (:documentation "See below"))
+(defun error-callback ()
+  "Your system should probably set this to something different")
+(cffi:defcallback error-callback :void ())
+
+#| (cl-glfw-macros:defcfun+doc ("glfwSetErrorCallback" set-error-callback)
     :void
   ((error-code :int) (description :string))
   "
 The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
 Runs in the context of whichever thread caused the error.
-")
+") |#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Window Size Callback Setter
