@@ -5,10 +5,11 @@
 ;;; This seems to make playing nicely with libglfw.so.2 less promising.
 #+ecl(ffi:load-foreign-library "glfw3" :system-library t)
 
-(defparameter *libglfw* nil)
-;; This just is not working...failing on :framework
 #-ecl
-(cffi:define-foreign-library *libglfw*
+(cffi:define-foreign-library libglfw
+  ;; These are trying to use version 2 instead of 3.
+  ;; Totally not going to work.
+  ;; Actually, this part should load fine...at least in theory
   (:darwin (:or "libglfw.dylib" (:framework "GLFW")))
   (:unix (:or "libglfw.so.3" "libglfw.so"))
   (:windows (:or "glfw.dll" "libglfw.dll")) 
@@ -18,7 +19,9 @@
 ;; Don't forget to call clean-up!
 ;; This is actually returning a foreign-library instance. What are the odds that
 ;; that's what I need to be cleaning up, rather than the named value?
-#-ecl(cffi:use-foreign-library *libglfw*)
+#-ecl(cffi:use-foreign-library libglfw)
+;; Really should check the library version here. Have to get that foreign function
+;; defined before I can call it.
 
 ;;;; Type aliases
 
@@ -511,15 +514,19 @@ THIS CALLBACK FUNCTION
 ") |#
 
 ;;; Is it worth trying to compress the next few lines into a macro?
-(defgeneric window-close-callback (handle)
+#| (defgeneric window-close-callback (handle)
   (:documentation "Override this to do something different when the user tries to close a window.
 Returning nil keeps the window from closing."))
-(defmethod window-close-callback ((handle t))
-  t)
-(defun %window-close-callback (handle)
+ (defmethod window-close-callback ((handle t))
+  t) |#
+
+;; Is there any point to the next two forms?
+#| (defun %window-close-callback (handle)
   (window-close-callback handle))
-(cffi:defcallback window-close-callback :int ((handle glfw-window)))
-(cffi:defcfun ("glfwSetWindowCloseCallback" %set-window-close-callback) :void ((handle glfw-window) (cbfun :pointer)))
+(cffi:defcallback window-close-callback :int ((handle glfw-window))) |#
+(cffi:defcfun ("glfwSetWindowCloseCallback" %set-window-close-callback) 
+    :void
+  (handle glfw-window cbfun :pointer))
 ;;; Note that the callback isn't actually being used. Yet.
 ;;; What does the rest of the original macro-expansion give us?
 #| (defun set-window-close-callback (window callback)
@@ -590,22 +597,23 @@ gl:+true+ from the function.
   "
 ") |#
 
-;; This really seems problematic...how can I distinguish what to call?
-;; (i.e. there isn't anything to override.
-(defgeneric error-callback ()
-  (:documentation "See below"))
-(defun error-callback ()
-  "Your system should probably set this to something different")
-(cffi:defcallback error-callback :void ())
-
-#| (cl-glfw-macros:defcfun+doc ("glfwSetErrorCallback" set-error-callback)
+(cl-glfw-macros:defcfun+doc ("glfwSetErrorCallback" set-error-callback)
     :void
-  ((error-code :int) (description :string))
+  ;;((error-code :int) (description :string))
+  ((cbfun :pointer))
   "
 The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
 Runs in the context of whichever thread caused the error.
-") |#
+")
+;; This really seems problematic...how can I distinguish what to call?
+;; (i.e. there isn't anything to override.
+#| (defgeneric error-callback ()
+  (:documentation "See below")) |#
+(defun error-callback (error-code description)
+  "Your system should probably set this to something different")
+(cffi:defcallback error-callback :void ())
+(set-error-callback #'error-callback)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Window Size Callback Setter
