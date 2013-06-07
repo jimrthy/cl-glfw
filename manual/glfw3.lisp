@@ -627,7 +627,7 @@ Runs in the context of whichever thread caused the error.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (cl-glfw-macros:defcfun+doc ("glfwSetWindowSizeCallback" set-window-size-callback)
     :int
-  ((handle glfw-window) (width :int) (height :int))
+  ((handle glfw-window) (cbfun :pointer))
   "
 Function that will be called every time the window size changes. The
 function should takes the arguments (width height) giving the new width and height of the window client area.
