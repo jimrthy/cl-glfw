@@ -6,22 +6,52 @@
 #+ecl(ffi:load-foreign-library "glfw3" :system-library t)
 
 #-ecl
-(cffi:define-foreign-library libglfw
-  ;; These are trying to use version 2 instead of 3.
-  ;; Totally not going to work.
-  ;; Actually, this part should load fine...at least in theory
-  (:darwin (:or "libglfw.dylib" (:framework "GLFW")))
-  (:unix (:or "libglfw.so.3" "libglfw.so"))
-  (:windows (:or "glfw.dll" "libglfw.dll")) 
-  (t (:default "libglfw")))
+(defparameter *libglfw* (cffi:define-foreign-library libglfw
+			  ;; These are trying to use version 2 instead of 3.
+			  ;; Totally not going to work.
+			  ;; Actually, this part should load fine...at least in theory
+			  (:darwin (:or "libglfw.dylib" (:framework "GLFW")))
+			  (:unix (:or "libglfw.so.3" "libglfw.so"))
+			  (:windows (:or "glfw.dll" "libglfw.dll")) 
+			  (t (:default "libglfw"))))
 
 ;;; Overall library initialization:
 ;; Don't forget to call clean-up!
 ;; This is actually returning a foreign-library instance. What are the odds that
 ;; that's what I need to be cleaning up, rather than the named value?
 #-ecl(cffi:use-foreign-library libglfw)
-;; Really should check the library version here. Have to get that foreign function
-;; defined before I can call it.
+
+;;; Version
+;;; This really should be defined later, in the "Information" section.
+;;; However, I need to check the version ASAP.
+
+;; "Official" Get Version method.
+(cffi:defcfun ("glfwGetVersion" glfw-get-version-official)
+    :void
+  ;; These next parameters are actually int*.
+  ;; Translating these back and forth is more than a little important.
+  ;; FIXME: How is this currently handled?
+  (major :pointer :int)
+  (minor :pointer :int)
+  (rev   :pointer :int))
+(defun get-version ()
+  "Returns a list of the major-minor-revision of the GLFW library in use.
+Note that this is likely to be quite distinct from your OpenGL library."
+  (cffi:with-foreign-object (array :int 3)
+    (glfw-get-version-official array (cffi:inc-pointer array 1) (cffi:inc-pointer array 2))
+    (list (cffi:mem-aref array :int) (cffi:mem-aref array :int 1) (cffi:mem-aref array :int 2))))
+
+(destructuring-bind (major minor rev) (get-version)
+  (declare (ignore minor rev))
+  (when (not (equal major 3))
+    ;; Probably shouldn't error out like this.
+    (error "Only applies to GLFW version 3")))
+
+;; Debugging version
+;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
+;; Can be called from any thread, before glfw-init.
+(cffi:defcfun ("glfwGetVersionString" get-version-string)
+    :string)
 
 ;;;; Type aliases
 
@@ -184,30 +214,6 @@
   (interval :int))
 
 ;;;; Information
-
-;;; Version
-
-;; "Official" Get Version method.
-(cffi:defcfun ("glfwGetVersion" glfw-get-version-official)
-    :void
-  ;; These next parameters are actually int*.
-  ;; Translating these back and forth is more than a little important.
-  ;; FIXME: How is this currently handled?
-  (major :pointer :int)
-  (minor :pointer :int)
-  (rev   :pointer :int))
-(defun get-version ()
-  "Returns a list of the major-minor-revision of the GLFW library in use.
-Note that this is likely to be quite distinct from your OpenGL library."
-  (cffi:with-foreign-object (array :int 3)
-    (glfw-get-version-official array (cffi:inc-pointer array 1) (cffi:inc-pointer array 2))
-    (list (cffi:mem-aref array :int) (cffi:mem-aref array :int 1) (cffi:mem-aref array :int 2))))
-
-;; Debugging version
-;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
-;; Can be called from any thread, before glfw-init.
-(cffi:defcfun ("glfwGetVersionString" get-version-string)
-    :string)
 
 ;;; UI info
 
@@ -609,7 +615,8 @@ Runs in the context of whichever thread caused the error.
 (defun error-callback (error-code description)
   (declare (ignore error-code description))
   "Your system should probably set this to something different")
-(cffi:defcallback error-callback :void ((error-code :int) (description :string)))
+;; Useless:
+;;(cffi:defcallback error-callback :void ((error-code :int) (description :string)))
 ;;; That seems like a lot of effort to get to this.
 (set-error-callback (cffi:callback error-callback))
 
@@ -859,26 +866,26 @@ Callback Parameters:
 window-handle keyboard-code scan-code action modifiers
 ")
 
-(defun set-key-callback (cb)
+(defun set-key-callback (window cb)
   ;; This gives me a compiler warning because cb isn't used.
   ;; Hmm. That's both annoying and scary.
-  (flet ((callback (window key-code scan-code action modifiers)
-	   (cb window (lispify-key key) scan-code action modifiers)))
-    (%set-key-callback (cffi:callback #'callback))))
+  (labels ((callback (window key-code scan-code action modifiers)
+	     (funcall cb window (lispify-key key-code) scan-code action modifiers)))
+    (%set-key-callback window (cffi:callback #'callback))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Unicode Key Callback
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (cl-glfw-macros:defcfun+doc ("glfwSetCharCallback" %set-char-callback)
     :void
-  ((cbfun :pointer))
+  ((handle glfw-window) (cbfun :pointer))
   "Parametrs: window-handle unicode-code-point")
 
-(defun set-char-callback (cb)
+(defun set-char-callback (window cb)
   ;; Same warning about unused cb parameter as for set-key-callback
-  (flet ((callback (window character)
-	   (cb window (char-code cb))))
-    (%set-char-callback (cffi:callback callback))))
+  (labels ((callback (window character)
+	     (funcall cb window (char-code character))))
+    (%set-char-callback window (cffi:callback callback))))
 
 ;;; Required for the current incarnation of lispify-mouse-button.
 ;;; I don't particularly like this approach, but nothing better
@@ -927,10 +934,10 @@ glfw::WaitEvents or glfw::SwapBuffers is called.
 +MOUSE_BUTTON_MIDDLE+ is equal to +MOUSE_BUTTON_3+
 ")
 
-(defun set-mouse-button-callback (cb)
-  (flet ((callback (window button action modifiers)
-	   (cb window (lispify-mouse-button button) action modifiers)))
-    (%set-mouse-button-callback (cffi:callback callback))))
+(defun set-mouse-button-callback (window cb)
+  (labels ((callback (window button action modifiers)
+	     (funcall cb window (lispify-mouse-button button) action modifiers)))
+    (%set-mouse-button-callback window (cffi:callback callback))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Mouse Position Callback
@@ -969,7 +976,6 @@ handle entered-p")
   ;; FIXME: This likely needs the same sort of chicanery to convert
   ;; everything interesting into a cffi:callback.
   ;; Except that it isn't a callback
-  ;;((cbfun :pointer))
   ((handle glfw-window) (cbfun :pointer))
   "Parameters
 window-handle
@@ -983,13 +989,8 @@ The function changes the position of the mouse wheel.
 (defparameter *mouse-wheel-cumulative* nil)
 (cl-glfw-macros:defcfun+doc ("glfwSetMouseWheelCallback" %set-mouse-wheel-callback)
     :void
-  ;;((window glfw-window) (pos :int))
-  ((cbfun :pointer))
-  "")
-#|(define-callback-setter "glfwSetMouseWheelCallback" #:mouse-wheel :void ((window glfw-window) (pos :int))
-                        :after-form (unless *mouse-wheel-cumulative* (glfw3::set-mouse-wheel 0))
-                        :documentation
-                        "
+  ((window glfw-window) (cbfun :pointer))
+  "
 Function that will be called every time the mouse wheel is moved.
 The function takes one argument: the position of the mouse wheel.
 This DIFFERS FROM GLFW's DEFAULT behaviour in that the position is
@@ -1004,19 +1005,20 @@ A window has to be opened for this function to have any effect.
 Notes
 Mouse wheel events are recorded continuously, but only reported when glfw::PollEvents,
 glfw::WaitEvents or glfw::SwapBuffers is called.
-") |#
-(defun set-mouse-wheel-callback (cb)
-  (flet ((callback (window position))
-	 (cb window position))
-    (unless *mouse-wheel-cumulative*
-      (glfw3::set-mouse-wheel 0))
-    (%set-mouse-wheel-callback (cffi:callback callback))))
+")
 
-;;;;
-;;;; FIXME: Start here!
-;;;;
+(defun set-mouse-wheel-callback (window cb)
+  (labels ((callback (window position)
+	     (funcall cb window position)
+	     (unless *mouse-wheel-cumulative*
+	       (glfw3::set-mouse-wheel window 0))))
+    (%set-mouse-wheel-callback window (cffi:callback callback))))
 
-(cl-glfw-macros:defcfun+doc ("glfwGetJoystickParam" get-joystick-param) :int ((window glfw-window) (joy :int) (param :int))
+;;; Obsolete. It looks like it's been broken into multiple functions.
+(warn "Get joystick pieces ported")
+#| (cl-glfw-macros:defcfun+doc ("glfwGetJoystickParam" get-joystick-param) 
+    :int 
+  ((window glfw-window) (joy :int) (param :int))
 	     "Parameters
 joy
       A joystick identifier, which should be +JOYSTICK_n+ where n is in the range 1 to 16.
@@ -1030,22 +1032,23 @@ The function is used for acquiring various properties of a joystick.
 Notes
 The joystick information is updated every time the function is called.
 No window has to be opened for joystick information to be valid.
-")
+") |#
 
-;; Sleeps until an event appears. Then processes all that are available
-;; Only callable from main thread
-;; Not from a callback.
-;; Strongly related to poll-events.
-(cffi:defcfun ("glfwWaitEvents" wait-events)
-    :void)
+;; 
+(cl-glfw-macros:defcfun+doc ("glfwWaitEvents" wait-events)
+    :void
+  ()
+  "Sleeps until an event appears. Then processes all that are available.
+Only callable from main thread.
+Not from a callback.
+Strongly related to poll-events.")
 
 ;;;; Termination
 
 ;; Override user's attempt to close, or signal that a window should close
 (cffi:defcfun ("glfwSetWindowShouldClose" set-window-should-close)
     :void
-  (window glfw-window)
-  (flag :int))
+  (window glfw-window) (flag :int))
 
 ;; Only callable from the main thread
 ;; Cannot be called from a callback
@@ -1067,4 +1070,5 @@ No window has to be opened for joystick information to be valid.
 (defun clean-up ()
   "The companion to initialize. Don't use one without the other.
 This probably doesn't play very nicely with ecl"
-  (cffi:close-foreign-library libglfw))
+  #-ecl (cffi:close-foreign-library *libglfw*)
+  #+ecl (error "Not Implemented"))
