@@ -72,6 +72,7 @@ Note that this is likely to be quite distinct from your OpenGL library."
 ;;; Examples:
 ;; (convert-to-foreign nil 'glfw-bool)
 ;; (convert-from-foreign 354 'glfw-bool)
+;; Yeah. That's a PITA.
 
 ;; Handles. The fact that they're implemented as pointers to
 ;; structs is totally irrelevant.
@@ -612,11 +613,12 @@ The description string is only valid within the scope of the callback.
 Returns the previous callback on success, NULL on failure.
 Runs in the context of whichever thread caused the error.
 ")
-(defun error-callback (error-code description)
+;; Do I really want a placeholder this lame?
+(cffi:defcallback error-callback 
+    :void
+    ((error-code :int) (description :string))
   (declare (ignore error-code description))
-  "Your system should probably set this to something different")
-;; Useless:
-;;(cffi:defcallback error-callback :void ((error-code :int) (description :string)))
+  "You most likely want to override this.")
 ;;; That seems like a lot of effort to get to this.
 (set-error-callback (cffi:callback error-callback))
 
@@ -1054,6 +1056,8 @@ Strongly related to poll-events.")
 ;; Cannot be called from a callback
 ;; If the context is current on the main thread, it is detached before destruction.
 ;; Context must *not* be current on any other thread.
+;; Hmm...this doesn't seem to actually *do* anything.
+;; Then again, that may involve my lack of ability to poll events.
 (cffi:defcfun ("glfwDestroyWindow" destroy-window)
     :void
   (window glfw-window))

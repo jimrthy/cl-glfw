@@ -15,54 +15,80 @@
 
 (cffi:defcallback error-handler
     :void
+    ;; What are the odds that my actual problem is somewhere in here?
     ((error-code :int) (description :string))
-  (format t "Error ~A: '~A'~%" error-code description))
+  (format t "Seriously. Error (really just checking)")
+  (format t "Error Callback ~A: '~A'~%" error-code description))
 (glfw3:set-error-callback (cffi:callback error-handler))
+
+;; The close callback no longer has a meaningful return value.
+;; So...what is this function supposed to be about nowadays?
+;;(defparameter *should-close* nil)
+;;(cffi:defcallback close-handler)
+
+(defun draw (window)
+  (let ((time (glfw3:get-time)))
+    (format t "~A~%" time)
+    (gl:clear :color-buffer)
+    (gl:matrix-mode :modelview)
+    (gl:rotate (* time 50) 0 0 1)
+		   
+    ;; Honestly, this seems to belong in a with-macro as well.
+    ;; Then again...this approach really only applies to toy
+    ;; programs.
+    (gl:begin :triangles)
+    (gl:color 1 0 0)
+    (gl:vertex -0.6 -0.4 0)
+    (gl:color 0 1 0)
+    (gl:vertex 0.6 -0.4 0)
+    (gl:color 0 0 1)
+    (gl:vertex 0 0.6 0)
+    (gl:end)
+
+    (glfw3:swap-buffers window)
+    (glfw3:poll-events)))
 
 (defun event-loop (window)
   (do ()
-      ((glfw3:window-should-close-p window) t)
-    (progn
-      ;; The event loop
-      (let ((time (glfw3:get-time)))
-	(gl:clear :color-buffer)
-	(gl:matrix-mode :modelview)
-	(gl:rotate (* time 50) 0 0 1)
-		   
-	;; Honestly, this seems to belong in a with-macro as well.
-	(gl:begin :triangles)
-	(gl:color 1 0 0)
-	(gl:vertex -0.6 -0.4 0)
-	(gl:color 0 1 0)
-	(gl:vertex 0.6 -0.4 0)
-	(gl:color 0 0 1)
-	(gl:vertex 0 0.6 0)
-	(gl:end)
+      (
+       (glfw3::bool-c-to-lisp (glfw3:window-should-close-p window))
+       t)
+    (draw window)))
 
-	(glfw3:poll-events)
-	(glfw3:swap-buffers window)))))
+(cffi:defcallback window-sizer
+    :void
+  ((window glfw3::glfw-window) (width :int) (height :int))
+  ;; Have to have the OpenGL context before we can do this.
+  ;; Q: Should I be making that window's context current?
+  ;; A: Seems really stupid to think otherwise.
+  (declare (ignore window))
+  (format t "Resizing to ~A x ~A~%" width height)
+  (gl:viewport 0 0 width height)
+  (format t "Setting projecting matrix~%")
+  (gl:matrix-mode :projection)
+  (gl:load-identity)
+  (let ((ratio (/ width height)))
+    (format t "Setting ortho: ~A~%" ratio)
+    ;; This next line is failing here, pretty spectacularly.
+    ;; with an error message that doesn't seem to make any sense.
+    ;; It appears to run fine (even if it does nothing) when 
+    ;; I run it throuh the REPL.
+    (gl:ortho (- ratio) ratio -1 1 1 -1))
+  (format t "Returning~%"))
 
 (defun run (window)
-  (progn 
-    (glfw3:make-context-current window)
-    
-    ;; Have to have the OpenGL context before we can do this
-    ;; And the macro for this doesn't make sense.
-    ;; Each window deserves its own sizer callback.
-    (glfw3:set-window-size-callback window (lambda (window width height)
-					     (declare (ignore window))
-					     (gl:viewport 0 0 width height)
-					     (gl:matrix-mode :projection)
-					     (gl:load-identity)
-					     (let ((ratio (/ width height)))
-					       (gl:ortho (- ratio) ratio -1 1 1 -1))))
-    (event-loop window)))
+  (glfw3:make-context-current window)
+  (event-loop window))
 
 (if (glfw3:glfw-init)
     (let ((window (glfw3:create-window 640 480 "My Title" glfw3::*null* glfw3::*null*)))
       (unwind-protect ; pretty obviously, protect using a with- macro instead.
-	   ;; This next line fails badly.
-	   (run window)
+	   (progn 
+	     ;; Note that all the examples use glfwSetFramebufferSizeCallback instead.
+	     (glfw3:set-window-size-callback window (cffi:callback window-sizer))
+	     ;; This window isn't closing. When I kill it, it's also killing
+	     ;; off my lisp process.
+	     (run window))
 	(glfw3:destroy-window window)))
     (format t "Failed to initialize"))
 
