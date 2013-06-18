@@ -4,18 +4,20 @@
 ;;; This desperately needs to be worked over. I'm sure I have
 ;;; all sorts of unjustified expectations about symbols being
 ;;; imported and such.
-;(error "Start here!")
 
 (require '#:asdf)
 (asdf:oos 'asdf:load-op '#:cl-glfw3)
 (asdf:oos 'asdf:load-op '#:cl-opengl)
 
 (defpackage #:glfw3-example
-  (:use #:cl #:cl-glfw3 #:cl-opengl))
+  (:use #:cl #:cl-glfw3 #:cffi #:cl-opengl))
 (in-package #:glfw3-example)
 
-(glfw3:set-error-callback (lambda (error-code description)
-			    (format t "Error ~A: '~A'~%" error-code description)))
+(cffi:defcallback error-handler
+    :void
+    ((error-code :int) (description :string))
+  (format t "Error ~A: '~A'~%" error-code description))
+(glfw3:set-error-callback (cffi:callback error-handler))
 
 (defun event-loop (window)
   (do ()
@@ -59,6 +61,7 @@
 (if (glfw3:glfw-init)
     (let ((window (glfw3:create-window 640 480 "My Title" glfw3::*null* glfw3::*null*)))
       (unwind-protect ; pretty obviously, protect using a with- macro instead.
+	   ;; This next line fails badly.
 	   (run window)
 	(glfw3:destroy-window window)))
     (format t "Failed to initialize"))
