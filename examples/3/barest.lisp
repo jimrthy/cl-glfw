@@ -6,6 +6,8 @@
 ;;; imported and such.
 
 (require '#:asdf)
+;; These are going to fail unless you've already quickloaded them.
+;; This seems to be a fairly hefty design flaw.
 (asdf:oos 'asdf:load-op '#:cl-glfw3)
 (asdf:oos 'asdf:load-op '#:cl-opengl)
 

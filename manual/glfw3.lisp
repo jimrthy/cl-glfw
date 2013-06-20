@@ -28,24 +28,30 @@
 ;; "Official" Get Version method.
 (cffi:defcfun ("glfwGetVersion" glfw-get-version-official)
     :void
-  ;; These next parameters are actually int*.
   ;; Translating these back and forth is more than a little important.
-  ;; FIXME: How is this currently handled?
+  ;; Q: How is this currently handled?
+  ;; A: defcfun+out+doc with :out parameters. It's a pretty nifty-looking
+  ;; macro. Really should figure out how it works.
   (major :pointer :int)
   (minor :pointer :int)
   (rev   :pointer :int))
 (defun get-version ()
   "Returns a list of the major-minor-revision of the GLFW library in use.
 Note that this is likely to be quite distinct from your OpenGL library."
+  ;; Except that it's failing miserably on my 32-bit linux VM
+  ;; (it's returning (131075 -1228931072 0)
+  ;; glfwinfo under GLFW's tests (in C) shows 3.0.2
   (cffi:with-foreign-object (array :int 3)
     (glfw-get-version-official array (cffi:inc-pointer array 1) (cffi:inc-pointer array 2))
     (list (cffi:mem-aref array :int) (cffi:mem-aref array :int 1) (cffi:mem-aref array :int 2))))
 
 (destructuring-bind (major minor rev) (get-version)
-  (declare (ignore minor rev))
   (when (not (equal major 3))
     ;; Probably shouldn't error out like this.
-    (error "Only applies to GLFW version 3")))
+
+    (warn (format nil 
+                   "Only applies to GLFW version 3. Trying to load in version ~A.~A.~A"
+                   major minor rev))))
 
 ;; Debugging version
 ;; Returns a char[] that's been allocated by the compiler (i.e. no need to free)
