@@ -75,6 +75,9 @@
     ;; with an error message that doesn't seem to make any sense.
     ;; It appears to run fine (even if it does nothing) when 
     ;; I run it throuh the REPL.
+    ;; Note that it works fine on a 32-bit linux VM running CCL.
+    ;; lisp-implementation-version there:
+    ;; 1.9-r15756 (LinuxX8632)
     (gl:ortho (- ratio) ratio -1 1 1 -1))
   (format t "Returning~%"))
 

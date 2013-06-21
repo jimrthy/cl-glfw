@@ -42,7 +42,9 @@ Note that this is likely to be quite distinct from your OpenGL library."
   ;; (it's returning (131075 -1228931072 0)
   ;; glfwinfo under GLFW's tests (in C) shows 3.0.2
   (cffi:with-foreign-object (array :int 3)
-    (glfw-get-version-official array (cffi:inc-pointer array 1) (cffi:inc-pointer array 2))
+    ;; This really needs to be incrementing by sizeof(int)
+    ;; How could the original version possibly have been working?
+    (glfw-get-version-official array (cffi:inc-pointer array 4) (cffi:inc-pointer array 8))
     (list (cffi:mem-aref array :int) (cffi:mem-aref array :int 1) (cffi:mem-aref array :int 2))))
 
 (destructuring-bind (major minor rev) (get-version)
